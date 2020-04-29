@@ -92,7 +92,7 @@ const navBarLinksStyle = theme => ({
   profPhoto: {
     width: "3rem",
     hight: "3rem",
-    borderRadius: "3rem"
+    borderRadius: "5rem"
   },
   profIcon: {
     "a:active": {
@@ -112,8 +112,8 @@ const navBarLinksStyle = theme => ({
       color: blackColor
     },
     "& > :first-child": {
-      width: "5rem",
-      hight: "5rem",
+      width: "7rem",
+      hight: "7rem",
       marginTop: "1.5rem",
       marginLeft: "0.5rem",
       marginBottom: "2.5rem",
