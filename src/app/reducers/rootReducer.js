@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./authReducer";
 import modalReducer from "./modalReducer";
 import userReducer from "./userReducer";
+import errorReducer from "./errorReducer";
 
 import { LOGOUT } from "../constants/auth";
 
@@ -16,7 +17,8 @@ const persistConfig = {
 const appReducers = combineReducers({
   auth: authReducer,
   modal: modalReducer,
-  me: userReducer
+  me: userReducer,
+  error: errorReducer
 });
 
 
