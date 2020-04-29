@@ -19,3 +19,11 @@ export const signOutUser = async () => {
   console.log('here')
   return response;
 }
+
+export const updateMyPassword = async (userData) => {
+  const response = await axios.patch(`${API_ENDPOINT}/api/v1/users/updateMyPassword`, userData, {
+    withCredentials: true,
+    credentials: 'include'
+  });
+  return response;
+}
