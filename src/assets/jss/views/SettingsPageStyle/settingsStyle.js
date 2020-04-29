@@ -1,4 +1,4 @@
-import { whiteColor, hexToRgb, defaultFont, blueColor, indigoColor } from '../../panoramaStyles.js';
+import { whiteColor, hexToRgb, defaultFont, blueColor, indigoColor, dangerColor } from '../../panoramaStyles.js';
 
 const settingsStyle = theme => ({
   formContainer: {
@@ -20,7 +20,7 @@ const settingsStyle = theme => ({
   },
   inputSection: {
     paddingBottom: "2rem",
-    marginBottom: "3rem",
+    marginBottom: "2rem",
     border: "2px solid",
     borderColor: blueColor,
     "& > h3": {
@@ -36,6 +36,14 @@ const settingsStyle = theme => ({
       letterSpacing: "0.2rem",
       color: whiteColor
     }
+  },
+  sectionTitle: {
+    ...defaultFont,
+    color: whiteColor,
+    textTransform: "uppercase",
+    textDecoration: "underline overline",
+    underlineColor: whiteColor,
+    marginBottom: "2rem"
   },
   inputField: {
     display: "flex",
@@ -57,6 +65,14 @@ const settingsStyle = theme => ({
     "& > :first-child": {
       marginRight: "1rem"
     }
+  },
+  error: {
+    margin: "0",
+    padding: "0",
+    marginBottom: "1.3rem",
+    ...defaultFont,
+    color: dangerColor,
+    textAlign: "right"
   }
 })
 
