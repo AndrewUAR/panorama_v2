@@ -5,7 +5,7 @@ import {
   whiteColor, 
   hexToRgb, 
   blueColor, 
-  blackColor 
+  dangerColor 
 } from "../panoramaStyles";
 
 const registerPageStyles = theme => ({
@@ -66,6 +66,14 @@ const registerPageStyles = theme => ({
     [theme.breakpoints.down("xs")]: {
       borderLeft: "none"
     }
+  },
+  error: {
+    margin: "0",
+    marginBottom: "1.3rem",
+    ...defaultFont,
+    color: dangerColor,
+    padding: "0 1.2rem",
+    textAlign: "center"
   }
 })
 
