@@ -1,4 +1,5 @@
-import { container, boxShadow, hexToRgb, indigoColor } from '../../panoramaStyles'
+import { container, boxShadow, hexToRgb, indigoColor } from '../../panoramaStyles';
+import image from "../../../img/backGround/photo-1525101479959-c3e73fd498ab.jpg"
 
 const settingsStyle = theme => ({
   container: {
@@ -7,7 +8,10 @@ const settingsStyle = theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundImage: `url(${image})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center center"
   },
   settings: { 
     ...container,
