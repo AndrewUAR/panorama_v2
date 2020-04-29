@@ -1,30 +1,40 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import socketIOClient from 'socket.io-client';
 import FormInput from '../../../components/FormInput/FormInput';
-import PersonIcon from '@material-ui/icons/Person';
-import EmailIcon from "@material-ui/icons/Email";
 import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
 import { makeStyles } from '@material-ui/core';
 import Button from "../../../components/Button/CustomButton";
 import LockIcon from '@material-ui/icons/Lock';
+import { validateInputs } from "../../../app/helper/validateInput";
+import { updatePassword } from "../../../app/actions/authActions";
+import { apiEndPoint } from '../../../config';
 
 const useStyles = makeStyles(styles);
 
+const API_ENDPOINT = apiEndPoint();
+
 const GeneralSettingsForm = props => {
+  const socket = socketIOClient(API_ENDPOINT);
+
+  const { updatePassword, errorMsg } = props;
+
+  console.log(errorMsg);
+
   const [user, setUser] = useState({
-    currentPassword: '',
-    newPassword: '',
+    passwordCurrent: '',
+    password: '',
     passwordConfirm: ''
   });
 
   const [error, setError] = useState({
-    currentPasswordError: '',
-    newPasswordError: '',
+    passwordError: '',
     passwordConfirmError: ''
   })
   
-  const { currentPassword, newPassword, passwordConfirm} = user;
-  const { currentPasswordError, newPasswordError, passwordConfirmError } = error;
+  const { passwordCurrent, password, passwordConfirm} = user;
+  const { passwordError, passwordConfirmError } = error;
   const classes = useStyles();
 
   const onChange = e => {
@@ -35,11 +45,27 @@ const GeneralSettingsForm = props => {
     }))
   }
 
+  const updateUserPassword = e => {
+    e.preventDefault();
+    const isValid = validateInputs(user, setError);
+    if (isValid) updatePassword(user);
+    socket.emit('refresh', {});
+    resetForm();
+  }
+
+  const resetForm = () => {
+    setUser({
+      passwordCurrent: '',
+      password: '',
+      passwordConfirm: ''
+    })
+  }
 
 
   return (
     <div className={classes.formContainer}>
-      <form className={classes.inputForm}>
+      <h2 className={classes.sectionTitle}>Security Settings</h2>
+      <form className={classes.inputForm} onSubmit={updateUserPassword}>
         <div className={classes.inputSection}>
           <h3>Password</h3>
           <div className={classes.inputField}>
@@ -51,11 +77,10 @@ const GeneralSettingsForm = props => {
               inputProps={{
                 placeholder: "Current Password",
                 type: "password",
-                name: "currentPassword",
-                value: currentPassword,
+                name: "passwordCurrent",
+                value: passwordCurrent,
                 autoComplete: 'off'
               }}
-              error={currentPasswordError}
               onChange={onChange}
             />
           </div>
@@ -68,11 +93,11 @@ const GeneralSettingsForm = props => {
               inputProps={{
                 placeholder: "New Password",
                 type: "password",
-                name: "newPassword",
-                value: newPassword,
+                name: "password",
+                value: password,
                 autoComplete: 'off'
               }}
-              error={newPasswordError}
+              error={passwordError}
               onChange={onChange}
             />
           </div>
@@ -94,8 +119,9 @@ const GeneralSettingsForm = props => {
             />
           </div>
         </div>
+        {errorMsg && errorMsg.hasOwnProperty('updatePasswordError') && <p className={classes.error}>{errorMsg["updatePasswordError"]}</p>}
         <div className={classes.buttonGroup}>
-          <Button color="success">Update</Button>
+          <Button type="submit" color="success">Update</Button>
           <Button color="danger">Cancel</Button>
         </div>
       </form>
@@ -103,8 +129,17 @@ const GeneralSettingsForm = props => {
   )
 }
 
-GeneralSettingsForm.propTypes = {
+const mapStateToProps = state => ({
+  errorMsg: state.error.error
+})
 
+const actions = ({
+  updatePassword
+})
+
+GeneralSettingsForm.propTypes = {
+  updatePassword: PropTypes.func.isRequired,
+  errorMsg: PropTypes.object
 }
 
-export default GeneralSettingsForm
+export default connect(mapStateToProps, actions)(GeneralSettingsForm);
