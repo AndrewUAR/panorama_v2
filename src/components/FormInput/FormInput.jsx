@@ -10,7 +10,7 @@ import styles from "../../assets/jss/components/formInputStyle.js";
 const useStyles = makeStyles(styles);
 
 const FormInput = props => {
-  const { id, labelText, inputProps, underlineColor, onChange, error } = props;
+  const { id, labelText, inputProps, underlineColor, onChange, onFocus, error } = props;
 
   const classes = useStyles();
   
@@ -40,6 +40,7 @@ const FormInput = props => {
           input: inputClasses
         }}
         onChange={onChange}
+        onFocus={onFocus}
       />
       {error ? <p className={classes.error}>{error}</p> : ''}
     </FormControl>
@@ -54,7 +55,8 @@ FormInput.propTypes = {
     "underlinePink",
     "underlineTeal"
   ]),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func
 }
 
 export default FormInput
