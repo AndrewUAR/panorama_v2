@@ -22,7 +22,7 @@ import { createUser } from "../../app/actions/authActions";
 const useStyles = makeStyles(styles);
 
 const RegisterPage = props => {
-  const { createUser, authenticated, history } = props;
+  const { createUser, authenticated, history, errorMsg } = props;
 
   const [user, setUser] = useState({
     firstName: '',
@@ -61,8 +61,8 @@ const RegisterPage = props => {
   const onSubmit = (e) => {
     e.preventDefault();
     sanitizeInputs({firstName, lastName}, setUser);
-    validateInputs(user, setError);
-    createUser(user);
+    const isValid = validateInputs(user, setError);
+    if (isValid) createUser(user);
   }
   
   const classes = useStyles();
@@ -182,6 +182,7 @@ const RegisterPage = props => {
                           />
                         </div>
                         <CardFooter>
+                        {errorMsg && errorMsg.hasOwnProperty('registerError') && <p className={classes.error}>{errorMsg["registerError"]}</p>}
                           <CustomButton 
                             type="submit" 
                             color="blue" 
@@ -201,7 +202,8 @@ const RegisterPage = props => {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  errorMsg: state.error.error
 })
 
 const actions = ({
