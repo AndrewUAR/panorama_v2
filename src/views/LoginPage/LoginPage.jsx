@@ -20,7 +20,7 @@ import { loginUser } from "../../app/actions/authActions";
 const useStyles = makeStyles(styles);
 
 const LoginPage = props => {
-  const { loginUser, authenticated, history } = props;
+  const { loginUser, authenticated, history, error } = props;
 
   const [user, setUser] = useState({
     email: '',
@@ -111,10 +111,11 @@ const LoginPage = props => {
                           />
                         </div>
                         <CardFooter>
+                        {error && error.hasOwnProperty('loginError') && <p className={classes.error}>{error["loginError"]}</p>}
                         <CustomButton type="submit" color="blue">Sign In</CustomButton>
                         <List className={classes.cardFooterLinks}>
-                          <Link to="/">Forgot Password</Link>
-                          <Link to="/">Sign Up</Link>
+                          <Link to="/forgotPassword">Forgot Password</Link>
+                          <Link to="/register">Sign Up</Link>
                         </List>
                       </CardFooter>
                       </form>
@@ -131,7 +132,8 @@ const LoginPage = props => {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.auth.authenticated
+  authenticated: state.auth.authenticated,
+  error: state.error.error
 })
 
 const actions = ({
