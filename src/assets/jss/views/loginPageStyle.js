@@ -1,5 +1,5 @@
 import image from '../../img/backGround/loginPage.jpg';
-import { container, defaultFont, tealColor, whiteColor, hexToRgb, blueColor } from '../panoramaStyles.js'
+import { container, defaultFont, dangerColor, whiteColor, hexToRgb, blueColor } from '../panoramaStyles.js'
 
 const loginPageStyles = theme => ({
   pageHeader: {
@@ -51,7 +51,7 @@ const loginPageStyles = theme => ({
       whiteSpace: "nowrap",
       borderBottom: "1px solid transparent",
       "&:hover,&:focus": {
-        borderColor: tealColor + " !important"
+        borderColor: blueColor + " !important"
       }
     },
   }, 
@@ -67,6 +67,13 @@ const loginPageStyles = theme => ({
     marginLeft: "1.3rem",
     paddingBottom: "0.3rem",
     color: whiteColor
+  },
+  error: {
+    margin: "0",
+    marginBottom: "1.3rem",
+    ...defaultFont,
+    color: dangerColor,
+    textTransform: "uppercase"
   }
 })
 
