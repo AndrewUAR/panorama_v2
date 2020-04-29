@@ -1,4 +1,4 @@
-import { GET_ME } from "../constants/user";
+import { SET_ERROR, DELETE_ERROR } from "../constants/error";
 import { AUTHENTICATE_USER, LOGOUT } from "../constants/auth";
 import { getCurrentUser, updateCurrentUser, deleteCurrentUser } from "../services/user.service";
 
@@ -10,8 +10,13 @@ export const getMe = () => async dispatch => {
       type: AUTHENTICATE_USER,
       payload: user
     })
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    if (err.response.data.message){
+      dispatch({
+        type: SET_ERROR,
+        payload: {authUserError: err.response.data.message}
+      })
+    }
   }
 }
 
@@ -23,8 +28,17 @@ export const updateMe = userData => async dispatch => {
       type: AUTHENTICATE_USER,
       payload: user
     })
-  } catch (error) {
-    console.log(error)
+    dispatch({
+      type: DELETE_ERROR,
+      payload: null
+    })
+  } catch (err) {
+    if (err.response.data.message){
+      dispatch({
+        type: SET_ERROR,
+        payload: {updateUserError: err.response.data.message}
+      })
+    }
   }
 }
 
