@@ -3,10 +3,13 @@ import sanitizer from 'validator';
 
 export const validateInputs = (userData, setError) => {
 
+  console.log(userData)
+
   const {
     firstName,
     lastName,
     email,
+    emailConfirm,
     password,
     passwordConfirm
   } = userData;
@@ -41,6 +44,14 @@ export const validateInputs = (userData, setError) => {
     const errorMessage = validateEmail(email);
     if (errorMessage) {
       errorMsg.emailError = errorMessage;
+      formValid = false;
+    }
+  }
+
+  if ("emailConfirm" in userData) {
+    const errorMessage = validateEmailConfirm(emailConfirm, email);
+    if (errorMessage) {
+      errorMsg.emailConfirmError = errorMessage;
       formValid = false;
     }
   }
@@ -107,6 +118,16 @@ const validateEmail = (email) => {
   }
 }
 
+const validateEmailConfirm = (emailConfirm, email) => {
+  if (validator.isEmpty(emailConfirm) !== false) {
+    return "Please confirm your email."
+  }
+
+  if (emailConfirm !== email) {
+    return "Email confirm doesn't match your email."
+  }
+}
+
 const validatePassword = (password) => {
   if (validator.isEmpty(password) !== false) {
     return "Password field can't be blank"
@@ -129,6 +150,6 @@ const validatePasswordConfirm = (passwordConfirm, password) => {
   }
 
   if (passwordConfirm !== password) {
-    return "Confirm password doesn't match your password."
+    return "Password confirm doesn't match your password."
   }
 }
