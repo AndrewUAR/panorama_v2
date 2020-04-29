@@ -1,20 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import socketIOClient from 'socket.io-client';
+import { connect } from 'react-redux';
 import FormInput from '../../../components/FormInput/FormInput';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from "@material-ui/icons/Email";
 import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
 import { makeStyles } from '@material-ui/core';
 import Button from "../../../components/Button/CustomButton";
+import { apiEndPoint } from '../../../config';
+import { updateMe } from "../../../app/actions/userActions";
+import {validateInputs, sanitizeInputs} from "../../../app/helper/validateInput";
 
 const useStyles = makeStyles(styles);
 
+const API_ENDPOINT = apiEndPoint();
+
 const GeneralSettingsForm = props => {
+  const socket = socketIOClient(API_ENDPOINT);
+
+  const { updateMe, authUser, errorMsg} = props;
+
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    confirmEmail: ''
+    emailConfirm: ''
   });
 
   const [error, setError] = useState({
@@ -23,6 +34,21 @@ const GeneralSettingsForm = props => {
     emailError: '',
     emailConfirmError: ''
   })
+
+  const cancelUpdate = e => {
+    e.preventDefault();
+  }
+
+  useEffect(() => {
+    if (authUser) {
+      setUser({
+        firstName: authUser.firstName,
+        lastName: authUser.lastName,
+        email: authUser.email,
+        emailConfirm: authUser.email
+      })
+    }
+  }, [authUser])
   
   const { firstName, lastName, email, emailConfirm} = user;
   const { firstNameError, lastNameError, emailError, emailConfirmError } = error;
@@ -36,11 +62,27 @@ const GeneralSettingsForm = props => {
     }))
   }
 
+  const updateProfile =  e => {
+    e.preventDefault();
+    const isValid = validateInputs(user, setError);
+    sanitizeInputs({firstName, lastName}, setUser);
+    if (isValid) updateMe(user);
+    socket.emit('refresh', {});
+  }
 
-
+  const emptyField = e => {
+    console.log('here')
+    const { name } = e.target;
+    setUser(prevState => ({
+      ...prevState,
+      [name]: ''
+    }))
+  }
+  
   return (
     <div className={classes.formContainer}>
-      <form className={classes.inputForm}>
+      <h2 className={classes.sectionTitle}>General Settings</h2>
+      <form className={classes.inputForm} onSubmit={updateProfile}>
         <div className={classes.inputSection}>
           <h3>Full Name</h3>
           <div className={classes.inputField}>
@@ -58,6 +100,7 @@ const GeneralSettingsForm = props => {
               }}
               error={firstNameError}
               onChange={onChange}
+              onFocus={emptyField}
             />
           </div>
           <div className={classes.inputField}>
@@ -75,6 +118,7 @@ const GeneralSettingsForm = props => {
               }}
               error={lastNameError}
               onChange={onChange}
+              onFocus={emptyField}
             />
           </div>
           </div>
@@ -95,37 +139,51 @@ const GeneralSettingsForm = props => {
                 }}
                 error={emailError}
                 onChange={onChange}
+                onFocus={emptyField}
               />
             </div>
             <div className={classes.inputField}>
               <EmailIcon className={classes.inputFieldIcon}/>
-              <FormInput
+              <FormInput 
                 id="emailConfirm"
-                labelText="Confirm Email"
+                labelText="Email Confirm"
                 underlineColor="underlineTeal"
                 inputProps={{
-                  placeholder: "Confirm Email",
-                  type: "text",
+                  placeholder: "Email Confirm",
+                  type: "email",
                   name: "emailConfirm",
                   value: emailConfirm,
                   autoComplete: 'off'
                 }}
-                error={firstNameError}
+                error={emailConfirmError}
                 onChange={onChange}
+                onFocus={emptyField}
               />
+            </div>    
           </div>
-        </div>
+          {errorMsg && errorMsg.hasOwnProperty('updateUserError') && <p className={classes.error}>{errorMsg["updateUserError"]}</p>}
         <div className={classes.buttonGroup}>
-          <Button color="success">Update</Button>
-          <Button color="danger">Cancel</Button>
+          <Button type="submit" color="success">Update</Button>
+          <Button color="danger" onClick={cancelUpdate}>Cancel</Button>
         </div>
       </form>
     </div>
   )
 }
 
-GeneralSettingsForm.propTypes = {
+const mapStateToProps = state => ({
+  authUser: state.auth.authUser,
+  errorMsg: state.error.error
+})
 
+const actions = ({
+  updateMe
+})
+
+GeneralSettingsForm.propTypes = {
+  authUser: PropTypes.object.isRequired,
+  updateMe: PropTypes.func.isRequired,
+  errorMsg: PropTypes.object
 }
 
-export default GeneralSettingsForm
+export default connect(mapStateToProps, actions)(GeneralSettingsForm);
