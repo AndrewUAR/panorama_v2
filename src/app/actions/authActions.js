@@ -1,5 +1,5 @@
-import { AUTHENTICATE_USER, LOGOUT } from "../constants/auth";
-import { SET_ERROR, DELETE_ERROR } from "../constants/error";
+import { AUTHENTICATE_USER } from "../constants/auth";
+import { SET_ERROR } from "../constants/error";
 import { signUpUser, signInUser, signOutUser, updateMyPassword } from "../services/auth.service";
 
 export const createUser = userData => async dispatch => {
@@ -11,16 +11,11 @@ export const createUser = userData => async dispatch => {
       payload: user
     })
 
-    dispatch({
-      type: DELETE_ERROR,
-      payload: null
-    })
-
   } catch (err) {
     if (err.response.data.message){
       dispatch({
         type: SET_ERROR,
-        payload: {registerError: err.response.data.message}
+        payload: err.response.data.message
       })
     }
   }
@@ -36,15 +31,11 @@ export const loginUser = userData => async dispatch => {
       payload: user
     })
 
-    dispatch({
-      type: DELETE_ERROR,
-      payload: null
-    })
   } catch (err) {
     if (err.response.data.message){
       dispatch({
         type: SET_ERROR,
-        payload: {loginError: err.response.data.message}
+        payload: err.response.data.message
       })
     }
   }
@@ -52,16 +43,12 @@ export const loginUser = userData => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    const res = await signOutUser();
-    dispatch({
-      type: LOGOUT,
-      payload: null
-    })
+    await signOutUser();
   } catch (err) {
     if (err.response.data.message){
       dispatch({
         type: SET_ERROR,
-        payload: {logoutError: err.response.data.message}
+        payload: err.response.data.message
       })
     }
   }
@@ -76,15 +63,11 @@ export const updatePassword = userData => async dispatch => {
       payload: user
     })
 
-    dispatch({
-      type: DELETE_ERROR,
-      payload: null
-    })
   } catch (err) {
     if (err.response.data.message){
       dispatch({
         type: SET_ERROR,
-        payload: {updatePasswordError: err.response.data.message}
+        payload: err.response.data.message
       })
     }
   }
