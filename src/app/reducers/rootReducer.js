@@ -11,7 +11,8 @@ import { LOGOUT } from "../constants/auth";
 
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+  blacklist: ['error', 'modal']
 };
 
 const appReducers = combineReducers({
