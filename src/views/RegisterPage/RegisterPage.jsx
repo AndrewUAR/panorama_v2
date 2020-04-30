@@ -1,8 +1,6 @@
 import React, {useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import NavBar from '../../components/NavBar/NavBar';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from '../../components/Grid/GridItem';
@@ -18,6 +16,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import { validateInputs, sanitizeInputs } from '../../app/helper/validateInput'
 import { createUser } from "../../app/actions/authActions";
+import { deleteError } from '../../app/actions/errorActions';
 
 const useStyles = makeStyles(styles);
 
@@ -45,6 +44,14 @@ const RegisterPage = props => {
       history.push('/')
     }
   }, [authenticated, history]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(deleteError())
+    }
+  }, [])
 
   const { firstName, lastName, email, password, passwordConfirm} = user;
 
@@ -182,7 +189,7 @@ const RegisterPage = props => {
                           />
                         </div>
                         <CardFooter>
-                        {errorMsg && errorMsg.hasOwnProperty('registerError') && <p className={classes.error}>{errorMsg["registerError"]}</p>}
+                        {errorMsg && <p className={classes.error}>{errorMsg}</p>}
                           <CustomButton 
                             type="submit" 
                             color="blue" 
@@ -212,7 +219,8 @@ const actions = ({
 
 RegisterPage.propTypes = {
   createUser: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
+  errorMsg: PropTypes.string
 }
 
 export default connect(mapStateToProps, actions)(RegisterPage);

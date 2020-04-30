@@ -12,7 +12,7 @@ import styles from "../../assets/jss/components/footerLinksStyle";
 const useStyles = makeStyles(styles);
 
 const FooterLinks = props => {
-  const { color, appResponsive } = props;
+  const { color } = props;
   const classes = useStyles();
 
   const navButtonClasses = classNames({
@@ -45,7 +45,6 @@ FooterLinks.propTypes = {
     "blue",
     "black"
   ]),
-  appResponsive: PropTypes.bool
 }
 
 export default FooterLinks;

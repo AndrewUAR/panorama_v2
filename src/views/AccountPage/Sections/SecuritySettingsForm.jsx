@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import socketIOClient from 'socket.io-client';
 import FormInput from '../../../components/FormInput/FormInput';
 import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
@@ -10,6 +10,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import { validateInputs } from "../../../app/helper/validateInput";
 import { updatePassword } from "../../../app/actions/authActions";
 import { apiEndPoint } from '../../../config';
+import { deleteError } from '../../../app/actions/errorActions';
 
 const useStyles = makeStyles(styles);
 
@@ -19,8 +20,6 @@ const GeneralSettingsForm = props => {
   const socket = socketIOClient(API_ENDPOINT);
 
   const { updatePassword, errorMsg } = props;
-
-  console.log(errorMsg);
 
   const [user, setUser] = useState({
     passwordCurrent: '',
@@ -44,6 +43,14 @@ const GeneralSettingsForm = props => {
       [name]: value
     }))
   }
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(deleteError())
+    }
+  }, [])
 
   const updateUserPassword = e => {
     e.preventDefault();
@@ -119,7 +126,7 @@ const GeneralSettingsForm = props => {
             />
           </div>
         </div>
-        {errorMsg && errorMsg.hasOwnProperty('updatePasswordError') && <p className={classes.error}>{errorMsg["updatePasswordError"]}</p>}
+        {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
           <Button type="submit" color="success">Update</Button>
           <Button color="danger">Cancel</Button>
@@ -139,7 +146,7 @@ const actions = ({
 
 GeneralSettingsForm.propTypes = {
   updatePassword: PropTypes.func.isRequired,
-  errorMsg: PropTypes.object
+  errorMsg: PropTypes.string
 }
 
 export default connect(mapStateToProps, actions)(GeneralSettingsForm);

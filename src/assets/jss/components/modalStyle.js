@@ -1,4 +1,4 @@
-import { whiteColor, blackColor, hexToRgb } from "../panoramaStyles";
+import { whiteColor, hexToRgb } from "../panoramaStyles";
 
 const modalStyle = theme => ({
   modalContainer: {

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import FormInput from '../../../components/FormInput/FormInput';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from "@material-ui/icons/Email";
@@ -11,6 +11,7 @@ import Button from "../../../components/Button/CustomButton";
 import { apiEndPoint } from '../../../config';
 import { updateMe } from "../../../app/actions/userActions";
 import {validateInputs, sanitizeInputs} from "../../../app/helper/validateInput";
+import { deleteError } from '../../../app/actions/errorActions';
 
 const useStyles = makeStyles(styles);
 
@@ -49,6 +50,14 @@ const GeneralSettingsForm = props => {
       })
     }
   }, [authUser])
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(deleteError())
+    }
+  }, [])
   
   const { firstName, lastName, email, emailConfirm} = user;
   const { firstNameError, lastNameError, emailError, emailConfirmError } = error;
@@ -71,7 +80,6 @@ const GeneralSettingsForm = props => {
   }
 
   const emptyField = e => {
-    console.log('here')
     const { name } = e.target;
     setUser(prevState => ({
       ...prevState,
@@ -161,7 +169,7 @@ const GeneralSettingsForm = props => {
               />
             </div>    
           </div>
-          {errorMsg && errorMsg.hasOwnProperty('updateUserError') && <p className={classes.error}>{errorMsg["updateUserError"]}</p>}
+          {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
           <Button type="submit" color="success">Update</Button>
           <Button color="danger" onClick={cancelUpdate}>Cancel</Button>
@@ -183,7 +191,7 @@ const actions = ({
 GeneralSettingsForm.propTypes = {
   authUser: PropTypes.object.isRequired,
   updateMe: PropTypes.func.isRequired,
-  errorMsg: PropTypes.object
+  errorMsg: PropTypes.string
 }
 
 export default connect(mapStateToProps, actions)(GeneralSettingsForm);

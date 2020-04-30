@@ -54,12 +54,12 @@ const SignedInLinks = props => {
 
   const signInLinks = [
     <Link className={classes.dropdownLink} to="/"><HomeIcon />Home</Link>,
-    <Link className={classes.dropdownLink} to="/myAccount"><AccountCircleIcon />My Account</Link>,
+    <Link className={classes.dropdownLink} to="/"><AccountCircleIcon />My Account</Link>,
     <Link className={classes.dropdownLink} to="/myBookings"><EventIcon />My Bookings</Link>,
     <Link className={classes.dropdownLink} to="/"><MonetizationOnIcon />Buy Tokens</Link>,
     <Link className={classes.dropdownLink} to="/"><StarsIcon />Favorite photographers</Link>,
     <Link className={classes.dropdownLink} to="/"><SearchIcon />Explore photographers</Link>,
-    <Link className={classes.dropdownLink} to="/"><SettingsIcon />Settings</Link>,
+    <Link className={classes.dropdownLink} to="/settings"><SettingsIcon />Settings</Link>,
     <Link className={classes.dropdownLink} to="/"><InfoIcon />About Us</Link>,
     <Link className={classes.dropdownLink} to="/login" onClick={logoutUser}><ExitToAppIcon />Sign Out</Link>
   ];

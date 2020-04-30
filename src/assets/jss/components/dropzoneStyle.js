@@ -1,4 +1,4 @@
-import { whiteColor, primaryColor, greyColor, DefaultFont, defaultFont, dropzoneBoxShadow, primaryBoxShadow } from "../../jss/panoramaStyles.js";
+import { whiteColor, defaultFont, dropzoneBoxShadow } from "../../jss/panoramaStyles.js";
 
 const dropzoneStyle = theme => ({
   container: {

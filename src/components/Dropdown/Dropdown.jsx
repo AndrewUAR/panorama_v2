@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from "@material-ui/core/Popover";
 import Button from "@material-ui/core/Button";
-import { MenuList, MenuItem, Paper } from '@material-ui/core';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { MenuList, MenuItem } from '@material-ui/core';
 import styles from "../../assets/jss/components/dropdownStyle";
-import { Link } from 'react-router-dom';
-import AppsIcon from '@material-ui/icons/Apps';
 
 const useStyles = makeStyles(styles);
 
 const Dropdown = props => {
-  const { dropdownList, buttonText, buttonProps } = props;
+  const { dropdownList, buttonProps } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -59,7 +56,8 @@ const Dropdown = props => {
 }
 
 Dropdown.propTypes = {
-
+  dropdownList: PropTypes.array.isRequired,
+  buttonProps: PropTypes.object.isRequired
 }
 
 export default Dropdown;

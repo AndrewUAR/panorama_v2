@@ -1,4 +1,4 @@
-import { defaultFont, hexToRgb, successBoxShadow, tealColor, whiteColor } from "../panoramaStyles";
+import { defaultFont, successBoxShadow, whiteColor } from "../panoramaStyles";
 const dropdownStyle = {
   root: {
     display: "flex",

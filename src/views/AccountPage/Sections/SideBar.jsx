@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
-import {makeStyles, Divider, List, ListItem} from '@material-ui/core';
+import {makeStyles, List, ListItem} from '@material-ui/core';
 import styles from "../../../assets/jss/views/SettingsPageStyle/sidebarStyle";
 import Button from "../../../components/Button/CustomButton";
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -19,7 +19,7 @@ const SideBar = props => {
   return (
     <div className={classes.panel}>
       <div className={classes.photoArea}>
-        <img src={user.profilePhoto} alt="user photo" className={classes.profPhoto} />
+        <img src={user.profilePhoto} alt="userPhoto" className={classes.profPhoto} />
         <Button color="blue" uploadButton onClick={() => openModal('CropModal')}>Update photo</Button>
       </div>
       <p className={classes.userName}>{user.firstName} {user.lastName}</p>
@@ -31,7 +31,7 @@ const SideBar = props => {
           <Button settingsButton color="transparent" onClick={() => onChange("security")}><LockIcon />Security<ArrowForwardIosIcon /></Button>
         </ListItem>
         <ListItem>
-          <Button settingsButton color="transparent"><NotificationImportantIcon />Notifications<ArrowForwardIosIcon /></Button>
+          <Button settingsButton color="transparent" onClick={() => onChange("notifications")}><NotificationImportantIcon />Notifications<ArrowForwardIosIcon /></Button>
         </ListItem>
       </List>
     </div>

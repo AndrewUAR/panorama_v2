@@ -8,6 +8,7 @@ import SideBar from './Sections/SideBar';
 import styles from '../../assets/jss/views/SettingsPageStyle/settingsPageStyle';
 import GeneralSettingsForm from './Sections/GeneralSettingsForm';
 import SecuritySettingsForm from './Sections/SecuritySettingsForm';
+import NotificationSettings from './Sections/NotificationSettings';
 
 const useStyles = makeStyles(styles)
 
@@ -29,6 +30,7 @@ const AccountPage = props => {
           <GridItem xs={12} sm={12} md={9}>
             {section === "general" && <GeneralSettingsForm />}
             {section === "security" && <SecuritySettingsForm />}
+            {section === "notifications" && <NotificationSettings />}
           </GridItem>
           
         </GridContainer>

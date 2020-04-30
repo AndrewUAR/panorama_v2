@@ -1,4 +1,4 @@
-import { whiteColor, hexToRgb, defaultFont, blueColor, indigoColor, dangerColor } from '../../panoramaStyles.js';
+import { whiteColor, defaultFont, blueColor, indigoColor, dangerColor } from '../../panoramaStyles.js';
 
 const settingsStyle = theme => ({
   formContainer: {
@@ -37,11 +37,18 @@ const settingsStyle = theme => ({
       color: whiteColor
     }
   },
+  notificationSection: {
+    paddingBottom: "0rem",
+    marginBottom: "0rem",
+    "& > :not(:last-child)": {
+      borderBottom: '1px solid',
+      borderColor: blueColor + "!important"
+    }
+  },
   sectionTitle: {
     ...defaultFont,
     color: whiteColor,
     textTransform: "uppercase",
-    textDecoration: "underline overline",
     underlineColor: whiteColor,
     marginBottom: "2rem"
   },

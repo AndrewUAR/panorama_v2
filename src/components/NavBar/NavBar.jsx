@@ -7,7 +7,6 @@ import { AppBar, Toolbar, Button, Hidden, IconButton, Drawer } from '@material-u
 import { makeStyles } from '@material-ui/core/styles';
 import SignedOutLinks from './SignedOutLinks';
 import FooterLinks from '../Footer/FooterLinks';
-import Close from "@material-ui/icons/Close";
 import Menu from "@material-ui/icons/Menu";
 
 import styles from "../../assets/jss/components/navBarStyle";

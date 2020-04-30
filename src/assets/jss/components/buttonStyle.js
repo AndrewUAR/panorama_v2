@@ -1,5 +1,4 @@
-import { 
-  tealColor, 
+import {  
   hexToRgb, 
   blackColor, 
   whiteColor,

@@ -1,4 +1,4 @@
-import { defaultFont, whiteColor, tealColor, hexToRgb, boxShadow, greyColor, blackColor } from "../panoramaStyles";
+import { defaultFont, whiteColor, tealColor, hexToRgb, greyColor, blackColor } from "../panoramaStyles";
 
 const navBarLinksStyle = theme => ({
   list: {

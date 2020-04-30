@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,11 +16,12 @@ import CardHeader from "../../components/Card/CardHeader";
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { loginUser } from "../../app/actions/authActions";
+import { deleteError } from '../../app/actions/errorActions';
 
 const useStyles = makeStyles(styles);
 
 const LoginPage = props => {
-  const { loginUser, authenticated, history, error } = props;
+  const { loginUser, authenticated, history, errorMsg } = props;
 
   const [user, setUser] = useState({
     email: '',
@@ -32,6 +33,14 @@ const LoginPage = props => {
       history.push('/')
     }
   }, [authenticated, history]);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(deleteError())
+    }
+  }, [])
 
   const { email, password } = user;
   
@@ -111,7 +120,7 @@ const LoginPage = props => {
                           />
                         </div>
                         <CardFooter>
-                        {error && error.hasOwnProperty('loginError') && <p className={classes.error}>{error["loginError"]}</p>}
+                        {errorMsg && <p className={classes.error}>{errorMsg}</p>}
                         <CustomButton type="submit" color="blue">Sign In</CustomButton>
                         <List className={classes.cardFooterLinks}>
                           <Link to="/forgotPassword">Forgot Password</Link>
@@ -133,16 +142,19 @@ const LoginPage = props => {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  error: state.error.error
+  errorMsg: state.error.error
 })
 
 const actions = ({
-  loginUser
+  loginUser,
+  deleteError
 })
 
 LoginPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
+  deleteError: PropTypes.func.isRequired,
+  errorMsg: PropTypes.string
 }
 
 export default connect(mapStateToProps, actions)(LoginPage);

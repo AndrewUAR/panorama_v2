@@ -1,7 +1,5 @@
-import _ from "lodash";
 import { createReducer } from "../helper/reducerUtils";
-import { GET_ME, UPDATE_ME, DELETE_ME } from "../constants/user";
-import { AUTHENTICATE_USER } from "../constants/auth";
+import { GET_ME, DELETE_ME } from "../constants/user";
 
 const initialState = {
   me: ''
