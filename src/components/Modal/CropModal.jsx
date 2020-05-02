@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
 import { connect } from "react-redux";
 import socketIOClient from 'socket.io-client';
 import PropTypes from "prop-types";

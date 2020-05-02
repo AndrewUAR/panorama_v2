@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
@@ -9,6 +7,8 @@ import styles from '../../assets/jss/views/SettingsPageStyle/settingsPageStyle';
 import GeneralSettingsForm from './Sections/GeneralSettingsForm';
 import SecuritySettingsForm from './Sections/SecuritySettingsForm';
 import NotificationSettings from './Sections/NotificationSettings';
+import Toast from '../../components/Toast/Toast';
+import LoadingComponent from '../../app/layout/LoadingComponent';
 
 const useStyles = makeStyles(styles)
 
@@ -22,6 +22,7 @@ const AccountPage = props => {
 
   return (
     <div className={classes.container}>
+      <LoadingComponent />
       <div className={classes.settings}>
         <GridContainer justify="center" alignItems="center">
           <GridItem xs={12} sm={12} md={3}>
@@ -37,10 +38,6 @@ const AccountPage = props => {
       </div>
     </div>
   )
-}
-
-AccountPage.propTypes = {
-
 }
 
 export default AccountPage;

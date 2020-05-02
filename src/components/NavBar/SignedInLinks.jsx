@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import socketIOClient from 'socket.io-client';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { List, ListItem, Button, makeStyles, Hidden, Divider } from '@material-ui/core';
+import { List, ListItem, Button, makeStyles, Hidden } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EventIcon from '@material-ui/icons/Event';
@@ -19,17 +18,12 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Dropdown from '../Dropdown/Dropdown';
 import styles from "../../assets/jss/components/navBarLinksStyle";
 import { logout } from "../../app/actions/authActions";
-import { apiEndPoint } from '../../config';
 
 const useStyles = makeStyles(styles);
 
-const API_ENDPOINT = apiEndPoint();
-
 const SignedInLinks = props => {
-  const socket = socketIOClient(API_ENDPOINT);
   
   const { logout, authUser } = props;
-  console.log(authUser)
   const { profilePhoto, role, firstName} = authUser;
   const classes = useStyles();
 
@@ -61,10 +55,10 @@ const SignedInLinks = props => {
     <Link className={classes.dropdownLink} to="/"><SearchIcon />Explore photographers</Link>,
     <Link className={classes.dropdownLink} to="/settings"><SettingsIcon />Settings</Link>,
     <Link className={classes.dropdownLink} to="/"><InfoIcon />About Us</Link>,
-    <Link className={classes.dropdownLink} to="/login" onClick={logoutUser}><ExitToAppIcon />Sign Out</Link>
+    <Link className={classes.dropdownLink} to="/" onClick={logoutUser}><ExitToAppIcon />Sign Out</Link>
   ];
 
-  const profileImage = <img src={profilePhoto} alt="Profile picture" className={classes.profPhoto} />
+  const profileImage = <img src={profilePhoto} alt="ProfilePhoto" className={classes.profPhoto} />
 
   return (
     <List className={logInListClasses}>

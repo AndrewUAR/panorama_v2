@@ -2,8 +2,7 @@ import {
   hexToRgb, 
   primaryColor, 
   blueColor, 
-  blackColor,
-  whiteColor 
+  blackColor 
 } from "../panoramaStyles";
 
 const cardStyle = {

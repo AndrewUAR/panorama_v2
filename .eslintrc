@@ -16,6 +16,8 @@
       "implicit-arrow-linebreak": "off",    
       "comma-dangle": "off",    
       "indent": "off",    
-      "no-trailing-spaces": "off"  
+      "no-trailing-spaces": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"  
     }
   }

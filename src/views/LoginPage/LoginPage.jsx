@@ -17,6 +17,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { loginUser } from "../../app/actions/authActions";
 import { deleteError } from '../../app/actions/errorActions';
+import LoadingComponent from "../../app/layout/LoadingComponent";
 
 const useStyles = makeStyles(styles);
 
@@ -27,6 +28,8 @@ const LoginPage = props => {
     email: '',
     password: ''
   });
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (authenticated) {
@@ -40,7 +43,12 @@ const LoginPage = props => {
     return () => {
       dispatch(deleteError())
     }
-  }, [])
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log('loaded')
+    setLoading(false)
+  }, []);
 
   const { email, password } = user;
   
@@ -62,6 +70,7 @@ const LoginPage = props => {
   return (
     <>
     <div className={classes.pageHeader}>
+    {loading && <LoadingComponent />}
       <div className={classes.container}>
         <GridContainer justify="flex-start">
           <GridItem xs={12} sm={6} md={4}>

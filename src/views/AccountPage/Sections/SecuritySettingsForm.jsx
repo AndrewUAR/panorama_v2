@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
+import _ from "lodash";
 import socketIOClient from 'socket.io-client';
 import FormInput from '../../../components/FormInput/FormInput';
 import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
@@ -11,6 +12,7 @@ import { validateInputs } from "../../../app/helper/validateInput";
 import { updatePassword } from "../../../app/actions/authActions";
 import { apiEndPoint } from '../../../config';
 import { deleteError } from '../../../app/actions/errorActions';
+import { useToasts } from 'react-toast-notifications';
 
 const useStyles = makeStyles(styles);
 
@@ -20,6 +22,7 @@ const GeneralSettingsForm = props => {
   const socket = socketIOClient(API_ENDPOINT);
 
   const { updatePassword, errorMsg } = props;
+  console.log(errorMsg);
 
   const [user, setUser] = useState({
     passwordCurrent: '',
@@ -28,13 +31,20 @@ const GeneralSettingsForm = props => {
   });
 
   const [error, setError] = useState({
+    passwordCurrentError: '',
     passwordError: '',
     passwordConfirmError: ''
   })
-  
+
+  const prevState = useRef(user);
+
+  const notTouched = useMemo(() => _.isEqual(prevState.current, user), [prevState, user]);;
+ 
   const { passwordCurrent, password, passwordConfirm} = user;
-  const { passwordError, passwordConfirmError } = error;
+  const { passwordError, passwordConfirmError, passwordCurrentError } = error;
   const classes = useStyles();
+
+  const { addToast, removeAllToasts } = useToasts();
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -50,14 +60,21 @@ const GeneralSettingsForm = props => {
     return () => {
       dispatch(deleteError())
     }
-  }, [])
+  }, [dispatch])
 
   const updateUserPassword = e => {
     e.preventDefault();
     const isValid = validateInputs(user, setError);
     if (isValid) updatePassword(user);
     socket.emit('refresh', {});
-    resetForm();
+    console.log(errorMsg);
+    if (!errorMsg && isValid) {
+      removeAllToasts();
+      resetForm();
+      setTimeout(() => {
+        addToast({severity: 'success', message: 'Your account has been successfully updated'});
+      }, 300); 
+    }
   }
 
   const resetForm = () => {
@@ -88,6 +105,7 @@ const GeneralSettingsForm = props => {
                 value: passwordCurrent,
                 autoComplete: 'off'
               }}
+              error={passwordCurrentError}
               onChange={onChange}
             />
           </div>
@@ -128,7 +146,7 @@ const GeneralSettingsForm = props => {
         </div>
         {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
-          <Button type="submit" color="success">Update</Button>
+          <Button type="submit" color="success" disabled={notTouched}>Update</Button>
           <Button color="danger">Cancel</Button>
         </div>
       </form>

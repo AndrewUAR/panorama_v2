@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
+import _ from "lodash";
 import { connect, useDispatch } from 'react-redux';
 import FormInput from '../../../components/FormInput/FormInput';
 import PersonIcon from '@material-ui/icons/Person';
@@ -12,6 +13,7 @@ import { apiEndPoint } from '../../../config';
 import { updateMe } from "../../../app/actions/userActions";
 import {validateInputs, sanitizeInputs} from "../../../app/helper/validateInput";
 import { deleteError } from '../../../app/actions/errorActions';
+import { useToasts } from 'react-toast-notifications'
 
 const useStyles = makeStyles(styles);
 
@@ -36,6 +38,8 @@ const GeneralSettingsForm = props => {
     emailConfirmError: ''
   })
 
+  const { addToast, removeAllToasts } = useToasts();
+
   const cancelUpdate = e => {
     e.preventDefault();
   }
@@ -51,13 +55,18 @@ const GeneralSettingsForm = props => {
     }
   }, [authUser])
 
+  const prevStateUser = _.pick(authUser, 'firstName', 'lastName', 'email');
+  const currentUser = _.omit(user, 'emailConfirm');
+  const disableSubmit = useMemo(() => _.isEqual(prevStateUser, currentUser), [prevStateUser, currentUser]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
       dispatch(deleteError())
     }
-  }, [])
+  }, [dispatch])
+
   
   const { firstName, lastName, email, emailConfirm} = user;
   const { firstNameError, lastNameError, emailError, emailConfirmError } = error;
@@ -77,15 +86,22 @@ const GeneralSettingsForm = props => {
     sanitizeInputs({firstName, lastName}, setUser);
     if (isValid) updateMe(user);
     socket.emit('refresh', {});
+    console.log('error', errorMsg);
+    if (!errorMsg && isValid) {
+      removeAllToasts();
+      setTimeout(() => {
+        addToast({severity: 'success', message: 'Your account has been successfully updated'});
+      }, 300);    
+    }
   }
 
-  const emptyField = e => {
-    const { name } = e.target;
-    setUser(prevState => ({
-      ...prevState,
-      [name]: ''
-    }))
-  }
+  // const emptyField = e => {
+  //   const { name } = e.target;
+  //   setUser(prevState => ({
+  //     ...prevState,
+  //     [name]: ''
+  //   }))
+  // }
   
   return (
     <div className={classes.formContainer}>
@@ -108,7 +124,7 @@ const GeneralSettingsForm = props => {
               }}
               error={firstNameError}
               onChange={onChange}
-              onFocus={emptyField}
+              // onFocus={emptyField}
             />
           </div>
           <div className={classes.inputField}>
@@ -126,7 +142,7 @@ const GeneralSettingsForm = props => {
               }}
               error={lastNameError}
               onChange={onChange}
-              onFocus={emptyField}
+              // onFocus={emptyField}
             />
           </div>
           </div>
@@ -147,7 +163,7 @@ const GeneralSettingsForm = props => {
                 }}
                 error={emailError}
                 onChange={onChange}
-                onFocus={emptyField}
+                // onFocus={emptyField}
               />
             </div>
             <div className={classes.inputField}>
@@ -165,13 +181,13 @@ const GeneralSettingsForm = props => {
                 }}
                 error={emailConfirmError}
                 onChange={onChange}
-                onFocus={emptyField}
+                // onFocus={emptyField}
               />
             </div>    
           </div>
           {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
-          <Button type="submit" color="success">Update</Button>
+          <Button type="submit" color="success" disabled={disableSubmit}>Update</Button>
           <Button color="danger" onClick={cancelUpdate}>Cancel</Button>
         </div>
       </form>

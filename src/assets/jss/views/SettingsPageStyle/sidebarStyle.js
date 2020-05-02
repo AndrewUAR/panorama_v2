@@ -2,7 +2,10 @@ import { defaultFont, whiteColor } from "../../panoramaStyles";
 
 const sidebarStyle = theme => ({
   panel: {
-    position: "relative"
+    position: "relative",
+    [theme.breakpoints.only("sm")]: {
+      margin: "0 2rem"
+    }
   },
   photoArea: {
     display: "flex",

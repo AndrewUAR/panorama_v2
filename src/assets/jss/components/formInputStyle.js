@@ -1,9 +1,7 @@
 import {
   defaultFont,
   dangerColor,
-  successColor,
   whiteColor,
-  tealColor,
   blueColor
 } from "../panoramaStyles.js"
 

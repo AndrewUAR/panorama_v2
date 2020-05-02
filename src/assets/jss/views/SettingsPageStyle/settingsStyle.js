@@ -23,6 +23,9 @@ const settingsStyle = theme => ({
     marginBottom: "2rem",
     border: "2px solid",
     borderColor: blueColor,
+    [theme.breakpoints.only("sm")]: {
+      margin: "2rem"
+    },
     "& > h3": {
       ...defaultFont,
       textTransform: "uppercase",

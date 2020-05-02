@@ -6,6 +6,7 @@ import authReducer from "./authReducer";
 import modalReducer from "./modalReducer";
 import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
+import asyncReducer from "./asyncReducer";
 
 import { LOGOUT } from "../constants/auth";
 
@@ -19,7 +20,8 @@ const appReducers = combineReducers({
   auth: authReducer,
   modal: modalReducer,
   me: userReducer,
-  error: errorReducer
+  error: errorReducer,
+  async: asyncReducer
 });
 
 

@@ -51,7 +51,7 @@ const RegisterPage = props => {
     return () => {
       dispatch(deleteError())
     }
-  }, [])
+  }, [dispatch])
 
   const { firstName, lastName, email, password, passwordConfirm} = user;
 

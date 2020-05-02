@@ -82,6 +82,7 @@ const navBarLinksStyle = theme => ({
     color: "inherit",
     textDecoration: "none",
     padding: "0.3rem",
+    width: "100%",
     "& svg, & .fab, & .material-icons": {
       marginRight: "0.5rem"
     },

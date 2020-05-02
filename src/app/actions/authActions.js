@@ -1,4 +1,4 @@
-import { AUTHENTICATE_USER } from "../constants/auth";
+import { AUTHENTICATE_USER, LOGOUT } from "../constants/auth";
 import { SET_ERROR } from "../constants/error";
 import { signUpUser, signInUser, signOutUser, updateMyPassword } from "../services/auth.service";
 
@@ -44,6 +44,10 @@ export const loginUser = userData => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await signOutUser();
+    dispatch({
+      type: LOGOUT,
+      payload: null
+    })
   } catch (err) {
     if (err.response.data.message){
       dispatch({
