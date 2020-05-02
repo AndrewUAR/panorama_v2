@@ -3,15 +3,14 @@ import sanitizer from 'validator';
 
 export const validateInputs = (userData, setError) => {
 
-  console.log(userData)
-
   const {
     firstName,
     lastName,
     email,
     emailConfirm,
     password,
-    passwordConfirm
+    passwordConfirm,
+    passwordCurrent,
   } = userData;
 
   let errorMsg = {
@@ -19,7 +18,8 @@ export const validateInputs = (userData, setError) => {
     lastNameError: '',
     emailError: '',
     passwordError: '',
-    passwordConfirmError: ''
+    passwordConfirmError: '',
+    passwordCurrentError: ''
   };
 
   let formValid = true;
@@ -64,6 +64,14 @@ export const validateInputs = (userData, setError) => {
     }
   }
 
+  if ("passwordCurrent" in userData) {
+    const errorMessage = validatePassword(passwordCurrent);
+    if (errorMessage) {
+      errorMsg.passwordCurrentError = errorMessage;
+      formValid = false;
+    }
+  }
+
   if ("passwordConfirm" in userData) {
     const errorMessage = validatePasswordConfirm(passwordConfirm, password);
     if (errorMessage) {
@@ -74,7 +82,6 @@ export const validateInputs = (userData, setError) => {
 
   setError(errorMsg);
   return formValid;
-  console.log(errorMsg, formValid)
 }
 
 export const sanitizeInputs = (userData, setUser) => {
