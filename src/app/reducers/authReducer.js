@@ -16,8 +16,6 @@ const authenticateUser = (state, payload) => {
   }
 }
 
-
-
 export default createReducer(initialState, {
   [AUTHENTICATE_USER]: authenticateUser
 })

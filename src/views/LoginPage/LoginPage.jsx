@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,7 +22,13 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 const useStyles = makeStyles(styles);
 
 const LoginPage = props => {
-  const { loginUser, authenticated, history, errorMsg } = props;
+  const { 
+    loginUser, 
+    authenticated, 
+    history, 
+    errorMsg,
+    deleteError
+  } = props;
 
   const [user, setUser] = useState({
     email: '',
@@ -37,23 +43,22 @@ const LoginPage = props => {
     }
   }, [authenticated, history]);
 
-  const dispatch = useDispatch();
+  const classes = useStyles();
 
   useEffect(() => {
     return () => {
-      dispatch(deleteError())
+      deleteError()
     }
-  }, [dispatch])
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(() => {
-    console.log('loaded')
     setLoading(false)
+    // eslint-disable-next-line
   }, []);
 
   const { email, password } = user;
   
-  const classes = useStyles();
-
   const onChange = e => {
     const { name, value } = e.target;
     setUser(prevState => ({
@@ -67,10 +72,11 @@ const LoginPage = props => {
     loginUser(user);
   }
 
+
   return (
     <>
-    <div className={classes.pageHeader}>
     {loading && <LoadingComponent />}
+    <div className={classes.pageHeader}>
       <div className={classes.container}>
         <GridContainer justify="flex-start">
           <GridItem xs={12} sm={6} md={4}>
@@ -145,7 +151,7 @@ const LoginPage = props => {
         </GridContainer>
       </div>
     </div>
-  </>
+    </>
   )
 }
 

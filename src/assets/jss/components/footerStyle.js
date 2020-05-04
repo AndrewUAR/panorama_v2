@@ -30,7 +30,7 @@ const footerStyle = theme => ({
   },
   license: {
     ...defaultFont,
-    paddingTop: "0.5rem",
+    paddingTop: "0.2rem",
     color: whiteColor,
     fontSize: "1rem",
     margin: "0",

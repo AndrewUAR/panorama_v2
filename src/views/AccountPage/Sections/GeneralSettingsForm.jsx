@@ -13,7 +13,6 @@ import { apiEndPoint } from '../../../config';
 import { updateMe } from "../../../app/actions/userActions";
 import {validateInputs, sanitizeInputs} from "../../../app/helper/validateInput";
 import { deleteError } from '../../../app/actions/errorActions';
-import { useToasts } from 'react-toast-notifications'
 
 const useStyles = makeStyles(styles);
 
@@ -37,8 +36,6 @@ const GeneralSettingsForm = props => {
     emailError: '',
     emailConfirmError: ''
   })
-
-  const { addToast, removeAllToasts } = useToasts();
 
   const cancelUpdate = e => {
     e.preventDefault();
@@ -86,13 +83,6 @@ const GeneralSettingsForm = props => {
     sanitizeInputs({firstName, lastName}, setUser);
     if (isValid) updateMe(user);
     socket.emit('refresh', {});
-    console.log('error', errorMsg);
-    if (!errorMsg && isValid) {
-      removeAllToasts();
-      setTimeout(() => {
-        addToast({severity: 'success', message: 'Your account has been successfully updated'});
-      }, 300);    
-    }
   }
 
   // const emptyField = e => {

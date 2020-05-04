@@ -29,7 +29,8 @@ CustomCard.propTypes = {
   color: PropTypes.oneOf([
     "pink",
     "blue",
-    "black"
+    "black",
+    "teal"
   ])
 }
 

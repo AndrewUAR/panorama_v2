@@ -60,7 +60,7 @@ const formInputStyle = {
     margin: "0",
     marginTop: '7px',
     padding: "0",
-    lineHeight: '5px',
+    lineHeight: '1rem',
     color: dangerColor
   }
 }

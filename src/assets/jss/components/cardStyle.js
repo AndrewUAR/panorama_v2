@@ -5,7 +5,7 @@ import {
   blackColor 
 } from "../panoramaStyles";
 
-const cardStyle = {
+const cardStyle = theme => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -26,7 +26,13 @@ const cardStyle = {
   },
   black: {
     backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.7)"
+  },
+  teal: {
+    background: "linear-gradient(to right, #1cb5e0, #000046)",
+    [theme.breakpoints.down("sm")]: {
+      background: "linear-gradient(to bottom, #1cb5e0, #000046)"
+      }
   }
-}
+})
 
 export default cardStyle;

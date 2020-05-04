@@ -12,7 +12,6 @@ import { validateInputs } from "../../../app/helper/validateInput";
 import { updatePassword } from "../../../app/actions/authActions";
 import { apiEndPoint } from '../../../config';
 import { deleteError } from '../../../app/actions/errorActions';
-import { useToasts } from 'react-toast-notifications';
 
 const useStyles = makeStyles(styles);
 
@@ -22,7 +21,6 @@ const GeneralSettingsForm = props => {
   const socket = socketIOClient(API_ENDPOINT);
 
   const { updatePassword, errorMsg } = props;
-  console.log(errorMsg);
 
   const [user, setUser] = useState({
     passwordCurrent: '',
@@ -43,8 +41,6 @@ const GeneralSettingsForm = props => {
   const { passwordCurrent, password, passwordConfirm} = user;
   const { passwordError, passwordConfirmError, passwordCurrentError } = error;
   const classes = useStyles();
-
-  const { addToast, removeAllToasts } = useToasts();
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -67,13 +63,8 @@ const GeneralSettingsForm = props => {
     const isValid = validateInputs(user, setError);
     if (isValid) updatePassword(user);
     socket.emit('refresh', {});
-    console.log(errorMsg);
     if (!errorMsg && isValid) {
-      removeAllToasts();
       resetForm();
-      setTimeout(() => {
-        addToast({severity: 'success', message: 'Your account has been successfully updated'});
-      }, 300); 
     }
   }
 

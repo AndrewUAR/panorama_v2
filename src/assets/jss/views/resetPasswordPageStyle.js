@@ -1,10 +1,13 @@
 import image from '../../img/backGround/resetPasswordPage.jpg';
-import { defaultFont, hexToRgb, blackColor } from '../panoramaStyles.js'
+import { 
+  defaultFont, 
+  hexToRgb, 
+  blackColor, 
+  container, 
+  whiteColor, 
+  dangerColor 
+} from '../panoramaStyles.js'
 
-import {
-  container,
-  whiteColor
-} from '../panoramaStyles';
 const resetPasswordPageStyles = theme => ({
   pageHeader: {
     display: "flex",
@@ -63,6 +66,16 @@ const resetPasswordPageStyles = theme => ({
     marginLeft: "1.3rem",
     paddingBottom: "0.3rem",
     color: whiteColor
+  },
+  cardForm: {
+    width: "100%"
+  },
+  error: {
+    margin: "0",
+    marginTop: "1.3rem",
+    ...defaultFont,
+    color: dangerColor,
+    textTransform: "uppercase"
   }
 })
 

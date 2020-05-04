@@ -26,8 +26,8 @@ const hexToRgb = input => {
 
 
 const containerFluid = {
-  paddingRight: "1.5rem",
-  paddingLeft: "1.5rem",
+  paddingRight: "1rem",
+  paddingLeft: "1rem",
   marginRight: "auto",
   marginLeft: "auto",
   width: "100%"
@@ -78,16 +78,7 @@ const infoColor = [
   "#4dd0e1"
 ];
 
-const warningColor = [
-  "#ff9800",
-  "#ffa726",
-  "#fb8c00",
-  "#ffa21a",
-  "#fcf8e3",
-  "#faf2cc",
-  "#ffe0b2",
-  "#ffb74d"
-];
+const warningColor = ["#ff9800"];
 
 const roseColor = ["#e91e63", "#ec407a", "#d81b60", "#f8bbd0", "#f06292"];
 

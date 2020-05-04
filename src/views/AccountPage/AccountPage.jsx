@@ -7,7 +7,7 @@ import styles from '../../assets/jss/views/SettingsPageStyle/settingsPageStyle';
 import GeneralSettingsForm from './Sections/GeneralSettingsForm';
 import SecuritySettingsForm from './Sections/SecuritySettingsForm';
 import NotificationSettings from './Sections/NotificationSettings';
-import Toast from '../../components/Toast/Toast';
+import Toast from '../../components/Notification/Notification';
 import LoadingComponent from '../../app/layout/LoadingComponent';
 
 const useStyles = makeStyles(styles)
@@ -22,7 +22,6 @@ const AccountPage = props => {
 
   return (
     <div className={classes.container}>
-      <LoadingComponent />
       <div className={classes.settings}>
         <GridContainer justify="center" alignItems="center">
           <GridItem xs={12} sm={12} md={3}>

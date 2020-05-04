@@ -7,21 +7,22 @@ import modalReducer from "./modalReducer";
 import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
 import asyncReducer from "./asyncReducer";
+import notificationReducer from "./notificationReducer";
 
 import { LOGOUT } from "../constants/auth";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ['error', 'modal']
+  blacklist: ['error', 'modal', 'async', 'notifications']
 };
 
 const appReducers = combineReducers({
   auth: authReducer,
   modal: modalReducer,
-  me: userReducer,
   error: errorReducer,
-  async: asyncReducer
+  async: asyncReducer,
+  notifications: notificationReducer
 });
 
 

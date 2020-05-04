@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from '../../components/Grid/GridItem';
@@ -17,11 +18,21 @@ import LockIcon from '@material-ui/icons/Lock';
 import { validateInputs, sanitizeInputs } from '../../app/helper/validateInput'
 import { createUser } from "../../app/actions/authActions";
 import { deleteError } from '../../app/actions/errorActions';
+import LoadingComponent from "../../app/layout/LoadingComponent";
+
 
 const useStyles = makeStyles(styles);
 
 const RegisterPage = props => {
-  const { createUser, authenticated, history, errorMsg } = props;
+  const { 
+    createUser, 
+    authenticated, 
+    history, 
+    errorMsg,
+    deleteError 
+  } = props;
+
+  const [loading, setLoading] = useState(true);
 
   const [user, setUser] = useState({
     firstName: '',
@@ -45,13 +56,17 @@ const RegisterPage = props => {
     }
   }, [authenticated, history]);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     return () => {
-      dispatch(deleteError())
+      deleteError()
     }
-  }, [dispatch])
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    setLoading(false);
+    // eslint-disable-next-line
+  }, []);
 
   const { firstName, lastName, email, password, passwordConfirm} = user;
 
@@ -69,12 +84,14 @@ const RegisterPage = props => {
     e.preventDefault();
     sanitizeInputs({firstName, lastName}, setUser);
     const isValid = validateInputs(user, setError);
-    if (isValid) createUser(user);
+    if (isValid) createUser(user, history);
   }
   
   const classes = useStyles();
 
   return (
+    <>
+    {loading && <LoadingComponent />}
     <div className={classes.pageHeader}>
         <div className={classes.container}>
           <GridContainer justify="center">
@@ -205,6 +222,7 @@ const RegisterPage = props => {
           </GridContainer>
         </div>
     </div>
+    </>
   )
 }
 
@@ -214,13 +232,15 @@ const mapStateToProps = state => ({
 })
 
 const actions = ({
-  createUser
+  createUser,
+  deleteError
 })
 
 RegisterPage.propTypes = {
   createUser: PropTypes.func.isRequired,
   authenticated: PropTypes.bool,
-  errorMsg: PropTypes.string
+  deleteError: PropTypes.func.isRequired,
+  errorMsg: PropTypes.string,
 }
 
 export default connect(mapStateToProps, actions)(RegisterPage);

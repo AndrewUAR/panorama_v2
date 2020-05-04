@@ -43,6 +43,7 @@ const CropModal = props => {
     await updateMe(form);
     socket.emit('refresh', {})
     handleCancelCrop();
+    closeModal();
   }
 
   const classes = useStyles();
