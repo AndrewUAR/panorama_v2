@@ -14,9 +14,13 @@ export const signInUser = async (userData) => {
   return response;
 }
 
+export const forgotPassword = async (userData) => {
+  const response = await axios.post(`${API_ENDPOINT}/api/v1/users/forgotPassword`, userData);
+  return response;
+}
+
 export const signOutUser = async () => {
   const response = await axios.get(`${API_ENDPOINT}/api/v1/users/logout`, config);
-  console.log('here')
   return response;
 }
 
@@ -25,5 +29,15 @@ export const updateMyPassword = async (userData) => {
     withCredentials: true,
     credentials: 'include'
   });
+  return response;
+}
+
+export const resetMyPassword = async (userData, token) => {
+  const response = await axios.patch(`${API_ENDPOINT}/api/v1/users/resetPassword/${token}`, userData);
+  return response;
+}
+
+export const confirmMyEmail = async (id) => {
+  const response = await axios.patch(`${API_ENDPOINT}/api/v1/users/confirmEmail/${id}`);
   return response;
 }
