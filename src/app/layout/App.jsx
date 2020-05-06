@@ -18,11 +18,14 @@ import ConfirmEmail from "../../views/ConfirmEmail/ConfirmEmail";
 import Notification from "../../components/Notification/Notification";
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "../../assets/jss/components/notificationStyle";
+import CreatePhotographerProfilePage from "../../views/CreatePhotographerProfilePage/CreatePhotographerProfilePage";
+import RestrictedRoute from "../../components/RestrictedRoute/RestrictedRoute";
 
 const useStyles = makeStyles(styles);
 
 
 const App = () => {
+  
   const classes = useStyles();
   const successClasses = classNames({
     [classes.snackbar]: true,
@@ -40,6 +43,7 @@ const App = () => {
     [classes.snackbar]: true,
     [classes.warning]: true
   })
+
   return (
     <Fragment>
       <ModalManager />
@@ -62,6 +66,7 @@ const App = () => {
             <Route path="/forgotPassword" component={ForgotPasswordPage} />
             <Route path="/resetPassword/:token" component={ResetPasswordPage} />
             <PrivateRoute path="/settings" component={AccountPage} />
+            <RestrictedRoute path="/createPhotographerProfile" roles={["user", "admin"]} component={CreatePhotographerProfilePage} />
           </Switch>
         </Container>
       </SnackbarProvider>
