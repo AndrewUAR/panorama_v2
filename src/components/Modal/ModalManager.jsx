@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CropModal from "./CropModal"
+import CropModal from "./CropModal";
+import BecomePhotographerModal from "./BecomePhotographerModal";
 
 const modalLookup = {
-  CropModal
+  CropModal,
+  BecomePhotographerModal
 }
 
 const ModalManager = props => {
