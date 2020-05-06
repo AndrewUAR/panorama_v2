@@ -53,7 +53,14 @@ const buttonStyle = theme => ({
       marginRight: "0.5rem"
     },
   },
-  
+  lg: {
+
+  },
+  sm: {
+    padding: "0.4rem 1.25rem",
+    borderRadius: "0.2rem",
+    margin: "0.2rem"
+  },
   danger: {
     background: "linear-gradient(to top, #e94057, #e91e63)",
     "&:hover,&:focus": {
@@ -61,22 +68,13 @@ const buttonStyle = theme => ({
     }
   },
   blue: {
-    background: "linear-gradient(to top, #00c6ff 0%, #0072ff 100%)",
-    "&:hover,&:focus": {
-      background: "linear-gradient(to top, #00c6ff, #0072ff)"
-    }
+    background: "linear-gradient(to top, #00c6ff 0%, #0072ff 100%)"
   },
   black: {
-    background: "linear-gradient(to right, #00c6ff, #0072ff)",
-    "&:hover,&:focus": {
-      background: "linear-gradient(to bottom, #434343, #000000, #434343)"
-    }
+    background: "linear-gradient(to right, #16222a, #3a6073)"
   },
   success: {
-    background: "linear-gradient(to top, #00e676, #00c853)",
-    "&:hover,&:focus": {
-      background: "linear-gradient(to bottom, #00e676, #00c853)"
-    }
+    background: "linear-gradient(to top, #00e676, #00c853)"
   },
   transparent: {
     "&,&:focus,&:hover": {
