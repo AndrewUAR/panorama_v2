@@ -5,7 +5,7 @@ import {
   blueColor
 } from "../panoramaStyles.js"
 
-const formInputStyle = {
+const formInputStyle = theme => ({
   disabled: {
     "&:before": {
       backgroundColor: "transparent !important"
@@ -52,17 +52,30 @@ const formInputStyle = {
   },
   formControl: {
     position: "relative",
-    width: "85%"
+    width: "100%"
   },
   error: {
     ...defaultFont,
     fontSize: "0.85rem",
     margin: "0",
-    marginTop: '7px',
+    marginTop: '0.4375rem',
     padding: "0",
     lineHeight: '1rem',
     color: dangerColor
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    height: "auto"
+  },
+  chip: {
+    ...defaultFont,
+    color: whiteColor,
+    height: "auto",
+    margin: "0.1rem",
+    background: "linear-gradient(to right, #00c6ff, #0072ff)"
+
   }
-}
+})
 
 export default formInputStyle;
