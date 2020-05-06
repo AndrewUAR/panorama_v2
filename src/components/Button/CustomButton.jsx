@@ -16,7 +16,8 @@ const CustomButton = props => {
     uploadButton, 
     settingsButton, 
     children, 
-    disabled, 
+    disabled,
+    size, 
     ref, 
     ...rest
   } = props;
@@ -28,7 +29,8 @@ const CustomButton = props => {
     [classes[color]]: color,
     [classes.socialSignUp]: socialSignUp,
     [classes.uploadButton]: uploadButton,
-    [classes.settingsButton]: settingsButton
+    [classes.settingsButton]: settingsButton,
+    [classes[size]]: size
   })
 
   return (
@@ -48,6 +50,10 @@ Button.propTypes = {
     "black",
     "transparent",
     "success"
+  ]),
+  size: PropTypes.oneOf([
+    "sm",
+    "lg"
   ])
 }
 
