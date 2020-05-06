@@ -1,0 +1,63 @@
+export const languagesList = () => {
+  return [
+    "Chinese (Mandarin)",
+    "Croatian",
+    "Czech",
+    "Danish",
+    "Dutch",
+    "English",
+    "Estonian",
+    "Finnish",
+    "French",
+    "Georgian",
+    "German",
+    "Greek",
+    "Hindi",
+    "Hungarian",
+    "Icelandic",
+    "Irish",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Latvian",
+    "Lithuanian",
+    "Norwegian",
+    "Polish",
+    "Portuguese",
+    "Romanian",
+    "Russian",
+    "Slovak",
+    "Slovenian",
+    "Spanish",
+    "Swedish",
+    "Turkish",
+    "Ukrainian"
+  ];
+}
+
+export const photographyCategories = () => {
+  return [
+    "Wedding", 
+    "Portrait",
+    "Still Life",
+    "Landscape",
+    "Food",
+    "Sports",
+    "Fine Art",
+    "Product",
+    "Wildlife",
+    "Travel", 
+    "Macro",
+    "Event",
+    "Pet",
+    "Aerial",  
+    "Fashion",
+    "Newborn",
+    "Street",
+    "Photojournalism",
+    "Documentary",
+    "Weather",
+    "Architectural",
+    "Long Exposure"
+  ]
+}
