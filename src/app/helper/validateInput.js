@@ -11,6 +11,9 @@ export const validateInputs = (userData, setError) => {
     password,
     passwordConfirm,
     passwordCurrent,
+    introduction,
+    languages,
+    categories
   } = userData;
 
   let errorMsg = {
@@ -19,7 +22,9 @@ export const validateInputs = (userData, setError) => {
     emailError: '',
     passwordError: '',
     passwordConfirmError: '',
-    passwordCurrentError: ''
+    passwordCurrentError: '',
+    introductionError: '',
+    languagesError: ''
   };
 
   let formValid = true;
@@ -76,6 +81,30 @@ export const validateInputs = (userData, setError) => {
     const errorMessage = validatePasswordConfirm(passwordConfirm, password);
     if (errorMessage) {
       errorMsg.passwordConfirmError = errorMessage;
+      formValid = false;
+    }
+  }
+
+  if ("introduction" in userData) {
+    const errorMessage = validateIntroduction(introduction);
+    if (errorMessage) {
+      errorMsg.introductionError = errorMessage;
+      formValid = false;
+    }
+  }
+
+  if ("languages" in userData) {
+    const errorMessage = validateLanguageCategory(languages, 'language');
+    if (errorMessage) {
+      errorMsg.languagesError = errorMessage;
+      formValid = false;
+    }
+  }
+
+  if ("categories" in userData) {
+    const errorMessage = validateLanguageCategory(categories, 'category');
+    if (errorMessage) {
+      errorMsg.categoriesError = errorMessage;
       formValid = false;
     }
   }
@@ -158,5 +187,24 @@ const validatePasswordConfirm = (passwordConfirm, password) => {
 
   if (passwordConfirm !== password) {
     return "Password confirm doesn't match your password."
+  }
+}
+
+const validateIntroduction = (introduction) => {
+  if (validator.isEmpty(introduction) !== false) {
+    return `Introduction field can't be empty.`
+  }
+
+  if (validator.isLength(introduction, {
+    min: 100,
+    max: 250
+  }) !== true) {
+    return `Introduction length must be between 100 and 250 characters.`
+  }
+}
+
+const validateLanguageCategory = (item, name) => {
+  if (item.length < 1) {
+    return `Select at least one ${name}`
   }
 }
