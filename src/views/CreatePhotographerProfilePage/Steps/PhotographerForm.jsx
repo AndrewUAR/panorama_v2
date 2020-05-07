@@ -1,5 +1,7 @@
+/*global google*/  
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import FormInput from '../../../components/FormInput/FormInput';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
@@ -11,36 +13,46 @@ import LanguageIcon from '@material-ui/icons/Language';
 import PersonIcon from '@material-ui/icons/Person';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
+import PlaceInput from '../../../components/PlaceInput/PlaceInput';
 
 const useStyles = makeStyles(styles);
 
 const PhotographerForm = props => {
-  const [photographer, setPhotographer] = useState({
-    bio: '',
-    languages: ['English'],
-    location: [],
-    categories: []
-  })
+  console.log(props)
+  // const [photographer, setPhotographer] = useState({
+  //   introduction: '',
+  //   languages: ['English'],
+  //   location: [],
+  //   categories: []
+  // })
 
-  const { bio, languages, categories, location } = photographer;
+  // const [error, setError] = useState({
+  //   introductionError: '',
+  //   languagesError: '',
+  //   locationError: '',
+  //   categoriesError: ''
+  // })
+  const { photographer, error, onChange, handleCityChange, handleCitySelect } = props;
+
+  // const [city, setCity] = useState('')
+
+  const { introduction, languages, categories, location, city } = photographer;
+  const { introductionError, languagesError, locationError, categoriesError } = error;
 
   const classes = useStyles();
 
-  const onChange = e => {
-    const { name, value } = e.target;
-    setPhotographer(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  }
+  // const handleCityChange = city => {
+  //   console.log(city)
+  //   setCity(city);
+  // }
 
-  const onChangeSelect = (e) => {
-    const { name, value } = e.target;
-    setPhotographer(prevState => ({
-      ...prevState,
-      [name]: value
-    }))
-  };
+  // const handleCitySelect = selectedCity => {
+  //   geocodeByAddress(selectedCity)
+  //     .then(result => getLatLng(result[0]))
+  //     .then(latLng=> {
+  //       console.log(latLng)
+  //     })
+  // }
 
   return (
     <GridContainer justify="center">
@@ -49,18 +61,19 @@ const PhotographerForm = props => {
           <div className={classes.formInput}>
             <PersonIcon className={classes.inputIcon}/>
             <FormInput 
-              id="bio"
-              labelText="Bio"
+              id="introduction"
+              labelText="Introduction"
               underlineColor="underlineTeal"
               inputProps={{
-                placeholder: "Bio",
+                placeholder: "Introduction",
                 multiline: true,
                 type: "text",
-                name: "bio",
-                value: bio,
+                name: "introduction",
+                value: introduction,
                 autoComplete: 'off'
               }}
               onChange={onChange}
+              error={introductionError}
             />
           </div>
           <div className={classes.formInput}>
@@ -74,9 +87,10 @@ const PhotographerForm = props => {
                 multiple: true,
                 name: "languages"
               }}
-              onChange={onChangeSelect}
+              onChange={onChange}
               options={languagesList()}
               underlineColor="underlineTeal"
+              error={languagesError}
             />
           </div>
           <div className={classes.formInput}>
@@ -90,25 +104,28 @@ const PhotographerForm = props => {
                 multiple: true,
                 name: "categories"
               }}
-              onChange={onChangeSelect}
+              onChange={onChange}
               options={photographyCategories()}
               underlineColor="underlineTeal"
+              error={categoriesError}
             />
           </div>
           <div className={classes.formInput}>
             <MyLocationIcon className={classes.inputIcon}/>
-            <FormInput 
-              id="location"
-              labelText="Serve city"
-              underlineColor="underlineTeal"
+            <PlaceInput
+              id="city"
+              labelText="Serve Location"
               inputProps={{
-                placeholder: "Serve City",
                 type: "text",
-                name: "location",
-                value: location,
+                name: "city",
+                placeholder: "Serve Location",
                 autoComplete: 'off'
               }}
-              onChange={onChange}
+              options={{types: ['cities']}}
+              onSelect={handleCitySelect}
+              onChange={handleCityChange}
+              value={city}
+              underlineColor="underlineTeal"
             />
           </div>
         </form>
