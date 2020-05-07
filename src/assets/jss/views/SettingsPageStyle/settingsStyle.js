@@ -19,6 +19,9 @@ const settingsStyle = theme => ({
     }
   },
   inputSection: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     paddingBottom: "2rem",
     marginBottom: "2rem",
     border: "2px solid",
@@ -28,6 +31,7 @@ const settingsStyle = theme => ({
     },
     "& > h3": {
       ...defaultFont,
+      alignSelf: "flex-start",
       textTransform: "uppercase",
       fontSize: "500",
       display: "inline-block",
@@ -41,6 +45,7 @@ const settingsStyle = theme => ({
     }
   },
   notificationSection: {
+    display: "inline-block",
     paddingBottom: "0rem",
     marginBottom: "0rem",
     "& > :not(:last-child)": {
@@ -58,7 +63,8 @@ const settingsStyle = theme => ({
   inputField: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: "90%",
   },
   inputFieldIcon: {
     alignSelf: "flex-end",
