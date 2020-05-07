@@ -22,7 +22,8 @@ const MenuProps = {
   PaperProps: {
     style: {
       height: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
+      width: 250,
+      background: "linear-gradient(to right, #2c3e50, #3498db)"
     },
   },
 };
@@ -38,10 +39,18 @@ function getStyles(item, options, theme) {
 
 const CustomSelect = props => {
 
-  const { options, onChange, selectProps, id, labelText, underlineColor } = props;
+  const { 
+    options, 
+    onChange, 
+    selectProps, 
+    id, 
+    labelText, 
+    underlineColor, 
+    error 
+  } = props;
   const classes = useStyles();
   const theme = useTheme();
-
+  console.log(error)
   const underlineClasses = classNames({
     [classes.underline]: true,
     [classes[underlineColor]]: underlineColor
@@ -79,11 +88,15 @@ const CustomSelect = props => {
       >
               
         {options.map((item, index) => (
-          <MenuItem key={index} value={item} style={getStyles(item, options, theme)}>
+          <MenuItem key={index} value={item} classes={{
+            root: classes.listItem,
+            selected: classes.selectedItem
+          }}>
             {item}
           </MenuItem>
         ))}
       </Select>
+      {error ? <p className={classes.error}>{error}</p> : ''}
     </FormControl>
   );
 }
