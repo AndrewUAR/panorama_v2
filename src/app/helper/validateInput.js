@@ -13,7 +13,8 @@ export const validateInputs = (userData, setError) => {
     passwordCurrent,
     introduction,
     languages,
-    categories
+    categories,
+    location
   } = userData;
 
   let errorMsg = {
@@ -24,7 +25,8 @@ export const validateInputs = (userData, setError) => {
     passwordConfirmError: '',
     passwordCurrentError: '',
     introductionError: '',
-    languagesError: ''
+    languagesError: '',
+    locationError: ''
   };
 
   let formValid = true;
@@ -105,6 +107,14 @@ export const validateInputs = (userData, setError) => {
     const errorMessage = validateLanguageCategory(categories, 'category');
     if (errorMessage) {
       errorMsg.categoriesError = errorMessage;
+      formValid = false;
+    }
+  }
+
+  if ("location" in userData) {
+    const errorMessage = validateLocation(location);
+    if (errorMessage) {
+      errorMsg.locationError = errorMessage;
       formValid = false;
     }
   }
@@ -205,6 +215,12 @@ const validateIntroduction = (introduction) => {
 
 const validateLanguageCategory = (item, name) => {
   if (item.length < 1) {
-    return `Select at least one ${name}`
+    return `Select at least one ${name}.`
+  }
+}
+
+const validateLocation = (location) => {
+  if (!location) {
+    return 'Please select your preferred serve location.'
   }
 }
