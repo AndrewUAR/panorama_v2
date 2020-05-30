@@ -1,42 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core';
-import GridContainer from '../../components/Grid/GridContainer';
-import GridItem from '../../components/Grid/GridItem';
-import SideBar from './Sections/SideBar';
-import styles from '../../assets/jss/views/SettingsPageStyle/settingsPageStyle';
-import GeneralSettingsForm from './Sections/GeneralSettingsForm';
-import SecuritySettingsForm from './Sections/SecuritySettingsForm';
-import NotificationSettings from './Sections/NotificationSettings';
-import Toast from '../../components/Notification/Notification';
+import PropTypes from 'prop-types';
+import { makeStyles } from "@material-ui/core/styles";
 import LoadingComponent from '../../app/layout/LoadingComponent';
+import GridContainer from '../../components/Grid/GridContainer';
+import GridLoader from "react-spinners/GridLoader";
+import Button from '../../components/Button/CustomButton';
+import styles from '../../assets/jss/views/AccountPageStyle/AccountPageStyle';
+import GridItem from '../../components/Grid/GridItem';
+import PhotographerAccountPage from '../../views/AccountPage/PhotographerAccountPage/PhotographerAccountPage';
+import Sidebar from "../../views/AccountPage/Sidebar";
+import Albums from './PhotographerAccountPage/Albums/MyAlbums';
+import Album from "./PhotographerAccountPage/Albums/MyAlbum";
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles(styles);
 
 const AccountPage = props => {
-  const [section, setSection] = useState("general");
+  const { component } = props;
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // setLoading(false)
+    // eslint-disable-next-line
+  }, []);
+
   const classes = useStyles();
 
-  const onChange = section => {
-    setSection(section);
-  }
-
   return (
-    <div className={classes.container}>
-      <div className={classes.settings}>
-        <GridContainer justify="center" alignItems="center">
-          <GridItem xs={12} sm={12} md={3}>
-            <SideBar onChange={onChange} />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={9}>
-            {section === "general" && <GeneralSettingsForm />}
-            {section === "security" && <SecuritySettingsForm />}
-            {section === "notifications" && <NotificationSettings />}
-          </GridItem>
-          
-        </GridContainer>
-      </div>
-    </div>
+    <>
+      <GridContainer justify="center" className={classes.container}>
+        <GridItem xs={12} sm={11} md={2} className={classes.sidebar}>
+          <Sidebar />
+        </GridItem>
+        <GridItem xs={12} sm={11} md={8}>
+          {component ? component : <PhotographerAccountPage />}
+        </GridItem>
+      </GridContainer>
+    </>
   )
 }
 
-export default AccountPage;
+AccountPage.propTypes = {
+
+}
+
+export default AccountPage

@@ -39,7 +39,7 @@ const settingsStyle = theme => ({
       marginLeft: "3rem",
       padding: "0 1rem",
       transform: "translateY(-50%)",
-      background: indigoColor,
+      background: "#3498db",
       letterSpacing: "0.2rem",
       color: whiteColor
     }

@@ -27,7 +27,7 @@ const Dropdown = props => {
   return (
     <>
       <Button aria-describedby={id} type="button" onClick={onClick} className={buttonProps.className}>
-        {buttonProps.image}{buttonProps.icon}
+        {buttonProps.image}{buttonProps.text}{buttonProps.icon}
       </Button>
       <Popover 
         id={id}

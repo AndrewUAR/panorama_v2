@@ -14,7 +14,8 @@ const CustomButton = props => {
     color, 
     socialSignUp, 
     uploadButton, 
-    settingsButton, 
+    settingsButton,
+    sideBarButton, 
     children, 
     disabled,
     size, 
@@ -30,6 +31,7 @@ const CustomButton = props => {
     [classes.socialSignUp]: socialSignUp,
     [classes.uploadButton]: uploadButton,
     [classes.settingsButton]: settingsButton,
+    [classes.sideBarButton]: sideBarButton,
     [classes[size]]: size
   })
 

@@ -1,104 +1,97 @@
-import React from 'react';
-import clsx from 'clsx';
+/* eslint-disable no-use-before-define */
+import React, { Fragment } from 'react';
 import classNames from 'classnames';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import styles from "../../assets/jss/components/formInputStyle";
-import Menu from '@material-ui/core/Menu';
-import MenuList from '@material-ui/core/MenuList';
+import FormControl from '@material-ui/core/FormControl';
+import CameraEnhanceIcon from '@material-ui/icons/CameraEnhance';
+import TranslateIcon from '@material-ui/icons/Translate';
 
 const useStyles = makeStyles(styles);
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      height: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-      background: "linear-gradient(to right, #2c3e50, #3498db)"
-    },
-  },
-};
-
-function getStyles(item, options, theme) {
-  return {
-    fontWeight:
-      options.indexOf(item) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-const CustomSelect = props => {
-
-  const { 
-    options, 
-    onChange, 
-    selectProps, 
-    id, 
-    labelText, 
-    underlineColor, 
-    error 
-  } = props;
+const Select = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
-  console.log(error)
+  const { 
+    error, 
+    options, 
+    labelText,
+    underlineColor, 
+    placeholder, 
+    value, 
+    onChange, 
+    id, 
+    listName 
+  } = props;
+
   const underlineClasses = classNames({
     [classes.underline]: true,
+    [classes.underlineError]: error,
     [classes[underlineColor]]: underlineColor
-  })
+  });
+
+  const getRenderOption = (option, listName) => {
+    switch (listName) {
+      case 'languages': 
+        return (<Fragment>
+          <span className={classes.renderOptionIcon}><TranslateIcon /></span>
+          {option}
+        </Fragment>)
+      case 'categories': 
+        return (<Fragment>
+          <span className={classes.renderOptionIcon}><CameraEnhanceIcon /></span>
+          {option} 
+        </Fragment>)
+        default:
+          return <Fragment>{option}</Fragment> 
+    }
+  }
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel 
-        className={classes.label} 
-        id={id + "-mutiple-chip-label"}
-      >{labelText}</InputLabel>
-      <Select
-        labelId={id + "-mutiple-chip-label"}
-        {...selectProps}
+      <Autocomplete
+        multiple
+        id={id}
+        options={options}
+        value={value}
+        autoHighlight
+        getOptionLabel={(option) => option}
         onChange={onChange}
         classes={{
-          select: classes.chips
+          inputRoot: underlineClasses,
+          tag: classes.chip,
+          listbox: classes.list,
+          option: classes.listItem,
+          noOptions: classes.list
         }}
-        input={<Input
-          id="select-multiple-chip"
-          classes={{ 
-            underline: underlineClasses,
-            input: classes.input
-          }}
-          id={selectProps.id} />
-        }
-        renderValue={(selected) => (
-          <div className={classes.chips}>
-            {selected.map((value) => (
-              <Chip key={value} label={value} className={classes.chip} />
-            ))}
-          </div>
+        renderOption={(option) => (
+          getRenderOption(option, listName)
         )}
-        MenuProps={MenuProps}
-      >
-              
-        {options.map((item, index) => (
-          <MenuItem key={index} value={item} classes={{
-            root: classes.listItem,
-            selected: classes.selectedItem
-          }}>
-            {item}
-          </MenuItem>
-        ))}
-      </Select>
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            variant="standard"
+            label={labelText}
+            InputLabelProps={{
+              classes: {root: classes.selectLabel}
+            }}
+            InputProps={{
+              ...params.InputProps,
+              classes: {root: classes.selectLabel}
+            }}
+            placeholder={placeholder}
+            classes={{
+              root: classes.input
+            }}
+          />
+        )}
+      />
       {error ? <p className={classes.error}>{error}</p> : ''}
     </FormControl>
   );
 }
 
-export default CustomSelect;
+export default Select;
+

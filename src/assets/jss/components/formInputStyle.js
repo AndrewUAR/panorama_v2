@@ -2,7 +2,8 @@ import {
   defaultFont,
   dangerColor,
   whiteColor,
-  blueColor
+  blueColor,
+  boxShadow
 } from "../panoramaStyles.js"
 
 const formInputStyle = theme => ({
@@ -40,25 +41,46 @@ const formInputStyle = theme => ({
     lineHeight: "1",
     top: "0.5rem"
   },
+  selectLabel: {
+    ...defaultFont,
+    color: whiteColor + "!important",
+    fontWeight: "400",
+    fontSize: "1rem",
+    lineHeight: "1"
+  },
   input: {
     color: whiteColor,
     marginTop: "0.5rem",
     borderRadius: "10px",
+    paddingRight: "0",
     "&,&::placeholder": {
       fontSize: "1rem",
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: "400"
+    },
+    "&::placeholder": {
+      color: whiteColor
     }
   },
   formControl: {
     position: "relative",
     width: "100%"
   },
+  radioFormControl: {
+    color: whiteColor
+  },
+  checkboxContainer: {
+    ...defaultFont,
+    color: whiteColor,
+    fontSize: "0.85rem",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center"
+  },
   error: {
     ...defaultFont,
     fontSize: "0.85rem",
     margin: "0",
-    marginTop: '0.4375rem',
     padding: "0",
     lineHeight: '1rem',
     color: dangerColor
@@ -72,9 +94,59 @@ const formInputStyle = theme => ({
     ...defaultFont,
     color: whiteColor,
     height: "auto",
-    margin: "0.1rem",
+    margin: "0 0.2rem 0.3rem 0",
     background: "linear-gradient(to right, #00c6ff, #0072ff)"
 
+  },
+  list: {
+    ...boxShadow,
+    color: whiteColor,
+    maxHeight: "11rem",
+    background: "linear-gradient(to right, #2c3e50, #3498db)"
+  },
+  listItem: {
+    display: "flex",
+    alignItems: "center",
+    color: whiteColor,
+    margin: "0 0.3rem",
+    "&:hover": {
+      ...boxShadow,
+      background: "linear-gradient(to right, #00c6ff, #0072ff)"
+    },
+    "& svg, & .fab, & .material-icons": {
+      marginRight: "0.5rem"
+    }
+    
+  },
+  selectedItem: {
+    ...boxShadow,
+    background: "linear-gradient(to right, #00c6ff, #0072ff)"
+  },
+  loadingPlaceholder: {
+    ...defaultFont,
+    color: whiteColor,
+    fontSize: "1rem",
+    paddingLeft: "1rem"
+  },
+  inputPadding: {
+    padding: "0 !important"
+  },
+  renderOptionIcon: {
+    lineHeight: "0"
+  },
+  radioGroup: {
+    ...defaultFont,
+    color: whiteColor,
+    flexDirection: "row",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    }
+  },
+  radioIcon: {
+    marginRight: "0.3rem"
+  },
+  blue: {
+    color: blueColor + "!important"
   }
 })
 

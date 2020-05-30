@@ -2,7 +2,7 @@ import { createReducer } from "../../app/helper/reducerUtils";
 import { ASYNC_ACTION_START, ASYNC_ACTION_FINISH, ASYNC_ACTION_ERROR } from "../../app/constants/async";
 
 const initialState = {
-  loading: true
+  loading: false
 }
 
 const asyncActionStarted = (state) => {
@@ -13,7 +13,6 @@ const asyncActionStarted = (state) => {
 }
 
 const asyncActionFinished = (state) => {
-  console.log('here')
   return {
     ...state,
     loading: false

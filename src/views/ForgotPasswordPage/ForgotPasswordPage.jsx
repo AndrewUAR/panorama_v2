@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
+import {PulseLoader} from "react-spinners";
+import { css } from "@emotion/core";
 import {makeStyles} from "@material-ui/core/styles";
 import styles from "../../assets/jss/views/forgotPasswordStyle.js";
 import GridContainer from '../../components/Grid/GridContainer.jsx';
@@ -17,14 +19,24 @@ import { forgotMyPassword } from '../../app/actions/authActions.js';
 
 const useStyles = makeStyles(styles);
 
+const buttonLoaderStyle = css`
+  display: flex;
+`;
+
 const ForgotPasswordPage = props => {
   
-  const { errorMsg, forgotMyPassword, authenticated, history } = props;
+  const { 
+    errorMsg, 
+    forgotMyPassword, 
+    authenticated, 
+    history,
+    loadingAsync 
+  } = props;
 
   const [user, setUser] = useState({email: ''});
   const [error, setError] = useState({
     emailError: ''
-  })
+  });
 
   const { email } = user;
   const { emailError } = error;
@@ -50,14 +62,16 @@ const ForgotPasswordPage = props => {
     <div className={classes.pageHeader}>
       <div className={classes.container}>
         <GridContainer justify="center">
-          <GridItem xs={12} sm={9} md={8}>
-            <CustomCard color="teal">
-              <CardHeader
-                login
-                color="blue"
-              >
-                <h3 className={classes.cardTitle}>Reset Password</h3>
-              </CardHeader>
+          <GridItem xs={12} sm={9} md={8} className={classes.borderWrap}>
+            <CustomCard color="black">
+              <div className={classes.cardHeaderContainer}>
+                <CardHeader
+                  login
+                  color="blue"
+                >
+                  <h3 className={classes.cardTitle}>Reset Password</h3>
+                </CardHeader>
+              </div>
               <form onSubmit={onSubmit} className={classes.cardForm}>
                 <CardContent>
                   <div className={classes.formInput}>
@@ -84,7 +98,16 @@ const ForgotPasswordPage = props => {
                     type="submit" 
                     color="blue"
                     formNoValidate
-                  >Reset</Button>
+                  >{loadingAsync 
+                      ? <PulseLoader
+                          color={"#fff"}
+                          css={buttonLoaderStyle}
+                          loading={true}
+                          margin={2}
+                        />
+                      : <>Reset</>
+                    }
+                  </Button>
                 </CardFooter>
               </form>
             </CustomCard>
@@ -97,7 +120,8 @@ const ForgotPasswordPage = props => {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  errorMsg: state.error.error
+  errorMsg: state.error.error,
+  loadingAsync: state.async.loading
 })
 
 const actions = ({

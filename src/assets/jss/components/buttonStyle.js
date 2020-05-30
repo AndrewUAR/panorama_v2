@@ -2,7 +2,10 @@ import {
   hexToRgb, 
   blackColor, 
   whiteColor,
-  blueColor
+  blueColor,
+  tealColor,
+  successBoxShadow,
+  boxShadow
 } from "../panoramaStyles";
 
 const buttonStyle = theme => ({
@@ -30,7 +33,7 @@ const buttonStyle = theme => ({
     transition:
       "box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
     lineHeight: "1.5",
-    textAlign: "center",
+    textAlign: "start",
     whiteSpace: "nowrap",
     verticalAlign: "middle",
     touchAction: "manipulation",
@@ -53,8 +56,8 @@ const buttonStyle = theme => ({
       marginRight: "0.5rem"
     },
   },
-  lg: {
-
+  fullWidth: {
+    width: "100%"
   },
   sm: {
     padding: "0.4rem 1.25rem",
@@ -131,6 +134,25 @@ const buttonStyle = theme => ({
       "& :first-child :last-child": {
         transform: "translateX(10%)"
       }
+    }
+  },
+  sideBarButton: {
+    color: whiteColor,
+    justifyContent: "flex-start",
+    margin: "0",
+    borderRadius: "0",
+    "& svg, & .fab, & .material-icons": {
+      paddingRight: "0.5rem",
+     
+    },
+    "&:hover,&:focus,&:active": {
+      marginLeft: "2px",
+      transition: "0.3s ease",
+      transform: "translateX(-0.5%)",
+      borderRight: `0.5rem solid ${whiteColor}`,
+      background: "linear-gradient(to right, #1fa2ff, #12d8fa)",
+      ...boxShadow,
+      color: whiteColor
     }
   }
 })

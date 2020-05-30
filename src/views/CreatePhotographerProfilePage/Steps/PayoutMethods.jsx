@@ -1,5 +1,4 @@
-import React, {useState, Fragment} from 'react';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
@@ -24,6 +23,10 @@ const PayoutMethods = props => {
     {label: 'ACH/Direct Deposit', value: 'directDeposit', icon: 'fas fa-university'}
   ];
 
+  const optionChange = (e) => {
+    setMethod(e.target.value);
+  }
+
   return (
     <GridContainer justify="center">
       <GridItem xs={11} sm={8} md={5}>
@@ -33,7 +36,7 @@ const PayoutMethods = props => {
             name="payoutMethod" 
             options={radioOptions}
             value={method}
-            onChange={onChange}
+            onChange={optionChange}
           />
           {method === "payPal" &&
             <div className={classes.accountCredentials}>
@@ -107,12 +110,11 @@ const PayoutMethods = props => {
   )
 }
 
-const mapStateToProps = state => ({
-  email: state.auth.authUser.email
-})
 
 PayoutMethods.propTypes = {
-
+  payPalError: PropTypes.string,
+  payPal: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps)(PayoutMethods);
+export default PayoutMethods;

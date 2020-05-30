@@ -21,7 +21,6 @@ const enqueueSnackbar = (state, payload) => {
 }
 
 const closeSnackbar = (state, payload) => {
-  console.log('in close')
   return {
     ...state,
     notifications: state.notifications.map(notification => (

@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Button from '../Button/CustomButton';
-import Paper from '@material-ui/core/Paper';
+import Backdrop from '@material-ui/core/Backdrop';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import { closeModal } from "../../app/actions/modalActions";
@@ -30,7 +31,7 @@ function getStepContent(step) {
               your personal information in order to create a photographer profile.
               You will be asked to provide such information like your preferred location
               by which users usually search for photographers, photography categories, in which you are good,
-              languages, which you speak and short also short bio. Also you will need to
+              languages, which you speak and short also short introduction. Also you will need to
               create preferred photo session bookings, which users would be able to buy.`;
     case 2:
       return `You can create albums and upload photos to them in order to make an impressive portfolio,
@@ -42,7 +43,7 @@ function getStepContent(step) {
 }
 
 const BecomePhotographerModal = props => {
-  const { closeModal, authenticated, history } = props;
+  const { closeModal, authenticated } = props;
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
@@ -69,12 +70,21 @@ const BecomePhotographerModal = props => {
       disableScrollLock={false}
       onClose={() => closeModal()}
       closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
     >
     <div className={classes.stepper}>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper activeStep={activeStep} orientation="vertical" >
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel
+              classes={{
+                label: classes.label,
+                active: classes.activeLabel
+            }} 
+            >{label}</StepLabel>
             <StepContent>
               <Typography>{getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>
@@ -124,11 +134,16 @@ const BecomePhotographerModal = props => {
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
-})
+});
 
 const actions = ({
   closeModal
-})
+});
+
+BecomePhotographerModal.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired
+}
 
 
 export default connect(mapStateToProps, actions)(BecomePhotographerModal);

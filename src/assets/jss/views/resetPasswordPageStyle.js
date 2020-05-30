@@ -23,7 +23,25 @@ const resetPasswordPageStyles = theme => ({
   },
   container: {
     ...container,
+    padding: "0 !important",
     zIndex: "4"
+  },
+  borderWrap: {
+    padding: "1rem",
+    background: "linear-gradient(135deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)",
+    [theme.breakpoints.up("md")]: {
+      padding: "1.5rem",
+      width: "70vw"
+    },
+    [theme.breakpoints.down("sm")]: {
+      background: "linear-gradient(115deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)"
+    }
+  },
+  cardHeaderContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    filter: "drop-shadow(4px 0px 3px rgba(50, 50, 0, 0.7))"
   },
   cardTitle: {
     ...defaultFont,
@@ -74,6 +92,7 @@ const resetPasswordPageStyles = theme => ({
     margin: "0",
     marginTop: "1.3rem",
     ...defaultFont,
+    fontSize: "1rem",
     color: dangerColor,
     textTransform: "uppercase"
   }

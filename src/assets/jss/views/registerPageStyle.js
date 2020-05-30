@@ -25,8 +25,26 @@ const registerPageStyles = theme => ({
   container: {
     ...container,
     [theme.breakpoints.down("xs")]: {
-      margin: "8rem 0"
+      margin: "8rem 0",
+      padding: "0"
     }
+  },
+  borderWrap: {
+    padding: "1rem",
+    background: "linear-gradient(135deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)",
+    [theme.breakpoints.up("md")]: {
+      padding: "1.5rem",
+      width: "70vw"
+    },
+    [theme.breakpoints.down("sm")]: {
+      background: "linear-gradient(115deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)"
+    }
+  },
+  cardHeaderContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    filter: "drop-shadow(4px 0px 3px rgba(50, 50, 0, 0.7))"
   },
   cardTitle: {
     ...defaultFont,
@@ -63,7 +81,7 @@ const registerPageStyles = theme => ({
   form: {
     borderLeft: "1px solid",
     borderColor: blueColor,
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       borderLeft: "none"
     }
   },

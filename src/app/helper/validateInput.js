@@ -14,7 +14,8 @@ export const validateInputs = (userData, setError) => {
     introduction,
     languages,
     categories,
-    location
+    location,
+    payPal
   } = userData;
 
   let errorMsg = {
@@ -26,7 +27,8 @@ export const validateInputs = (userData, setError) => {
     passwordCurrentError: '',
     introductionError: '',
     languagesError: '',
-    locationError: ''
+    locationError: '',
+    payPalError: ''
   };
 
   let formValid = true;
@@ -119,6 +121,14 @@ export const validateInputs = (userData, setError) => {
     }
   }
 
+  if ("payPal" in userData) {
+    const errorMessage = validateEmail(payPal);
+    if (errorMessage) {
+      errorMsg.payPalError = errorMessage;
+      formValid = false;
+    }
+  }
+
   setError(errorMsg);
   return formValid;
 }
@@ -206,7 +216,7 @@ const validateIntroduction = (introduction) => {
   }
 
   if (validator.isLength(introduction, {
-    min: 100,
+    min: 10,
     max: 250
   }) !== true) {
     return `Introduction length must be between 100 and 250 characters.`

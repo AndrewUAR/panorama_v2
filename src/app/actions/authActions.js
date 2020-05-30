@@ -1,6 +1,7 @@
 import { AUTHENTICATE_USER, LOGOUT } from "../constants/auth";
 import { SET_ERROR } from "../constants/error";
 import { enqueueSnackbar } from '../actions/notificationActions';
+import { asyncActionStart, asyncActionFinish, asyncActionError } from "./asyncActions";
 import { 
   signUpUser, 
   signInUser, 
@@ -12,14 +13,10 @@ import {
 } from "../services/auth.service";
 
 export const createUser = (userData, history) => async dispatch => {
-  console.log('here')
   try {
+    dispatch(asyncActionStart());
     await signUpUser(userData);
-    // const user = res.data.data;
-    // dispatch({
-    //   type: AUTHENTICATE_USER,
-    //   payload: user
-    // })
+    dispatch(asyncActionFinish());
     const notification = {
       message: 
         'Your account was successfully created. Please verify your email.',
@@ -32,6 +29,7 @@ export const createUser = (userData, history) => async dispatch => {
 
   } catch (err) {
     if (err.response.data.message){
+      dispatch(asyncActionError());
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -42,7 +40,10 @@ export const createUser = (userData, history) => async dispatch => {
 
 export const loginUser = userData => async dispatch => {
   try {
+    dispatch(asyncActionStart());
     const res = await signInUser(userData);
+    dispatch(asyncActionFinish());
+
     const user = res.data.data;
     
     dispatch({
@@ -58,16 +59,9 @@ export const loginUser = userData => async dispatch => {
     };
     
     dispatch(enqueueSnackbar(notification));
-    // dispatch({
-    //   type: ENQUEUE_SNACKBAR,
-    //   payload: {
-    //     key: cuid(),
-    //     notification
-    //   }
-    // })
-
   } catch (err) {
     if (err.response.data.message){
+      dispatch(asyncActionError());
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -85,6 +79,7 @@ export const logout = () => async dispatch => {
     })
   } catch (err) {
     if (err.response.data.message){
+      
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -130,7 +125,9 @@ export const updatePassword = userData => async dispatch => {
 
 export const forgotMyPassword = userData => async dispatch => {
   try {
+    dispatch(asyncActionStart());
     await forgotPassword(userData);
+    dispatch(asyncActionFinish());
     const notification = {
       message: 'Reset link was sent to your email!',
       options: {
@@ -140,6 +137,7 @@ export const forgotMyPassword = userData => async dispatch => {
     dispatch(enqueueSnackbar(notification));
   } catch (err) {
     if (err.response.data.message){
+      dispatch(asyncActionError());
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -173,9 +171,11 @@ export const resetPassword = (userData, token) => async dispatch => {
   }
 }
 
-export const confirmEmail = (id) => async dispatch => {
+export const confirmEmail = (id, history) => async dispatch => {
   try {
+    dispatch(asyncActionStart());
     await confirmMyEmail(id);
+    dispatch(asyncActionFinish());
     const notification = {
       message: 'Your email was successfully confirmed. Please proceed to login.',
       options: {
@@ -183,12 +183,17 @@ export const confirmEmail = (id) => async dispatch => {
       }
     };
     dispatch(enqueueSnackbar(notification));
+    history.push('/login');
   } catch (err) {
     if (err.response.data.message){
-      dispatch({
-        type: SET_ERROR,
-        payload: err.response.data.message
-      })
+      const notification = {
+        message: 'Your account has been already activated.',
+        options: {
+          variant: 'warning'
+        }
+      };
+      dispatch(enqueueSnackbar(notification));
+      history.push('/login');
     }
   }
 }

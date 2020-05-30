@@ -2,6 +2,8 @@ import React, {useState, useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import socketIOClient from 'socket.io-client';
 import _ from "lodash";
+import {PulseLoader} from "react-spinners";
+import { css } from "@emotion/core";
 import { connect, useDispatch } from 'react-redux';
 import FormInput from '../../../components/FormInput/FormInput';
 import PersonIcon from '@material-ui/icons/Person';
@@ -14,6 +16,10 @@ import { updateMe } from "../../../app/actions/userActions";
 import {validateInputs, sanitizeInputs} from "../../../app/helper/validateInput";
 import { deleteError } from '../../../app/actions/errorActions';
 
+const buttonLoaderStyle = css`
+  display: flex;
+`;
+
 const useStyles = makeStyles(styles);
 
 const API_ENDPOINT = apiEndPoint();
@@ -21,7 +27,7 @@ const API_ENDPOINT = apiEndPoint();
 const GeneralSettingsForm = props => {
   const socket = socketIOClient(API_ENDPOINT);
 
-  const { updateMe, authUser, errorMsg} = props;
+  const { updateMe, authUser, errorMsg, loadingAsync} = props;
 
   const [user, setUser] = useState({
     firstName: '',
@@ -81,17 +87,9 @@ const GeneralSettingsForm = props => {
     e.preventDefault();
     const isValid = validateInputs(user, setError);
     sanitizeInputs({firstName, lastName}, setUser);
-    if (isValid) updateMe(user);
+    if (isValid) updateMe(_.omit(user, 'emailConfirm'));
     socket.emit('refresh', {});
   }
-
-  // const emptyField = e => {
-  //   const { name } = e.target;
-  //   setUser(prevState => ({
-  //     ...prevState,
-  //     [name]: ''
-  //   }))
-  // }
   
   return (
     <div className={classes.formContainer}>
@@ -99,6 +97,7 @@ const GeneralSettingsForm = props => {
       <form className={classes.inputForm} onSubmit={updateProfile}>
         <div className={classes.inputSection}>
           <h3>Full Name</h3>
+          
           <div className={classes.inputField}>
             <PersonIcon className={classes.inputFieldIcon}/>
             <FormInput
@@ -177,7 +176,20 @@ const GeneralSettingsForm = props => {
           </div>
           {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
-          <Button type="submit" color="success" disabled={disableSubmit}>Update</Button>
+          <Button 
+            type="submit" 
+            color="success" 
+            disabled={disableSubmit}
+          >{loadingAsync && !disableSubmit
+              ? <PulseLoader
+                  color={"#fff"}
+                  css={buttonLoaderStyle}
+                  loading={true}
+                  margin={2}
+                />
+              : <>Update</>
+            }
+          </Button>
           <Button color="danger" onClick={cancelUpdate}>Cancel</Button>
         </div>
       </form>
@@ -187,7 +199,8 @@ const GeneralSettingsForm = props => {
 
 const mapStateToProps = state => ({
   authUser: state.auth.authUser,
-  errorMsg: state.error.error
+  errorMsg: state.error.error,
+  loadingAsync: state.async.loading
 })
 
 const actions = ({

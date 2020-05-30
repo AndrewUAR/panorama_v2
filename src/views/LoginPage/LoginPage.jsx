@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {PulseLoader} from "react-spinners";
+import { css } from "@emotion/core";
 import { makeStyles } from '@material-ui/core/styles';
 import GridContainer from "../../components/Grid/GridContainer";
 import GridItem from '../../components/Grid/GridItem';
@@ -10,16 +12,19 @@ import CustomCard from '../../components/Card/Card';
 import CardContent from '../../components/Card/CardContent';
 import {  List, ListItemIcon } from '@material-ui/core';
 import FormInput from '../../components/FormInput/FormInput';
-import CustomButton from '../../components/Button/CustomButton';
+import Button from '../../components/Button/CustomButton';
 import CardFooter from "../../components/Card/CardFooter";
 import CardHeader from "../../components/Card/CardHeader";
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { loginUser } from "../../app/actions/authActions";
 import { deleteError } from '../../app/actions/errorActions';
-import LoadingComponent from "../../app/layout/LoadingComponent";
 
 const useStyles = makeStyles(styles);
+
+const buttonLoaderStyle = css`
+  display: flex;
+`;
 
 const LoginPage = props => {
   const { 
@@ -27,15 +32,14 @@ const LoginPage = props => {
     authenticated, 
     history, 
     errorMsg,
-    deleteError
+    deleteError,
+    loadingAsync
   } = props;
 
   const [user, setUser] = useState({
     email: '',
     password: ''
   });
-
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (authenticated) {
@@ -52,11 +56,6 @@ const LoginPage = props => {
     // eslint-disable-next-line
   }, [])
 
-  useEffect(() => {
-    setLoading(false)
-    // eslint-disable-next-line
-  }, []);
-
   const { email, password } = user;
   
   const onChange = e => {
@@ -72,15 +71,13 @@ const LoginPage = props => {
     loginUser(user);
   }
 
-
   return (
-    <>
-    {loading && <LoadingComponent />}
     <div className={classes.pageHeader}>
       <div className={classes.container}>
         <GridContainer justify="flex-start">
-          <GridItem xs={12} sm={6} md={4}>
+          <GridItem xs={12} sm={6} md={5} className={classes.borderWrap}>
             <CustomCard color="black">
+              <div className={classes.cardHeaderContainer}>
                 <CardHeader
                   login
                   color="blue"
@@ -88,16 +85,17 @@ const LoginPage = props => {
                   <h3 className={classes.cardTitle}>Login</h3>
                   <List className={classes.cardTitleIcons}>
                     <ListItemIcon>
-                      <CustomButton justIcon><i className="fab fa-facebook" /></CustomButton>
+                      <Button justIcon><i className="fab fa-facebook" /></Button>
                     </ListItemIcon>
                     <ListItemIcon>
-                      <CustomButton justIcon><i className="fab fa-google" /></CustomButton>
+                      <Button justIcon><i className="fab fa-google" /></Button>
                     </ListItemIcon>
                     <ListItemIcon>
-                      <CustomButton justIcon><i className="fab fa-twitter" /></CustomButton>
+                      <Button justIcon><i className="fab fa-twitter" /></Button>
                     </ListItemIcon>
                   </List>
                 </CardHeader>
+                </div>
                 <CardContent>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={12} md={12}>
@@ -136,7 +134,19 @@ const LoginPage = props => {
                         </div>
                         <CardFooter>
                         {errorMsg && <p className={classes.error}>{errorMsg}</p>}
-                        <CustomButton type="submit" color="blue">Sign In</CustomButton>
+                        <Button 
+                          type="submit" 
+                          color="blue"
+                        >{loadingAsync 
+                            ? <PulseLoader
+                                color={"#fff"}
+                                css={buttonLoaderStyle}
+                                loading={true}
+                                margin={2}
+                              />
+                            : <>Sign In</>
+                          }
+                        </Button>
                         <List className={classes.cardFooterLinks}>
                           <Link to="/forgotPassword">Forgot Password</Link>
                           <Link to="/register">Sign Up</Link>
@@ -151,13 +161,13 @@ const LoginPage = props => {
         </GridContainer>
       </div>
     </div>
-    </>
   )
 }
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  errorMsg: state.error.error
+  errorMsg: state.error.error,
+  loadingAsync: state.async.loading
 })
 
 const actions = ({

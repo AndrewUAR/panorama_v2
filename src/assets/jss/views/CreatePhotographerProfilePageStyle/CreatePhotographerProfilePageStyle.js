@@ -1,4 +1,4 @@
-import { whiteColor, dangerColor, greyColor, boxShadow } from "../../panoramaStyles.js";
+import { whiteColor, blueColor, greyColor, boxShadow } from "../../panoramaStyles.js";
 import image from "../../../../assets/img/backGround/mcdobbie-hu-5RgShZblKAQ-unsplash.jpg"
 export const createPhotographerProfilePageStyle = theme => ({
   container: {
@@ -19,10 +19,24 @@ export const createPhotographerProfilePageStyle = theme => ({
       background: "linear-gradient(to right, #2c3e50, #3498db)"
     }
   },
+  borderWrap: {
+    padding: "1rem",
+    background: "linear-gradient(115deg, #00c6ff, #0072ff 45%, rgba(255,0,0,0) 45%)",
+    [theme.breakpoints.up("md")]: {
+      padding: "2rem",
+      width: "70vw"
+    }
+  },
   label: {
     color: whiteColor,
-    fontSize: "1rem",
-    textTransform: "uppercase"
+    fontSize: "0.9rem",
+    textTransform: "uppercase",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.7rem"
+    }
+  },
+  activeLabel: {
+    color: blueColor + '!important'
   },
   actionsContainer: {
     display: "flex",
@@ -38,13 +52,13 @@ export const colorLibConnectorStyles = theme => ({
   active: {
     '& $line': {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient(136deg, #00c6ff 0%, #0072ff 100%)',
     },
   },
   completed: {
     '& $line': {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient(136deg, #00c6ff 0%, #0072ff 100%)',
     },
   },
   line: {
@@ -69,11 +83,11 @@ export const colorLibStepIconStyles = theme => ({
   },
   active: {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient(136deg, #00c6ff 0%, #0072ff 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   },
   completed: {
     backgroundImage:
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient(136deg, #00c6ff 0%, #0072ff 100%)',
   }
 })

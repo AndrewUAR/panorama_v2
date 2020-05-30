@@ -20,7 +20,8 @@ const loginPageStyles = theme => ({
       marginLeft: "4rem"
     },
     [theme.breakpoints.down("xs")]: {
-      margin: "8rem 0"
+      margin: "8rem 0",
+      padding: "0"
     }
   },
   cardTitle: {
@@ -30,6 +31,23 @@ const loginPageStyles = theme => ({
     fontWeight: "600",
     textTransform: "uppercase",
     marginBottom: "0"
+  },
+  borderWrap: {
+    padding: "1rem",
+    background: "linear-gradient(125deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)",
+    [theme.breakpoints.up("md")]: {
+      padding: "1.5rem",
+      width: "70vw"
+    },
+    [theme.breakpoints.down("sm")]: {
+      background: "linear-gradient(120deg, #0072ff, #00c6ff 55%, rgba(255,0,0,0) 55%)"
+    }
+  },
+  cardHeaderContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    filter: "drop-shadow(3px 2px 2px rgba(50, 50, 0, 0.7))"
   },
   cardTitleIcons: {
     padding: "0"
@@ -73,6 +91,7 @@ const loginPageStyles = theme => ({
     marginBottom: "1.3rem",
     ...defaultFont,
     color: dangerColor,
+    textAlign: "center",
     textTransform: "uppercase"
   }
 })

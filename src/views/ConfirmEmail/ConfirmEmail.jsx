@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { confirmEmail } from "../../app/actions/authActions";
-import { deleteError } from "../../app/actions/errorActions";
+import LoadingComponent from '../../app/layout/LoadingComponent';
 
 const ConfirmEmail = props => {
   console.log(props.match.params.id)
-  const { confirmEmail, authenticated, errorMsg, history } = props;
+  const { loading, confirmEmail, authenticated, history } = props;
 
   const id = props.match.params.id;
 
@@ -14,34 +14,19 @@ const ConfirmEmail = props => {
     if (authenticated) {
       history.push('/')
     } else {
-      confirmEmail(id);
+      confirmEmail(id, history);
     }
     // eslint-disable-next-line
   }, [authenticated, history]);
 
-  useEffect(() => {
-    if (errorMsg) {
-      history.push('/login')
-    }
-  }, [errorMsg])
-
-  useEffect(() => {
-    return () => {
-      deleteError()
-    }
-    // eslint-disable-next-line
-  }, [])
-
   return (
-    <div>
-      
-    </div>
+    <>{loading && <LoadingComponent />}</>
   )
 }
 
 const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
-  errorMsg: state.error.error
+  loading: state.async.loading
 })
 
 const actions = ({
@@ -50,8 +35,7 @@ const actions = ({
 
 ConfirmEmail.propTypes = {
   confirmEmail: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool,
-  errorMsg: PropTypes.string
+  authenticated: PropTypes.bool
 }
 
 export default connect(mapStateToProps, actions)(ConfirmEmail);

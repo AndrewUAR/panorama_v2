@@ -10,7 +10,6 @@ import EventIcon from '@material-ui/icons/Event';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import StarsIcon from '@material-ui/icons/Stars';
 import SearchIcon from '@material-ui/icons/Search';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import InfoIcon from '@material-ui/icons/Info';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DetailsIcon from '@material-ui/icons/Details';
@@ -18,12 +17,14 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Dropdown from '../Dropdown/Dropdown';
 import styles from "../../assets/jss/components/navBarLinksStyle";
 import { logout } from "../../app/actions/authActions";
+import { openModal } from "../../app/actions/modalActions";
+import { getMyPhotographerProfile } from "../../app/actions/photographerActions";
 
 const useStyles = makeStyles(styles);
 
 const SignedInLinks = props => {
   
-  const { logout, authUser } = props;
+  const { logout, authUser, getMyPhotographerProfile } = props;
   const { profilePhoto, role, firstName} = authUser;
   const classes = useStyles();
 
@@ -46,11 +47,20 @@ const SignedInLinks = props => {
     logout();
   }
 
+  const handleMyAccount = () => {
+    if (role === "photographer") {
+      getMyPhotographerProfile();
+    }
+  }
+
   const signInLinks = [
     <Link className={classes.dropdownLink} to="/"><HomeIcon />Home</Link>,
-    <Link className={classes.dropdownLink} to="/"><AccountCircleIcon />My Account</Link>,
+    <Link 
+      className={classes.dropdownLink} 
+      to="/my-profile" 
+      onClick={() => handleMyAccount()}
+    ><AccountCircleIcon />My Account</Link>,
     <Link className={classes.dropdownLink} to="/myBookings"><EventIcon />My Bookings</Link>,
-    <Link className={classes.dropdownLink} to="/"><MonetizationOnIcon />Buy Tokens</Link>,
     <Link className={classes.dropdownLink} to="/"><StarsIcon />Favorite photographers</Link>,
     <Link className={classes.dropdownLink} to="/"><SearchIcon />Explore photographers</Link>,
     <Link className={classes.dropdownLink} to="/settings"><SettingsIcon />Settings</Link>,
@@ -66,13 +76,15 @@ const SignedInLinks = props => {
         {role === "user" &&
           <ListItem className={classes.listItem}>
             <Button className={navButtonClasses}>
-              <Link className={classes.dropdownLink} to="/"><PhotoCameraIcon />Become a photographer</Link>
+              <Link 
+                to="/createPhotographerProfile"
+                className={classes.dropdownLink} 
+              ><PhotoCameraIcon />Become a photographer</Link>
             </Button>
           </ListItem>
         }
         <ListItem className={classes.listItem}>
           <Dropdown
-            buttonText="<Home />"
             buttonProps={{
               className: dropdownButton,
               color: "dark",
@@ -110,13 +122,15 @@ const mapStateToProps = state => ({
 })
 
 const actions = ({
-  logout
+  logout,
+  getMyPhotographerProfile
 })
 
 SignedInLinks.propTypes = {
   appResponsive: PropTypes.bool,
   authUser: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  getMyPhotographerProfile: PropTypes.func
 }
 
 export default connect(mapStateToProps, actions)(SignedInLinks);

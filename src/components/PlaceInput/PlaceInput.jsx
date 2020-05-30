@@ -1,74 +1,143 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, Fragment } from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import PlacesAutocomplete from 'react-places-autocomplete';
-import styles from '../../assets/jss/components/formInputStyle';
-import Input from '@material-ui/core/Input';
-import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import styles from "../../assets/jss/components/formInputStyle";
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Popover from '@material-ui/core/Popover';
-import Menu from '@material-ui/core/Menu';
-import MenuList from '@material-ui/core/MenuList';
+import {getPlaces} from "../../app/services/thirdPartyAPI.service";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
+import { getMyLocation } from '../../app/helper/helperFunctions';
+import { getMyPlace } from '../../app/services/thirdPartyAPI.service';
 
 const useStyles = makeStyles(styles);
 
-
-const PlaceInput = props => {
-  const { onChange, onSelect, value, options, underlineColor, placeholder, inputProps, labelText, id } = props;
-
+const PlaceInput = (props) => {
+  const [place, setPlace] = useState('');
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState([]);
+  const [coordinates, setCoordinates] = useState({
+    lat: '',
+    lng: ''
+  });
   const classes = useStyles();
-  const theme = useTheme();
 
-  const underlineClasses = classNames({
+  const {
+    id,
+    loading,
+    error,
+    labelText, 
+    underlineColor, 
+    placeholder, 
+    onChangeLocation
+  } = props;
+
+  const onChange = (e) => {
+    setPlace(e.target.value);
+  }
+
+  useEffect(() => {
+    if (place) {
+      setOpen(true);
+      (async () => {
+        const places = await getPlaces({place});
+        console.log(places)
+        setOptions(places.data.data);
+        console.log(options)
+      })();
+    } else {
+      setOpen(false);
+      setOptions([])
+    }
+  }, [place]);
+
+  useEffect(() => {
+    if (coordinates.lat) {
+      (async () => {
+        const myPlace = await getMyPlace(coordinates);
+        setPlace(myPlace.data.data);
+      })();
+    }
+  }, [coordinates])
+
+  const inputRootClasses = classNames({
     [classes.underline]: true,
-    [classes[underlineColor]]: underlineColor
+    [classes.inputPadding]: true,
+    [classes[underlineColor]]: underlineColor,
+    [classes.underlineError]: error
   })
 
   return (
-    <PlacesAutocomplete
-      value={value}
-      onChange={onChange}
-      onSelect={onSelect}
-    >
-      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <FormControl className={classes.formControl}> 
-          <InputLabel 
-            htmlFor={id}
-            className={classes.label}
-          >
-            {labelText}
-          </InputLabel>
-          <Input
-            id={id}
-            {...getInputProps({...inputProps})}
-            classes={{ 
-              underline: underlineClasses,
-              input: classes.input
+    <FormControl className={classes.formControl}>
+      <Autocomplete
+        id={id}
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          setPlace('');
+        }}
+        loading={loading}
+        getOptionLabel={(option) => option.placeName}
+        options={options}
+        noOptionsText="No results found"
+        loading={loading}
+        loadingText="Locating..."
+        onChange={onChangeLocation}
+        classes={{
+          inputRoot: inputRootClasses,
+          listbox: classes.list,
+          option: classes.listItem,
+          noOptions: classes.list,
+          loading: classes.list
+        }}
+        renderOption={(option) => (
+          <Fragment>
+            <span className={classes.renderOptionIcon}><LocationOnIcon /></span>
+            {option.placeName} 
+          </Fragment>
+        )}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label={labelText}
+            onChange={onChange}
+            variant="standard"
+            InputLabelProps={{
+              classes: {root: classes.selectLabel}
             }}
+            InputProps={{
+              ...params.InputProps,
+              classes: {
+                root: classes.selectLabel
+              },
+              endAdornment: (
+                <Fragment>
+                  {loading 
+                    ? <CircularProgress color="inherit" size={20} /> 
+                    : <MyLocationIcon className={classes.inputIcon} onClick={() => getMyLocation(setCoordinates)} />
+                  }
+                </Fragment>
+              ),
+            }}
+            placeholder={placeholder}
+              classes={{
+                root: classes.input
+              }}
           />
-          <div style={{position: "relative"}}>
-            <MenuList className={classes.list}>
-              {loading && <div className={classes.loadingPlaceholder}>Searching...</div>}
-              {suggestions.map(suggestion => 
-                <MenuItem
-                  {...getSuggestionItemProps(suggestion)}
-                  className={classes.listItem}
-                >
-                  {suggestion.description}
-                </MenuItem>
-              )}
-            </MenuList>
-          </div>
-        </FormControl>
-      )}
-    </PlacesAutocomplete>
-  )
+        )}
+      />
+      {error ? <p className={classes.error}>{error}</p> : ''}
+    </FormControl>
+  );
 }
 
-PlaceInput.propTypes = {
 
-}
+const mapStateToProps = state => ({
+  loading: state.async.loading
+})
 
-export default PlaceInput
+
+export default connect(mapStateToProps)(PlaceInput);

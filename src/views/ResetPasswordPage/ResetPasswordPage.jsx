@@ -8,7 +8,7 @@ import styles from "../../assets/jss/views/resetPasswordPageStyle.js";
 import CustomCard from '../../components/Card/Card';
 import CardContent from '../../components/Card/CardContent';
 import FormInput from '../../components/FormInput/FormInput';
-import CustomButton from '../../components/Button/CustomButton';
+import Button from '../../components/Button/CustomButton';
 import CardFooter from "../../components/Card/CardFooter";
 import CardHeader from "../../components/Card/CardHeader";
 import LockIcon from '@material-ui/icons/Lock';
@@ -41,7 +41,7 @@ const ResetPasswordPage = props => {
     if (authenticated) {
       history.push('/')
     }
-  }, [authenticated, history]);
+  }, [authenticated, history])
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -62,14 +62,16 @@ const ResetPasswordPage = props => {
     <div className={classes.pageHeader}>
         <div className={classes.container}>
           <GridContainer justify="flex-start">
-            <GridItem xs={12} sm={6} md={5}>
+            <GridItem xs={12} sm={6} md={5} className={classes.borderWrap}>
               <CustomCard color="black">
-                <CardHeader
-                  login
-                  color="blue"
-                >
-                  <h3 className={classes.cardTitle}>Reset Password</h3>
-                </CardHeader>
+                <div className={classes.cardHeaderContainer}>
+                  <CardHeader
+                    login
+                    color="blue"
+                  >
+                    <h3 className={classes.cardTitle}>Reset Password</h3>
+                  </CardHeader>
+                </div>
                 <form className={classes.cardForm} onSubmit={onSubmit}>
                   <CardContent>
                     <GridContainer justify="center">
@@ -113,7 +115,7 @@ const ResetPasswordPage = props => {
                     {errorMsg && <p className={classes.error}>{errorMsg}</p>}
                   </CardContent>
                   <CardFooter>
-                    <CustomButton type="submit" color="blue">Reset</CustomButton>
+                    <Button type="submit" color="blue">Reset</Button>
                   </CardFooter>
                 </form>
               </CustomCard>

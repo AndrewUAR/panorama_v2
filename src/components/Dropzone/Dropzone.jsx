@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react';
+import _ from "lodash";
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import { makeStyles } from "@material-ui/core";
@@ -8,16 +9,17 @@ import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 const useStyles = makeStyles(styles);
 
 const Dropzone = (props) => {
-  const { setFile } = props;
+  const { setFile, multiple, message } = props;
 
   const onDrop = useCallback(acceptedFiles => {
+    if (multiple) acceptedFiles = _.slice(acceptedFiles, 0, 10);
     setFile(acceptedFiles.map(file => Object.assign(file, {
       preview: URL.createObjectURL(file)
   })))
   }, [setFile])
 
   const {getRootProps, getInputProps} = useDropzone({
-    multiple: false,
+    multiple: multiple,
     accept: "image/*",
     onDrop
   });
@@ -32,7 +34,7 @@ const Dropzone = (props) => {
         <input {...getInputProps()} />
         <div className={classes.boxContent}>
           <SystemUpdateAltIcon />
-          <p>Drag&drop photo here, or click to select file</p>
+          <p>{message}</p>
         </div>
       </div>
     </section>

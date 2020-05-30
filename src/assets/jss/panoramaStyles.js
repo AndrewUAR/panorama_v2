@@ -82,17 +82,15 @@ const warningColor = ["#ff9800"];
 
 const roseColor = ["#e91e63", "#ec407a", "#d81b60", "#f8bbd0", "#f06292"];
 
-
-
 const boxShadow = {
   boxShadow:
     "0 10px 30px -12px rgba(" +
     hexToRgb(blackColor) +
     ", 0.42), 0 4px 25px 0px rgba(" +
     hexToRgb(blackColor) +
-    ", 0.12), 0 8px 10px -5px rgba(" +
+    ", 0.42), 0 8px 10px -5px rgba(" +
     hexToRgb(blackColor) +
-    ", 0.2)"
+    ", 0.4)"
 };
 
 const dropzoneBoxShadow = {
@@ -109,11 +107,11 @@ const dropzoneBoxShadow = {
 const primaryBoxShadow = {
   boxShadow:
     "0 12px 20px -10px rgba(" +
-    hexToRgb(primaryColor[0]) +
+    hexToRgb(whiteColor) +
     ", 0.28), 0 4px 20px 0px rgba(" +
-    hexToRgb(blackColor) +
+    hexToRgb(whiteColor) +
     ", 0.12), 0 7px 8px -5px rgba(" +
-    hexToRgb(primaryColor[0]) +
+    hexToRgb(whiteColor) +
     ", 0.2)"
 };
 const infoBoxShadow = {

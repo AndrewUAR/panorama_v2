@@ -17,14 +17,6 @@ export const updateCurrentUser = async (userData) => {
   return response; 
 }
 
-export const updateMyPassword = async (userData) => {
-  const response = await axios.patch(`${API_ENDPOINT}/api/v1/users/updateMyPassword`, userData, {
-    withCredentials: true,
-    credentials: 'include'
-  });
-  return response;
-}
-
 export const deleteCurrentUser = async () => {
   const response = await axios.delete(`${API_ENDPOINT}/api/v1/users/deleteMe`, config);
   return response; 

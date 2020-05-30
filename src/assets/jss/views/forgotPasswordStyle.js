@@ -14,7 +14,25 @@ const forgetPasswordStyle = theme => ({
   },
   container: {
     ...container,
+    padding: "0 !important",
     zIndex: "4"
+  },
+  borderWrap: {
+    padding: "1rem",
+    background: "linear-gradient(135deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)",
+    [theme.breakpoints.up("md")]: {
+      padding: "1.5rem",
+      width: "70vw"
+    },
+    [theme.breakpoints.down("sm")]: {
+      background: "linear-gradient(115deg, #0072ff, #00c6ff 50%, rgba(255,0,0,0) 50%)"
+    }
+  },
+  cardHeaderContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    filter: "drop-shadow(4px 0px 3px rgba(50, 50, 0, 0.7))"
   },
   formInput: {
     display: "flex",
@@ -28,7 +46,7 @@ const forgetPasswordStyle = theme => ({
     }
   },
   cardForm: {
-    width: "100%",
+    width: "90%",
     display: "flex",
     [theme.breakpoints.down("sm")]: {
       margin: "0",
@@ -37,7 +55,7 @@ const forgetPasswordStyle = theme => ({
     }
   },
   formButton: {
-    margin: "1rem 1.5rem"
+    margin: "1rem 1rem 1rem 1.5rem"
   },
   formInputIcon: {
     alignSelf: "flex-end",
@@ -55,8 +73,10 @@ const forgetPasswordStyle = theme => ({
   },
   error: {
     margin: "0",
-    marginBottom: "1.3rem",
+    marginTop: "0.2rem",
+    textAlign: "center",
     ...defaultFont,
+    fontSize: "0.85rem",
     color: dangerColor,
     textTransform: "uppercase"
   }

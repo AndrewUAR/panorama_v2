@@ -2,6 +2,8 @@ import React, {useState, useEffect, useRef, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
 import _ from "lodash";
+import {PulseLoader} from "react-spinners";
+import { css } from "@emotion/core";
 import socketIOClient from 'socket.io-client';
 import FormInput from '../../../components/FormInput/FormInput';
 import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
@@ -13,6 +15,10 @@ import { updatePassword } from "../../../app/actions/authActions";
 import { apiEndPoint } from '../../../config';
 import { deleteError } from '../../../app/actions/errorActions';
 
+const buttonLoaderStyle = css`
+  display: flex;
+`;
+
 const useStyles = makeStyles(styles);
 
 const API_ENDPOINT = apiEndPoint();
@@ -20,7 +26,7 @@ const API_ENDPOINT = apiEndPoint();
 const GeneralSettingsForm = props => {
   const socket = socketIOClient(API_ENDPOINT);
 
-  const { updatePassword, errorMsg } = props;
+  const { updatePassword, errorMsg, loadingAsync } = props;
 
   const [user, setUser] = useState({
     passwordCurrent: '',
@@ -137,7 +143,20 @@ const GeneralSettingsForm = props => {
         </div>
         {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
-          <Button type="submit" color="success" disabled={notTouched}>Update</Button>
+          <Button
+             type="submit"
+             color="success"
+             disabled={notTouched}
+          >{loadingAsync && !notTouched
+              ? <PulseLoader
+                  color={"#fff"}
+                  css={buttonLoaderStyle}
+                  loading={true}
+                  margin={2}
+                />
+              : <>Update</>
+            }
+          </Button>
           <Button color="danger">Cancel</Button>
         </div>
       </form>
@@ -146,7 +165,8 @@ const GeneralSettingsForm = props => {
 }
 
 const mapStateToProps = state => ({
-  errorMsg: state.error.error
+  errorMsg: state.error.error,
+  loadingAsync: state.async.loading
 })
 
 const actions = ({

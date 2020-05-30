@@ -8,6 +8,7 @@ import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
 import asyncReducer from "./asyncReducer";
 import notificationReducer from "./notificationReducer";
+import albumReducer from "./albumReducer";
 
 import { LOGOUT } from "../constants/auth";
 
@@ -22,10 +23,9 @@ const appReducers = combineReducers({
   modal: modalReducer,
   error: errorReducer,
   async: asyncReducer,
-  notifications: notificationReducer
+  notifications: notificationReducer,
+  selectedAlbum: albumReducer
 });
-
-
 
 const rootReducer = (state, action) => {
   if (action.type === LOGOUT) {

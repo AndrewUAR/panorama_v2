@@ -18,6 +18,14 @@ const sidebarStyle = theme => ({
     height: "12rem",
     borderRadius: "7rem"
   },
+  photoLoader: {
+    width: "12rem",
+    height: "12rem",
+    borderRadius: "7rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   uploadButton: {
     position: "absolute",
     top: "10rem",

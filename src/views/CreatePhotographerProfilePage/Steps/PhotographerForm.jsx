@@ -1,62 +1,50 @@
-/*global google*/  
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import FormInput from '../../../components/FormInput/FormInput';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
 import Select from "../../../components/SelectInput/Select";
 import { languagesList, photographyCategories } from "../../../app/helper/selectInputData";
-import styles from "../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/formStyle";
+import styles from "../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle";
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageIcon from '@material-ui/icons/Language';
 import PersonIcon from '@material-ui/icons/Person';
-import MyLocationIcon from '@material-ui/icons/MyLocation';
 import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
+import PinDropIcon from '@material-ui/icons/PinDrop';
 import PlaceInput from '../../../components/PlaceInput/PlaceInput';
 
 const useStyles = makeStyles(styles);
 
 const PhotographerForm = props => {
-  console.log(props)
-  // const [photographer, setPhotographer] = useState({
-  //   introduction: '',
-  //   languages: ['English'],
-  //   location: [],
-  //   categories: []
-  // })
 
-  // const [error, setError] = useState({
-  //   introductionError: '',
-  //   languagesError: '',
-  //   locationError: '',
-  //   categoriesError: ''
-  // })
-  const { photographer, error, onChange, handleCityChange, handleCitySelect } = props;
+  const { 
+    photographer, 
+    error, 
+    onChange, 
+    handleLanguagesChange, 
+    handleCategoriesChange, 
+    handleLocationChange
+  } = props;
 
-  // const [city, setCity] = useState('')
+  const { 
+    introduction, 
+    languages, 
+    categories, 
+    location 
+  } = photographer;
 
-  const { introduction, languages, categories, location, city } = photographer;
-  const { introductionError, languagesError, locationError, categoriesError } = error;
+  const { 
+    introductionError, 
+    languagesError, 
+    locationError, 
+    categoriesError 
+  } = error;
 
   const classes = useStyles();
 
-  // const handleCityChange = city => {
-  //   console.log(city)
-  //   setCity(city);
-  // }
-
-  // const handleCitySelect = selectedCity => {
-  //   geocodeByAddress(selectedCity)
-  //     .then(result => getLatLng(result[0]))
-  //     .then(latLng=> {
-  //       console.log(latLng)
-  //     })
-  // }
-
   return (
-    <GridContainer justify="center">
-      <GridItem xs={12} sm={8} md={6}>
+    <GridContainer justify="center" className={classes.container}>
+      <GridItem xs={11} sm={8} md={6}>
         <form className={classes.formContainer}>
           <div className={classes.formInput}>
             <PersonIcon className={classes.inputIcon}/>
@@ -67,6 +55,7 @@ const PhotographerForm = props => {
               inputProps={{
                 placeholder: "Introduction",
                 multiline: true,
+                rows: 1,
                 type: "text",
                 name: "introduction",
                 value: introduction,
@@ -81,15 +70,12 @@ const PhotographerForm = props => {
             <Select
               id="languages"
               labelText="Languages"
-              selectProps={{
-                id: "languages",
-                value: languages,
-                multiple: true,
-                name: "languages"
-              }}
-              onChange={onChange}
+              placeholder="Languages"
+              value={languages}
+              onChange={handleLanguagesChange}
               options={languagesList()}
               underlineColor="underlineTeal"
+              listName="languages"
               error={languagesError}
             />
           </div>
@@ -97,35 +83,26 @@ const PhotographerForm = props => {
             <PhotoFilterIcon className={classes.inputIcon}/>
             <Select
               id="categories"
-              labelText="Photography Categories"
-              selectProps={{
-                id: "categories",
-                value: categories,
-                multiple: true,
-                name: "categories"
-              }}
-              onChange={onChange}
+              labelText="Categories"
+              placeholder="Categories"
+              value={categories}
+              onChange={handleCategoriesChange}
               options={photographyCategories()}
               underlineColor="underlineTeal"
+              listName="categories"
               error={categoriesError}
             />
           </div>
           <div className={classes.formInput}>
-            <MyLocationIcon className={classes.inputIcon}/>
+            <PinDropIcon className={classes.inputIcon}/>
             <PlaceInput
-              id="city"
+              id="location"
               labelText="Serve Location"
-              inputProps={{
-                type: "text",
-                name: "city",
-                placeholder: "Serve Location",
-                autoComplete: 'off'
-              }}
-              options={{types: ['cities']}}
-              onSelect={handleCitySelect}
-              onChange={handleCityChange}
-              value={city}
+              placeholder="Serve Location"
+              value={location}
+              onChangeLocation={handleLocationChange}
               underlineColor="underlineTeal"
+              error={locationError}
             />
           </div>
         </form>
@@ -135,7 +112,12 @@ const PhotographerForm = props => {
 }
 
 PhotographerForm.propTypes = {
-
+  photographer: PropTypes.object.isRequired,
+  error: PropTypes.object,
+  onChange: PropTypes.func.isRequired,
+  handleLanguagesChange: PropTypes.func.isRequired,
+  handleCategoriesChange: PropTypes.func.isRequired,
+  handleLocationChange: PropTypes.func.isRequired
 }
 
 export default PhotographerForm;

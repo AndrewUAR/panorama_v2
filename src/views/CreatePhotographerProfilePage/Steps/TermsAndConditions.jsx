@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from "../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle";
 import GridContainer from '../../../components/Grid/GridContainer';
@@ -36,7 +36,9 @@ const TermsAndConditions = props => {
 }
 
 TermsAndConditions.propTypes = {
-
+  checked: PropTypes.bool.isRequired,
+  handleChecked: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
 }
 
 export default TermsAndConditions
