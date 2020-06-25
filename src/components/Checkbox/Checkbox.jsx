@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(styles);
 
 const CustomCheckBox = props => {
-  const { checked, onChange, label, color } = props;
+  const { checked, onChange, label } = props;
 
   const classes =useStyles();
 
@@ -33,7 +33,7 @@ const CustomCheckBox = props => {
 }
 
 CustomCheckBox.propTypes = {
-
+  checked: PropTypes.bool.isRequired
 }
 
 export default CustomCheckBox;

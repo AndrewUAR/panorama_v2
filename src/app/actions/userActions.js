@@ -1,6 +1,6 @@
 import { SET_ERROR } from "../constants/error";
 import { AUTHENTICATE_USER, LOGOUT } from "../constants/auth";
-import { getCurrentUser, updateCurrentUser, deleteCurrentUser } from "../services/user.service";
+import { updateCurrentUser, deleteCurrentUser } from "../services/user.service";
 import { asyncActionStart, asyncActionFinish, asyncActionError } from "./asyncActions";
 import { enqueueSnackbar } from '../actions/notificationActions';
 

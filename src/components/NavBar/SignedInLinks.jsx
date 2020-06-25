@@ -17,7 +17,6 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import Dropdown from '../Dropdown/Dropdown';
 import styles from "../../assets/jss/components/navBarLinksStyle";
 import { logout } from "../../app/actions/authActions";
-import { openModal } from "../../app/actions/modalActions";
 import { getMyPhotographerProfile } from "../../app/actions/photographerActions";
 
 const useStyles = makeStyles(styles);

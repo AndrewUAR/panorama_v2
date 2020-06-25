@@ -2,11 +2,9 @@ import {
   GET_ALL_ALBUMS, 
   GET_ALBUM, 
   CREATE_ALBUM, 
-  UPDATE_ALBUM, 
-  DELETE_ALBUM 
+  UPDATE_ALBUM
 } from '../constants/album.js';
 import { SET_ERROR } from "../constants/error";
-import { enqueueSnackbar } from '../actions/notificationActions';
 import { 
   asyncActionStart, 
   asyncActionFinish, 

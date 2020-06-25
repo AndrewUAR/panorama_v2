@@ -28,10 +28,22 @@ const albumStyle = theme => ({
       transform: "scale(0.98)"
     }
   },
+  albumImage: {
+    display: "block"
+  },
+  imageContainer: {
+    "&:hover": {
+      position: "relative",
+      transition: "0.3s ease",
+      transform: "scale(1.2)",
+      zIndex: "200",
+      border: `1px solid ${blueColor}`
+    }
+  },
   albumTitle: {
     color: whiteColor,
     fontSize: "1.25rem",
-    padding: "1rem 0.5rem 0.3rem 0.5rem",
+    padding: "0.3rem 2rem 0.3rem 2rem",
     textAlign: "center",
     margin: "0"
   },
@@ -104,6 +116,10 @@ const albumStyle = theme => ({
     "&:active": {
       transform: "scale(0.98)"
     }
+  },
+  titleBar: {
+    zIndex: "100",
+    color: whiteColor
   },
   imageCover: {
     ...boxShadow,

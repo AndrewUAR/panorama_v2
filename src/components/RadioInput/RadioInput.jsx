@@ -10,7 +10,7 @@ import styles from "../../assets/jss/components/formInputStyle.js";
 const useStyles = makeStyles(styles);
 
 const RadioInput = props => {
-  const {label, name, value, options, onChange, direction} = props;
+  const { label, name, value, options, onChange } = props;
 
   const classes = useStyles();
 
@@ -32,7 +32,7 @@ const RadioInput = props => {
 }
 
 RadioInput.propTypes = {
-
+  name: PropTypes.string
 }
 
 export default RadioInput

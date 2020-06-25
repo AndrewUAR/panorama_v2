@@ -16,7 +16,7 @@ const Dropzone = (props) => {
     setFile(acceptedFiles.map(file => Object.assign(file, {
       preview: URL.createObjectURL(file)
   })))
-  }, [setFile])
+  }, [setFile, multiple])
 
   const {getRootProps, getInputProps} = useDropzone({
     multiple: multiple,

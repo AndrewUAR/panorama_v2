@@ -1,10 +1,10 @@
 import { createReducer } from "../helper/reducerUtils";
 import { 
-  CREATE_ALBUM, 
+  // CREATE_ALBUM, 
   GET_ALBUM, 
-  GET_ALL_ALBUMS, 
+  // GET_ALL_ALBUMS, 
   UPDATE_ALBUM,
-  DELETE_ALBUM
+  // DELETE_ALBUM
 } from "../constants/album";
 
 const initialState = {};

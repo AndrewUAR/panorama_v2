@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -172,7 +172,6 @@ const CreatePhotographerProfilePage = props => {
               <Button
                 variant="contained"
                 color="blue"
-                onClick={handleNext}
                 size="sm"
                 disabled={!checked}
                 onClick={() => { 

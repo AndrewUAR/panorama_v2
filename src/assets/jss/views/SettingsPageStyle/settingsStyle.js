@@ -1,4 +1,4 @@
-import { whiteColor, defaultFont, blueColor, indigoColor, dangerColor } from '../../panoramaStyles.js';
+import { whiteColor, defaultFont, blueColor, dangerColor } from '../../panoramaStyles.js';
 
 const settingsStyle = theme => ({
   formContainer: {

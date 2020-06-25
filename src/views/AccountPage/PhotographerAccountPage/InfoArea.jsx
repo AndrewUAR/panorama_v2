@@ -8,7 +8,6 @@ const useStyles = makeStyles(styles);
 
 const InfoArea = props => {
   const { user } = props;
-  console.log(user)
 
   const { introduction, languages, categories, location } = user.photographer;
 
@@ -31,7 +30,7 @@ const mapStateToProps = state => ({
 })
 
 InfoArea.propTypes = {
-  
+  user: PropTypes.object
 }
 
 export default connect(mapStateToProps)(InfoArea);

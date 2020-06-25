@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from '@material-ui/lab/Rating';
 import styles from "../../../assets/jss/views/AccountPageStyle/AccountPageStyle";
-import StarHalfIcon from '@material-ui/icons/StarHalf';
 import DescriptionIcon from '@material-ui/icons/Description';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import Button from "../../../components/Button/CustomButton";
@@ -36,8 +34,5 @@ const Stats = props => {
   )
 }
 
-Stats.propTypes = {
 
-}
-
-export default Stats
+export default Stats;

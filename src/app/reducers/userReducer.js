@@ -1,5 +1,5 @@
 import { createReducer } from "../helper/reducerUtils";
-import { GET_ME, DELETE_ME } from "../constants/user";
+import { GET_ME } from "../constants/user";
 
 const initialState = {
   me: ''

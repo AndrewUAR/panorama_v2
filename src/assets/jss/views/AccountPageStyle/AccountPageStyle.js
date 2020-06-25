@@ -18,7 +18,6 @@ const accountPageStyle = theme => ({
     top: "8rem",
     height: "max-content",
     position: "sticky",
-    background: "#fff",
     background: "linear-gradient(to bottom right, #2c3e50, #3498db)",
     marginRight: "2rem",
     [theme.breakpoints.down("sm")]: {
@@ -28,12 +27,14 @@ const accountPageStyle = theme => ({
       position: "initial"
     }
   },
+  mainArea: {
+    height: "45rem"
+  },
   info: {
     ...boxShadow,
     ...defaultFont,
     color: whiteColor,
     textAlign: "justify",
-    background: "#fff",
     padding: "1rem 5rem 1rem 5rem",
     background: "linear-gradient(to bottom right, #2c3e50, #3498db)"
   },

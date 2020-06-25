@@ -4,7 +4,6 @@ import storage from "redux-persist/lib/storage";
 
 import authReducer from "./authReducer";
 import modalReducer from "./modalReducer";
-import userReducer from "./userReducer";
 import errorReducer from "./errorReducer";
 import asyncReducer from "./asyncReducer";
 import notificationReducer from "./notificationReducer";

@@ -1,6 +1,4 @@
 import {
-   blackColor, 
-   hexToRgb,
    boxShadow 
 } from "../panoramaStyles.js";
 

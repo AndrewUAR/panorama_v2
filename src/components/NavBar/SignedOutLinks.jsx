@@ -52,10 +52,6 @@ const SignedOutLinks = props => {
   )
 }
 
-const mapStateToProps = state => ({
-
-})
-
 const actions = ({
   openModal
 })

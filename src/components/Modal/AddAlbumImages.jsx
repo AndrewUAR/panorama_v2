@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
 import _ from "lodash";
-import socketIOClient from 'socket.io-client';
 import PropTypes from "prop-types";
 import classNames from 'classnames';
 import {PulseLoader} from "react-spinners";
@@ -14,7 +13,6 @@ import { uploadAlbumImages } from "../../app/actions/albumActions";
 import Dropzone from "../Dropzone/Dropzone";
 import Button from "../../components/Button/CustomButton";
 import styles from "../../assets/jss/components/modalStyle";
-import { apiEndPoint } from '../../config';
 
 const buttonLoaderStyle = css`
   display: flex;
@@ -22,10 +20,8 @@ const buttonLoaderStyle = css`
 
 const useStyles = makeStyles(styles);
 
-const API_ENDPOINT = apiEndPoint();
-
 const AddAlbumImages = props => {
-  const socket = socketIOClient(API_ENDPOINT);
+  // const socket = socketIOClient(API_ENDPOINT);
   const {closeModal, uploadAlbumImages, loadingAsync, selectedAlbum} = props;
 
   const [files, setFiles] = useState([]);
@@ -72,6 +68,7 @@ const AddAlbumImages = props => {
         <img
           src={file.preview}
           className={classes.img}
+          alt=""
         />
       </div>
     </div>

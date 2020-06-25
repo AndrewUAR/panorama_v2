@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
 
 const Main = props => {
   return (
@@ -7,10 +6,6 @@ const Main = props => {
       
     </div>
   )
-}
-
-Main.propTypes = {
-
 }
 
 export default Main

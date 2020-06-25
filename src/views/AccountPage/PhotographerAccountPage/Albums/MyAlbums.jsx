@@ -3,10 +3,8 @@ import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import classNames from 'classnames';
 import GridLoader from "react-spinners/GridLoader";
 import { makeStyles } from "@material-ui/core/styles";
-import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import styles from "../../../../assets/jss/views/AccountPageStyle/albumStyle";
 import GridContainer from '../../../../components/Grid/GridContainer';
@@ -16,7 +14,7 @@ import { openModal } from "../../../../app/actions/modalActions";
 const useStyles = makeStyles(styles);
 
 const MyAlbums = props => {
-  const { user, openModal, selectAlbum, loadingAsync } = props;
+  const { user, selectAlbum, loadingAsync } = props;
   const [myAlbums, setAlbums] = useState([]);
   
   const { albums } = user;
@@ -25,7 +23,7 @@ const MyAlbums = props => {
     if (albums) {
       setAlbums(albums);
     }
-  }, [])
+  }, [albums])
 
 
   const history = useHistory();
@@ -53,7 +51,7 @@ const MyAlbums = props => {
                 </div>
                 : <div className={classes.albumCover}>
                     {_.slice(album.images, -3, (album.length)).map((image, index) => (
-                      <img key={index} src={image} className={classes.imageCover}/>
+                      <img key={index} src={image} className={classes.imageCover} alt=""/>
                       ))}
                   </div>
               }

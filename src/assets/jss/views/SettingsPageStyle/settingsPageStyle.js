@@ -1,4 +1,4 @@
-import { container, boxShadow, indigoColor } from '../../panoramaStyles';
+import { container, boxShadow } from '../../panoramaStyles';
 import image from "../../../img/backGround/photo-1525101479959-c3e73fd498ab.jpg"
 
 const settingsStyle = theme => ({

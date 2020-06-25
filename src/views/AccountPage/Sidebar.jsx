@@ -12,12 +12,11 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { getAllAlbums } from "../../app/actions/albumActions";
 
 const useStyles = makeStyles(styles);
 
 const Sidebar = props => {
-  const { user, getAllAlbums } = props;
+  const { user } = props;
   const classes = useStyles();
   const history = useHistory();
 
@@ -43,7 +42,7 @@ const Sidebar = props => {
           <Button fullWidth color="transparent" sideBarButton><DateRangeIcon />My Calender</Button>
           <Button fullWidth color="transparent" sideBarButton><RateReviewIcon />My Reviews</Button>
           <Button fullWidth color="transparent" sideBarButton><CreditCardIcon />My Payouts</Button>
-          <Button fullWidth color="transparent" sideBarButton><SettingsIcon />Account Settings</Button>
+          <Button fullWidth color="transparent" sideBarButton href="/settings"><SettingsIcon />Account Settings</Button>
         </div>
       </div>
     </div>
@@ -54,12 +53,9 @@ const mapStateToProps = state => ({
   user: state.auth.authUser
 })
 
-const actions = ({
-  getAllAlbums
-})
 
 Sidebar.propTypes = {
-
+  user: PropTypes.object
 }
 
-export default connect(mapStateToProps, actions)(Sidebar);
+export default connect(mapStateToProps)(Sidebar);

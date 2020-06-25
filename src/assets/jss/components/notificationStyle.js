@@ -1,9 +1,6 @@
 import { 
   defaultFont, 
   dangerColor, 
-  hexToRgb, 
-  successColor, 
-  whiteColor, 
   blueColor, 
   warningColor,
   tealColor 

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import _ from "lodash";
-import socketIOClient from 'socket.io-client';
 import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
 import GridLoader from "react-spinners/GridLoader";
@@ -20,25 +18,14 @@ import { openModal } from "../../../../app/actions/modalActions";
 import Button from '@material-ui/core/Button';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import { deleteAlbumImages, deleteMyAlbum } from "../../../../app/actions/albumActions";
-import ImageGalleryModal from "../../../../components/Modal/ImageGalleryModal";
-import { apiEndPoint } from "../../../../config";
-
-const API_ENDPOINT = apiEndPoint();
 
 const useStyles = makeStyles(styles);
 
 const MyAlbum = props => {
   const { selectedAlbum, openModal, loadingAsync, deleteAlbumImages, deleteMyAlbum } = props;
-  const socket = socketIOClient(API_ENDPOINT);
-  const [loading, setLoading] = useState(true);
   const { title, images, _id } = selectedAlbum;
 
   const history = useHistory();
-
-  useEffect(() => {
-    setLoading(false);
-    socket.emit('refresh', {});
-  }, [])
 
   const classes = useStyles();
 
@@ -79,9 +66,9 @@ const MyAlbum = props => {
       {(loadingAsync)
         ? <GridLoader loading={true} color={"#fff"} />
         : <>
-            <GridList cellHeight={200} className={classes.gridList} cols={3}>
+            <GridList cellHeight={200} cols={3}>
               {images.map((image, index) => (
-                <GridListTile key={index} rowcols={1}>
+                <GridListTile key={index} rowcols={1} className={classes.imageContainer}>
                   <GridListTileBar
                     titlePosition="top"
                     actionIcon={
@@ -90,7 +77,7 @@ const MyAlbum = props => {
                     actionPosition="right"
                     className={classes.titleBar}
                   />
-                  <img style={{width: '100%', height: '100%'}} src={image} onClick={() => openModal('ImageGalleryModal')}/>
+                  <img className={classes.albumImage} src={image} onClick={() => openModal('ImageGalleryModal')} alt=""/>
                 </GridListTile>
               ))}
             </GridList>

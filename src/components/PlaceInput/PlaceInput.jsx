@@ -44,9 +44,7 @@ const PlaceInput = (props) => {
       setOpen(true);
       (async () => {
         const places = await getPlaces({place});
-        console.log(places)
         setOptions(places.data.data);
-        console.log(options)
       })();
     } else {
       setOpen(false);
@@ -83,7 +81,6 @@ const PlaceInput = (props) => {
         getOptionLabel={(option) => option.placeName}
         options={options}
         noOptionsText="No results found"
-        loading={loading}
         loadingText="Locating..."
         onChange={onChangeLocation}
         classes={{

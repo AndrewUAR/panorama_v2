@@ -3,8 +3,6 @@ import {
   blackColor, 
   whiteColor,
   blueColor,
-  tealColor,
-  successBoxShadow,
   boxShadow
 } from "../panoramaStyles";
 

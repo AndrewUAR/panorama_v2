@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core';
 import Switch from "../../../components/Switch/Switch";
@@ -123,10 +122,6 @@ const NotificationSettings = props => {
       </div>
     </div>
   )
-}
-
-NotificationSettings.propTypes = {
-
 }
 
 export default NotificationSettings

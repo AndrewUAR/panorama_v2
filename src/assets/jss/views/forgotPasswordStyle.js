@@ -1,4 +1,4 @@
-import { container, defaultFont, hexToRgb, whiteColor, dangerColor } from "../panoramaStyles";
+import { container, defaultFont, whiteColor, dangerColor } from "../panoramaStyles";
 import image from '../../img/backGround/ramon-salinero-vEE00Hx5d0Q-unsplash.jpg';
 
 const forgetPasswordStyle = theme => ({
