@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import styles from "../../assets/jss/components/buttonStyle";
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import styles from '../../assets/jss/components/buttonStyle';
 
 const useStyles = makeStyles(styles);
 
-const CustomButton = props => {
+const CustomButton = (props) => {
   const {
-    type, 
-    justIcon, 
-    color, 
-    socialSignUp, 
-    uploadButton, 
+    type,
+    justIcon,
+    color,
+    socialSignUp,
+    uploadButton,
     settingsButton,
-    sideBarButton, 
-    children, 
+    sideBarButton,
+    children,
     disabled,
-    size, 
-    ref, 
+    size,
+    ref,
     ...rest
   } = props;
   const classes = useStyles();
@@ -33,30 +33,27 @@ const CustomButton = props => {
     [classes.settingsButton]: settingsButton,
     [classes.sideBarButton]: sideBarButton,
     [classes[size]]: size
-  })
+  });
 
   return (
-    <Button type={type} className={btnClasses} disabled={disabled} ref={ref} {...rest}>
+    <Button
+      type={type}
+      className={btnClasses}
+      disabled={disabled}
+      ref={ref}
+      {...rest}
+    >
       {children}
     </Button>
-  )
-}
+  );
+};
 
 Button.propTypes = {
   justIcon: PropTypes.bool,
   socialSignUp: PropTypes.bool,
   uploadButton: PropTypes.bool,
-  color: PropTypes.oneOf([
-    "danger",
-    "blue",
-    "black",
-    "transparent",
-    "success"
-  ]),
-  size: PropTypes.oneOf([
-    "sm",
-    "lg"
-  ])
-}
+  color: PropTypes.oneOf(['danger', 'blue', 'black', 'transparent', 'success']),
+  size: PropTypes.oneOf(['sm', 'lg'])
+};
 
 export default CustomButton;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,13 +10,17 @@ import Button from '../Button/CustomButton';
 import Backdrop from '@material-ui/core/Backdrop';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import { closeModal } from "../../app/actions/modalActions";
-import styles from "../../assets/jss/components/modalStyle";
+import { closeModal } from '../../app/actions/modalActions';
+import styles from '../../assets/jss/components/modalStyle';
 
 const useStyles = makeStyles(styles);
 
 function getSteps() {
-  return ['Sign in / Sign Up', 'Create a photographer profile', 'Make a portfolio'];
+  return [
+    'Sign in / Sign Up',
+    'Create a photographer profile',
+    'Make a portfolio'
+  ];
 }
 
 function getStepContent(step) {
@@ -42,7 +46,7 @@ function getStepContent(step) {
   }
 }
 
-const BecomePhotographerModal = props => {
+const BecomePhotographerModal = (props) => {
   const { closeModal, authenticated } = props;
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
@@ -61,7 +65,6 @@ const BecomePhotographerModal = props => {
   };
 
   return (
-    
     <Modal
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
@@ -72,78 +75,72 @@ const BecomePhotographerModal = props => {
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        timeout: 500,
+        timeout: 500
       }}
     >
-    <div className={classes.stepper}>
-      <Stepper activeStep={activeStep} orientation="vertical" >
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel
-              classes={{
-                label: classes.label,
-                active: classes.activeLabel
-            }} 
-            >{label}</StepLabel>
-            <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  color="danger"
-                  size="sm"
-                >
-                  Back
-                </Button>
-                <Button
-                  color="black"
-                  size="sm"
-                  onClick={
-                    activeStep === steps.length - 1 ? handleClose : handleNext}
-                >
-                  {activeStep === steps.length - 1 ? 'Close' : 'Next'}
-                </Button>
-                {activeStep === steps.length - 1 && !authenticated && 
-                  <>
-                    <Button
-                      color="blue"
-                      size="sm"
-                      href="/login"
-                    >
-                      Sign In
-                    </Button>
-                    <Button
-                      color="blue"
-                      size="sm"
-                      href="/register"
-                    >
-                      Sign Up
-                    </Button>
-                  </>
-                }
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
+      <div className={classes.stepper}>
+        <Stepper activeStep={activeStep} orientation="vertical">
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel
+                classes={{
+                  label: classes.label,
+                  active: classes.activeLabel
+                }}
+              >
+                {label}
+              </StepLabel>
+              <StepContent>
+                <Typography>{getStepContent(index)}</Typography>
+                <div className={classes.actionsContainer}>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    color="danger"
+                    size="sm"
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    color="black"
+                    size="sm"
+                    onClick={
+                      activeStep === steps.length - 1 ? handleClose : handleNext
+                    }
+                  >
+                    {activeStep === steps.length - 1 ? 'Close' : 'Next'}
+                  </Button>
+                  {activeStep === steps.length - 1 && !authenticated && (
+                    <>
+                      <Button color="blue" size="sm" href="/login">
+                        Sign In
+                      </Button>
+                      <Button color="blue" size="sm" href="/register">
+                        Sign Up
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
       </div>
     </Modal>
   );
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated
 });
 
-const actions = ({
+const actions = {
   closeModal
-});
+};
 
 BecomePhotographerModal.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired
-}
-
+};
 
 export default connect(mapStateToProps, actions)(BecomePhotographerModal);

@@ -4,12 +4,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { FormControlLabel, Radio } from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
-import styles from "../../assets/jss/components/formInputStyle.js";
+import { makeStyles } from '@material-ui/core/styles';
+import styles from '../../assets/jss/components/formInputStyle.js';
 
 const useStyles = makeStyles(styles);
 
-const RadioInput = props => {
+const RadioInput = (props) => {
   const { label, name, value, options, onChange } = props;
 
   const classes = useStyles();
@@ -17,23 +17,32 @@ const RadioInput = props => {
   return (
     <FormControl>
       <FormLabel className={classes.label}>{label}</FormLabel>
-      <RadioGroup name={name} value={value} onChange={onChange} className={classes.radioGroup}>
+      <RadioGroup
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={classes.radioGroup}
+      >
         {options.map((option, index) => (
-          <FormControlLabel 
-            key={index} 
-            value={option.value} 
-            control={<Radio classes={{root: classes.blue}}/>} 
-            label={<><i className={option.icon + ' ' + classes.radioIcon}></i>{option.label}</>}
+          <FormControlLabel
+            key={index}
+            value={option.value}
+            control={<Radio classes={{ root: classes.blue }} />}
+            label={
+              <>
+                <i className={option.icon + ' ' + classes.radioIcon}></i>
+                {option.label}
+              </>
+            }
           />
         ))}
       </RadioGroup>
     </FormControl>
-  )
-}
+  );
+};
 
 RadioInput.propTypes = {
   name: PropTypes.string
-}
+};
 
-export default RadioInput
-
+export default RadioInput;

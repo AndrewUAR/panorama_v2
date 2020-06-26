@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { AppBar, Toolbar, Button, Hidden, IconButton, Drawer } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Hidden,
+  IconButton,
+  Drawer
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SignedOutLinks from './SignedOutLinks';
 import FooterLinks from '../Footer/FooterLinks';
-import Menu from "@material-ui/icons/Menu";
+import Menu from '@material-ui/icons/Menu';
 
-import styles from "../../assets/jss/components/navBarStyle";
+import styles from '../../assets/jss/components/navBarStyle';
 import SignedInLinks from './SignedInLinks';
 
 const useStyles = makeStyles(styles);
 
-const NavBar = props => {
+const NavBar = (props) => {
   const { fixed, color, authenticated } = props;
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
-  }
+  };
 
   const classes = useStyles();
 
@@ -29,12 +36,12 @@ const NavBar = props => {
     [classes.appBar]: true,
     [classes.fixed]: fixed,
     [classes[color]]: color
-  })
+  });
 
   const drawerPaperClasses = classNames({
     [classes.drawerPaper]: true,
     [classes[color]]: color
-  })
+  });
 
   return (
     <AppBar className={appBarClasses}>
@@ -43,10 +50,11 @@ const NavBar = props => {
           <Link to="/">Panorama</Link>
         </Button>
         <Hidden smDown>
-          {authenticated 
-            ? <SignedInLinks className={classes.container}/>
-            : <SignedOutLinks className={classes.container}/>
-          }
+          {authenticated ? (
+            <SignedInLinks className={classes.container} />
+          ) : (
+            <SignedOutLinks className={classes.container} />
+          )}
         </Hidden>
         <Hidden mdUp>
           <IconButton
@@ -61,33 +69,32 @@ const NavBar = props => {
       <Hidden mdUp>
         <Drawer
           variant="temporary"
-          anchor={"left"}
+          anchor={'left'}
           open={drawerOpen}
           onClose={handleDrawerToggle}
-          classes={{paper: drawerPaperClasses}}
+          classes={{ paper: drawerPaperClasses }}
         >
-        {authenticated 
-          ? <SignedInLinks className={classes.container}/>
-          : <><FooterLinks /><SignedOutLinks className={classes.container}/></>
-        }
+          {authenticated ? (
+            <SignedInLinks className={classes.container} />
+          ) : (
+            <>
+              <FooterLinks />
+              <SignedOutLinks className={classes.container} />
+            </>
+          )}
         </Drawer>
       </Hidden>
     </AppBar>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated
-})
+});
 
 NavBar.propTypes = {
   absolute: PropTypes.bool,
-  color: PropTypes.oneOf([
-    "pink",
-    "blue",
-    "black"
-  ])
-}
+  color: PropTypes.oneOf(['pink', 'blue', 'black'])
+};
 
 export default connect(mapStateToProps)(NavBar);
-

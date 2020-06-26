@@ -1,6 +1,6 @@
 export const apiEndPoint = () => {
-  return 'https://photopanorama.herokuapp.com'
-}
+  return 'https://photopanorama.herokuapp.com';
+};
 
 export const configHeader = () => {
   const config = {
@@ -9,6 +9,6 @@ export const configHeader = () => {
     },
     withCredentials: true,
     credentials: 'include'
-  }
+  };
   return config;
-}
+};

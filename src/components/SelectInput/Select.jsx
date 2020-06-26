@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import styles from "../../assets/jss/components/formInputStyle";
+import styles from '../../assets/jss/components/formInputStyle';
 import FormControl from '@material-ui/core/FormControl';
 import CameraEnhanceIcon from '@material-ui/icons/CameraEnhance';
 import TranslateIcon from '@material-ui/icons/Translate';
@@ -13,16 +13,16 @@ const useStyles = makeStyles(styles);
 
 const Select = (props) => {
   const classes = useStyles();
-  const { 
-    error, 
-    options, 
+  const {
+    error,
+    options,
     labelText,
-    underlineColor, 
-    placeholder, 
-    value, 
-    onChange, 
-    id, 
-    listName 
+    underlineColor,
+    placeholder,
+    value,
+    onChange,
+    id,
+    listName
   } = props;
 
   const underlineClasses = classNames({
@@ -33,20 +33,28 @@ const Select = (props) => {
 
   const getRenderOption = (option, listName) => {
     switch (listName) {
-      case 'languages': 
-        return (<Fragment>
-          <span className={classes.renderOptionIcon}><TranslateIcon /></span>
-          {option}
-        </Fragment>)
-      case 'categories': 
-        return (<Fragment>
-          <span className={classes.renderOptionIcon}><CameraEnhanceIcon /></span>
-          {option} 
-        </Fragment>)
-        default:
-          return <Fragment>{option}</Fragment> 
+      case 'languages':
+        return (
+          <Fragment>
+            <span className={classes.renderOptionIcon}>
+              <TranslateIcon />
+            </span>
+            {option}
+          </Fragment>
+        );
+      case 'categories':
+        return (
+          <Fragment>
+            <span className={classes.renderOptionIcon}>
+              <CameraEnhanceIcon />
+            </span>
+            {option}
+          </Fragment>
+        );
+      default:
+        return <Fragment>{option}</Fragment>;
     }
-  }
+  };
 
   return (
     <FormControl className={classes.formControl}>
@@ -65,20 +73,18 @@ const Select = (props) => {
           option: classes.listItem,
           noOptions: classes.list
         }}
-        renderOption={(option) => (
-          getRenderOption(option, listName)
-        )}
+        renderOption={(option) => getRenderOption(option, listName)}
         renderInput={(params) => (
           <TextField
             {...params}
             variant="standard"
             label={labelText}
             InputLabelProps={{
-              classes: {root: classes.selectLabel}
+              classes: { root: classes.selectLabel }
             }}
             InputProps={{
               ...params.InputProps,
-              classes: {root: classes.selectLabel}
+              classes: { root: classes.selectLabel }
             }}
             placeholder={placeholder}
             classes={{
@@ -90,7 +96,6 @@ const Select = (props) => {
       {error ? <p className={classes.error}>{error}</p> : ''}
     </FormControl>
   );
-}
+};
 
 export default Select;
-

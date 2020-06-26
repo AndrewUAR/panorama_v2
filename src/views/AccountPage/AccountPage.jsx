@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 import GridContainer from '../../components/Grid/GridContainer';
 
 import styles from '../../assets/jss/views/AccountPageStyle/AccountPageStyle';
 import GridItem from '../../components/Grid/GridItem';
 import PhotographerAccountPage from '../../views/AccountPage/PhotographerAccountPage/PhotographerAccountPage';
-import Sidebar from "../../views/AccountPage/Sidebar";
-
+import Sidebar from '../../views/AccountPage/Sidebar';
 
 const useStyles = makeStyles(styles);
 
-const AccountPage = props => {
+const AccountPage = (props) => {
   const { component } = props;
 
   // const [loading, setLoading] = useState(true);
@@ -35,11 +34,11 @@ const AccountPage = props => {
         </GridItem>
       </GridContainer>
     </>
-  )
-}
+  );
+};
 
 AccountPage.propTypes = {
   component: PropTypes.node
-}
+};
 
-export default AccountPage
+export default AccountPage;

@@ -1,17 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import styles from "../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle";
+import styles from '../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
-import Checkbox from "../../../components/Checkbox/Checkbox";
+import Checkbox from '../../../components/Checkbox/Checkbox';
 
 const useStyles = makeStyles(styles);
 
-const TermsAndConditions = props => {
-
-  const {checked, handleChecked, label} = props;
+const TermsAndConditions = (props) => {
+  const { checked, handleChecked, label } = props;
 
   const classes = useStyles();
 
@@ -25,20 +24,25 @@ const TermsAndConditions = props => {
               () => `Cras mattis consectetur purus sit amet fermentum.
                 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
                 Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
             )
             .join('\n')}
         </Box>
-        <Checkbox className={classes.checkbox} checked={checked} onChange={handleChecked} label={label} />
+        <Checkbox
+          className={classes.checkbox}
+          checked={checked}
+          onChange={handleChecked}
+          label={label}
+        />
       </GridItem>
     </GridContainer>
-  )
-}
+  );
+};
 
 TermsAndConditions.propTypes = {
   checked: PropTypes.bool.isRequired,
   handleChecked: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired
-}
+};
 
-export default TermsAndConditions
+export default TermsAndConditions;

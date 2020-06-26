@@ -5,8 +5,7 @@ import clsx from 'clsx';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
-import { colorLibStepIconStyles } from "../../assets/jss/views/CreatePhotographerProfilePageStyle/CreatePhotographerProfilePageStyle";
-
+import { colorLibStepIconStyles } from '../../assets/jss/views/CreatePhotographerProfilePageStyle/CreatePhotographerProfilePageStyle';
 
 const useStyles = makeStyles(colorLibStepIconStyles);
 
@@ -17,14 +16,14 @@ function ColorlibStepIcon(props) {
   const icons = {
     1: <ListAltIcon />,
     2: <AddPhotoAlternateIcon />,
-    3: <CreditCardIcon />,
+    3: <CreditCardIcon />
   };
 
   return (
     <div
       className={clsx(classes.root, {
         [classes.active]: active,
-        [classes.completed]: completed,
+        [classes.completed]: completed
       })}
     >
       {icons[String(props.icon)]}
@@ -35,7 +34,7 @@ function ColorlibStepIcon(props) {
 ColorlibStepIcon.propTypes = {
   active: PropTypes.bool,
   completed: PropTypes.bool,
-  icon: PropTypes.node,
+  icon: PropTypes.node
 };
 
-export default ColorlibStepIcon
+export default ColorlibStepIcon;
