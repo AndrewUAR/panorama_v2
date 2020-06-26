@@ -104,7 +104,7 @@ jobs:
             then
               aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_STAGING_BUCKET} --delete
             else
-              aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_DEV_BUCKET} --delete
+              aws --region ${AWS_REGION} s3 sync ~/project/build s3://${AWS_DEVELOP_BUCKET} --delete
             fi
   deploy-to-aws-cloudfront:
     executor: app-executor
