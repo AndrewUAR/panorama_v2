@@ -1,4 +1,8 @@
-import { ASYNC_ACTION_START, ASYNC_ACTION_FINISH, ASYNC_ACTION_ERROR } from "../../app/constants/async";
+import {
+  ASYNC_ACTION_START,
+  ASYNC_ACTION_FINISH,
+  ASYNC_ACTION_ERROR
+} from "../../app/constants/async";
 
 
 export const asyncActionStart = () => {
