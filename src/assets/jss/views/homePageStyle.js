@@ -1,5 +1,12 @@
 import image from '../../img/backGround/home.jpg';
-import { whiteColor, defaultFont, blackColor, hexToRgb, container, blueColor } from '../panoramaStyles';
+import {
+  whiteColor,
+  defaultFont,
+  blackColor,
+  hexToRgb,
+  container,
+  blueColor
+} from '../panoramaStyles';
 
 const homePageStyles = (theme) => ({
   pageHeader: {
@@ -15,7 +22,7 @@ const homePageStyles = (theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center center'
   },
-  container: {  
+  container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -49,29 +56,29 @@ const homePageStyles = (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    
+
     '&::before': {
       content: '" "',
       display: 'block',
       height: '0.09em',
       minWidth: '30vw',
       marginRight: '0.5rem',
-      background: 'linear-gradient(to right, rgba(240,240,240,0), #fff)',
+      background: 'linear-gradient(to right, rgba(240,240,240,0), #fff)'
     },
-    
+
     // '&::before': {
     //   background: 'linear-gradient(to right, rgba(240,240,240,0), #fff)',
     //   marginRight: '4vh',
     // },
-    
+
     '&::after': {
       content: '" "',
       display: 'block',
       height: '0.09em',
       minWidth: '30vw',
       marginLeft: '0.5rem',
-      background: 'linear-gradient(to left, rgba(240,240,240,0), #fff)',
-    } 
+      background: 'linear-gradient(to left, rgba(240,240,240,0), #fff)'
+    }
   },
   formInput: {
     width: '40%',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core'; 
+import { makeStyles } from '@material-ui/core';
 import styles from '../../assets/jss/views/homePageStyle';
 import HeaderSection from './HeaderSection';
 
@@ -11,7 +11,7 @@ const HomePage = (props) => {
     <div>
       <HeaderSection />
     </div>
-    );
+  );
 };
 
 export default HomePage;

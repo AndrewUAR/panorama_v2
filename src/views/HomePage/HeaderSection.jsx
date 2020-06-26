@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core'; 
+import { makeStyles } from '@material-ui/core';
 import styles from '../../assets/jss/views/homePageStyle';
 import Button from '../../components/Button/CustomButton';
 import ExploreIcon from '@material-ui/icons/Explore';
@@ -12,15 +12,17 @@ const HeaderSection = (props) => {
   const [location, setLocation] = useState('');
   const classes = useStyles();
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { value } = e.target;
     setLocation(value);
-  }
+  };
   return (
     <div className={classes.pageHeader}>
       <div className={classes.container}>
         <div className={classes.searchButton}>
-          <Button justIcon pulseButton color="blue" size="lg"><ExploreIcon className={classes.buttonIcon} /></Button>
+          <Button justIcon pulseButton color="blue" size="lg">
+            <ExploreIcon className={classes.buttonIcon} />
+          </Button>
           <span className={classes.buttonText}>Find photographer near you</span>
         </div>
         <div className={classes.divider}>
@@ -39,7 +41,7 @@ const HeaderSection = (props) => {
         </form>
       </div>
     </div>
-    );
+  );
 };
 
 export default HeaderSection;

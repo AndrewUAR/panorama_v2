@@ -90,7 +90,7 @@ const buttonStyle = (theme) => ({
     backgroundColor: 'transparent',
     '& svg, & .fab, & .material-icons': {
       margin: '0'
-    },
+    }
   },
   socialSignUp: {
     width: '70%',
@@ -160,10 +160,14 @@ const buttonStyle = (theme) => ({
   },
   '@keyframes pulse': {
     '0%': {
-      boxShadow: `0 0 0 0px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(${hexToRgb(blueColor)}, 0.7)`,
+      boxShadow: `0 0 0 0px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(${hexToRgb(
+        blueColor
+      )}, 0.7)`
     },
     '100%': {
-      boxShadow: `0 0 0 20px rgba(0, 0, 0, 0), 0 0 0 5px rgba(${hexToRgb(blueColor)}, 0.7)`
+      boxShadow: `0 0 0 20px rgba(0, 0, 0, 0), 0 0 0 5px rgba(${hexToRgb(
+        blueColor
+      )}, 0.7)`
     }
   }
 });
