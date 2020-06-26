@@ -8,7 +8,7 @@ const useStyles = makeStyles(styles);
 const HomePage = (props) => {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.class}>
       <HeaderSection />
     </div>
   );
