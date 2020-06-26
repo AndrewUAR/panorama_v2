@@ -74,6 +74,9 @@ jobs:
       - run:
           name: Run prettier check
           command: npm run prettier:check
+      - run:
+          name: Run prettier write
+          command: npm run prettier:write
   unit-test:
     executor: app-executor
     steps:
