@@ -62,9 +62,9 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *restore-cache
-      - run:
-          name: Run linting
-          command: npm run lint
+      # - run:
+      #     name: Run linting
+      #     command: npm run lint
   prettier:
     executor: app-executor
     steps:
