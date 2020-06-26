@@ -85,21 +85,27 @@ const buttonStyle = (theme) => ({
     }
   },
   justIcon: {
-    borderRadius: '3rem',
-    fontSize: '1.56rem',
-    height: '3.125rem',
-    minWidth: '2.56rem',
-    width: '1.875rem',
-    paddingRight: '1.25rem',
-    border: 'none',
-    boxShadow: 'none',
-    backgroundColor: 'transparent'
+    borderRadius: '5rem',
+    padding: '0.75rem',
+    backgroundColor: 'transparent',
+    '& svg, & .fab, & .material-icons': {
+      margin: '0'
+    },
   },
   socialSignUp: {
     width: '70%',
     margin: '0.5rem 0',
     [theme.breakpoints.down('sm')]: {
       width: '100%'
+    }
+  },
+  pulseButton: {
+    animation: '$pulse 1.5s infinite',
+    '&:hover': {
+      animation: 'none',
+      boxShadow: `0 0 0 5px rgba(${hexToRgb(blueColor)}, 0.7)`,
+      transform: 'scale(0.9)',
+      transition: '0.2s ease'
     }
   },
   uploadButton: {
@@ -150,6 +156,14 @@ const buttonStyle = (theme) => ({
       background: 'linear-gradient(to right, #1fa2ff, #12d8fa)',
       ...boxShadow,
       color: whiteColor
+    }
+  },
+  '@keyframes pulse': {
+    '0%': {
+      boxShadow: `0 0 0 0px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(${hexToRgb(blueColor)}, 0.7)`,
+    },
+    '100%': {
+      boxShadow: `0 0 0 20px rgba(0, 0, 0, 0), 0 0 0 5px rgba(${hexToRgb(blueColor)}, 0.7)`
     }
   }
 });

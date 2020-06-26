@@ -82,7 +82,7 @@ const LoginPage = (props) => {
                   <h3 className={classes.cardTitle}>Login</h3>
                   <List className={classes.cardTitleIcons}>
                     <ListItemIcon>
-                      <Button justIcon>
+                      <Button justIcon size="lg">
                         <i className="fab fa-facebook" />
                       </Button>
                     </ListItemIcon>

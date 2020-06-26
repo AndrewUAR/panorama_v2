@@ -11,6 +11,7 @@ const CustomButton = (props) => {
   const {
     type,
     justIcon,
+    pulseButton,
     color,
     socialSignUp,
     uploadButton,
@@ -27,6 +28,7 @@ const CustomButton = (props) => {
   const btnClasses = classNames({
     [classes.button]: true,
     [classes.justIcon]: justIcon,
+    [classes.pulseButton]: pulseButton,
     [classes[color]]: color,
     [classes.socialSignUp]: socialSignUp,
     [classes.uploadButton]: uploadButton,
@@ -50,6 +52,7 @@ const CustomButton = (props) => {
 
 Button.propTypes = {
   justIcon: PropTypes.bool,
+  pulseButton: PropTypes.bool,
   socialSignUp: PropTypes.bool,
   uploadButton: PropTypes.bool,
   color: PropTypes.oneOf(['danger', 'blue', 'black', 'transparent', 'success']),
