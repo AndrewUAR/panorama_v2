@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from "react-redux";
-import {PulseLoader} from "react-spinners";
-import { css } from "@emotion/core";
-import {makeStyles} from "@material-ui/core/styles";
-import styles from "../../assets/jss/views/forgotPasswordStyle.js";
+import { connect } from 'react-redux';
+import { PulseLoader } from 'react-spinners';
+import { css } from '@emotion/core';
+import { makeStyles } from '@material-ui/core/styles';
+import styles from '../../assets/jss/views/forgotPasswordStyle.js';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import GridItem from '../../components/Grid/GridItem.jsx';
 import CustomCard from '../../components/Card/Card.jsx';
@@ -23,17 +23,16 @@ const buttonLoaderStyle = css`
   display: flex;
 `;
 
-const ForgotPasswordPage = props => {
-  
-  const { 
-    errorMsg, 
-    forgotMyPassword, 
-    authenticated, 
+const ForgotPasswordPage = (props) => {
+  const {
+    errorMsg,
+    forgotMyPassword,
+    authenticated,
     history,
-    loadingAsync 
+    loadingAsync
   } = props;
 
-  const [user, setUser] = useState({email: ''});
+  const [user, setUser] = useState({ email: '' });
   const [error, setError] = useState({
     emailError: ''
   });
@@ -43,19 +42,19 @@ const ForgotPasswordPage = props => {
 
   useEffect(() => {
     if (authenticated) {
-      history.push('/')
+      history.push('/');
     }
   }, [authenticated, history]);
-  
-  const onChange = e => {
-    setUser({email: e.target.value});
-  }
 
-  const onSubmit = e => {
+  const onChange = (e) => {
+    setUser({ email: e.target.value });
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
     const isValid = validateInputs(user, setError);
-    if (isValid) forgotMyPassword(user)
-  }
+    if (isValid) forgotMyPassword(user);
+  };
 
   const classes = useStyles();
   return (
@@ -65,25 +64,22 @@ const ForgotPasswordPage = props => {
           <GridItem xs={12} sm={9} md={8} className={classes.borderWrap}>
             <CustomCard color="black">
               <div className={classes.cardHeaderContainer}>
-                <CardHeader
-                  login
-                  color="blue"
-                >
+                <CardHeader login color="blue">
                   <h3 className={classes.cardTitle}>Reset Password</h3>
                 </CardHeader>
               </div>
               <form onSubmit={onSubmit} className={classes.cardForm}>
                 <CardContent>
                   <div className={classes.formInput}>
-                    <EmailIcon className={classes.formInputIcon}/>
-                    <FormInput 
+                    <EmailIcon className={classes.formInputIcon} />
+                    <FormInput
                       id="email"
                       labelText="Email"
                       underlineColor="underlineTeal"
                       inputProps={{
-                        placeholder: "Email",
-                        type: "email",
-                        name: "email",
+                        placeholder: 'Email',
+                        type: 'email',
+                        name: 'email',
                         value: email,
                         autoComplete: 'off'
                       }}
@@ -94,19 +90,17 @@ const ForgotPasswordPage = props => {
                   {errorMsg && <p className={classes.error}>{errorMsg}</p>}
                 </CardContent>
                 <CardFooter className={classes.formButton}>
-                  <Button 
-                    type="submit" 
-                    color="blue"
-                    formNoValidate
-                  >{loadingAsync 
-                      ? <PulseLoader
-                          color={"#fff"}
-                          css={buttonLoaderStyle}
-                          loading={true}
-                          margin={2}
-                        />
-                      : <>Reset</>
-                    }
+                  <Button type="submit" color="blue" formNoValidate>
+                    {loadingAsync ? (
+                      <PulseLoader
+                        color={'#fff'}
+                        css={buttonLoaderStyle}
+                        loading={true}
+                        margin={2}
+                      />
+                    ) : (
+                      <>Reset</>
+                    )}
                   </Button>
                 </CardFooter>
               </form>
@@ -115,22 +109,22 @@ const ForgotPasswordPage = props => {
         </GridContainer>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,
   errorMsg: state.error.error,
   loadingAsync: state.async.loading
-})
+});
 
-const actions = ({
+const actions = {
   forgotMyPassword
-})
+};
 
 ForgotPasswordPage.propTypes = {
   errorMsg: PropTypes.string,
   forgotMyPassword: PropTypes.func.isRequired
-}
+};
 
 export default connect(mapStateToProps, actions)(ForgotPasswordPage);

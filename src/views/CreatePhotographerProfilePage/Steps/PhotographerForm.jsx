@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import FormInput from '../../../components/FormInput/FormInput';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
-import Select from "../../../components/SelectInput/Select";
-import { languagesList, photographyCategories } from "../../../app/helper/selectInputData";
-import styles from "../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle";
+import Select from '../../../components/SelectInput/Select';
+import {
+  languagesList,
+  photographyCategories
+} from '../../../app/helper/selectInputData';
+import styles from '../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageIcon from '@material-ui/icons/Language';
 import PersonIcon from '@material-ui/icons/Person';
@@ -15,29 +18,23 @@ import PlaceInput from '../../../components/PlaceInput/PlaceInput';
 
 const useStyles = makeStyles(styles);
 
-const PhotographerForm = props => {
-
-  const { 
-    photographer, 
-    error, 
-    onChange, 
-    handleLanguagesChange, 
-    handleCategoriesChange, 
+const PhotographerForm = (props) => {
+  const {
+    photographer,
+    error,
+    onChange,
+    handleLanguagesChange,
+    handleCategoriesChange,
     handleLocationChange
   } = props;
 
-  const { 
-    introduction, 
-    languages, 
-    categories, 
-    location 
-  } = photographer;
+  const { introduction, languages, categories, location } = photographer;
 
-  const { 
-    introductionError, 
-    languagesError, 
-    locationError, 
-    categoriesError 
+  const {
+    introductionError,
+    languagesError,
+    locationError,
+    categoriesError
   } = error;
 
   const classes = useStyles();
@@ -47,17 +44,17 @@ const PhotographerForm = props => {
       <GridItem xs={11} sm={8} md={6}>
         <form className={classes.formContainer}>
           <div className={classes.formInput}>
-            <PersonIcon className={classes.inputIcon}/>
-            <FormInput 
+            <PersonIcon className={classes.inputIcon} />
+            <FormInput
               id="introduction"
               labelText="Introduction"
               underlineColor="underlineTeal"
               inputProps={{
-                placeholder: "Introduction",
+                placeholder: 'Introduction',
                 multiline: true,
                 rows: 1,
-                type: "text",
-                name: "introduction",
+                type: 'text',
+                name: 'introduction',
                 value: introduction,
                 autoComplete: 'off'
               }}
@@ -66,7 +63,7 @@ const PhotographerForm = props => {
             />
           </div>
           <div className={classes.formInput}>
-            <LanguageIcon className={classes.inputIcon}/>
+            <LanguageIcon className={classes.inputIcon} />
             <Select
               id="languages"
               labelText="Languages"
@@ -80,7 +77,7 @@ const PhotographerForm = props => {
             />
           </div>
           <div className={classes.formInput}>
-            <PhotoFilterIcon className={classes.inputIcon}/>
+            <PhotoFilterIcon className={classes.inputIcon} />
             <Select
               id="categories"
               labelText="Categories"
@@ -94,7 +91,7 @@ const PhotographerForm = props => {
             />
           </div>
           <div className={classes.formInput}>
-            <PinDropIcon className={classes.inputIcon}/>
+            <PinDropIcon className={classes.inputIcon} />
             <PlaceInput
               id="location"
               labelText="Serve Location"
@@ -108,8 +105,8 @@ const PhotographerForm = props => {
         </form>
       </GridItem>
     </GridContainer>
-  )
-}
+  );
+};
 
 PhotographerForm.propTypes = {
   photographer: PropTypes.object.isRequired,
@@ -118,6 +115,6 @@ PhotographerForm.propTypes = {
   handleLanguagesChange: PropTypes.func.isRequired,
   handleCategoriesChange: PropTypes.func.isRequired,
   handleLocationChange: PropTypes.func.isRequired
-}
+};
 
 export default PhotographerForm;

@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from "react-redux";
-import _ from "lodash";
-import socketIOClient from 'socket.io-client';
-import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {PulseLoader} from "react-spinners";
-import { css } from "@emotion/core";
+import { PulseLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import { closeModal } from "../../app/actions/modalActions";
-import { uploadAlbumImages } from "../../app/actions/albumActions";
-import Dropzone from "../Dropzone/Dropzone";
-import Button from "../../components/Button/CustomButton";
-import styles from "../../assets/jss/components/modalStyle";
-import { apiEndPoint } from '../../config';
+import { closeModal } from '../../app/actions/modalActions';
+import { uploadAlbumImages } from '../../app/actions/albumActions';
+import Dropzone from '../Dropzone/Dropzone';
+import Button from '../../components/Button/CustomButton';
+import styles from '../../assets/jss/components/modalStyle';
 
 const buttonLoaderStyle = css`
   display: flex;
@@ -22,33 +20,33 @@ const buttonLoaderStyle = css`
 
 const useStyles = makeStyles(styles);
 
-const API_ENDPOINT = apiEndPoint();
-
-const AddAlbumImages = props => {
-  const socket = socketIOClient(API_ENDPOINT);
-  const {closeModal, uploadAlbumImages, loadingAsync, selectedAlbum} = props;
+const AddAlbumImages = (props) => {
+  // const socket = socketIOClient(API_ENDPOINT);
+  const { closeModal, uploadAlbumImages, loadingAsync, selectedAlbum } = props;
 
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
     return () => {
-        files.forEach(file => URL.revokeObjectURL(file.preview))
-    }
-  }, [files])
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  }, [files]);
 
   const handleCancelCrop = () => {
     setFiles([]);
-  }
+  };
 
   const handleUploadImages = async () => {
     const form = new FormData();
-    _.forEach(files, function(file) {form.append("images", file)})
+    _.forEach(files, function (file) {
+      form.append('images', file);
+    });
     // form.append("images", files);
     await uploadAlbumImages(form, selectedAlbum._id);
     // socket.emit('refresh', {my: 'data'});
     handleCancelCrop();
     closeModal();
-  }
+  };
   const classes = useStyles();
 
   const dropzoneStyles = classNames({
@@ -59,20 +57,23 @@ const AddAlbumImages = props => {
   const buttonGroupStyles = classNames({
     [classes.buttonGroup]: true,
     [classes.albumButtons]: true
-  })
+  });
 
   const deleteImg = (name) => {
-    const updated = files.filter(file => {return file.name !== name});
+    const updated = files.filter((file) => {
+      return file.name !== name;
+    });
     setFiles(updated);
-  }
+  };
 
-  const thumbs = files.map(file => (
-    <div className={classes.thumb} key={file.name} onClick={() => deleteImg(file.name)}>
+  const thumbs = files.map((file) => (
+    <div
+      className={classes.thumb}
+      key={file.name}
+      onClick={() => deleteImg(file.name)}
+    >
       <div className={classes.thumbInner}>
-        <img
-          src={file.preview}
-          className={classes.img}
-        />
+        <img src={file.preview} className={classes.img} alt="" />
       </div>
     </div>
   ));
@@ -89,58 +90,58 @@ const AddAlbumImages = props => {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 500
         }}
       >
         <div className={dropzoneStyles}>
-          <Dropzone multiple={true} setFile={setFiles} 
-            message='Drag&drop photos here, or click to select files. Maximum 10 photos per one upload.' 
+          <Dropzone
+            multiple={true}
+            setFile={setFiles}
+            message="Drag&drop photos here, or click to select files. Maximum 10 photos per one upload."
           />
-          <div className={classes.thumbsContainer}>
-            {thumbs}
-          </div>
-          {!_.isEmpty(files) &&
-             <>
+          <div className={classes.thumbsContainer}>{thumbs}</div>
+          {!_.isEmpty(files) && (
+            <>
               <div className={buttonGroupStyles}>
-                <Button 
-                  color="success" 
-                  onClick={handleUploadImages}
-                >{loadingAsync 
-                  ? <PulseLoader
-                      color={"#fff"}
+                <Button color="success" onClick={handleUploadImages}>
+                  {loadingAsync ? (
+                    <PulseLoader
+                      color={'#fff'}
                       css={buttonLoaderStyle}
                       loading={true}
                       margin={2}
                     />
-                  : <>Upload</>
-                }
+                  ) : (
+                    <>Upload</>
+                  )}
                 </Button>
-                <Button color="danger" onClick={() => closeModal()}>Cancel</Button>
+                <Button color="danger" onClick={() => closeModal()}>
+                  Cancel
+                </Button>
               </div>
             </>
-          }
+          )}
         </div>
       </Modal>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   loadingAsync: state.async.loading,
   selectedAlbum: state.selectedAlbum
-})
+});
 
-const actions = ({
+const actions = {
   closeModal,
   uploadAlbumImages
-})
+};
 
 AddAlbumImages.propTypes = {
   closeModal: PropTypes.func.isRequired,
   uploadAlbumImages: PropTypes.func.isRequired,
   loadingAsync: PropTypes.bool,
   selectedAlbum: PropTypes.object.isRequired
-}
+};
 
 export default connect(mapStateToProps, actions)(AddAlbumImages);
-

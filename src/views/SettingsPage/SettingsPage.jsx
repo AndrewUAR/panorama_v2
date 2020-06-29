@@ -8,16 +8,16 @@ import GeneralSettingsForm from './Sections/GeneralSettingsForm';
 import SecuritySettingsForm from './Sections/SecuritySettingsForm';
 import NotificationSettings from './Sections/NotificationSettings';
 
-const useStyles = makeStyles(styles)
+const useStyles = makeStyles(styles);
 
-const SettingsPage = props => {
-  const [section, setSection] = useState("general");
+const SettingsPage = (props) => {
+  const [section, setSection] = useState('general');
 
   const classes = useStyles();
 
-  const onChange = section => {
+  const onChange = (section) => {
     setSection(section);
-  }
+  };
 
   return (
     <div className={classes.container}>
@@ -27,14 +27,14 @@ const SettingsPage = props => {
             <SideBar onChange={onChange} />
           </GridItem>
           <GridItem xs={12} sm={12} md={9}>
-            {section === "general" && <GeneralSettingsForm />}
-            {section === "security" && <SecuritySettingsForm />}
-            {section === "notifications" && <NotificationSettings />}
+            {section === 'general' && <GeneralSettingsForm />}
+            {section === 'security' && <SecuritySettingsForm />}
+            {section === 'notifications' && <NotificationSettings />}
           </GridItem>
         </GridContainer>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default SettingsPage;

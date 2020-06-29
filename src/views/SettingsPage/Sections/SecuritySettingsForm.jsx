@@ -1,17 +1,17 @@
-import React, {useState, useEffect, useRef, useMemo} from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useDispatch } from 'react-redux';
-import _ from "lodash";
-import {PulseLoader} from "react-spinners";
-import { css } from "@emotion/core";
+import _ from 'lodash';
+import { PulseLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 import socketIOClient from 'socket.io-client';
 import FormInput from '../../../components/FormInput/FormInput';
-import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
+import styles from '../../../assets/jss/views/SettingsPageStyle/settingsStyle';
 import { makeStyles } from '@material-ui/core';
-import Button from "../../../components/Button/CustomButton";
+import Button from '../../../components/Button/CustomButton';
 import LockIcon from '@material-ui/icons/Lock';
-import { validateInputs } from "../../../app/helper/validateInput";
-import { updatePassword } from "../../../app/actions/authActions";
+import { validateInputs } from '../../../app/helper/validateInput';
+import { updatePassword } from '../../../app/actions/authActions';
 import { apiEndPoint } from '../../../config';
 import { deleteError } from '../../../app/actions/errorActions';
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles(styles);
 
 const API_ENDPOINT = apiEndPoint();
 
-const GeneralSettingsForm = props => {
+const GeneralSettingsForm = (props) => {
   const socket = socketIOClient(API_ENDPOINT);
 
   const { updatePassword, errorMsg, loadingAsync } = props;
@@ -38,33 +38,36 @@ const GeneralSettingsForm = props => {
     passwordCurrentError: '',
     passwordError: '',
     passwordConfirmError: ''
-  })
+  });
 
   const prevState = useRef(user);
 
-  const notTouched = useMemo(() => _.isEqual(prevState.current, user), [prevState, user]);;
- 
-  const { passwordCurrent, password, passwordConfirm} = user;
+  const notTouched = useMemo(() => _.isEqual(prevState.current, user), [
+    prevState,
+    user
+  ]);
+
+  const { passwordCurrent, password, passwordConfirm } = user;
   const { passwordError, passwordConfirmError, passwordCurrentError } = error;
   const classes = useStyles();
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setUser(prevState => ({
+    setUser((prevState) => ({
       ...prevState,
       [name]: value
-    }))
-  }
+    }));
+  };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     return () => {
-      dispatch(deleteError())
-    }
-  }, [dispatch])
+      dispatch(deleteError());
+    };
+  }, [dispatch]);
 
-  const updateUserPassword = e => {
+  const updateUserPassword = (e) => {
     e.preventDefault();
     const isValid = validateInputs(user, setError);
     if (isValid) updatePassword(user);
@@ -72,16 +75,15 @@ const GeneralSettingsForm = props => {
     if (!errorMsg && isValid) {
       resetForm();
     }
-  }
+  };
 
   const resetForm = () => {
     setUser({
       passwordCurrent: '',
       password: '',
       passwordConfirm: ''
-    })
-  }
-
+    });
+  };
 
   return (
     <div className={classes.formContainer}>
@@ -90,15 +92,15 @@ const GeneralSettingsForm = props => {
         <div className={classes.inputSection}>
           <h3>Password</h3>
           <div className={classes.inputField}>
-            <LockIcon className={classes.inputFieldIcon}/>
-            <FormInput 
+            <LockIcon className={classes.inputFieldIcon} />
+            <FormInput
               id="currentPassword"
               labelText="Current Password"
               underlineColor="underlineTeal"
               inputProps={{
-                placeholder: "Current Password",
-                type: "password",
-                name: "passwordCurrent",
+                placeholder: 'Current Password',
+                type: 'password',
+                name: 'passwordCurrent',
                 value: passwordCurrent,
                 autoComplete: 'off'
               }}
@@ -107,15 +109,15 @@ const GeneralSettingsForm = props => {
             />
           </div>
           <div className={classes.inputField}>
-            <LockIcon className={classes.inputFieldIcon}/>
-            <FormInput 
+            <LockIcon className={classes.inputFieldIcon} />
+            <FormInput
               id="newPassword"
               labelText="New Password"
               underlineColor="underlineTeal"
               inputProps={{
-                placeholder: "New Password",
-                type: "password",
-                name: "password",
+                placeholder: 'New Password',
+                type: 'password',
+                name: 'password',
                 value: password,
                 autoComplete: 'off'
               }}
@@ -124,15 +126,15 @@ const GeneralSettingsForm = props => {
             />
           </div>
           <div className={classes.inputField}>
-            <LockIcon className={classes.inputFieldIcon}/>
-            <FormInput 
+            <LockIcon className={classes.inputFieldIcon} />
+            <FormInput
               id="passwordConfirm"
               labelText="Password Confirm"
               underlineColor="underlineTeal"
               inputProps={{
-                placeholder: "Password Confirm",
-                type: "password",
-                name: "passwordConfirm",
+                placeholder: 'Password Confirm',
+                type: 'password',
+                name: 'passwordConfirm',
                 value: passwordConfirm,
                 autoComplete: 'off'
               }}
@@ -143,39 +145,37 @@ const GeneralSettingsForm = props => {
         </div>
         {errorMsg && <p className={classes.error}>{errorMsg}</p>}
         <div className={classes.buttonGroup}>
-          <Button
-             type="submit"
-             color="success"
-             disabled={notTouched}
-          >{loadingAsync && !notTouched
-              ? <PulseLoader
-                  color={"#fff"}
-                  css={buttonLoaderStyle}
-                  loading={true}
-                  margin={2}
-                />
-              : <>Update</>
-            }
+          <Button type="submit" color="success" disabled={notTouched}>
+            {loadingAsync && !notTouched ? (
+              <PulseLoader
+                color={'#fff'}
+                css={buttonLoaderStyle}
+                loading={true}
+                margin={2}
+              />
+            ) : (
+              <>Update</>
+            )}
           </Button>
           <Button color="danger">Cancel</Button>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errorMsg: state.error.error,
   loadingAsync: state.async.loading
-})
+});
 
-const actions = ({
+const actions = {
   updatePassword
-})
+};
 
 GeneralSettingsForm.propTypes = {
   updatePassword: PropTypes.func.isRequired,
   errorMsg: PropTypes.string
-}
+};
 
 export default connect(mapStateToProps, actions)(GeneralSettingsForm);
