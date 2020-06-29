@@ -28,6 +28,7 @@
             "named": "always"
         }],
         "camelcase": 0,
-        "no-return-assign": 0
+        "no-return-assign": 0,
+        "comma-dangle": ["error", "never"]
     }
 }
