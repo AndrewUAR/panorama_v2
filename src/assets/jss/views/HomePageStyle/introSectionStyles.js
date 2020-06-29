@@ -19,18 +19,24 @@ const introPageStyles = (theme) => ({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: 'auto',
       width: '80%',
-      margin: '5rem 0 5rem 0',
       [theme.breakpoints.down('sm')]: {
         flexDirection: 'column',
         width: '100%',
         height: '100%'
       }
     },
-    '& > :last-child': {
+    '& > :first-child': {
+      margin: '7rem 0 3rem 0',
       [theme.breakpoints.down('sm')]: {
-        flexDirection: 'column-reverse'
+        margin: '5rem 0 2rem 0'
+      }
+    },
+    '& > :last-child': {
+      margin: '3rem 0 7rem 0',
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column-reverse',
+        margin: '0 0 2rem 0'
       }
     }
   },
@@ -41,11 +47,18 @@ const introPageStyles = (theme) => ({
     backgroundColor: 'transparent',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
     // [theme.breakpoints.only('sm')]: {
     //   padding: '9rem 4rem 2rem 0'
     // },
-    marginRight: 'rem',
+    marginRight: '7rem',
+    [theme.breakpoints.only('xs')]: {
+      padding: '4rem 0 0 2rem',
+      height: '13rem'
+    },
+    [theme.breakpoints.only('sm')]: {
+      paddingTop: '6rem',
+      height: '18rem'
+    },
     '& > *': {
       ...boxShadow,
       height: '14rem',
@@ -121,7 +134,7 @@ const introPageStyles = (theme) => ({
       textAlign: 'center',
       [theme.breakpoints.only('xs')]: {
         margin: '0',
-        paddingTop: '5rem'
+        paddingTop: '1rem'
       }
     },
     '& > :last-child': {
