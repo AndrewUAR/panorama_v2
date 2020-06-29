@@ -1,8 +1,4 @@
-import {
-  boxShadow,
-  defaultFont,
-  blueColor
-} from '../../panoramaStyles';
+import { boxShadow, defaultFont, blueColor } from '../../panoramaStyles';
 
 const introPageStyles = (theme) => ({
   container: {
