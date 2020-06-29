@@ -64,6 +64,9 @@ const introPageStyles = (theme) => ({
       height: '14rem',
       width: 'auto',
       position: 'absolute',
+      [theme.breakpoints.only('md')]: {
+        height: '12rem'
+      },
       [theme.breakpoints.only('xs')]: {
         height: '8rem'
       },
@@ -122,6 +125,7 @@ const introPageStyles = (theme) => ({
     alignSelf: 'center',
     flexDirection: 'column',
     padding: '2rem',
+    
     [theme.breakpoints.only('sm')]: {
       width: '80%'
     },
@@ -132,6 +136,9 @@ const introPageStyles = (theme) => ({
       ...defaultFont,
       margin: '0 3rem 1rem 3rem',
       textAlign: 'center',
+      [theme.breakpoints.down('md')]: {
+        fontSize: '1rem',
+      },
       [theme.breakpoints.only('xs')]: {
         margin: '0',
         paddingTop: '1rem'
@@ -139,7 +146,10 @@ const introPageStyles = (theme) => ({
     },
     '& > :last-child': {
       ...defaultFont,
-      textAlign: 'justify'
+      textAlign: 'justify',
+      [theme.breakpoints.down('md')]: {
+        fontSize: '0.75rem',
+      },
     }
   },
   textAnimationLeft: {
