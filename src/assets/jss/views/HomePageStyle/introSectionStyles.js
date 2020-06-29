@@ -2,19 +2,19 @@ import { boxShadow, defaultFont, blueColor } from '../../panoramaStyles';
 
 const introPageStyles = (theme) => ({
   container: {
-    height: '100vh',
+    // height: '100vh',
     width: '100vw',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     background: 'linear-gradient(to right, #141e30, #243b55)',
-    [theme.breakpoints.only('xs')]: {
-      padding: '25rem 0 30rem 0'
-    },
-    [theme.breakpoints.only('sm')]: {
-      padding: '8rem 0 16rem 0'
-    },
+    // [theme.breakpoints.only('xs')]: {
+    //   padding: '20rem 0 30rem 0'
+    // },
+    // [theme.breakpoints.only('sm')]: {
+    //   padding: '8rem 0 16rem 0'
+    // },
     '& > *': {
       display: 'flex',
       justifyContent: 'center',
@@ -36,16 +36,16 @@ const introPageStyles = (theme) => ({
   },
   photos: {
     position: 'relative',
-    height: '100%',
+    height: '20rem',
     width: '50%',
     backgroundColor: 'transparent',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '0 7rem 5rem 0',
-    [theme.breakpoints.only('sm')]: {
-      padding: '9rem 4rem 2rem 0'
-    },
+    // [theme.breakpoints.only('sm')]: {
+    //   padding: '9rem 4rem 2rem 0'
+    // },
+    marginRight: 'rem',
     '& > *': {
       ...boxShadow,
       height: '14rem',
@@ -120,7 +120,8 @@ const introPageStyles = (theme) => ({
       margin: '0 3rem 1rem 3rem',
       textAlign: 'center',
       [theme.breakpoints.only('xs')]: {
-        margin: '0'
+        margin: '0',
+        paddingTop: '5rem'
       }
     },
     '& > :last-child': {
