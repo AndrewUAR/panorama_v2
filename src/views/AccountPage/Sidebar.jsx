@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import styles from '../../assets/jss/views/AccountPageStyle/sidebarStyle';
-import Button from '../../components/Button/CustomButton';
 import MessageIcon from '@material-ui/icons/Message';
 import BurstModeIcon from '@material-ui/icons/BurstMode';
 import EventIcon from '@material-ui/icons/Event';
@@ -12,6 +10,8 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Button from '../../components/Button/CustomButton';
+import styles from '../../assets/jss/views/AccountPageStyle/sidebarStyle';
 
 const useStyles = makeStyles(styles);
 

@@ -40,11 +40,14 @@ const MyAlbums = (props) => {
     <>
       <div className={classes.head}>
         <h3 style={{ color: '#fff' }}>Albums</h3>
-        <h3 style={{ color: '#fff' }}>Total: {myAlbums.length}</h3>
+        <h3 style={{ color: '#fff' }}>
+          Total:
+          {myAlbums.length}
+        </h3>
       </div>
       <GridContainer justify="space-between" className={classes.container}>
         {loadingAsync ? (
-          <GridLoader loading={true} color={'#fff'} />
+          <GridLoader loading color="#fff" />
         ) : (
           myAlbums.map((album, index) => (
             <div

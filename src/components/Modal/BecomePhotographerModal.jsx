@@ -6,10 +6,10 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Button from '../Button/CustomButton';
 import Backdrop from '@material-ui/core/Backdrop';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
+import Button from '../Button/CustomButton';
 import { closeModal } from '../../app/actions/modalActions';
 import styles from '../../assets/jss/components/modalStyle';
 
@@ -69,7 +69,7 @@ const BecomePhotographerModal = (props) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       className={classes.modalContainer}
-      open={true}
+      open
       disableScrollLock={false}
       onClose={() => closeModal()}
       closeAfterTransition

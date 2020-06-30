@@ -7,13 +7,11 @@ const initialState = {
   authUser: ''
 };
 
-const authenticateUser = (state, payload) => {
-  return {
-    ...state,
-    authenticated: !_.isEmpty(payload),
-    authUser: payload.user
-  };
-};
+const authenticateUser = (state, payload) => ({
+  ...state,
+  authenticated: !_.isEmpty(payload),
+  authUser: payload.user
+});
 
 export default createReducer(initialState, {
   [AUTHENTICATE_USER]: authenticateUser

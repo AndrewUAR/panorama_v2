@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert, AlertTitle } from '@material-ui/lab';
-import styles from '../../assets/jss/components/notificationStyle';
 import { Snackbar } from '@material-ui/core';
+import styles from '../../assets/jss/components/notificationStyle';
 
 const useStyles = makeStyles(styles);
 

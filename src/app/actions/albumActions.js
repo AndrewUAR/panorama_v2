@@ -63,7 +63,7 @@ export const getAllAlbums = () => async (dispatch) => {
   try {
     dispatch(asyncActionStart());
     const res = await getAllMyAlbums();
-    const albums = res.data.data.albums;
+    const { albums } = res.data.data;
     dispatch(asyncActionFinish());
     dispatch({
       type: GET_ALL_ALBUMS,

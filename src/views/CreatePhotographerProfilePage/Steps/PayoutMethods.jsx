@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import EmailIcon from '@material-ui/icons/Email';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
 import RadioInput from '../../../components/RadioInput/RadioInput';
 import styles from '../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle';
-import { makeStyles } from '@material-ui/core/styles';
 import FormInput from '../../../components/FormInput/FormInput';
-import EmailIcon from '@material-ui/icons/Email';
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 const useStyles = makeStyles(styles);
 
@@ -76,7 +76,7 @@ const PayoutMethods = (props) => {
                 <AccountBalanceIcon className={classes.inputIcon} />
                 <FormInput
                   id="accountNumber"
-                  disabled={true}
+                  disabled
                   labelText="Account Number"
                   underlineColor="underlineTeal"
                   inputProps={{
@@ -93,7 +93,7 @@ const PayoutMethods = (props) => {
                 <AccountTreeIcon className={classes.inputIcon} />
                 <FormInput
                   id="routingNumber"
-                  disabled={true}
+                  disabled
                   labelText="Routing Number"
                   underlineColor="underlineTeal"
                   inputProps={{

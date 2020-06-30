@@ -5,11 +5,11 @@ import _ from 'lodash';
 import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import socketIOClient from 'socket.io-client';
+import { makeStyles } from '@material-ui/core';
+import LockIcon from '@material-ui/icons/Lock';
 import FormInput from '../../../components/FormInput/FormInput';
 import styles from '../../../assets/jss/views/SettingsPageStyle/settingsStyle';
-import { makeStyles } from '@material-ui/core';
 import Button from '../../../components/Button/CustomButton';
-import LockIcon from '@material-ui/icons/Lock';
 import { validateInputs } from '../../../app/helper/validateInput';
 import { updatePassword } from '../../../app/actions/authActions';
 import { apiEndPoint } from '../../../config';
@@ -61,11 +61,12 @@ const GeneralSettingsForm = (props) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       dispatch(deleteError());
-    };
-  }, [dispatch]);
+    },
+    [dispatch]
+  );
 
   const updateUserPassword = (e) => {
     e.preventDefault();
@@ -148,9 +149,9 @@ const GeneralSettingsForm = (props) => {
           <Button type="submit" color="success" disabled={notTouched}>
             {loadingAsync && !notTouched ? (
               <PulseLoader
-                color={'#fff'}
+                color="#fff"
                 css={buttonLoaderStyle}
-                loading={true}
+                loading
                 margin={2}
               />
             ) : (

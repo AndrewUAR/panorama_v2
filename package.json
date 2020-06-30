@@ -40,7 +40,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint --fix 'src/**/*.js*'",
+    "lint:check": "eslint 'src/**/*.js*'",
+    "lint:write": "eslint --fix 'src/**/*.js*'",
     "prettier:check": "prettier --check 'src/**/*.{js,jsx,json}'",
     "prettier:write": "prettier --write 'src/**/*.{js,jsx,json}'",
     "test": "react-scripts test",

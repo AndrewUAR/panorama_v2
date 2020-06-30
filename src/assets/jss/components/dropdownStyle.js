@@ -1,4 +1,5 @@
 import { defaultFont, boxShadow, whiteColor } from '../panoramaStyles';
+
 const dropdownStyle = {
   root: {
     display: 'flex',

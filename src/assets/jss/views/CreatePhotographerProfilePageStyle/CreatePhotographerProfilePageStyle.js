@@ -4,7 +4,8 @@ import {
   greyColor,
   boxShadow
 } from '../../panoramaStyles.js';
-import image from '../../../../assets/img/backGround/mcdobbie-hu-5RgShZblKAQ-unsplash.jpg';
+import image from '../../../img/backGround/mcdobbie-hu-5RgShZblKAQ-unsplash.jpg';
+
 export const createPhotographerProfilePageStyle = (theme) => ({
   container: {
     minHeight: '100vh',
@@ -42,7 +43,7 @@ export const createPhotographerProfilePageStyle = (theme) => ({
     }
   },
   activeLabel: {
-    color: blueColor + '!important'
+    color: `${blueColor}!important`
   },
   actionsContainer: {
     display: 'flex',

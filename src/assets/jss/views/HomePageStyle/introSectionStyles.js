@@ -177,18 +177,22 @@ const introPageStyles = (theme) => ({
   },
   '@keyframes revealPhotosTop': {
     '0%': {
-      transform: 'translateY(-50%)'
+      transform: 'translateY(-50%)',
+      opacity: '0'
     },
     '100%': {
-      transform: 'translateY(0%)'
+      transform: 'translateY(0%)',
+      opacity: '1'
     }
   },
   '@keyframes revealPhotosBottom': {
     '0%': {
-      transform: 'translateY(50%)'
+      transform: 'translateY(50%)',
+      opacity: '0'
     },
     '100%': {
-      transform: 'translateY(0)'
+      transform: 'translateY(0)',
+      opacity: '1'
     }
   }
 });

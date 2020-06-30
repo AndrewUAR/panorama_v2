@@ -1,5 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import LanguageIcon from '@material-ui/icons/Language';
+import PersonIcon from '@material-ui/icons/Person';
+import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
+import PinDropIcon from '@material-ui/icons/PinDrop';
 import FormInput from '../../../components/FormInput/FormInput';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
@@ -9,11 +14,6 @@ import {
   photographyCategories
 } from '../../../app/helper/selectInputData';
 import styles from '../../../assets/jss/views/CreatePhotographerProfilePageStyle/Steps/photographerFormStyle';
-import { makeStyles } from '@material-ui/core/styles';
-import LanguageIcon from '@material-ui/icons/Language';
-import PersonIcon from '@material-ui/icons/Person';
-import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
-import PinDropIcon from '@material-ui/icons/PinDrop';
 import PlaceInput from '../../../components/PlaceInput/PlaceInput';
 
 const useStyles = makeStyles(styles);

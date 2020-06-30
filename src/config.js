@@ -1,6 +1,4 @@
-export const apiEndPoint = () => {
-  return 'https://photopanorama.herokuapp.com';
-};
+export const apiEndPoint = () => 'https://photopanorama.herokuapp.com';
 
 export const configHeader = () => {
   const config = {

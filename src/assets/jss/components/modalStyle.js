@@ -75,7 +75,7 @@ const modalStyle = (theme) => ({
     }
   },
   activeLabel: {
-    color: blueColor + '!important'
+    color: `${blueColor}!important`
   },
   createAlbumForm: {
     width: '30vw',

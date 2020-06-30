@@ -11,7 +11,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { closeModal } from '../../app/actions/modalActions';
 import { updateMe } from '../../app/actions/userActions';
 import Dropzone from '../Dropzone/Dropzone';
-import Button from '../../components/Button/CustomButton';
+import Button from '../Button/CustomButton';
 
 import styles from '../../assets/jss/components/modalStyle';
 import CropPhoto from '../Cropper/CropPhoto';
@@ -32,11 +32,12 @@ const CropModal = (props) => {
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
-    };
-  }, [files]);
+    },
+    [files]
+  );
 
   const handleCancelCrop = () => {
     setFiles([]);
@@ -60,7 +61,7 @@ const CropModal = (props) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modalContainer}
-        open={true}
+        open
         disableScrollLock={false}
         onClose={() => closeModal()}
         closeAfterTransition
@@ -94,9 +95,9 @@ const CropModal = (props) => {
                 <Button color="success" onClick={handleUploadImage}>
                   {loadingAsync ? (
                     <PulseLoader
-                      color={'#fff'}
+                      color="#fff"
                       css={buttonLoaderStyle}
-                      loading={true}
+                      loading
                       margin={2}
                     />
                   ) : (

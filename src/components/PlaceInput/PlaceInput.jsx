@@ -2,16 +2,18 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import styles from '../../assets/jss/components/formInputStyle';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControl from '@material-ui/core/FormControl';
-import { getPlaces } from '../../app/services/thirdPartyAPI.service';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
+import {
+  getPlaces,
+  getMyPlace
+} from '../../app/services/thirdPartyAPI.service';
+import styles from '../../assets/jss/components/formInputStyle';
 import { getMyLocation } from '../../app/helper/helperFunctions';
-import { getMyPlace } from '../../app/services/thirdPartyAPI.service';
 
 const useStyles = makeStyles(styles);
 
@@ -91,12 +93,12 @@ const PlaceInput = (props) => {
           loading: classes.list
         }}
         renderOption={(option) => (
-          <Fragment>
+          <>
             <span className={classes.renderOptionIcon}>
               <LocationOnIcon />
             </span>
             {option.placeName}
-          </Fragment>
+          </>
         )}
         renderInput={(params) => (
           <TextField
@@ -113,7 +115,7 @@ const PlaceInput = (props) => {
                 root: classes.selectLabel
               },
               endAdornment: (
-                <Fragment>
+                <>
                   {loading ? (
                     <CircularProgress color="inherit" size={20} />
                   ) : (
@@ -122,7 +124,7 @@ const PlaceInput = (props) => {
                       onClick={() => getMyLocation(setCoordinates)}
                     />
                   )}
-                </Fragment>
+                </>
               )
             }}
             placeholder={placeholder}

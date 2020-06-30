@@ -6,8 +6,8 @@ import GridContainer from '../../components/Grid/GridContainer';
 
 import styles from '../../assets/jss/views/AccountPageStyle/AccountPageStyle';
 import GridItem from '../../components/Grid/GridItem';
-import PhotographerAccountPage from '../../views/AccountPage/PhotographerAccountPage/PhotographerAccountPage';
-import Sidebar from '../../views/AccountPage/Sidebar';
+import PhotographerAccountPage from './PhotographerAccountPage/PhotographerAccountPage';
+import Sidebar from './Sidebar';
 
 const useStyles = makeStyles(styles);
 
@@ -30,7 +30,7 @@ const AccountPage = (props) => {
           <Sidebar />
         </GridItem>
         <GridItem xs={12} sm={11} md={8} className={classes.mainArea}>
-          {component ? component : <PhotographerAccountPage />}
+          {component || <PhotographerAccountPage />}
         </GridItem>
       </GridContainer>
     </>

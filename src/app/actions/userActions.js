@@ -6,7 +6,7 @@ import {
   asyncActionFinish,
   asyncActionError
 } from './asyncActions';
-import { enqueueSnackbar } from '../actions/notificationActions';
+import { enqueueSnackbar } from './notificationActions';
 
 export const updateMe = (userData) => async (dispatch) => {
   try {

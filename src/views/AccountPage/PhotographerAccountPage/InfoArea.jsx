@@ -16,10 +16,22 @@ const InfoArea = (props) => {
   return (
     <div className={classes.info}>
       <div className={classes.personalInfo}>
-        <p>Introduction: {introduction}</p>
-        <p>Languages: {languages}</p>
-        <p>Categories: {categories}</p>
-        <p>Serve Location: {location.placeName}</p>
+        <p>
+          Introduction:
+          {introduction}
+        </p>
+        <p>
+          Languages:
+          {languages}
+        </p>
+        <p>
+          Categories:
+          {categories}
+        </p>
+        <p>
+          Serve Location:
+          {location.placeName}
+        </p>
       </div>
     </div>
   );

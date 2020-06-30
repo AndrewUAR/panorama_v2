@@ -30,7 +30,7 @@ const switchStyles = (theme) => ({
   },
   track: {
     borderRadius: '26 / 2',
-    border: `1px solid`,
+    border: '1px solid',
     background: 'linear-gradient(to right, #ef3b36, #ffffff)',
     opacity: '1'
   }

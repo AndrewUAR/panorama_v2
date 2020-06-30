@@ -79,7 +79,7 @@ const loginPageStyles = (theme) => ({
       whiteSpace: 'nowrap',
       borderBottom: '1px solid transparent',
       '&:hover,&:focus': {
-        borderColor: blueColor + ' !important'
+        borderColor: `${blueColor} !important`
       }
     }
   },

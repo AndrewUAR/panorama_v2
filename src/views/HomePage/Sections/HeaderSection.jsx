@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import styles from '../../../assets/jss/views/HomePageStyle/homePageStyle';
-import Button from '../../../components/Button/CustomButton';
 import ExploreIcon from '@material-ui/icons/Explore';
 import PublicIcon from '@material-ui/icons/Public';
+import styles from '../../../assets/jss/views/HomePageStyle/homePageStyle';
+import Button from '../../../components/Button/CustomButton';
 import PlaceInput from '../../../components/PlaceInput/PlaceInput';
 
 const useStyles = makeStyles(styles);

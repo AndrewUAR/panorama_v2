@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { useSnackbar } from 'notistack';
-import { removeSnackbar } from '../../app/actions/notificationActions';
 import { Button } from '@material-ui/core';
+import { removeSnackbar } from '../../app/actions/notificationActions';
 
 const Notification = (props) => {
   const { notifications, removeSnackbar } = props;

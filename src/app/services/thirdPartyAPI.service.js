@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { apiEndPoint } from '../../config.js';
-import { store } from '../../app/store/store';
+import { store } from '../store/store';
 import { asyncActionStart, asyncActionFinish } from '../actions/asyncActions';
 
 const API_ENDPOINT = apiEndPoint();

@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { makeStyles } from '@material-ui/core/styles';
+import EmailIcon from '@material-ui/icons/Email';
 import styles from '../../assets/jss/views/forgotPasswordStyle.js';
 import GridContainer from '../../components/Grid/GridContainer.jsx';
 import GridItem from '../../components/Grid/GridItem.jsx';
 import CustomCard from '../../components/Card/Card.jsx';
 import CardContent from '../../components/Card/CardContent.jsx';
 import FormInput from '../../components/FormInput/FormInput.jsx';
-import EmailIcon from '@material-ui/icons/Email';
 import CardFooter from '../../components/Card/CardFooter.jsx';
 import Button from '../../components/Button/CustomButton.jsx';
 import CardHeader from '../../components/Card/CardHeader.jsx';
@@ -93,9 +93,9 @@ const ForgotPasswordPage = (props) => {
                   <Button type="submit" color="blue" formNoValidate>
                     {loadingAsync ? (
                       <PulseLoader
-                        color={'#fff'}
+                        color="#fff"
                         css={buttonLoaderStyle}
-                        loading={true}
+                        loading
                         margin={2}
                       />
                     ) : (

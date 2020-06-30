@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CircleLoader } from 'react-spinners';
 import { makeStyles, List, ListItem } from '@material-ui/core';
-import styles from '../../../assets/jss/views/SettingsPageStyle/sidebarStyle';
-import Button from '../../../components/Button/CustomButton';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockIcon from '@material-ui/icons/Lock';
 import NotificationImportantIcon from '@material-ui/icons/NotificationImportant';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import Button from '../../../components/Button/CustomButton';
+import styles from '../../../assets/jss/views/SettingsPageStyle/sidebarStyle';
 import { openModal } from '../../../app/actions/modalActions';
 
 const useStyles = makeStyles(styles);
@@ -22,7 +22,7 @@ const SideBar = (props) => {
       <div className={classes.photoArea}>
         {loadingAsync ? (
           <div className={classes.photoLoader}>
-            <CircleLoader color={'#fff'} loading={true} size="100px" />
+            <CircleLoader color="#fff" loading size="100px" />
           </div>
         ) : (
           <img

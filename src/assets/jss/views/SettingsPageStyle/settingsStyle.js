@@ -55,7 +55,7 @@ const settingsStyle = (theme) => ({
     marginBottom: '0rem',
     '& > :not(:last-child)': {
       borderBottom: '1px solid',
-      borderColor: blueColor + '!important'
+      borderColor: `${blueColor}!important`
     }
   },
   sectionTitle: {

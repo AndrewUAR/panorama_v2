@@ -4,19 +4,19 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import GridLoader from 'react-spinners/GridLoader';
-import styles from '../../../../assets/jss/views/AccountPageStyle/albumStyle';
-import GridContainer from '../../../../components/Grid/GridContainer';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Dropdown from '../../../../components/Dropdown/Dropdown';
 import UpdateIcon from '@material-ui/icons/Update';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import DeleteIcon from '@material-ui/icons/Delete';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import { openModal } from '../../../../app/actions/modalActions';
 import Button from '@material-ui/core/Button';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
+import { openModal } from '../../../../app/actions/modalActions';
+import Dropdown from '../../../../components/Dropdown/Dropdown';
+import GridContainer from '../../../../components/Grid/GridContainer';
+import styles from '../../../../assets/jss/views/AccountPageStyle/albumStyle';
 import {
   deleteAlbumImages,
   deleteMyAlbum
@@ -79,7 +79,7 @@ const MyAlbum = (props) => {
       </div>
       <GridContainer justify="center" className={classes.container}>
         {loadingAsync ? (
-          <GridLoader loading={true} color={'#fff'} />
+          <GridLoader loading color="#fff" />
         ) : (
           <>
             <GridList cellHeight={200} cols={3}>

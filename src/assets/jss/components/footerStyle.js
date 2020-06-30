@@ -18,12 +18,9 @@ const footerStyle = (theme) => ({
     background: `linear-gradient(to right, rgba(${hexToRgb(
       '#141e30'
     )}, 0.7) , rgba(${hexToRgb('#243b55')}, 0.7))`,
-    boxShadow:
-      '0px -4px 5px 0px  rgba(' +
-      hexToRgb(blackColor) +
-      ', 0.2), 0px -4px 5px 0px  rgba(' +
-      hexToRgb(blackColor) +
-      ', 0.4)',
+    boxShadow: `0px -4px 5px 0px  rgba(${hexToRgb(
+      blackColor
+    )}, 0.2), 0px -4px 5px 0px  rgba(${hexToRgb(blackColor)}, 0.4)`,
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column'
     }

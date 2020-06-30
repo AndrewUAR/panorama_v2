@@ -12,9 +12,9 @@ import {
   Drawer
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/icons/Menu';
 import SignedOutLinks from './SignedOutLinks';
 import FooterLinks from '../Footer/FooterLinks';
-import Menu from '@material-ui/icons/Menu';
 
 import styles from '../../assets/jss/components/navBarStyle';
 import SignedInLinks from './SignedInLinks';
@@ -69,7 +69,7 @@ const NavBar = (props) => {
       <Hidden mdUp>
         <Drawer
           variant="temporary"
-          anchor={'left'}
+          anchor="left"
           open={drawerOpen}
           onClose={handleDrawerToggle}
           classes={{ paper: drawerPaperClasses }}

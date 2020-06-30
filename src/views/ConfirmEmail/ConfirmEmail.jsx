@@ -8,7 +8,7 @@ const ConfirmEmail = (props) => {
   console.log(props.match.params.id);
   const { loading, confirmEmail, authenticated, history } = props;
 
-  const id = props.match.params.id;
+  const { id } = props.match.params;
 
   useEffect(() => {
     if (authenticated) {

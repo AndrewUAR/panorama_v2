@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '@material-ui/core/Checkbox';
 import { FormControlLabel } from '@material-ui/core';
-import styles from '../../assets/jss/components/formInputStyle';
 import { makeStyles } from '@material-ui/core/styles';
+import styles from '../../assets/jss/components/formInputStyle';
 
 const useStyles = makeStyles(styles);
 
