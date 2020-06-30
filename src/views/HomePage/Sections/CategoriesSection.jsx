@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Hidden } from '@material-ui/core';
 import classNames from 'classnames';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -12,25 +12,41 @@ import image5 from '../../../assets/img/categories/newborn.jpg';
 const useStyles = makeStyles(styles);
 
 const CategoriesSection = () => {
+  const [isVisibleTop, setVisibleTop] = useState(false);
+  const [isVisibleBottom, setVisibleBottom] = useState(false);
   const classes = useStyles();
   const categoriesTitle = classNames({
     [classes.categoryTitle]: true,
     [classes.title]: false
   });
 
-  const onChange = (isVisible) => {
-    console.log(isVisible);
+  const onChangeTop = (isVisible) => {
+    isVisible ? setVisibleTop(true) : setVisibleTop(false);
   };
+
+  const onChangeBottom = (isVisible) => {
+    isVisible ? setVisibleBottom(true) : setVisibleBottom(false);
+  };
+
+  const group1Classes = classNames({
+    [classes.group1]: true,
+    [classes.animationTop]: isVisibleTop
+  });
+
+  const group2Classes = classNames({
+    [classes.group2]: true,
+    [classes.animationBottom]: isVisibleBottom
+  });
 
   return (
     <div className={classes.mainContainer}>
       <h1 className={classes.title}>Search by most popular categories</h1>
       <VisibilitySensor
-        onChange={onChange}
+        onChange={onChangeTop}
         partialVisibility={{ top: true }}
         offset={{ top: 50 }}
       >
-        <div className={classNames(classes.group1, classes.categoryAnimation)}>
+        <div className={group1Classes}>
           <div className={classes.outerContainer}>
             <div className={classes.imageContainer}>
               <h2 className={categoriesTitle}>
@@ -67,7 +83,6 @@ const CategoriesSection = () => {
       </VisibilitySensor>
       <Hidden mdUp>
         <VisibilitySensor
-          onChange={onChange}
           partialVisibility={{ top: true }}
           offset={{ top: 50 }}
         >
@@ -86,11 +101,11 @@ const CategoriesSection = () => {
         </VisibilitySensor>
       </Hidden>
       <VisibilitySensor
-        onChange={onChange}
+        onChange={onChangeBottom}
         partialVisibility={{ top: true }}
         offset={{ top: 50 }}
       >
-        <div className={classes.group2}>
+        <div className={group2Classes}>
           <div className={classes.outerContainer}>
             <div className={classes.imageContainer}>
               <h2 className={categoriesTitle}>

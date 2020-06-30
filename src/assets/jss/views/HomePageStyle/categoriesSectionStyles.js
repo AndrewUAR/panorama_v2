@@ -28,6 +28,7 @@ const categoriesSectionStyles = (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     filter: 'drop-shadow(0.5rem 0.75rem 0.75rem black)',
+    animation: '$imageReveal 0.5s',
     '& > :nth-child(1)': {
       '&:hover': {
         transform: 'translate(-10%, -8%)',
@@ -114,7 +115,6 @@ const categoriesSectionStyles = (theme) => ({
     height: '20rem',
     width: '20rem',
     background: 'linear-gradient(to right, #7474bf, #26a0da)',
-    backgroundColor: '#fff',
     margin: '0.1rem',
     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
     WebkitClipPath:
@@ -204,15 +204,26 @@ const categoriesSectionStyles = (theme) => ({
     width: '100%',
     objectFit: 'cover'
   },
-  '@keyframes imageReveal': {
+  animationTop: {
+    animation: '$imageRevealTop 0.5s'
+  },
+  animationBottom: {
+    animation: '$imageRevealBottom 0.5s'
+  },
+  '@keyframes imageRevealTop': {
     '0%': {
-      transform: 'scale(0)'
-    },
-    '50%': {
-      transform: 'scale(1.3)'
+      transform: 'translateY(-10%)'
     },
     '100%': {
-      transform: 'scale(1)'
+      transform: 'translateY(0%)'
+    }
+  },
+  '@keyframes imageRevealBottom': {
+    '0%': {
+      transform: 'translateY(10%)'
+    },
+    '100%': {
+      transform: 'translateY(0%)'
     }
   }
 });
