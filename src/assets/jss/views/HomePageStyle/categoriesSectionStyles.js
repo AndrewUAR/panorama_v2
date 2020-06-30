@@ -28,9 +28,6 @@ const categoriesSectionStyles = (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     filter: 'drop-shadow(0.5rem 0.75rem 0.75rem black)',
-    // [theme.breakpoints.down('sm')]: {
-    //   flexDirection: 'column'
-    // },
     '& > :nth-child(1)': {
       '&:hover': {
         transform: 'translate(-10%, -8%)',
@@ -120,6 +117,7 @@ const categoriesSectionStyles = (theme) => ({
     backgroundColor: '#fff',
     margin: '0.1rem',
     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+    WebkitClipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
     '&:active': {
       transform: 'scale(0.9) !important',
       transition: 'all 0.2s !important'
@@ -143,6 +141,7 @@ const categoriesSectionStyles = (theme) => ({
     height: '18rem',
     width: '18rem',
     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+    WebkitClipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
     '& > *': {
       animation: '$imageReveal 1s'
     },
