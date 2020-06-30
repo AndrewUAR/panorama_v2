@@ -3,7 +3,6 @@ import {
   boxShadow,
   whiteColor,
   hexToRgb,
-  blackColor,
   container
 } from '../../panoramaStyles';
 import image from '../../../img/backGround/settingsBackground.jpg';
