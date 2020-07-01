@@ -17,7 +17,7 @@ export const validateInputs = (userData, setError) => {
     payPal
   } = userData;
 
-  let errorMsg = {
+  const errorMsg = {
     firstNameError: '',
     lastNameError: '',
     emailError: '',
@@ -133,9 +133,9 @@ export const validateInputs = (userData, setError) => {
 };
 
 export const sanitizeInputs = (userData, setUser) => {
-  let sanitizedUserData = {};
+  const sanitizedUserData = {};
 
-  for (let field in userData) {
+  for (const field in userData) {
     sanitizedUserData[field] = sanitizer.rtrim(
       sanitizer.ltrim(userData[field], ' '),
       ' '
@@ -200,7 +200,7 @@ const validatePassword = (password) => {
       min: 8
     }) !== true
   ) {
-    return `Password length must be minimum 8 characters.`;
+    return 'Password length must be minimum 8 characters.';
   }
 };
 
@@ -216,7 +216,7 @@ const validatePasswordConfirm = (passwordConfirm, password) => {
 
 const validateIntroduction = (introduction) => {
   if (validator.isEmpty(introduction) !== false) {
-    return `Introduction field can't be empty.`;
+    return "Introduction field can't be empty.";
   }
 
   if (
@@ -225,7 +225,7 @@ const validateIntroduction = (introduction) => {
       max: 250
     }) !== true
   ) {
-    return `Introduction length must be between 100 and 250 characters.`;
+    return 'Introduction length must be between 100 and 250 characters.';
   }
 };
 

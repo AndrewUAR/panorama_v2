@@ -31,7 +31,8 @@ const albumStyle = (theme) => ({
   albumContainer: {
     boxShadow: '-5px 6px 5px -4px rgba(0,0,0,0.75)',
     padding: '0.5rem 0.8rem 0 0',
-    background: `linear-gradient(45deg, #00c6ff, #0072ff 60%, rgba(255,0,0,0) 60%)`,
+    background:
+      'linear-gradient(45deg, #00c6ff, #0072ff 60%, rgba(255,0,0,0) 60%)',
     '&:active': {
       transform: 'scale(0.98)'
     }

@@ -79,7 +79,7 @@ const navBarLinksStyle = (theme) => ({
       }
     },
     '&:hover,&:focus,&:before': {
-      borderColor: tealColor + ' !important'
+      borderColor: `${tealColor} !important`
     }
   },
   dropdownLink: {
@@ -124,14 +124,11 @@ const navBarLinksStyle = (theme) => ({
       marginTop: '1.5rem',
       marginLeft: '0.5rem',
       marginBottom: '2.5rem',
-      boxShadow:
-        '0 0 0 80px rgba(' +
-        hexToRgb(whiteColor) +
-        ', 0.4), 0 0 0 140px rgba(' +
-        hexToRgb(whiteColor) +
-        ', 0.2), 0 0 0 200px rgba(' +
-        hexToRgb(whiteColor) +
-        ', 0.1)'
+      boxShadow: `0 0 0 80px rgba(${hexToRgb(
+        whiteColor
+      )}, 0.4), 0 0 0 140px rgba(${hexToRgb(
+        whiteColor
+      )}, 0.2), 0 0 0 200px rgba(${hexToRgb(whiteColor)}, 0.1)`
     }
   },
   pink: {

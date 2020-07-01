@@ -5,12 +5,10 @@ const initialState = {
   me: ''
 };
 
-const getMe = (state, payload) => {
-  return {
-    ...state,
-    me: payload.user
-  };
-};
+const getMe = (state, payload) => ({
+  ...state,
+  me: payload.user
+});
 
 export default createReducer(initialState, {
   [GET_ME]: getMe

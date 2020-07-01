@@ -5,19 +5,15 @@ const initialState = {
   error: ''
 };
 
-const setError = (state, payload) => {
-  return {
-    ...state,
-    error: payload
-  };
-};
+const setError = (state, payload) => ({
+  ...state,
+  error: payload
+});
 
-const deleteError = (state, payload) => {
-  return {
-    ...state,
-    error: payload
-  };
-};
+const deleteError = (state, payload) => ({
+  ...state,
+  error: payload
+});
 
 export default createReducer(initialState, {
   [SET_ERROR]: setError,

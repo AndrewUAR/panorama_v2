@@ -5,18 +5,18 @@ import PropTypes from 'prop-types';
 import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { List, ListItemIcon } from '@material-ui/core';
+import EmailIcon from '@material-ui/icons/Email';
+import LockIcon from '@material-ui/icons/Lock';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import styles from '../../assets/jss/views/loginPageStyle.js';
 import CustomCard from '../../components/Card/Card';
 import CardContent from '../../components/Card/CardContent';
-import { List, ListItemIcon } from '@material-ui/core';
 import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/CustomButton';
 import CardFooter from '../../components/Card/CardFooter';
 import CardHeader from '../../components/Card/CardHeader';
-import EmailIcon from '@material-ui/icons/Email';
-import LockIcon from '@material-ui/icons/Lock';
 import { loginUser } from '../../app/actions/authActions';
 import { deleteError } from '../../app/actions/errorActions';
 
@@ -49,12 +49,13 @@ const LoginPage = (props) => {
 
   const classes = useStyles();
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       deleteError();
-    };
+    },
     // eslint-disable-next-line
-  }, []);
+    []
+  );
 
   const { email, password } = user;
 
@@ -142,9 +143,9 @@ const LoginPage = (props) => {
                         <Button type="submit" color="blue">
                           {loadingAsync ? (
                             <PulseLoader
-                              color={'#fff'}
+                              color="#fff"
                               css={buttonLoaderStyle}
-                              loading={true}
+                              loading
                               margin={2}
                             />
                           ) : (

@@ -1,6 +1,6 @@
 import { AUTHENTICATE_USER, LOGOUT } from '../constants/auth';
 import { SET_ERROR } from '../constants/error';
-import { enqueueSnackbar } from '../actions/notificationActions';
+import { enqueueSnackbar } from './notificationActions';
 import {
   asyncActionStart,
   asyncActionFinish,

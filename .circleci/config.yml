@@ -1,5 +1,6 @@
 orbs:
   slack: circleci/slack@3.4.2
+  jira: circleci/jira@1.0.5
 version: 2.1
 executors:
   app-executor:
@@ -133,8 +134,7 @@ jobs:
           message: "${CIRCLE_BRANCH} branch deployment to aws s3 and cloudfront is complete."
           webhook: $CIRCLECI_SLACK_WEBHOOK
       - slack/status:
-          webhook: $CIRCLECI_SLACK_WEBHOOK
-
+          webhook: $CIRCLECI_SLACK_WEBHOOK 
 workflows:
   build_and_deploy:
     jobs:
@@ -179,6 +179,8 @@ workflows:
       - deploy-to-aws-cloudfront:
           requires:
             - deploy-to-aws-s3
+          post-steps:
+            - jira/notify
           filters:
             branches:
               only:
@@ -194,3 +196,4 @@ workflows:
                 - develop
                 - staging
                 - master
+

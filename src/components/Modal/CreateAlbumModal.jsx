@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { makeStyles } from '@material-ui/core/styles';
 import FormInput from '../FormInput/FormInput';
-import Button from '../../components/Button/CustomButton';
+import Button from '../Button/CustomButton';
 import { closeModal } from '../../app/actions/modalActions';
 import { createAlbum } from '../../app/actions/albumActions';
 import styles from '../../assets/jss/components/modalStyle';
@@ -34,7 +34,7 @@ const CreateAlbumModal = (props) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       disableScrollLock={false}
-      open={true}
+      open
       onClose={() => closeModal()}
       className={classes.modalContainer}
       closeAfterTransition

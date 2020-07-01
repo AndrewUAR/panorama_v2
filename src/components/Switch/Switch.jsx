@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, FormControlLabel } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
-import { FormControlLabel } from '@material-ui/core';
+
 import Switch from '@material-ui/core/Switch';
 import styles from '../../assets/jss/components/switchStyles';
 

@@ -16,10 +16,10 @@ const cardStyle = (theme) => ({
       2px 8px 10px -5px rgba(${hexToRgb(blackColor)}, 0.7)`
   },
   pink: {
-    backgroundColor: 'rgba(' + hexToRgb(primaryColor) + ', 0.6)'
+    backgroundColor: `rgba(${hexToRgb(primaryColor)}, 0.6)`
   },
   blue: {
-    backgroundColor: 'rgba(' + hexToRgb(blueColor) + ', 0.6)'
+    backgroundColor: `rgba(${hexToRgb(blueColor)}, 0.6)`
   },
   black: {
     background: 'linear-gradient(to right, #2c3e50, #3498db)'

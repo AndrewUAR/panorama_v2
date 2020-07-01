@@ -5,11 +5,11 @@ import _ from 'lodash';
 import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { connect, useDispatch } from 'react-redux';
-import FormInput from '../../../components/FormInput/FormInput';
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
-import styles from '../../../assets/jss/views/SettingsPageStyle/settingsStyle';
 import { makeStyles } from '@material-ui/core';
+import styles from '../../../assets/jss/views/SettingsPageStyle/settingsStyle';
+import FormInput from '../../../components/FormInput/FormInput';
 import Button from '../../../components/Button/CustomButton';
 import { apiEndPoint } from '../../../config';
 import { updateMe } from '../../../app/actions/userActions';
@@ -70,11 +70,12 @@ const GeneralSettingsForm = (props) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       dispatch(deleteError());
-    };
-  }, [dispatch]);
+    },
+    [dispatch]
+  );
 
   const { firstName, lastName, email, emailConfirm } = user;
   const {
@@ -189,9 +190,9 @@ const GeneralSettingsForm = (props) => {
           <Button type="submit" color="success" disabled={disableSubmit}>
             {loadingAsync && !disableSubmit ? (
               <PulseLoader
-                color={'#fff'}
+                color="#fff"
                 css={buttonLoaderStyle}
-                loading={true}
+                loading
                 margin={2}
               />
             ) : (

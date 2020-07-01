@@ -2,7 +2,7 @@ import {
   whiteColor,
   defaultFont,
   dropzoneBoxShadow
-} from '../../jss/panoramaStyles.js';
+} from '../panoramaStyles.js';
 
 const dropzoneStyle = (theme) => ({
   container: {

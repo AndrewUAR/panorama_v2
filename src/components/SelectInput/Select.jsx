@@ -1,13 +1,13 @@
 /* eslint-disable no-use-before-define */
-import React, { Fragment } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import styles from '../../assets/jss/components/formInputStyle';
 import FormControl from '@material-ui/core/FormControl';
 import CameraEnhanceIcon from '@material-ui/icons/CameraEnhance';
 import TranslateIcon from '@material-ui/icons/Translate';
+import styles from '../../assets/jss/components/formInputStyle';
 
 const useStyles = makeStyles(styles);
 
@@ -35,24 +35,24 @@ const Select = (props) => {
     switch (listName) {
       case 'languages':
         return (
-          <Fragment>
+          <>
             <span className={classes.renderOptionIcon}>
               <TranslateIcon />
             </span>
             {option}
-          </Fragment>
+          </>
         );
       case 'categories':
         return (
-          <Fragment>
+          <>
             <span className={classes.renderOptionIcon}>
               <CameraEnhanceIcon />
             </span>
             {option}
-          </Fragment>
+          </>
         );
       default:
-        return <Fragment>{option}</Fragment>;
+        return <>{option}</>;
     }
   };
 

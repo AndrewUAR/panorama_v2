@@ -16,12 +16,9 @@ const navBarStyle = (theme) => ({
     transition: 'all 150ms ease 0s',
     alignItems: 'center',
     flexFlow: 'row nowrap',
-    boxShadow:
-      '0px 4px 5px 0px  rgba(' +
-      hexToRgb(blackColor) +
-      ', 0.2), 0px 4px 5px 0px  rgba(' +
-      hexToRgb(blackColor) +
-      ', 0.4)'
+    boxShadow: `0px 4px 5px 0px  rgba(${hexToRgb(
+      blackColor
+    )}, 0.2), 0px 4px 5px 0px  rgba(${hexToRgb(blackColor)}, 0.4)`
   },
   fixed: {
     position: 'fixed'

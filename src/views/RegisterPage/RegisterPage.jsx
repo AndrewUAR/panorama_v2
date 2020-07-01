@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import { makeStyles } from '@material-ui/core/styles';
+import EmailIcon from '@material-ui/icons/Email';
+import PersonIcon from '@material-ui/icons/Person';
+import LockIcon from '@material-ui/icons/Lock';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import styles from '../../assets/jss/views/registerPageStyle.js';
@@ -13,9 +16,6 @@ import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/CustomButton';
 import CardFooter from '../../components/Card/CardFooter';
 import CardHeader from '../../components/Card/CardHeader';
-import EmailIcon from '@material-ui/icons/Email';
-import PersonIcon from '@material-ui/icons/Person';
-import LockIcon from '@material-ui/icons/Lock';
 import { validateInputs, sanitizeInputs } from '../../app/helper/validateInput';
 import { createUser } from '../../app/actions/authActions';
 import { deleteError } from '../../app/actions/errorActions';
@@ -58,12 +58,13 @@ const RegisterPage = (props) => {
     }
   }, [authenticated, history]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       deleteError();
-    };
+    },
     // eslint-disable-next-line
-  }, []);
+    []
+  );
 
   const { firstName, lastName, email, password, passwordConfirm } = user;
 
@@ -215,9 +216,9 @@ const RegisterPage = (props) => {
                         <Button type="submit" color="blue" formNoValidate>
                           {loadingAsync ? (
                             <PulseLoader
-                              color={'#fff'}
+                              color="#fff"
                               css={buttonLoaderStyle}
-                              loading={true}
+                              loading
                               margin={2}
                             />
                           ) : (

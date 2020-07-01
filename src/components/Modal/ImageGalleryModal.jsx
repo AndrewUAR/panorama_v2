@@ -5,12 +5,11 @@ import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
+import ImageGallery from 'react-image-gallery';
+import { DialogContent } from '@material-ui/core';
 import { closeModal } from '../../app/actions/modalActions';
 
 import styles from '../../assets/jss/components/modalStyle';
-
-import ImageGallery from 'react-image-gallery';
-import { DialogContent } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 
@@ -19,9 +18,10 @@ const ImageGalleryModel = (props) => {
   const [images, setImages] = useState('');
 
   useEffect(() => {
-    const imagesOriginal = _.map(selectedAlbum.images, function (img) {
-      return { original: img, thumbnail: img };
-    });
+    const imagesOriginal = _.map(selectedAlbum.images, (img) => ({
+      original: img,
+      thumbnail: img
+    }));
     setImages(imagesOriginal);
   }, [selectedAlbum.images]);
 
@@ -31,7 +31,7 @@ const ImageGalleryModel = (props) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       className={classes.modalContainer}
-      open={true}
+      open
       disableScrollLock={false}
       onClose={() => closeModal()}
       closeAfterTransition

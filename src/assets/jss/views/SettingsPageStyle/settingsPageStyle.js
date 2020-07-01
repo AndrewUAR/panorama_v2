@@ -16,14 +16,16 @@ const settingsStyle = (theme) => ({
   settings: {
     ...container,
     ...boxShadow,
-    background: `linear-gradient(105deg, #2c3e50, #3498db 33%, #292e49 33%, #2b32b2)`,
+    background:
+      'linear-gradient(105deg, #2c3e50, #3498db 33%, #292e49 33%, #2b32b2)',
     [theme.breakpoints.only('sm')]: {
       width: '70%'
     },
     [theme.breakpoints.down('sm')]: {
       margin: '6rem 1rem',
       padding: '0',
-      background: `linear-gradient(120deg,  #2c3e50, #3498db 34%, #292e49 34%, #2b32b2)`
+      background:
+        'linear-gradient(120deg,  #2c3e50, #3498db 34%, #292e49 34%, #2b32b2)'
     }
   }
 });

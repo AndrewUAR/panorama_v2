@@ -32,9 +32,11 @@ const buttonLoaderStyle = css`
   display: flex;
 `;
 
-const getSteps = () => {
-  return ['Terms And Agreements', 'Photographer Form', 'Choose Payout Method'];
-};
+const getSteps = () => [
+  'Terms And Agreements',
+  'Photographer Form',
+  'Choose Payout Method'
+];
 
 const CreatePhotographerProfilePage = (props) => {
   const { createPhotographerProf, email, loadingAsync } = props;
@@ -197,9 +199,9 @@ const CreatePhotographerProfilePage = (props) => {
                 {activeStep === steps.length - 1 ? (
                   loadingAsync ? (
                     <PulseLoader
-                      color={'#fff'}
+                      color="#fff"
                       css={buttonLoaderStyle}
-                      loading={true}
+                      loading
                       margin={2}
                     />
                   ) : (

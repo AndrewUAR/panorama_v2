@@ -9,13 +9,9 @@ import {
 
 const initialState = {};
 
-const updateAlbum = (state, payload) => {
-  return { ...state, ...payload };
-};
+const updateAlbum = (state, payload) => ({ ...state, ...payload });
 
-const getAlbum = (state, payload) => {
-  return { ...state, ...payload };
-};
+const getAlbum = (state, payload) => ({ ...state, ...payload });
 
 export default createReducer(initialState, {
   [GET_ALBUM]: getAlbum,

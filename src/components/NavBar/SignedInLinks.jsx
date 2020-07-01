@@ -33,7 +33,7 @@ const SignedInLinks = (props) => {
 
   const navButtonClasses = classNames({
     [classes.navButton]: true,
-    [classes['black']]: true
+    [classes.black]: true
   });
 
   const logInListClasses = classNames({

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import LockIcon from '@material-ui/icons/Lock';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import styles from '../../assets/jss/views/resetPasswordPageStyle.js';
@@ -11,7 +12,6 @@ import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/CustomButton';
 import CardFooter from '../../components/Card/CardFooter';
 import CardHeader from '../../components/Card/CardHeader';
-import LockIcon from '@material-ui/icons/Lock';
 import { validateInputs } from '../../app/helper/validateInput';
 import { resetPassword } from '../../app/actions/authActions';
 

@@ -11,7 +11,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import { closeModal } from '../../app/actions/modalActions';
 import { uploadAlbumImages } from '../../app/actions/albumActions';
 import Dropzone from '../Dropzone/Dropzone';
-import Button from '../../components/Button/CustomButton';
+import Button from '../Button/CustomButton';
 import styles from '../../assets/jss/components/modalStyle';
 
 const buttonLoaderStyle = css`
@@ -26,11 +26,12 @@ const AddAlbumImages = (props) => {
 
   const [files, setFiles] = useState([]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
-    };
-  }, [files]);
+    },
+    [files]
+  );
 
   const handleCancelCrop = () => {
     setFiles([]);
@@ -38,7 +39,7 @@ const AddAlbumImages = (props) => {
 
   const handleUploadImages = async () => {
     const form = new FormData();
-    _.forEach(files, function (file) {
+    _.forEach(files, (file) => {
       form.append('images', file);
     });
     // form.append("images", files);
@@ -60,9 +61,7 @@ const AddAlbumImages = (props) => {
   });
 
   const deleteImg = (name) => {
-    const updated = files.filter((file) => {
-      return file.name !== name;
-    });
+    const updated = files.filter((file) => file.name !== name);
     setFiles(updated);
   };
 
@@ -84,7 +83,7 @@ const AddAlbumImages = (props) => {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modalContainer}
-        open={true}
+        open
         disableScrollLock={false}
         onClose={() => closeModal()}
         closeAfterTransition
@@ -95,7 +94,7 @@ const AddAlbumImages = (props) => {
       >
         <div className={dropzoneStyles}>
           <Dropzone
-            multiple={true}
+            multiple
             setFile={setFiles}
             message="Drag&drop photos here, or click to select files. Maximum 10 photos per one upload."
           />
@@ -106,9 +105,9 @@ const AddAlbumImages = (props) => {
                 <Button color="success" onClick={handleUploadImages}>
                   {loadingAsync ? (
                     <PulseLoader
-                      color={'#fff'}
+                      color="#fff"
                       css={buttonLoaderStyle}
-                      loading={true}
+                      loading
                       margin={2}
                     />
                   ) : (

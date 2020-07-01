@@ -3,8 +3,8 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import { makeStyles } from '@material-ui/core';
-import styles from '../../assets/jss/components/dropzoneStyle';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import styles from '../../assets/jss/components/dropzoneStyle';
 
 const useStyles = makeStyles(styles);
 
@@ -26,7 +26,7 @@ const Dropzone = (props) => {
   );
 
   const { getRootProps, getInputProps } = useDropzone({
-    multiple: multiple,
+    multiple,
     accept: 'image/*',
     onDrop
   });

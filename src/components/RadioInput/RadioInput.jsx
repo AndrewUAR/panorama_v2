@@ -30,7 +30,7 @@ const RadioInput = (props) => {
             control={<Radio classes={{ root: classes.blue }} />}
             label={
               <>
-                <i className={option.icon + ' ' + classes.radioIcon}></i>
+                <i className={`${option.icon} ${classes.radioIcon}`} />
                 {option.label}
               </>
             }

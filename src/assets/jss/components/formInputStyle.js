@@ -22,20 +22,20 @@ const formInputStyle = (theme) => ({
   },
   underlineTeal: {
     '&:hover:not($disabled):before,&:before': {
-      borderColor: blueColor + ' !important'
+      borderColor: `${blueColor} !important`
     }
   },
   underlineError: {
     '&:hover:not($disabled):before,&:before': {
-      borderColor: dangerColor + ' !important'
+      borderColor: `${dangerColor} !important`
     }
   },
   labelRootError: {
-    color: dangerColor + ' !important'
+    color: `${dangerColor} !important`
   },
   label: {
     ...defaultFont,
-    color: whiteColor + '!important',
+    color: `${whiteColor}!important`,
     fontWeight: '400',
     fontSize: '1rem',
     lineHeight: '1',
@@ -43,7 +43,7 @@ const formInputStyle = (theme) => ({
   },
   selectLabel: {
     ...defaultFont,
-    color: whiteColor + '!important',
+    color: `${whiteColor}!important`,
     fontWeight: '400',
     fontSize: '1rem',
     lineHeight: '1'
@@ -144,7 +144,7 @@ const formInputStyle = (theme) => ({
     marginRight: '0.3rem'
   },
   blue: {
-    color: blueColor + '!important'
+    color: `${blueColor}!important`
   }
 });
 
