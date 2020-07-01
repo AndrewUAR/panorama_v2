@@ -189,11 +189,11 @@ workflows:
             - jira/notify:
                 environment_type: |
                   if [ "${CIRCLE_BRANCH}" == "master"]
-                    then production
+                    then "production"
                   elif [ "${CIRCLE_BRANCH}" == "staging" ]
-                    then staging
+                    then "staging"
                   else
-                    development
+                    "development"
                 job_type: deployment
       - notify-via-slack:
           requires:
