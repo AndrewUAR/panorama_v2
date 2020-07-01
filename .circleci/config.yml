@@ -136,6 +136,10 @@ jobs:
       - slack/status:
           webhook: $CIRCLECI_SLACK_WEBHOOK
   jira-notify:
+    steps:
+      - checkout
+      - *show-current-branch-name
+      - *restore-cache
     environment_type: |
       if [ "${CIRCLE_BRANCH}" == "master"]
         then production
