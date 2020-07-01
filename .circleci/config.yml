@@ -189,12 +189,13 @@ workflows:
             - jira/notify:
                 environment_type: development
                 job_type: deployment
+                token_name: $CIRCLE_JIRA_TOKEN
       - notify-via-slack:
           requires:
             - deploy-to-aws-cloudfront
           filters:
             branches:
               only:
-                - develop
+                - develop c
                 - staging
                 - master
