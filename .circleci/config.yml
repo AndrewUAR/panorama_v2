@@ -187,9 +187,9 @@ workflows:
                 - master
           post-steps:
             - jira/notify:
+                token_name: $CIRCLECI_TOKEN
                 environment_type: development
                 job_type: deployment
-                token_name: $CIRCLECI_TOKEN
       - notify-via-slack:
           requires:
             - deploy-to-aws-cloudfront
