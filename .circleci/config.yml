@@ -187,13 +187,7 @@ workflows:
                 - master
           post-steps:
             - jira/notify:
-                environment_type: |
-                  if [ "${CIRCLE_BRANCH}" == "master"]
-                    then "production"
-                  elif [ "${CIRCLE_BRANCH}" == "staging" ]
-                    then "staging"
-                  else
-                    "development"
+                environment_type: development
                 job_type: deployment
       - notify-via-slack:
           requires:
