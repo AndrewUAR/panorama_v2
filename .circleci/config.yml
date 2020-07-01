@@ -186,14 +186,15 @@ workflows:
                 - staging
                 - master
           post-steps:
-            environment_type: |
-              if [ "${CIRCLE_BRANCH}" == "master"]
-                then production
-              elif [ "${CIRCLE_BRANCH}" == "staging" ]
-                then staging
-              else
-                development
-            job_type: deploy
+            - jira/notify:
+                environment_type: |
+                  if [ "${CIRCLE_BRANCH}" == "master"]
+                    then production
+                  elif [ "${CIRCLE_BRANCH}" == "staging" ]
+                    then staging
+                  else
+                    development
+                job_type: deployment
       - notify-via-slack:
           requires:
             - deploy-to-aws-cloudfront
