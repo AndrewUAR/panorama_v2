@@ -136,10 +136,6 @@ jobs:
       - slack/status:
           webhook: $CIRCLECI_SLACK_WEBHOOK
   jira-notify:
-    steps:
-      - checkout
-      - *show-current-branch-name
-      - *restore-cache
     environment_type: |
       if [ "${CIRCLE_BRANCH}" == "master"]
         then production
@@ -198,8 +194,15 @@ workflows:
                 - develop
                 - staging
                 - master
-          post-steps:
-            - jira-notify
+      - jira-notify:
+          requires:
+            - deploy-to-aws-cloudfront
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
       - notify-via-slack:
           requires:
             - deploy-to-aws-cloudfront
