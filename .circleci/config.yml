@@ -1,5 +1,6 @@
 orbs:
   slack: circleci/slack@3.4.2
+  jira: circleci/jira@1.1.7
 version: 2.1
 executors:
   app-executor:
@@ -134,7 +135,6 @@ jobs:
           webhook: $CIRCLECI_SLACK_WEBHOOK
       - slack/status:
           webhook: $CIRCLECI_SLACK_WEBHOOK
-
 workflows:
   build_and_deploy:
     jobs:
@@ -185,6 +185,10 @@ workflows:
                 - develop
                 - staging
                 - master
+          post-steps:
+            - jira/notify:
+                environment_type: $CIRCLE_BRANCH
+                job_type: deploy-to-aws-cloudfront
       - notify-via-slack:
           requires:
             - deploy-to-aws-cloudfront
