@@ -187,7 +187,6 @@ workflows:
                 - master
           post-steps:
             - jira/notify:
-                token_name: $CIRCLECI_TOKEN
                 environment_type: development
                 job_type: deployment
       - notify-via-slack:
