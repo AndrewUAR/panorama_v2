@@ -179,16 +179,14 @@ workflows:
       - deploy-to-aws-cloudfront:
           requires:
             - deploy-to-aws-s3
+          post-steps:
+            - jira/notify
           filters:
             branches:
               only:
                 - develop
                 - staging
                 - master
-          post-steps:
-            - jira/notify:
-                environment_type: development
-                job_type: deployment
       - notify-via-slack:
           requires:
             - deploy-to-aws-cloudfront
@@ -198,3 +196,4 @@ workflows:
                 - develop
                 - staging
                 - master
+
