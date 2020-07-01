@@ -187,7 +187,7 @@ workflows:
                 - master
           post-steps:
             - jira/notify:
-                environment_type: $CIRCLE_BRANCH
+                environment_type: development
                 job_type: deploy-to-aws-cloudfront
       - notify-via-slack:
           requires:
