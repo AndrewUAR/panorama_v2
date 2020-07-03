@@ -20,7 +20,13 @@ const HeaderSection = (props) => {
     <div className={classes.pageHeader}>
       <div className={classes.container}>
         <div className={classes.searchButton}>
-          <Button justIcon pulseButton color="blue" size="lg">
+          <Button
+            href="/photographers"
+            justIcon
+            pulseButton
+            color="blue"
+            size="lg"
+          >
             <ExploreIcon className={classes.buttonIcon} />
           </Button>
           <span className={classes.buttonText}>Find photographer near you</span>

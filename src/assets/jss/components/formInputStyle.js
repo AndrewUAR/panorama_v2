@@ -51,7 +51,7 @@ const formInputStyle = (theme) => ({
   input: {
     color: whiteColor,
     marginTop: '0.5rem',
-    borderRadius: '10px',
+    borderRadius: '0.5rem',
     paddingRight: '0',
     '&,&::placeholder': {
       fontSize: '1rem',

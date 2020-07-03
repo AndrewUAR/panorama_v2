@@ -67,3 +67,12 @@ export const photographyCategories = () => [
   'Fashion Photography',
   'Family Photography'
 ];
+
+export const sortByOptions = () => [
+  'PRICE: LOW TO HIGH',
+  'PRICE: HIGH TO LOW',
+  'RATING: LOW TO HIGH',
+  'RATING: HIGH TO LOW'
+];
+
+export const resultsPerPage = () => ['12', '24', '48'];
