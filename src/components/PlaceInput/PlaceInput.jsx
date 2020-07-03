@@ -1,17 +1,19 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import styles from "../../assets/jss/components/formInputStyle";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import FormControl from '@material-ui/core/FormControl';
-import {getPlaces} from "../../app/services/thirdPartyAPI.service";
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import MyLocationIcon from '@material-ui/icons/MyLocation';
+import {
+  getPlaces,
+  getMyPlace
+} from '../../app/services/thirdPartyAPI.service';
+import styles from '../../assets/jss/components/formInputStyle';
 import { getMyLocation } from '../../app/helper/helperFunctions';
-import { getMyPlace } from '../../app/services/thirdPartyAPI.service';
 
 const useStyles = makeStyles(styles);
 
@@ -29,28 +31,26 @@ const PlaceInput = (props) => {
     id,
     loading,
     error,
-    labelText, 
-    underlineColor, 
-    placeholder, 
+    labelText,
+    underlineColor,
+    placeholder,
     onChangeLocation
   } = props;
 
   const onChange = (e) => {
     setPlace(e.target.value);
-  }
+  };
 
   useEffect(() => {
     if (place) {
       setOpen(true);
       (async () => {
-        const places = await getPlaces({place});
-        console.log(places)
+        const places = await getPlaces({ place });
         setOptions(places.data.data);
-        console.log(options)
       })();
     } else {
       setOpen(false);
-      setOptions([])
+      setOptions([]);
     }
   }, [place]);
 
@@ -61,14 +61,14 @@ const PlaceInput = (props) => {
         setPlace(myPlace.data.data);
       })();
     }
-  }, [coordinates])
+  }, [coordinates]);
 
   const inputRootClasses = classNames({
     [classes.underline]: true,
     [classes.inputPadding]: true,
     [classes[underlineColor]]: underlineColor,
     [classes.underlineError]: error
-  })
+  });
 
   return (
     <FormControl className={classes.formControl}>
@@ -83,7 +83,6 @@ const PlaceInput = (props) => {
         getOptionLabel={(option) => option.placeName}
         options={options}
         noOptionsText="No results found"
-        loading={loading}
         loadingText="Locating..."
         onChange={onChangeLocation}
         classes={{
@@ -94,10 +93,12 @@ const PlaceInput = (props) => {
           loading: classes.list
         }}
         renderOption={(option) => (
-          <Fragment>
-            <span className={classes.renderOptionIcon}><LocationOnIcon /></span>
-            {option.placeName} 
-          </Fragment>
+          <>
+            <span className={classes.renderOptionIcon}>
+              <LocationOnIcon />
+            </span>
+            {option.placeName}
+          </>
         )}
         renderInput={(params) => (
           <TextField
@@ -106,7 +107,7 @@ const PlaceInput = (props) => {
             onChange={onChange}
             variant="standard"
             InputLabelProps={{
-              classes: {root: classes.selectLabel}
+              classes: { root: classes.selectLabel }
             }}
             InputProps={{
               ...params.InputProps,
@@ -114,30 +115,32 @@ const PlaceInput = (props) => {
                 root: classes.selectLabel
               },
               endAdornment: (
-                <Fragment>
-                  {loading 
-                    ? <CircularProgress color="inherit" size={20} /> 
-                    : <MyLocationIcon className={classes.inputIcon} onClick={() => getMyLocation(setCoordinates)} />
-                  }
-                </Fragment>
-              ),
+                <>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : (
+                    <MyLocationIcon
+                      className={classes.inputIcon}
+                      onClick={() => getMyLocation(setCoordinates)}
+                    />
+                  )}
+                </>
+              )
             }}
             placeholder={placeholder}
-              classes={{
-                root: classes.input
-              }}
+            classes={{
+              root: classes.input
+            }}
           />
         )}
       />
       {error ? <p className={classes.error}>{error}</p> : ''}
     </FormControl>
   );
-}
+};
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   loading: state.async.loading
-})
-
+});
 
 export default connect(mapStateToProps)(PlaceInput);

@@ -1,8 +1,8 @@
-import { DELETE_ERROR } from "../constants/error";
+import { DELETE_ERROR } from '../constants/error';
 
-export const deleteError = () => dispatch => {
+export const deleteError = () => (dispatch) => {
   dispatch({
     type: DELETE_ERROR,
     payload: ''
-  })
-}
+  });
+};

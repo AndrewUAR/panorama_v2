@@ -1,6 +1,4 @@
-export const apiEndPoint = () => {
-  return 'http://localhost:8000'
-}
+export const apiEndPoint = () => 'https://photopanorama.herokuapp.com';
 
 export const configHeader = () => {
   const config = {
@@ -9,6 +7,6 @@ export const configHeader = () => {
     },
     withCredentials: true,
     credentials: 'include'
-  }
+  };
   return config;
-}
+};

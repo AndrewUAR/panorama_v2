@@ -1,19 +1,18 @@
-import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import authReducer from "./authReducer";
-import modalReducer from "./modalReducer";
-import userReducer from "./userReducer";
-import errorReducer from "./errorReducer";
-import asyncReducer from "./asyncReducer";
-import notificationReducer from "./notificationReducer";
-import albumReducer from "./albumReducer";
+import authReducer from './authReducer';
+import modalReducer from './modalReducer';
+import errorReducer from './errorReducer';
+import asyncReducer from './asyncReducer';
+import notificationReducer from './notificationReducer';
+import albumReducer from './albumReducer';
 
-import { LOGOUT } from "../constants/auth";
+import { LOGOUT } from '../constants/auth';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
   blacklist: ['error', 'modal', 'async', 'notifications']
 };

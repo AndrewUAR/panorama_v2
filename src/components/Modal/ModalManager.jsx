@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CropModal from "./CropModal";
-import BecomePhotographerModal from "./BecomePhotographerModal";
-import CreateAlbumModal from "./CreateAlbumModal";
-import UpdateAlbumModal from "./UpdateAlbumModel";
-import AddAlbumImages from "./AddAlbumImages";
-import ImageGalleryModal from "./ImageGalleryModal"
+import CropModal from './CropModal';
+import BecomePhotographerModal from './BecomePhotographerModal';
+import CreateAlbumModal from './CreateAlbumModal';
+import UpdateAlbumModal from './UpdateAlbumModel';
+import AddAlbumImages from './AddAlbumImages';
+import ImageGalleryModal from './ImageGalleryModal';
 
 const modalLookup = {
   CropModal,
@@ -15,32 +15,28 @@ const modalLookup = {
   UpdateAlbumModal,
   AddAlbumImages,
   ImageGalleryModal
-}
+};
 
-const ModalManager = props => {
+const ModalManager = (props) => {
   const { currentModal } = props;
   let renderedModal;
 
   if (currentModal) {
-    const {modalType, modalProps} = currentModal;
+    const { modalType, modalProps } = currentModal;
     const ModalComponent = modalLookup[modalType];
 
-    renderedModal = <ModalComponent {...modalProps} />
+    renderedModal = <ModalComponent {...modalProps} />;
   }
 
-  return (
-    <div>
-      {renderedModal}
-    </div>
-  )
-}
+  return <div>{renderedModal}</div>;
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentModal: state.modal
-})
+});
 
 ModalManager.propTypes = {
   currentModal: PropTypes.object
-}
+};
 
 export default connect(mapStateToProps)(ModalManager);

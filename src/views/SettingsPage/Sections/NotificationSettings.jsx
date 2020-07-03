@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core';
-import Switch from "../../../components/Switch/Switch";
-import styles from "../../../assets/jss/views/SettingsPageStyle/settingsStyle";
+import Switch from '../../../components/Switch/Switch';
+import styles from '../../../assets/jss/views/SettingsPageStyle/settingsStyle';
 
 const useStyles = makeStyles(styles);
 
-const NotificationSettings = props => {
-
+const NotificationSettings = (props) => {
   const [checked, setChecked] = useState({
     passwordChange: true,
     photoSessionRequest: true,
@@ -16,39 +14,37 @@ const NotificationSettings = props => {
     photoSessionReminder: true,
     photoSessionCancel: true,
     tokensPurchase: true
-  })
+  });
 
-  const { 
-    passwordChange, 
-    photoSessionRequest, 
-    photoSessionAccepted, 
-    photoSessionReminder, 
+  const {
+    passwordChange,
+    photoSessionRequest,
+    photoSessionAccepted,
+    photoSessionReminder,
     photoSessionCancel,
-    tokensPurchase 
+    tokensPurchase
   } = checked;
 
   const classes = useStyles();
 
- 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, checked } = e.target;
-    setChecked(prevState => ({
+    setChecked((prevState) => ({
       ...prevState,
       [name]: checked
-    }))
-  }
+    }));
+  };
 
   const inputSectionClasses = classNames({
     [classes.inputSection]: true,
     [classes.notificationSection]: true
   });
 
-
   return (
     <div className={classes.formContainer}>
       <h2 className={classes.sectionTitle}>Notifications Settings</h2>
       <div className={inputSectionClasses}>
-        <Switch 
+        <Switch
           labelProps={{
             value: true,
             label: 'Send a notification, when password was changed.',
@@ -60,10 +56,11 @@ const NotificationSettings = props => {
           }}
           onChange={onChange}
         />
-        <Switch 
+        <Switch
           labelProps={{
             value: true,
-            label: 'Send a notification, when a new photo session request was created.',
+            label:
+              'Send a notification, when a new photo session request was created.',
             labelPlacement: 'start'
           }}
           switchProps={{
@@ -72,10 +69,11 @@ const NotificationSettings = props => {
           }}
           onChange={onChange}
         />
-        <Switch 
+        <Switch
           labelProps={{
             value: true,
-            label: 'Send a notification, when a photographer accepted your photo session request.',
+            label:
+              'Send a notification, when a photographer accepted your photo session request.',
             labelPlacement: 'start'
           }}
           switchProps={{
@@ -84,7 +82,7 @@ const NotificationSettings = props => {
           }}
           onChange={onChange}
         />
-        <Switch 
+        <Switch
           labelProps={{
             value: true,
             label: 'Send a reminder 24hrs before a photo session.',
@@ -96,10 +94,11 @@ const NotificationSettings = props => {
           }}
           onChange={onChange}
         />
-        <Switch 
+        <Switch
           labelProps={{
             value: true,
-            label: 'Send a confirmation, that a photo session was successfully canceled.',
+            label:
+              'Send a confirmation, that a photo session was successfully canceled.',
             labelPlacement: 'start'
           }}
           switchProps={{
@@ -108,10 +107,11 @@ const NotificationSettings = props => {
           }}
           onChange={onChange}
         />
-        <Switch 
+        <Switch
           labelProps={{
             value: true,
-            label: 'Send a confirmation, that tokens were successfully purchased.',
+            label:
+              'Send a confirmation, that tokens were successfully purchased.',
             labelPlacement: 'start'
           }}
           switchProps={{
@@ -122,11 +122,7 @@ const NotificationSettings = props => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-NotificationSettings.propTypes = {
-
-}
-
-export default NotificationSettings
+export default NotificationSettings;
