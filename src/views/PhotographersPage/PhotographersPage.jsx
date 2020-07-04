@@ -57,7 +57,7 @@ const PhotographersPage = (props) => {
               labelText="Enter City"
               placeholder="Enter City"
               value={location}
-              onChange={handleCategoryChange}
+              onChange={handleLocationChange}
               underlineColor="underlineTeal"
             />
           </div>
