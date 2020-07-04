@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
-import Rating from '@material-ui/lab/Rating';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
@@ -14,85 +12,82 @@ import {
   photographyCategories
 } from '../../../src/app/helper/selectInputData';
 import RatingSelect from '../../components/SelectInput/RatingSelect';
+import Slide from '../../components/SlideInput/Slide';
+import SlideRange from '../../components/SlideInput/SlideRange';
 const useStyles = makeStyles(styles);
 
 const PhotographersPage = (props) => {
-  const [sortValue, setSortValue] = useState([]);
-  const [resultsValue, setResultsValue] = useState([]);
+  const [location, setLocation] = useState('');
+  const [sortValue, setSortValue] = useState('');
+  const [resultsValue, setResultsValue] = useState('');
   const [categoriesValue, setCategoriesValue] = useState([]);
-  const [ratingValue, setRatingValue] = useState([]);
-  const [distanceRangeValue, setDistanceRangeValue] = useState([]);
-  const [priceRangeValue, setPriceRangeValue] = useState([]);
+  const [ratingValue, setRatingValue] = useState('');
+  const [distanceRangeValue, setDistanceRangeValue] = useState(50);
+  const [priceRangeValue, setPriceRangeValue] = useState([0, 999]);
   const classes = useStyles();
 
-  const handleSortChange = (e) => {
-    setSortValue(e.target.value);
+  const handleLocationChange = (e) => {
+    const { value } = e.target;
+    setLocation(value);
+  };
+  const handleSortChange = (e, values) => {
+    setSortValue(values);
   };
 
-  const handleResultsChange = (e) => {
-    setResultsValue(e.target.value);
+  const handleResultsChange = (e, values) => {
+    setResultsValue(values);
   };
 
-  const handleCategoryChange = (e) => {
-    setCategoriesValue(e.target.value);
+  const handleCategoryChange = (e, values) => {
+    setCategoriesValue(values);
   };
 
   const handleRatingChange = (e) => {
-    setRatingValue(e.target.value);
+    const { value } = e.target;
+    setRatingValue(value);
   };
 
-  const handleDistanceRangeChange = (e) => {
-    setDistanceRangeValue(e.target.value);
-  };
-
-  const handlePriceRangeChange = (e) => {
-    setPriceRangeValue(e.target.value);
-  };
-
-  const ratingOptions = _.range(5).map((val) => {
-    return (
-      <Rating defaultValue={val} size="small" />
-    )
-  })
   return (
     <div className={classes.container}>
-      <div className={classes.searchAndSortBar}>
-        <form className={classes.formInput}>
-          <div>
+      <GridContainer justify="center" className={classes.topBar}>
+        <GridItem xs={12} sm={12} md={12} className={classes.searchAndSortBar}>
+          <div className={classes.formInput}>
             <PlaceInput
-              id="city"
+              id="location"
               labelText="Enter City"
               placeholder="Enter City"
-              // value={city}
-              // onChange={onChange}
+              value={location}
+              onChange={handleCategoryChange}
               underlineColor="underlineTeal"
-              autoComplete="off"
             />
           </div>
-        </form>
-        <div className={classes.sortSelectGroup}>
-          <Select
-            id="sortBy"
-            labelText="Sort By"
-            placeholder="Sort by"
-            value={sortValue}
-            onChange={handleSortChange}
-            options={sortByOptions()}
-            underlineColor="underlineTeal"
-          />
-          <Select
-            id="resultsPerPage"
-            labelText="Per Page"
-            placeholder="Per Page"
-            value={resultsValue}
-            onChange={handleResultsChange}
-            options={resultsPerPage()}
-            underlineColor="underlineTeal"
-          />
-        </div>
-      </div>
+          <div className={classes.sortSelectGroup}>
+            <Select
+              id="sortBy"
+              labelText="Sort By"
+              placeholder="Sort by"
+              value={sortValue}
+              onChange={handleSortChange}
+              options={sortByOptions()}
+              multiple={false}
+              underlineColor="underlineTeal"
+            />
+            <Select
+              id="resultsPerPage"
+              labelText="Per Page"
+              placeholder="Per Page"
+              value={resultsValue}
+              onChange={handleResultsChange}
+              options={resultsPerPage()}
+              multiple={false}
+              underlineColor="underlineTeal"
+            />
+          </div>
+        </GridItem>
+      </GridContainer>
       <GridContainer justify="center" className={classes.mainArea}>
         <GridItem xs={12} sm={12} md={2} className={classes.sideBar}>
+          <h3 className={classes.sideBarTitle}>Filter by:</h3>
           <Select
             id="categories"
             labelText="Categories"
@@ -100,26 +95,25 @@ const PhotographersPage = (props) => {
             value={categoriesValue}
             onChange={handleCategoryChange}
             options={photographyCategories()}
+            multiple={true}
             underlineColor="underlineTeal"
           />
-          <RatingSelect underlineColor="underlineTeal" />
-          <Select
-            id="distance"
+          <RatingSelect
+            id="rating"
+            labelText="Rating"
+            value={ratingValue}
+            onChange={handleRatingChange}
+            underlineColor="underlineTeal"
+          />
+          <Slide
             labelText="Distance Range"
-            placeholder="Distance Range"
             value={distanceRangeValue}
-            onChange={handleCategoryChange}
-            options={photographyCategories()}
-            underlineColor="underlineTeal"
+            setValue={setDistanceRangeValue}
           />
-          <Select
-            id="categoryFilter"
-            labelText="Categories"
-            placeholder="Categories"
-            value={categoriesValue}
-            onChange={handleCategoryChange}
-            options={photographyCategories()}
-            underlineColor="underlineTeal"
+          <SlideRange
+            labelText="Price range ($)"
+            value={priceRangeValue}
+            setValue={setPriceRangeValue}
           />
         </GridItem>
         <GridItem

@@ -46,7 +46,10 @@ const formInputStyle = (theme) => ({
     color: `${whiteColor}!important`,
     fontWeight: '400',
     fontSize: '1rem',
-    lineHeight: '1'
+    lineHeight: '1',
+    '& svg, & .fab, & .material-icons': {
+      color: whiteColor
+    }
   },
   input: {
     color: whiteColor,
@@ -59,12 +62,21 @@ const formInputStyle = (theme) => ({
       fontWeight: '400'
     },
     '&::placeholder': {
-      color: whiteColor
+      color: whiteColor + '!important'
     }
   },
   formControl: {
     position: 'relative',
     width: '100%'
+  },
+  sliderInput: {
+    ...defaultFont,
+    color: whiteColor,
+    textAlign: 'center'
+  },
+  sliderLabel: {
+    ...defaultFont,
+    color: whiteColor
   },
   radioFormControl: {
     color: whiteColor
@@ -116,6 +128,17 @@ const formInputStyle = (theme) => ({
       marginRight: '0.5rem'
     }
   },
+  ratingStars: {
+    '& > *': {
+      '&:hover': {
+        ...boxShadow,
+        background: 'linear-gradient(to right, #00c6ff, #0072ff)'
+      },
+      '& svg, & .fab, & .material-icons': {
+        fontSize: '1.25rem'
+      }
+    }
+  },
   selectedItem: {
     ...boxShadow,
     background: 'linear-gradient(to right, #00c6ff, #0072ff)'
@@ -145,6 +168,9 @@ const formInputStyle = (theme) => ({
   },
   blue: {
     color: `${blueColor}!important`
+  },
+  white: {
+    color: whiteColor
   }
 });
 
