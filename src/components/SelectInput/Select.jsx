@@ -22,7 +22,8 @@ const Select = (props) => {
     value,
     onChange,
     id,
-    listName
+    listName,
+    multiple
   } = props;
 
   const underlineClasses = classNames({
@@ -59,7 +60,7 @@ const Select = (props) => {
   return (
     <FormControl className={classes.formControl}>
       <Autocomplete
-        multiple
+        multiple={multiple}
         id={id}
         options={options}
         value={value}

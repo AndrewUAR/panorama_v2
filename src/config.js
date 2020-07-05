@@ -4,6 +4,7 @@ export const configHeader = () => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       'Access-Control-Allow-Origin': '*'
     },
     withCredentials: true,

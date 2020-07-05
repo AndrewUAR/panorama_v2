@@ -10,7 +10,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import styles from '../../assets/jss/views/registerPageStyle.js';
-import CustomCard from '../../components/Card/Card';
+import Card from '../../components/Card/Card';
 import CardContent from '../../components/Card/CardContent';
 import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/CustomButton';
@@ -98,9 +98,9 @@ const RegisterPage = (props) => {
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={8} md={10} className={classes.borderWrap}>
-            <CustomCard color="black">
+            <Card color="black">
               <div className={classes.cardHeaderContainer}>
-                <CardHeader login color="blue">
+                <CardHeader login color="blue" overflow="overflowTop">
                   <h3 className={classes.cardTitle}>Register</h3>
                 </CardHeader>
               </div>
@@ -230,7 +230,7 @@ const RegisterPage = (props) => {
                   </GridItem>
                 </GridContainer>
               </CardContent>
-            </CustomCard>
+            </Card>
           </GridItem>
         </GridContainer>
       </div>

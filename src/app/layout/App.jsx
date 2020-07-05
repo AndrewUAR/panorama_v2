@@ -21,6 +21,9 @@ import MyAlbums from '../../views/AccountPage/PhotographerAccountPage/Albums/MyA
 import MyAlbum from '../../views/AccountPage/PhotographerAccountPage/Albums/MyAlbum';
 
 const HomePage = lazy(() => import('../../views/HomePage/HomePage'));
+const PhotographersPage = lazy(() =>
+  import('../../views/PhotographersPage/PhotographersPage')
+);
 const LoginPage = lazy(() => import('../../views/LoginPage/LoginPage'));
 const RegisterPage = lazy(() =>
   import('../../views/RegisterPage/RegisterPage')
@@ -79,6 +82,7 @@ const App = () => {
           <Suspense fallback={<LoadingComponent />}>
             <Switch>
               <Route exact path="/" component={HomePage} />
+              <Route path="/photographers" component={PhotographersPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
               <Route path="/confirm/:id" component={ConfirmEmail} />
