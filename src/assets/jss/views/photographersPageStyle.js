@@ -76,7 +76,7 @@ const photographerPageStyles = (theme) => ({
   accordion: {
     background: 'transparent',
     boxShadow: 'none',
-    padding: '0',
+    padding: '0'
   },
   accordionDetails: {
     display: 'flex',

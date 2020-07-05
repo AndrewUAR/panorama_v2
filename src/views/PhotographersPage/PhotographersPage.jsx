@@ -40,11 +40,11 @@ const PhotographersPage = (props) => {
 
   const classes = useStyles();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.up("sm"));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
   useEffect(() => {
     setExpanded(isSmallScreen);
-  }, [isSmallScreen])
+  }, [isSmallScreen]);
 
   const handleChange = (event, isExpanded) => {
     setExpanded(isExpanded);
@@ -113,14 +113,20 @@ const PhotographersPage = (props) => {
       </GridContainer>
       <GridContainer justify="center" className={classes.mainArea}>
         <GridItem xs={12} sm={12} md={2} className={classes.sideBar}>
-          <Accordion expanded={expanded} className={classes.accordion} onChange={handleChange}>
+          <Accordion
+            expanded={expanded}
+            className={classes.accordion}
+            onChange={handleChange}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
               className={classes.accordionTitle}
             >
-              <Typography className={classes.sideBarTitle}>Filter by:</Typography>
+              <Typography className={classes.sideBarTitle}>
+                Filter by:
+              </Typography>
             </AccordionSummary>
             <AccordionDetails className={classes.accordionDetails}>
               <Hidden mdUp>
@@ -162,13 +168,12 @@ const PhotographersPage = (props) => {
                 value={priceRangeValue}
                 setValue={setPriceRangeValue}
               />
-              <Button
-                color="blue"
-                size="sm"
-              >Apply</Button>
-              </AccordionDetails>
-            </Accordion>
-          </GridItem>
+              <Button color="blue" size="sm">
+                Apply
+              </Button>
+            </AccordionDetails>
+          </Accordion>
+        </GridItem>
         <GridItem
           xs={12}
           sm={12}
@@ -177,7 +182,13 @@ const PhotographersPage = (props) => {
         >
           <GridContainer justify="space-evenly">
             {photographers.map((photographer, index) => (
-              <GridItem key={index} xs={12} sm={12} md={4} className={classes.photographerCard}>
+              <GridItem
+                key={index}
+                xs={12}
+                sm={12}
+                md={4}
+                className={classes.photographerCard}
+              >
                 <PhotographerCard photographerObj={photographer} />
               </GridItem>
             ))}
