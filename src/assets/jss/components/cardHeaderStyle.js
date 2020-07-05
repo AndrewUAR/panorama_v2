@@ -21,6 +21,7 @@ const cardHeaderStyle = (theme) => ({
     marginBottom: '-2.5rem',
     display: 'flex',
     justifyContent: 'space-between',
+    borderRadius: '0.5rem 0.5rem 0 0',
     background: `rgba(${hexToRgb(blackColor)}, 0.5)`,
     zIndex: '10',
     '& > *': {

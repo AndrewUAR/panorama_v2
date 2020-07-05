@@ -16,6 +16,7 @@ const MediaCard = (props) => {
       height={height}
       image={image}
       title={title}
+      style={{ borderRadius: '0.5rem 0.5rem 0 0' }}
     />
   );
 };

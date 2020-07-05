@@ -12,6 +12,7 @@ import CardHeader from '../../components/Card/CardHeader';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Typography } from '@material-ui/core';
+import CardFooter from '../../components/Card/CardFooter';
 
 const useStyles = makeStyles(styles);
 
@@ -70,12 +71,12 @@ const PhotographerCard = (props) => {
                   Languages: {photographer.languages.join(', ')}
                 </Typography>
               </div>
-              <div className={classes.infoRow}>
-                <Typography noWrap>Price per hour: 45$</Typography>
-              </div>
             </GridItem>
           </GridContainer>
         </CardContent>
+        <CardFooter className={classes.cardFooter}>
+          <Typography noWrap>Price per hour: 45$</Typography>
+        </CardFooter>
       </Card>
     </div>
   );
