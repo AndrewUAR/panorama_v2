@@ -1,17 +1,30 @@
-import { boxShadow } from '../panoramaStyles.js';
+import { boxShadow, hexToRgb, blackColor } from '../panoramaStyles.js';
 
 const cardHeaderStyle = (theme) => ({
   cardHeader: {
-    ...boxShadow,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '-1.50rem',
-    width: '90%',
-    marginBottom: '1rem',
     [theme.breakpoints.down('sm')]: {
       marginTop: '-1rem',
       width: '100%'
+    }
+  },
+  overflowTop: {
+    ...boxShadow,
+    marginTop: '-1.50rem',
+    marginBottom: '1rem',
+    width: '90%'
+  },
+  overflowBottom: {
+    width: '100%',
+    marginBottom: '-2.5rem',
+    display: 'flex',
+    justifyContent: 'space-between',
+    background: `rgba(${hexToRgb(blackColor)}, 0.5)`,
+    zIndex: '10',
+    '& > *': {
+      padding: '0.5rem 1rem'
     }
   },
   cardHeaderLogin: {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import GridContainer from '../../components/Grid/GridContainer';
@@ -14,9 +15,11 @@ import {
 import RatingSelect from '../../components/SelectInput/RatingSelect';
 import Slide from '../../components/SlideInput/Slide';
 import SlideRange from '../../components/SlideInput/SlideRange';
+import PhotographerCard from './PhotographerCard';
 const useStyles = makeStyles(styles);
 
 const PhotographersPage = (props) => {
+  const { photographers } = props;
   const [location, setLocation] = useState('');
   const [sortValue, setSortValue] = useState('');
   const [resultsValue, setResultsValue] = useState('');
@@ -120,13 +123,27 @@ const PhotographersPage = (props) => {
           xs={12}
           sm={12}
           md={9}
-          className={classes.photographersArea}
-        ></GridItem>
+          // className={classes.photographersArea}
+        >
+          <GridContainer justify='flex-start'>
+            {photographers.map((photographer, index) => (
+              <GridItem key={index} md={3} className={classes.photographerCard}>
+                <PhotographerCard photographerObj={photographer} />
+              </GridItem>
+            ))}
+          </GridContainer>
+        </GridItem>
       </GridContainer>
     </div>
   );
 };
 
-PhotographersPage.propTypes = {};
+const mapStateToProps = (state) => ({
+  photographers: state.photographers.photographers
+})
 
-export default PhotographersPage;
+PhotographersPage.propTypes = {
+
+};
+
+export default connect(mapStateToProps)(PhotographersPage);

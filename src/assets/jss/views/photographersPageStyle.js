@@ -1,4 +1,5 @@
-import { boxShadow, whiteColor, defaultFont } from '../panoramaStyles';
+import { boxShadow, whiteColor, defaultFont, blueColor, hexToRgb, blackColor } from '../panoramaStyles';
+import image from '../../img/backGround/imgs/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg';
 
 const photographerPageStyles = (theme) => ({
   container: {
@@ -7,7 +8,13 @@ const photographerPageStyles = (theme) => ({
     paddingTop: '8rem',
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundImage: `linear-gradient(to bottom, rgba(${hexToRgb(
+      blueColor
+    )}, 0.1),
+      rgba(${hexToRgb(blueColor)}, 0.5)), url(${image})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center center'
   },
   searchAndSortBar: {
     display: 'flex',
@@ -60,8 +67,8 @@ const photographerPageStyles = (theme) => ({
   },
   photographersArea: {
     ...boxShadow,
-    borderRadius: '0.5rem',
-    background: 'linear-gradient(to top, #000046, #1cb5e0)'
+    padding: '2rem',
+    borderRadius: '0.5rem'
   },
   formInput: {
     width: '20%',
@@ -93,6 +100,40 @@ const photographerPageStyles = (theme) => ({
     margin: '0',
     padding: '0',
     fontSize: '1.5rem'
+  },
+  photographerCard: {
+    margin: '2rem',
+    borderRadius: '0.5rem'
+  },
+  fullName: {
+    ...defaultFont,
+    fontSize: '1.25rem',
+    width: '100%',
+    color: whiteColor,
+    textAlign: 'center',
+    marginTop: '-2.5rem',
+    padding: '0.3rem 0',
+    background: `rgba(${hexToRgb(blackColor)}, 0.5)`
+  },
+  cardRating: {
+    ...defaultFont,
+    color: blueColor,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    fontSize: '1rem',
+    padding: '0 1rem'
+  },
+  cardInfoArea: {
+    padding: '1.25rem 0.75rem'
+  },
+  infoRow: {
+    ...defaultFont,
+    color: blueColor,
+    padding: '0.25rem 1rem'
+  },
+  favoriteIcon: {
+    color: whiteColor
   }
 });
 
