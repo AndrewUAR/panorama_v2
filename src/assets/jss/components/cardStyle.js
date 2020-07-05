@@ -1,9 +1,4 @@
-import {
-  hexToRgb,
-  primaryColor,
-  blueColor,
-  blackColor
-} from '../panoramaStyles';
+import { hexToRgb, primaryColor, blackColor } from '../panoramaStyles';
 
 const cardStyle = (theme) => ({
   card: {

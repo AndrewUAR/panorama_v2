@@ -31,8 +31,8 @@ const HeaderSection = (props) => {
             color="blue"
             size="lg"
             onClick={() => {
-              getPhotographers()
-              history.push("/photographers")
+              getPhotographers();
+              history.push('/photographers');
             }}
           >
             <ExploreIcon className={classes.buttonIcon} />
@@ -60,6 +60,6 @@ const HeaderSection = (props) => {
 
 const actions = {
   getPhotographers
-}
+};
 
 export default connect(null, actions)(HeaderSection);

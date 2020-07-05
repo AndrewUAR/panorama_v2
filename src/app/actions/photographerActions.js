@@ -56,7 +56,6 @@ export const getMyPhotographerProfile = () => async (dispatch) => {
   }
 };
 
-
 export const getPhotographers = () => async (dispatch) => {
   try {
     dispatch(asyncActionStart());
@@ -66,7 +65,7 @@ export const getPhotographers = () => async (dispatch) => {
     dispatch({
       type: GET_ALL_PHOTOGRAPHERS,
       payload: photographers
-    })
+    });
   } catch (err) {
     if (err.response.data.message) {
       dispatch(asyncActionError());
@@ -76,4 +75,4 @@ export const getPhotographers = () => async (dispatch) => {
       });
     }
   }
-}
+};

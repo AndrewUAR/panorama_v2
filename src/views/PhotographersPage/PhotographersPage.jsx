@@ -125,7 +125,7 @@ const PhotographersPage = (props) => {
           md={9}
           // className={classes.photographersArea}
         >
-          <GridContainer justify='flex-start'>
+          <GridContainer justify="flex-start">
             {photographers.map((photographer, index) => (
               <GridItem key={index} md={3} className={classes.photographerCard}>
                 <PhotographerCard photographerObj={photographer} />
@@ -140,10 +140,10 @@ const PhotographersPage = (props) => {
 
 const mapStateToProps = (state) => ({
   photographers: state.photographers.photographers
-})
+});
 
 PhotographersPage.propTypes = {
-
+  photographers: PropTypes.array
 };
 
 export default connect(mapStateToProps)(PhotographersPage);

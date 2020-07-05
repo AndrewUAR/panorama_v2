@@ -1,4 +1,11 @@
-import { boxShadow, whiteColor, defaultFont, blueColor, hexToRgb, blackColor } from '../panoramaStyles';
+import {
+  boxShadow,
+  whiteColor,
+  defaultFont,
+  blueColor,
+  hexToRgb,
+  blackColor
+} from '../panoramaStyles';
 import image from '../../img/backGround/imgs/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg';
 
 const photographerPageStyles = (theme) => ({

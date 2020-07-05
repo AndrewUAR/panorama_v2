@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '../../components/Card/Card';
 import MediaCard from '../../components/Card/CardMedia';
-import image from '../../assets/img/image_21.jpg'
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import CardContent from '../../components/Card/CardContent';
@@ -15,15 +14,19 @@ import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 
-const PhotographerCard = props => {
-  const {photographerObj} = props;
-  const {firstName, lastName, profilePhoto, photographer} = photographerObj;
+const PhotographerCard = (props) => {
+  const { photographerObj } = props;
+  const { firstName, lastName, profilePhoto, photographer } = photographerObj;
   const classes = useStyles();
   return (
     <div className={classes.card}>
       <Card color="blue">
         <CardHeader overflow="overflowBottom">
-          <Rating name="read-only" value={photographer.ratingsAverage} readOnly />
+          <Rating
+            name="read-only"
+            value={photographer.ratingsAverage}
+            readOnly
+          />
           <FavoriteBorderIcon className={classes.favoriteIcon} />
         </CardHeader>
         <MediaCard
@@ -36,7 +39,9 @@ const PhotographerCard = props => {
         <CardContent>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12} className={classes.fullName}>
-              <span>{firstName}&nbsp;{lastName}</span>
+              <span>
+                {firstName}&nbsp;{lastName}
+              </span>
             </GridItem>
             <GridItem xs={12} sm={12} md={12} className={classes.cardInfoArea}>
               <div className={classes.cardRating}>
@@ -44,10 +49,14 @@ const PhotographerCard = props => {
                 <span>Rated times: {photographer.ratingsQuantity}</span>
               </div>
               <div className={classes.infoRow}>
-                <Typography noWrap>Location: {photographer.location.placeName}</Typography>
+                <Typography noWrap>
+                  Location: {photographer.location.placeName}
+                </Typography>
               </div>
               <div className={classes.infoRow}>
-                <Typography  noWrap>Languages: {photographer.languages.join(', ')}</Typography>
+                <Typography noWrap>
+                  Languages: {photographer.languages.join(', ')}
+                </Typography>
               </div>
               <div className={classes.infoRow}>
                 <Typography noWrap>Price per hour: 45$</Typography>
@@ -57,11 +66,11 @@ const PhotographerCard = props => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 PhotographerCard.propTypes = {
-
-}
+  photographerObj: PropTypes.object
+};
 
 export default PhotographerCard;
