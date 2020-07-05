@@ -165,6 +165,15 @@ const photographerPageStyles = (theme) => ({
     color: blueColor,
     padding: '0.25rem 1rem'
   },
+  cardFooter: {
+    ...defaultFont,
+    fontSize: '1.25rem',
+    color: blueColor,
+    width: '100%',
+    textAlign: 'center',
+    marginBottom: '1rem',
+    background: `rgba(${hexToRgb(whiteColor)}, 0.1)`
+  },
   favoriteIcon: {
     color: whiteColor
   },
