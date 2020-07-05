@@ -112,7 +112,7 @@ const formInputStyle = (theme) => ({
   list: {
     ...boxShadow,
     color: whiteColor,
-    maxHeight: '11rem',
+    maxHeight: 'auto',
     background: 'linear-gradient(to right, #2c3e50, #3498db)'
   },
   listItem: {

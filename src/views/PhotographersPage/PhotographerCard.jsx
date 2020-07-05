@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '../../components/Card/Card';
@@ -10,12 +10,14 @@ import Rating from '@material-ui/lab/Rating';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import CardHeader from '../../components/Card/CardHeader';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(styles);
 
 const PhotographerCard = (props) => {
   const { photographerObj } = props;
+  const [favorite, setFavorite] = useState(false);
   const { firstName, lastName, profilePhoto, photographer } = photographerObj;
   const classes = useStyles();
   return (
@@ -27,7 +29,17 @@ const PhotographerCard = (props) => {
             value={photographer.ratingsAverage}
             readOnly
           />
-          <FavoriteBorderIcon className={classes.favoriteIcon} />
+          {favorite ? (
+            <FavoriteIcon
+              className={classes.favoriteFilledIcon}
+              onClick={() => setFavorite(false)}
+            />
+          ) : (
+            <FavoriteBorderIcon
+              className={classes.favoriteIcon}
+              onClick={() => setFavorite(true)}
+            />
+          )}
         </CardHeader>
         <MediaCard
           component="img"

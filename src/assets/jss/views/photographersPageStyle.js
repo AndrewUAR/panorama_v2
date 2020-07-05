@@ -4,7 +4,8 @@ import {
   defaultFont,
   blueColor,
   hexToRgb,
-  blackColor
+  blackColor,
+  dangerColor
 } from '../panoramaStyles';
 import image from '../../img/backGround/imgs/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg';
 
@@ -21,7 +22,10 @@ const photographerPageStyles = (theme) => ({
     )}, 0.1),
       rgba(${hexToRgb(blueColor)}, 0.5)), url(${image})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center center'
+    backgroundPosition: 'center center',
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto'
+    }
   },
   searchAndSortBar: {
     display: 'flex',
@@ -39,7 +43,7 @@ const photographerPageStyles = (theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
+      // flexDirection: 'column',
       width: '90%'
     }
   },
@@ -53,23 +57,38 @@ const photographerPageStyles = (theme) => ({
       flexDirection: 'column',
       width: '90%',
       height: 'auto',
-      padding: '1rem'
+      padding: '0 1rem 1rem 1rem'
     }
   },
   sideBar: {
     ...boxShadow,
-    height: '100%',
-    padding: '2rem',
+    height: 'max-content',
+    padding: '0 0.5rem',
     maxWidth: '21%',
     flexBasis: '21%',
     borderRadius: '0.5rem',
     background: 'linear-gradient(to top, #000046, #1cb5e0)',
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: '100%',
+      flexBasis: '100%'
+    }
+  },
+  accordion: {
+    background: 'transparent',
+    boxShadow: 'none',
+    padding: '0'
+  },
+  accordionDetails: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: '2rem',
     '& > *': {
       paddingTop: '1rem'
     },
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: '100%',
-      padding: '1rem'
+    '& > :last-child': {
+      // width: 'max-content',
+      marginTop: '2rem',
+      padding: '0.5rem 0'
     }
   },
   photographersArea: {
@@ -106,11 +125,18 @@ const photographerPageStyles = (theme) => ({
     color: whiteColor,
     margin: '0',
     padding: '0',
-    fontSize: '1.5rem'
+    fontSize: '1.5rem',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem'
+    }
   },
   photographerCard: {
-    margin: '2rem',
-    borderRadius: '0.5rem'
+    margin: '2rem 0',
+    borderRadius: '0.5rem',
+    padding: '0 1rem',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0'
+    }
   },
   fullName: {
     ...defaultFont,
@@ -141,6 +167,9 @@ const photographerPageStyles = (theme) => ({
   },
   favoriteIcon: {
     color: whiteColor
+  },
+  favoriteFilledIcon: {
+    color: dangerColor
   }
 });
 
