@@ -7,12 +7,12 @@ import styles from '../../assets/jss/components/cardHeaderStyle';
 const useStyles = makeStyles(styles);
 
 const CardHeader = (props) => {
-  const { login, signup, color, children, ...rest } = props;
+  const { login, signup, color, children, overflow, ...rest } = props;
   const classes = useStyles();
   const cardHeaderClasses = classNames({
     [classes.cardHeader]: true,
+    [classes[overflow]]: overflow,
     [classes.cardHeaderLogin]: login,
-    [classes.cardHeaderSignup]: signup,
     [classes[color]]: color
   });
   return (

@@ -6,10 +6,11 @@ import {
 } from './asyncActions';
 import {
   createPhotographerProfile,
-  getPhotographerProfile
+  getPhotographerProfile,
+  getAllPhotographers
 } from '../services/photographer.service';
 import { AUTHENTICATE_USER } from '../constants/auth';
-
+import { GET_ALL_PHOTOGRAPHERS } from '../constants/photographer';
 export const createPhotographerProf = (photographerData, history) => async (
   dispatch
 ) => {
@@ -43,6 +44,27 @@ export const getMyPhotographerProfile = () => async (dispatch) => {
     dispatch({
       type: AUTHENTICATE_USER,
       payload: { user }
+    });
+  } catch (err) {
+    if (err.response.data.message) {
+      dispatch(asyncActionError());
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data.message
+      });
+    }
+  }
+};
+
+export const getPhotographers = () => async (dispatch) => {
+  try {
+    dispatch(asyncActionStart());
+    const res = await getAllPhotographers();
+    dispatch(asyncActionFinish());
+    const photographers = res.data.data;
+    dispatch({
+      type: GET_ALL_PHOTOGRAPHERS,
+      payload: photographers
     });
   } catch (err) {
     if (err.response.data.message) {

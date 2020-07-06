@@ -79,7 +79,7 @@ const LoginPage = (props) => {
           <GridItem xs={12} sm={6} md={5} className={classes.borderWrap}>
             <CustomCard color="black">
               <div className={classes.cardHeaderContainer}>
-                <CardHeader login color="blue">
+                <CardHeader login color="blue" overflow="overflowTop">
                   <h3 className={classes.cardTitle}>Login</h3>
                   <List className={classes.cardTitleIcons}>
                     <ListItemIcon>
