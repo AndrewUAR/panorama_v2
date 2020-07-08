@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
@@ -8,19 +8,31 @@ import styles from '../../../assets/jss/views/HomePageStyle/homePageStyle';
 import Button from '../../../components/Button/CustomButton';
 import PlaceInput from '../../../components/PlaceInput/PlaceInput';
 import { getPhotographers } from '../../../app/actions/photographerActions.js';
+import { getMyLocation } from '../../../app/helper/helperFunctions';
+import { setCoordinates } from '../../../app/actions/photographersQueryActions.js';
 
 const useStyles = makeStyles(styles);
 
 const HeaderSection = (props) => {
-  const { getPhotographers } = props;
-  const [location, setLocation] = useState('');
+  const { getPhotographers, setCoordinates, coordinates } = props;
+  // const [coordinates, setSearchCoordinates] = useState();
   const classes = useStyles();
   const history = useHistory();
 
-  const onChange = (e) => {
-    const { value } = e.target;
-    setLocation(value);
+  useEffect(() => {
+    if (coordinates.length > 0) {
+      const query = { coordinates };
+      console.log('query', query);
+      getPhotographers(query);
+      history.push('/photographers');
+    }
+  }, [coordinates]);
+
+  const onChange = (e, value) => {
+    // setSearchCoordinates(value.coordinates);
+    setCoordinates(value.coordinates);
   };
+
   return (
     <div className={classes.pageHeader}>
       <div className={classes.container}>
@@ -31,8 +43,7 @@ const HeaderSection = (props) => {
             color="blue"
             size="lg"
             onClick={() => {
-              getPhotographers();
-              history.push('/photographers');
+              getMyLocation(setCoordinates);
             }}
           >
             <ExploreIcon className={classes.buttonIcon} />
@@ -48,8 +59,8 @@ const HeaderSection = (props) => {
             id="location"
             labelText="Enter Desire Location"
             placeholder="Enter Desire Location"
-            value={location}
-            onChange={onChange}
+            // value={location}
+            onChangeLocation={onChange}
             underlineColor="underlineTeal"
           />
         </form>
@@ -58,8 +69,13 @@ const HeaderSection = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  coordinates: state.photographersQuery.coordinates
+});
+
 const actions = {
-  getPhotographers
+  getPhotographers,
+  setCoordinates
 };
 
-export default connect(null, actions)(HeaderSection);
+export default connect(mapStateToProps, actions)(HeaderSection);

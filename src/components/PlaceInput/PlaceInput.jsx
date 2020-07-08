@@ -26,7 +26,6 @@ const PlaceInput = (props) => {
     lng: ''
   });
   const classes = useStyles();
-
   const {
     id,
     loading,
@@ -55,10 +54,12 @@ const PlaceInput = (props) => {
   }, [place]);
 
   useEffect(() => {
-    if (coordinates.lat) {
+    if (coordinates.length > 0) {
+      setOpen(true);
       (async () => {
-        const myPlace = await getMyPlace(coordinates);
-        setPlace(myPlace.data.data);
+        const res = await getMyPlace(coordinates);
+        const myPlace = { placeName: res.data.data, coordinates };
+        setOptions([myPlace]);
       })();
     }
   }, [coordinates]);

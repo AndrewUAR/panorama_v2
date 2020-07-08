@@ -8,7 +8,7 @@ import PinDropIcon from '@material-ui/icons/PinDrop';
 import FormInput from '../../../components/FormInput/FormInput';
 import GridContainer from '../../../components/Grid/GridContainer';
 import GridItem from '../../../components/Grid/GridItem';
-import Select from '../../../components/SelectInput/Select';
+import Select from '../../../components/SelectInput/AutocompleteSelect';
 import {
   languagesList,
   photographyCategories

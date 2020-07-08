@@ -11,7 +11,8 @@ import image from '../../img/backGround/imgs/rene-bohmer-YeUVDKZWSZ4-unsplash.jp
 
 const photographerPageStyles = (theme) => ({
   container: {
-    height: '100vh',
+    minHeight: '100vh',
+    height: 'auto',
     width: '100vw',
     paddingTop: '8rem',
     display: 'flex',
@@ -34,7 +35,8 @@ const photographerPageStyles = (theme) => ({
       marginRight: '10rem'
     },
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column'
+      flexDirection: 'column',
+      width: '90%'
     }
   },
   mainArea: {
@@ -49,15 +51,17 @@ const photographerPageStyles = (theme) => ({
   },
   topBar: {
     ...boxShadow,
+    alignItems: 'center',
     width: '80%',
-    height: '4rem',
+    height: '4.5rem',
     background: 'linear-gradient(to left, #000046, #1cb5e0)',
     borderRadius: '0.5rem',
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
-      width: '90%',
-      height: 'auto',
-      padding: '0 1rem 1rem 1rem'
+      height: 'auto'
+    },
+    [theme.breakpoints.only('xs')]: {
+      width: '90%'
     }
   },
   sideBar: {
@@ -68,7 +72,12 @@ const photographerPageStyles = (theme) => ({
     flexBasis: '21%',
     borderRadius: '0.5rem',
     background: 'linear-gradient(to top, #000046, #1cb5e0)',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.only('sm')]: {
+      maxWidth: '70%',
+      flexBasis: '70%',
+      margin: '0 auto'
+    },
+    [theme.breakpoints.only('xs')]: {
       maxWidth: '100%',
       flexBasis: '100%'
     }
@@ -86,7 +95,6 @@ const photographerPageStyles = (theme) => ({
       paddingTop: '1rem'
     },
     '& > :last-child': {
-      // width: 'max-content',
       marginTop: '2rem',
       padding: '0.5rem 0'
     }
@@ -94,23 +102,33 @@ const photographerPageStyles = (theme) => ({
   photographersArea: {
     ...boxShadow,
     padding: '2rem',
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+    marginBottom: '3rem',
+    background: `linear-gradient(to top, rgba(${hexToRgb(
+      '#000046'
+    )}, 0.3), rgba(${hexToRgb('#1cb5e0')}, 0.7))`
   },
-  formInput: {
+  locationInput: {
     width: '20%',
-    display: 'inline-block',
+    display: 'flex',
+    paddingBottom: '1rem',
     [theme.breakpoints.down('sm')]: {
       width: '100%'
     }
   },
   sortSelectGroup: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     width: '25%',
     marginRight: '3rem',
+    paddingTop: '0.4rem',
     '& > :first-child': {
       marginRight: '1rem',
-      width: '150%'
+      width: '45%'
+    },
+    '& > :last-child': {
+      marginRight: '1rem',
+      width: '25%'
     },
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
@@ -134,7 +152,10 @@ const photographerPageStyles = (theme) => ({
     margin: '2rem 0',
     borderRadius: '0.5rem',
     padding: '0 1rem',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.only('sm')]: {
+      padding: '0 0.5rem'
+    },
+    [theme.breakpoints.only('xs')]: {
       padding: '0'
     }
   },
@@ -179,6 +200,16 @@ const photographerPageStyles = (theme) => ({
   },
   favoriteFilledIcon: {
     color: dangerColor
+  },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '2rem 0',
+    bottom: '0',
+    '& > * *': {
+      color: whiteColor,
+      borderColor: whiteColor
+    }
   }
 });
 

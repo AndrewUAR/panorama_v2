@@ -56,10 +56,10 @@ export const getMyPhotographerProfile = () => async (dispatch) => {
   }
 };
 
-export const getPhotographers = () => async (dispatch) => {
+export const getPhotographers = (query) => async (dispatch) => {
   try {
     dispatch(asyncActionStart());
-    const res = await getAllPhotographers();
+    const res = await getAllPhotographers(query);
     dispatch(asyncActionFinish());
     const photographers = res.data.data;
     dispatch({

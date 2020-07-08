@@ -49,6 +49,8 @@ const CreatePhotographerProfilePage = (props) => {
     payPal: email
   });
 
+  console.log(photographer);
+
   const [error, setError] = useState({
     introductionError: '',
     languagesError: '',

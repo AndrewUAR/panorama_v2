@@ -16,6 +16,7 @@ export const getPlaces = async (place) => {
 };
 
 export const getMyPlace = async (coordinates) => {
+  store.dispatch(asyncActionStart());
   const response = await axios.post(
     `${API_ENDPOINT}/api/v1/data/getMyPlace`,
     coordinates

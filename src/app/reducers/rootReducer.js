@@ -9,13 +9,14 @@ import asyncReducer from './asyncReducer';
 import notificationReducer from './notificationReducer';
 import albumReducer from './albumReducer';
 import photographerReducer from './photographerReducer';
+import photographersQueryReducer from './photographersQueryReducer';
 
 import { LOGOUT } from '../constants/auth';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['error', 'modal', 'async', 'notifications']
+  blacklist: ['error', 'modal', 'async', 'notifications', 'photographers']
 };
 
 const appReducers = combineReducers({
@@ -25,7 +26,8 @@ const appReducers = combineReducers({
   async: asyncReducer,
   photographers: photographerReducer,
   notifications: notificationReducer,
-  selectedAlbum: albumReducer
+  selectedAlbum: albumReducer,
+  photographersQuery: photographersQueryReducer
 });
 
 const rootReducer = (state, action) => {

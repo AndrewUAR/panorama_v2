@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Pagination from '@material-ui/lab/Pagination';
+import PaginationItem from '@material-ui/lab/PaginationItem';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import PlaceInput from '../../components/PlaceInput/PlaceInput';
-import Select from '../../components/SelectInput/Select';
+import AutocompleteSelect from '../../components/SelectInput/AutocompleteSelect';
 import {
-  sortByOptions,
-  resultsPerPage,
-  photographyCategories
+  photographyCategories,
+  languagesList
 } from '../../../src/app/helper/selectInputData';
-import RatingSelect from '../../components/SelectInput/RatingSelect';
+import Select from '../../components/SelectInput/Select';
 import Slide from '../../components/SlideInput/Slide';
 import SlideRange from '../../components/SlideInput/SlideRange';
 import PhotographerCard from './PhotographerCard';
@@ -24,63 +26,185 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '../../components/Button/CustomButton';
-import { Hidden } from '@material-ui/core';
+import { Hidden, MenuItem } from '@material-ui/core';
+import { getMyLocation } from '../../app/helper/helperFunctions';
+import { getPhotographers } from '../../app/actions/photographerActions';
+import Rating from '@material-ui/lab/Rating';
+import {
+  setCoordinates,
+  setSort,
+  setPage,
+  setResultsPerPage,
+  setDistanceRange,
+  setPriceRange,
+  setRating,
+  setCategories,
+  setLanguages
+} from '../../app/actions/photographersQueryActions';
+
 const useStyles = makeStyles(styles);
 
 const PhotographersPage = (props) => {
-  const { photographers } = props;
-  const [location, setLocation] = useState('');
-  const [sortValue, setSortValue] = useState('');
-  const [resultsValue, setResultsValue] = useState('');
-  const [categoriesValue, setCategoriesValue] = useState([]);
-  const [ratingValue, setRatingValue] = useState('');
-  const [distanceRangeValue, setDistanceRangeValue] = useState(50);
-  const [priceRangeValue, setPriceRangeValue] = useState([0, 999]);
+  const {
+    photographers,
+    loading,
+    getPhotographers,
+    setCoordinates,
+    setSort,
+    setPage,
+    setResultsPerPage,
+    setDistanceRange,
+    setPriceRange,
+    setRating,
+    setCategories,
+    setLanguages,
+    query
+  } = props;
+
+  const {
+    coordinates,
+    sort,
+    page,
+    resultsPerPage,
+    distanceRange,
+    priceRange,
+    rating,
+    categories,
+    languages
+  } = query;
+
   const [expanded, setExpanded] = useState(false);
 
   const classes = useStyles();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.up('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.up('md'));
 
   useEffect(() => {
     setExpanded(isSmallScreen);
   }, [isSmallScreen]);
 
+  useEffect(() => {
+    if (photographers.length < 1) {
+      getMyLocation(setCoordinates);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (coordinates.length > 0) {
+      const query = {
+        coordinates,
+        sort,
+        limit: resultsPerPage
+      };
+      getPhotographers(query);
+    }
+  }, [coordinates, sort, resultsPerPage]);
+
+  useEffect(
+    () => () => {
+      setPage(1);
+      setCoordinates([]);
+      setSort('');
+      setResultsPerPage('');
+      setDistanceRange(100);
+      setPriceRange([0, 999]);
+      setRating('');
+      setCategories([]);
+      setLanguages([]);
+    },
+    // eslint-disable-next-line
+    []
+  );
+
   const handleChange = (event, isExpanded) => {
     setExpanded(isExpanded);
   };
 
-  const handleLocationChange = (e) => {
-    const { value } = e.target;
-    setLocation(value);
-  };
-  const handleSortChange = (e, values) => {
-    setSortValue(values);
+  const handlePageChange = (event, value) => {
+    setPage(value);
   };
 
-  const handleResultsChange = (e, values) => {
-    setResultsValue(values);
+  const handleLocationChange = (e, value) => {
+    setCoordinates(value.coordinates);
+  };
+
+  const handleSortChange = (e) => {
+    const { value } = e.target;
+    setSort(value);
+  };
+
+  const handleResultsChange = (e) => {
+    const { value } = e.target;
+    setResultsPerPage(value);
   };
 
   const handleCategoryChange = (e, values) => {
-    setCategoriesValue(values);
+    setCategories(values);
+  };
+
+  const handleLanguageChange = (e, values) => {
+    setLanguages(values);
   };
 
   const handleRatingChange = (e) => {
     const { value } = e.target;
-    setRatingValue(value);
+    setRating(value);
   };
+
+  const handleReset = () => {
+    setPage(1);
+    setCoordinates([]);
+    setSort('');
+    setResultsPerPage('');
+    setDistanceRange(100);
+    setPriceRange([0, 999]);
+    setRating('');
+    setCategories([]);
+    setLanguages([]);
+  };
+
+  const ratingOptions = _.range(5, 0).map((item, index) => (
+    <MenuItem key={index} value={item}>
+      <Rating name="size-small" value={item} size="small" readOnly />
+    </MenuItem>
+  ));
+
+  const sortOptions = [
+    <MenuItem key={1} value={'-price'}>
+      Price: high to low
+    </MenuItem>,
+    <MenuItem key={2} value={'price'}>
+      Price: low to high
+    </MenuItem>,
+    <MenuItem key={3} value={'-photographer.ratingsAverage'}>
+      Rating: high to low
+    </MenuItem>,
+    <MenuItem key={4} value={'photographer.ratingsAverage'}>
+      Rating: low to high
+    </MenuItem>
+  ];
+
+  const resultsOptions = [
+    <MenuItem key={1} value={'12'}>
+      12
+    </MenuItem>,
+    <MenuItem key={2} value={'24'}>
+      24
+    </MenuItem>,
+    <MenuItem key={3} value={'48'}>
+      48
+    </MenuItem>
+  ];
 
   return (
     <div className={classes.container}>
       <GridContainer justify="center" className={classes.topBar}>
-        <GridItem xs={12} sm={12} md={12} className={classes.searchAndSortBar}>
-          <div className={classes.formInput}>
+        <GridItem xs={12} sm={10} md={12} className={classes.searchAndSortBar}>
+          <div className={classes.locationInput}>
             <PlaceInput
               id="location"
               labelText="Enter City"
               placeholder="Enter City"
-              value={location}
               onChange={handleLocationChange}
               underlineColor="underlineTeal"
             />
@@ -88,23 +212,19 @@ const PhotographersPage = (props) => {
           <div className={classes.sortSelectGroup}>
             <Hidden smDown>
               <Select
-                id="sortBy"
-                labelText="Sort By"
-                placeholder="Sort by"
-                value={sortValue}
+                id="sort"
+                labelText="Sort by:"
+                value={sort}
+                menuItems={sortOptions}
                 onChange={handleSortChange}
-                options={sortByOptions()}
-                multiple={false}
                 underlineColor="underlineTeal"
               />
               <Select
-                id="resultsPerPage"
-                labelText="Per Page"
-                placeholder="Per Page"
-                value={resultsValue}
+                id="result"
+                labelText="Per page:"
+                value={resultsPerPage}
+                menuItems={resultsOptions}
                 onChange={handleResultsChange}
-                options={resultsPerPage()}
-                multiple={false}
                 underlineColor="underlineTeal"
               />
             </Hidden>
@@ -112,7 +232,7 @@ const PhotographersPage = (props) => {
         </GridItem>
       </GridContainer>
       <GridContainer justify="center" className={classes.mainArea}>
-        <GridItem xs={12} sm={12} md={2} className={classes.sideBar}>
+        <GridItem xs={12} sm={10} md={2} className={classes.sideBar}>
           <Accordion
             expanded={expanded}
             className={classes.accordion}
@@ -130,69 +250,88 @@ const PhotographersPage = (props) => {
             </AccordionSummary>
             <AccordionDetails className={classes.accordionDetails}>
               <Hidden mdUp>
-                <Select
+                <AutocompleteSelect
                   id="sortBy"
                   labelText="Sort By"
                   placeholder="Sort by"
-                  value={sortValue}
+                  value={sort}
                   onChange={handleSortChange}
-                  options={sortByOptions()}
+                  options={sortOptions}
                   multiple={false}
                   underlineColor="underlineTeal"
                 />
               </Hidden>
-              <Select
+              <AutocompleteSelect
                 id="categories"
                 labelText="Categories"
                 placeholder="Categories"
-                value={categoriesValue}
+                value={categories}
                 onChange={handleCategoryChange}
                 options={photographyCategories()}
                 multiple={true}
                 underlineColor="underlineTeal"
               />
-              <RatingSelect
+              <AutocompleteSelect
+                id="languages"
+                labelText="Languages"
+                placeholder="Languages"
+                value={languages}
+                onChange={handleLanguageChange}
+                options={languagesList()}
+                multiple={true}
+                underlineColor="underlineTeal"
+              />
+              <Select
                 id="rating"
                 labelText="Rating"
-                value={ratingValue}
+                value={rating}
+                menuItems={ratingOptions}
                 onChange={handleRatingChange}
                 underlineColor="underlineTeal"
               />
               <Slide
                 labelText="Distance Range"
-                value={distanceRangeValue}
-                setValue={setDistanceRangeValue}
+                value={distanceRange}
+                setValue={setDistanceRange}
               />
               <SlideRange
                 labelText="Price range ($)"
-                value={priceRangeValue}
-                setValue={setPriceRangeValue}
+                value={priceRange}
+                setValue={setPriceRange}
               />
-              <Button color="blue" size="sm">
-                Apply
+              <Button color="danger" size="sm" onClick={() => handleReset()}>
+                Reset
               </Button>
             </AccordionDetails>
           </Accordion>
         </GridItem>
-        <GridItem
-          xs={12}
-          sm={12}
-          md={9}
-          // className={classes.photographersArea}
-        >
+        <GridItem xs={12} sm={12} md={9} className={classes.photographersArea}>
           <GridContainer justify="space-evenly">
-            {photographers.map((photographer, index) => (
-              <GridItem
-                key={index}
-                xs={12}
-                sm={12}
-                md={4}
-                className={classes.photographerCard}
-              >
-                <PhotographerCard photographerObj={photographer} />
-              </GridItem>
-            ))}
+            {!loading &&
+              photographers.map((photographer, index) => (
+                <GridItem
+                  key={index}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  className={classes.photographerCard}
+                >
+                  <PhotographerCard photographerObj={photographer} />
+                </GridItem>
+              ))}
           </GridContainer>
+          <Hidden smDown>
+            <div className={classes.pagination}>
+              <Pagination
+                count={10}
+                page={page}
+                color="secondary"
+                onChange={handlePageChange}
+                variant="outlined"
+                shape="rounded"
+              />
+            </div>
+          </Hidden>
         </GridItem>
       </GridContainer>
     </div>
@@ -200,11 +339,26 @@ const PhotographersPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  photographers: state.photographers.photographers
+  photographers: state.photographers.photographers,
+  loading: state.async.loading,
+  query: state.photographersQuery
 });
+
+const actions = {
+  getPhotographers,
+  setCoordinates,
+  setSort,
+  setPage,
+  setResultsPerPage,
+  setDistanceRange,
+  setPriceRange,
+  setRating,
+  setCategories,
+  setLanguages
+};
 
 PhotographersPage.propTypes = {
   photographers: PropTypes.array
 };
 
-export default connect(mapStateToProps)(PhotographersPage);
+export default connect(mapStateToProps, actions)(PhotographersPage);
