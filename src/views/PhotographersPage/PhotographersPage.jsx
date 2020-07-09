@@ -3,12 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import LazyLoad from 'react-lazy-load';
-import { css } from "@emotion/core";
-import { makeStyles } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
+import { css } from '@emotion/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+
 import GridLoader from 'react-spinners/GridLoader';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pagination from '@material-ui/lab/Pagination';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Hidden, MenuItem } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
@@ -17,21 +24,14 @@ import AutocompleteSelect from '../../components/SelectInput/AutocompleteSelect'
 import {
   photographyCategories,
   languagesList
-} from '../../../src/app/helper/selectInputData';
+} from '../../app/helper/selectInputData';
 import Select from '../../components/SelectInput/Select';
 import Slide from '../../components/SlideInput/Slide';
 import SlideRange from '../../components/SlideInput/SlideRange';
 import PhotographerCard from './PhotographerCard';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '../../components/Button/CustomButton';
-import { Hidden, MenuItem } from '@material-ui/core';
 import { getMyLocation } from '../../app/helper/helperFunctions';
 import { getPhotographers } from '../../app/actions/photographerActions';
-import Rating from '@material-ui/lab/Rating';
 import {
   setCoordinates,
   setSort,
@@ -99,6 +99,7 @@ const PhotographersPage = (props) => {
     if (_.isEmpty(coordinates)) {
       getMyLocation(setCoordinates);
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -186,28 +187,28 @@ const PhotographersPage = (props) => {
   ));
 
   const sortOptions = [
-    <MenuItem key={1} value={'-price'}>
+    <MenuItem key={1} value="-price">
       Price: high to low
     </MenuItem>,
-    <MenuItem key={2} value={'price'}>
+    <MenuItem key={2} value="price">
       Price: low to high
     </MenuItem>,
-    <MenuItem key={3} value={'-photographer.ratingsAverage'}>
+    <MenuItem key={3} value="-photographer.ratingsAverage">
       Rating: high to low
     </MenuItem>,
-    <MenuItem key={4} value={'photographer.ratingsAverage'}>
+    <MenuItem key={4} value="photographer.ratingsAverage">
       Rating: low to high
     </MenuItem>
   ];
 
   const resultsOptions = [
-    <MenuItem key={1} value={'12'}>
+    <MenuItem key={1} value="12">
       12
     </MenuItem>,
-    <MenuItem key={2} value={'24'}>
+    <MenuItem key={2} value="24">
       24
     </MenuItem>,
-    <MenuItem key={3} value={'48'}>
+    <MenuItem key={3} value="48">
       48
     </MenuItem>
   ];
@@ -285,7 +286,7 @@ const PhotographersPage = (props) => {
                 value={categories}
                 onChange={handleCategoryChange}
                 options={photographyCategories()}
-                multiple={true}
+                multiple
                 underlineColor="underlineTeal"
               />
               <AutocompleteSelect
@@ -295,7 +296,7 @@ const PhotographersPage = (props) => {
                 value={languages}
                 onChange={handleLanguageChange}
                 options={languagesList()}
-                multiple={true}
+                multiple
                 underlineColor="underlineTeal"
               />
               <Select
@@ -326,9 +327,12 @@ const PhotographersPage = (props) => {
         </GridItem>
         <GridItem xs={12} sm={12} md={9} className={classes.photographersArea}>
           <div className={classes.resultsBar}>
-            <span>Total results found: {results}</span>
+            <span>
+              Total results found:
+              {results}
+            </span>
           </div>
-          <GridContainer style={{flexGrow: '1'}}>
+          <GridContainer style={{ flexGrow: '1' }}>
             {loading ? (
               <GridLoader css={override} loading color="#fff" />
             ) : (
@@ -340,10 +344,7 @@ const PhotographersPage = (props) => {
                   md={4}
                   className={classes.photographerCard}
                 >
-                  <LazyLoad
-                    height={450}
-                    offsetTop={100}
-                  >
+                  <LazyLoad height={450} offsetTop={100}>
                     <PhotographerCard photographerObj={photographer} />
                   </LazyLoad>
                 </GridItem>

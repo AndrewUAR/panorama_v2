@@ -12,6 +12,7 @@ import {
 } from '../services/photographer.service';
 import { AUTHENTICATE_USER } from '../constants/auth';
 import { GET_ALL_PHOTOGRAPHERS } from '../constants/photographer';
+
 export const createPhotographerProf = (photographerData, history) => async (
   dispatch
 ) => {
@@ -61,17 +62,17 @@ export const getPhotographers = (query) => async (dispatch) => {
   try {
     dispatch(asyncActionStart());
     const res = await getAllPhotographers(query);
-    let response = res.data.data;
+    const response = res.data.data;
     let payload = {};
     if (_.isEmpty(response)) {
-      payload['results'] = 0;
-      payload['photographers'] = [];
+      payload.results = 0;
+      payload.photographers = [];
     } else {
       payload = res.data.data[0];
     }
     dispatch({
       type: GET_ALL_PHOTOGRAPHERS,
-      payload: payload
+      payload
     });
     dispatch(asyncActionFinish());
   } catch (err) {

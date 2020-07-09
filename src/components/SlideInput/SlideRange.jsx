@@ -17,8 +17,8 @@ const RangeSlider = (props) => {
   };
 
   const onChange = (event, value) => {
-    setChange(value)
-  }
+    setChange(value);
+  };
 
   const underlineClasses = classNames({
     [classes.underline]: true,

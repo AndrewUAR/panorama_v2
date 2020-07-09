@@ -31,7 +31,7 @@ const InputSlider = (props) => {
 
   const onChange = (event, value) => {
     setChange(value);
-  }
+  };
 
   const underlineClasses = classNames({
     [classes.underline]: true,

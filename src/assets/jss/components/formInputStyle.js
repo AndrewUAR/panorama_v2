@@ -62,7 +62,7 @@ const formInputStyle = (theme) => ({
       fontWeight: '400'
     },
     '&::placeholder': {
-      color: whiteColor + '!important'
+      color: `${whiteColor}!important`
     }
   },
   formControl: {

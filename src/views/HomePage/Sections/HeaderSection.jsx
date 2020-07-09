@@ -21,21 +21,17 @@ const HeaderSection = (props) => {
 
   useEffect(() => {
     setCoordinates([]);
-    console.log('first');
-  }, [])
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
-    console.log(coordinates.length);
     if (coordinates.length > 1) {
       getPhotographers(query);
-      console.log('second');
       history.push('/photographers');
     }
-  }, [coordinates]);
+  }, [coordinates, getPhotographers]);
 
   const onChange = (e, value) => {
-    console.log('val', value);
-    // setSearchCoordinates(value.coordinates);
     setCoordinates(value.coordinates);
   };
 

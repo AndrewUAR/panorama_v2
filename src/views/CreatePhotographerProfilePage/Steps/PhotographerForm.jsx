@@ -73,7 +73,7 @@ const PhotographerForm = (props) => {
               options={languagesList()}
               underlineColor="underlineTeal"
               listName="languages"
-              multiple={true}
+              multiple
               error={languagesError}
             />
           </div>
@@ -88,7 +88,7 @@ const PhotographerForm = (props) => {
               options={photographyCategories()}
               underlineColor="underlineTeal"
               listName="categories"
-              multiple={true}
+              multiple
               error={categoriesError}
             />
           </div>
