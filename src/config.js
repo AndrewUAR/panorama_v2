@@ -1,4 +1,4 @@
-export const apiEndPoint = () => 'http://localhost:8000';
+export const apiEndPoint = () => 'https://photopanorama.herokuapp.com';
 
 export const configHeader = () => {
   const config = {
