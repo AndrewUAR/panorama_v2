@@ -59,6 +59,7 @@ const PlaceInput = (props) => {
       (async () => {
         const res = await getMyPlace(coordinates);
         const myPlace = { placeName: res.data.data, coordinates };
+        console.log(myPlace);
         setOptions([myPlace]);
       })();
     }

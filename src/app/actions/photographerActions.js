@@ -62,12 +62,12 @@ export const getPhotographers = (query) => async (dispatch) => {
     dispatch(asyncActionStart());
     const res = await getAllPhotographers(query);
     let response = res.data.data;
-    let payload = {}
+    let payload = {};
     if (_.isEmpty(response)) {
-      payload["results"] = 0;
-      payload["photographers"] = [];
+      payload['results'] = 0;
+      payload['photographers'] = [];
     } else {
-      payload = res.data.data[0]
+      payload = res.data.data[0];
     }
     dispatch({
       type: GET_ALL_PHOTOGRAPHERS,

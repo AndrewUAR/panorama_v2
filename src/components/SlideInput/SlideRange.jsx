@@ -9,12 +9,16 @@ import styles from '../../assets/jss/components/formInputStyle';
 const useStyles = makeStyles(styles);
 
 const RangeSlider = (props) => {
-  const { labelText, value, setValue } = props;
+  const { labelText, value, setValue, setChange } = props;
   const classes = useStyles();
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (event, value) => {
+    setValue(value);
   };
+
+  const onChange = (event, value) => {
+    setChange(value)
+  }
 
   const underlineClasses = classNames({
     [classes.underline]: true,
@@ -47,7 +51,8 @@ const RangeSlider = (props) => {
             max={999}
             step={1}
             value={value}
-            onChange={handleChange}
+            onChangeCommitted={handleChange}
+            onChange={onChange}
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             classes={{

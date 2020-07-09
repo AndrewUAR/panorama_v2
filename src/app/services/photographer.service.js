@@ -23,7 +23,8 @@ export const getPhotographerProfile = async () => {
 
 export const getAllPhotographers = async (query) => {
   const response = await axios.post(
-    `${API_ENDPOINT}/api/v1/photographers/photographers-within`, query,
+    `${API_ENDPOINT}/api/v1/photographers/photographers-within`,
+    query,
     config
   );
   return response;

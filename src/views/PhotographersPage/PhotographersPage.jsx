@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import LazyLoad from 'react-lazy-load';
+import { css } from "@emotion/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
+import GridLoader from 'react-spinners/GridLoader';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pagination from '@material-ui/lab/Pagination';
 import styles from '../../assets/jss/views/photographersPageStyle';
@@ -43,6 +46,11 @@ import {
 
 const useStyles = makeStyles(styles);
 
+const override = css`
+  display: block;
+  margin: auto;
+`;
+
 const PhotographersPage = (props) => {
   const {
     photographersResults,
@@ -67,21 +75,21 @@ const PhotographersPage = (props) => {
     sort,
     page,
     resultsPerPage,
-    distanceRange,
-    priceRange,
     rating,
     categories,
     languages
   } = query;
 
+  const [distanceRange, setDistanceValue] = useState(100);
+  const [priceRange, setPriceValue] = useState([0, 999]);
+
   const [expanded, setExpanded] = useState(false);
   const [pagesQuantity, setPagesQuantity] = useState(0);
+  const [place, setPlace] = useState('');
 
   const classes = useStyles();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.up('md'));
-
-  
 
   useEffect(() => {
     setExpanded(isSmallScreen);
@@ -95,14 +103,16 @@ const PhotographersPage = (props) => {
 
   useEffect(() => {
     if (!_.isEmpty(coordinates)) {
+      setDistanceValue(query.distanceRange);
+      setPriceValue(query.priceRange);
       getPhotographers(query);
     }
-  }, [coordinates]);
+  }, [query]);
 
   useEffect(() => {
     const pages = Math.ceil(results / resultsPerPage);
     setPagesQuantity(pages);
-  }, [results, resultsPerPage])
+  }, [results, resultsPerPage]);
 
   useEffect(
     () => () => {
@@ -129,8 +139,10 @@ const PhotographersPage = (props) => {
   };
 
   const handleLocationChange = (e, value) => {
-    console.log('coord', coordinates);
-    setCoordinates(value.coordinates);
+    if (value) {
+      setPlace(value.placeName);
+      setCoordinates(value.coordinates);
+    }
   };
 
   const handleSortChange = (e) => {
@@ -209,7 +221,8 @@ const PhotographersPage = (props) => {
               id="location"
               labelText="Enter City"
               placeholder="Enter City"
-              onChange={handleLocationChange}
+              value={place}
+              onChangeLocation={handleLocationChange}
               underlineColor="underlineTeal"
             />
           </form>
@@ -297,11 +310,13 @@ const PhotographersPage = (props) => {
                 labelText="Distance Range"
                 value={distanceRange}
                 setValue={setDistanceRange}
+                setChange={setDistanceValue}
               />
               <SlideRange
                 labelText="Price range ($)"
                 value={priceRange}
                 setValue={setPriceRange}
+                setChange={setPriceValue}
               />
               <Button color="danger" size="sm" onClick={() => handleReset()}>
                 Reset
@@ -311,10 +326,13 @@ const PhotographersPage = (props) => {
         </GridItem>
         <GridItem xs={12} sm={12} md={9} className={classes.photographersArea}>
           <div className={classes.resultsBar}>
-            <span>Found near: </span><span>Total results: {results}</span>
+            <span>Total results found: {results}</span>
           </div>
-          <GridContainer>
-            {photographers.map((photographer, index) => (
+          <GridContainer style={{flexGrow: '1'}}>
+            {loading ? (
+              <GridLoader css={override} loading color="#fff" />
+            ) : (
+              photographers.map((photographer, index) => (
                 <GridItem
                   key={index}
                   xs={12}
@@ -322,9 +340,15 @@ const PhotographersPage = (props) => {
                   md={4}
                   className={classes.photographerCard}
                 >
-                  <PhotographerCard photographerObj={photographer} />
+                  <LazyLoad
+                    height={450}
+                    offsetTop={100}
+                  >
+                    <PhotographerCard photographerObj={photographer} />
+                  </LazyLoad>
                 </GridItem>
-              ))}
+              ))
+            )}
           </GridContainer>
           <Hidden smDown>
             <div className={classes.pagination}>

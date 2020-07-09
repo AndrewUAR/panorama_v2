@@ -32,7 +32,7 @@ const photographerPageStyles = (theme) => ({
     display: 'flex',
     justifyContent: 'flex-end',
     '& > :first-child': {
-      marginRight: '10rem'
+      marginRight: '6rem'
     },
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
@@ -111,10 +111,16 @@ const photographerPageStyles = (theme) => ({
     )}, 0.3), rgba(${hexToRgb('#1cb5e0')}, 0.7))`,
     '& > :last-child': {
       marginTop: 'auto'
+    },
+    [theme.breakpoints.down('sm')]: {
+      boxShadow: 'none',
+      padding: '0',
+      marginTop: '1rem',
+      background: 'none'
     }
   },
   locationInput: {
-    width: '20%',
+    width: '30%',
     display: 'flex',
     paddingBottom: '1rem',
     [theme.breakpoints.down('sm')]: {
@@ -154,9 +160,11 @@ const photographerPageStyles = (theme) => ({
     }
   },
   photographerCard: {
+    display: 'inline-block',
     margin: '2rem 0',
     borderRadius: '0.5rem',
     padding: '0 1rem',
+    animation: '$revealCard 0.3s',
     [theme.breakpoints.only('sm')]: {
       padding: '0 0.5rem'
     },
@@ -176,7 +184,7 @@ const photographerPageStyles = (theme) => ({
   },
   cardRating: {
     ...defaultFont,
-    color: blueColor,
+    color: whiteColor,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -188,13 +196,13 @@ const photographerPageStyles = (theme) => ({
   },
   infoRow: {
     ...defaultFont,
-    color: blueColor,
+    color: whiteColor,
     padding: '0.25rem 1rem'
   },
   cardFooter: {
     ...defaultFont,
     fontSize: '1.25rem',
-    color: blueColor,
+    color: whiteColor,
     width: '100%',
     textAlign: 'center',
     marginBottom: '1rem',
@@ -216,19 +224,33 @@ const photographerPageStyles = (theme) => ({
       borderColor: whiteColor
     }
   },
-   resultsBar: {
+  resultsBar: {
     ...boxShadow,
     ...defaultFont,
     height: '3rem',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     padding: '0 2rem',
     color: whiteColor,
     fontSize: '1.3rem',
     borderRadius: '0.5rem',
     background: 'linear-gradient(to left, #000046, #1cb5e0)',
-   }
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+      padding: '0 1rem'
+    }
+  },
+  '@keyframes revealCard': {
+    '0%': {
+      transform: 'translateY(50%)',
+      opacity: '0'
+    },
+    '100%': {
+      transform: 'translateY(0)',
+      opacity: '1'
+    }
+  }
 });
 
 export default photographerPageStyles;

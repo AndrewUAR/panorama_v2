@@ -14,7 +14,7 @@ import { setCoordinates } from '../../../app/actions/photographersQueryActions.j
 const useStyles = makeStyles(styles);
 
 const HeaderSection = (props) => {
-  const { getPhotographers, setCoordinates, query} = props;
+  const { getPhotographers, setCoordinates, query } = props;
   const { coordinates } = query;
   const classes = useStyles();
   const history = useHistory();
@@ -26,7 +26,7 @@ const HeaderSection = (props) => {
 
   useEffect(() => {
     console.log(coordinates.length);
-    if (coordinates.length > 0) {
+    if (coordinates.length > 1) {
       getPhotographers(query);
       console.log('second');
       history.push('/photographers');
@@ -34,6 +34,7 @@ const HeaderSection = (props) => {
   }, [coordinates]);
 
   const onChange = (e, value) => {
+    console.log('val', value);
     // setSearchCoordinates(value.coordinates);
     setCoordinates(value.coordinates);
   };

@@ -10,11 +10,11 @@ import styles from '../../assets/jss/components/formInputStyle';
 const useStyles = makeStyles(styles);
 
 const InputSlider = (props) => {
-  const { labelText, value, setValue } = props;
+  const { labelText, value, setValue, setChange } = props;
   const classes = useStyles();
 
-  const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
+  const handleSliderChange = (event, value) => {
+    setValue(value);
   };
 
   const handleInputChange = (event) => {
@@ -28,6 +28,10 @@ const InputSlider = (props) => {
       setValue(100);
     }
   };
+
+  const onChange = (event, value) => {
+    setChange(value);
+  }
 
   const underlineClasses = classNames({
     [classes.underline]: true,
@@ -47,7 +51,8 @@ const InputSlider = (props) => {
         <Grid item xs>
           <Slider
             value={typeof value === 'number' ? value : 0}
-            onChange={handleSliderChange}
+            onChangeCommitted={handleSliderChange}
+            onChange={onChange}
             aria-labelledby="input-slider"
             classes={{
               root: classes.blue
