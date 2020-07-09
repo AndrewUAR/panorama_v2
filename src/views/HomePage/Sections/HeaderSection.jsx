@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
@@ -14,16 +14,21 @@ import { setCoordinates } from '../../../app/actions/photographersQueryActions.j
 const useStyles = makeStyles(styles);
 
 const HeaderSection = (props) => {
-  const { getPhotographers, setCoordinates, coordinates } = props;
-  // const [coordinates, setSearchCoordinates] = useState();
+  const { getPhotographers, setCoordinates, query} = props;
+  const { coordinates } = query;
   const classes = useStyles();
   const history = useHistory();
 
   useEffect(() => {
+    setCoordinates([]);
+    console.log('first');
+  }, [])
+
+  useEffect(() => {
+    console.log(coordinates.length);
     if (coordinates.length > 0) {
-      const query = { coordinates };
-      console.log('query', query);
       getPhotographers(query);
+      console.log('second');
       history.push('/photographers');
     }
   }, [coordinates]);
@@ -70,7 +75,7 @@ const HeaderSection = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  coordinates: state.photographersQuery.coordinates
+  query: state.photographersQuery
 });
 
 const actions = {

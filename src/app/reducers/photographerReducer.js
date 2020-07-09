@@ -6,12 +6,14 @@ import {
 
 const initialState = {
   photographers: [],
+  results: 0,
   selectedPhotographer: {}
 };
 
 const getPhotographers = (state, payload) => ({
   ...state,
-  photographers: payload
+  photographers: payload.photographers,
+  results: payload.results
 });
 
 const selectedPhotographer = (state, payload) => ({

@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Pagination from '@material-ui/lab/Pagination';
-import PaginationItem from '@material-ui/lab/PaginationItem';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
@@ -46,7 +45,7 @@ const useStyles = makeStyles(styles);
 
 const PhotographersPage = (props) => {
   const {
-    photographers,
+    photographersResults,
     loading,
     getPhotographers,
     setCoordinates,
@@ -61,6 +60,8 @@ const PhotographersPage = (props) => {
     query
   } = props;
 
+  const { photographers, results } = photographersResults;
+
   const {
     coordinates,
     sort,
@@ -74,38 +75,41 @@ const PhotographersPage = (props) => {
   } = query;
 
   const [expanded, setExpanded] = useState(false);
+  const [pagesQuantity, setPagesQuantity] = useState(0);
 
   const classes = useStyles();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.up('md'));
+
+  
 
   useEffect(() => {
     setExpanded(isSmallScreen);
   }, [isSmallScreen]);
 
   useEffect(() => {
-    if (photographers.length < 1) {
+    if (_.isEmpty(coordinates)) {
       getMyLocation(setCoordinates);
     }
   }, []);
 
   useEffect(() => {
-    if (coordinates.length > 0) {
-      const query = {
-        coordinates,
-        sort,
-        limit: resultsPerPage
-      };
+    if (!_.isEmpty(coordinates)) {
       getPhotographers(query);
     }
-  }, [coordinates, sort, resultsPerPage]);
+  }, [coordinates]);
+
+  useEffect(() => {
+    const pages = Math.ceil(results / resultsPerPage);
+    setPagesQuantity(pages);
+  }, [results, resultsPerPage])
 
   useEffect(
     () => () => {
       setPage(1);
       setCoordinates([]);
       setSort('');
-      setResultsPerPage('');
+      setResultsPerPage(12);
       setDistanceRange(100);
       setPriceRange([0, 999]);
       setRating('');
@@ -125,6 +129,7 @@ const PhotographersPage = (props) => {
   };
 
   const handleLocationChange = (e, value) => {
+    console.log('coord', coordinates);
     setCoordinates(value.coordinates);
   };
 
@@ -153,7 +158,6 @@ const PhotographersPage = (props) => {
 
   const handleReset = () => {
     setPage(1);
-    setCoordinates([]);
     setSort('');
     setResultsPerPage('');
     setDistanceRange(100);
@@ -200,7 +204,7 @@ const PhotographersPage = (props) => {
     <div className={classes.container}>
       <GridContainer justify="center" className={classes.topBar}>
         <GridItem xs={12} sm={10} md={12} className={classes.searchAndSortBar}>
-          <div className={classes.locationInput}>
+          <form className={classes.locationInput}>
             <PlaceInput
               id="location"
               labelText="Enter City"
@@ -208,7 +212,7 @@ const PhotographersPage = (props) => {
               onChange={handleLocationChange}
               underlineColor="underlineTeal"
             />
-          </div>
+          </form>
           <div className={classes.sortSelectGroup}>
             <Hidden smDown>
               <Select
@@ -306,9 +310,11 @@ const PhotographersPage = (props) => {
           </Accordion>
         </GridItem>
         <GridItem xs={12} sm={12} md={9} className={classes.photographersArea}>
-          <GridContainer justify="space-evenly">
-            {!loading &&
-              photographers.map((photographer, index) => (
+          <div className={classes.resultsBar}>
+            <span>Found near: </span><span>Total results: {results}</span>
+          </div>
+          <GridContainer>
+            {photographers.map((photographer, index) => (
                 <GridItem
                   key={index}
                   xs={12}
@@ -323,7 +329,7 @@ const PhotographersPage = (props) => {
           <Hidden smDown>
             <div className={classes.pagination}>
               <Pagination
-                count={10}
+                count={pagesQuantity}
                 page={page}
                 color="secondary"
                 onChange={handlePageChange}
@@ -339,7 +345,7 @@ const PhotographersPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  photographers: state.photographers.photographers,
+  photographersResults: state.photographers,
   loading: state.async.loading,
   query: state.photographersQuery
 });

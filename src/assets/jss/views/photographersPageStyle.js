@@ -42,6 +42,7 @@ const photographerPageStyles = (theme) => ({
   mainArea: {
     width: '80%',
     marginTop: '1rem',
+    marginBottom: '3rem',
     display: 'flex',
     justifyContent: 'space-between',
     [theme.breakpoints.down('sm')]: {
@@ -103,10 +104,14 @@ const photographerPageStyles = (theme) => ({
     ...boxShadow,
     padding: '2rem',
     borderRadius: '0.5rem',
-    marginBottom: '3rem',
+    display: 'flex',
+    flexDirection: 'column',
     background: `linear-gradient(to top, rgba(${hexToRgb(
       '#000046'
-    )}, 0.3), rgba(${hexToRgb('#1cb5e0')}, 0.7))`
+    )}, 0.3), rgba(${hexToRgb('#1cb5e0')}, 0.7))`,
+    '& > :last-child': {
+      marginTop: 'auto'
+    }
   },
   locationInput: {
     width: '20%',
@@ -210,7 +215,20 @@ const photographerPageStyles = (theme) => ({
       color: whiteColor,
       borderColor: whiteColor
     }
-  }
+  },
+   resultsBar: {
+    ...boxShadow,
+    ...defaultFont,
+    height: '3rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0 2rem',
+    color: whiteColor,
+    fontSize: '1.3rem',
+    borderRadius: '0.5rem',
+    background: 'linear-gradient(to left, #000046, #1cb5e0)',
+   }
 });
 
 export default photographerPageStyles;

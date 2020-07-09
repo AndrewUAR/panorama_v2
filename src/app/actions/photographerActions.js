@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { SET_ERROR } from '../constants/error';
 import {
   asyncActionStart,
@@ -60,12 +61,19 @@ export const getPhotographers = (query) => async (dispatch) => {
   try {
     dispatch(asyncActionStart());
     const res = await getAllPhotographers(query);
-    dispatch(asyncActionFinish());
-    const photographers = res.data.data;
+    let response = res.data.data;
+    let payload = {}
+    if (_.isEmpty(response)) {
+      payload["results"] = 0;
+      payload["photographers"] = [];
+    } else {
+      payload = res.data.data[0]
+    }
     dispatch({
       type: GET_ALL_PHOTOGRAPHERS,
-      payload: photographers
+      payload: payload
     });
+    dispatch(asyncActionFinish());
   } catch (err) {
     if (err.response.data.message) {
       dispatch(asyncActionError());

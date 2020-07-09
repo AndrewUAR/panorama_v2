@@ -11,7 +11,7 @@ import styles from '../../assets/jss/views/photographersPageStyle';
 import CardHeader from '../../components/Card/CardHeader';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { Typography } from '@material-ui/core';
+import { Typography, Tooltip } from '@material-ui/core';
 import CardFooter from '../../components/Card/CardFooter';
 
 const useStyles = makeStyles(styles);
@@ -25,11 +25,16 @@ const PhotographerCard = (props) => {
     <div className={classes.card}>
       <Card color="blue">
         <CardHeader overflow="overflowBottom">
-          <Rating
-            name="read-only"
-            value={photographer.ratingsAverage}
-            readOnly
-          />
+          <Tooltip title={photographer.ratingsAverage} placement="right" arrow>
+            <div>
+              <Rating
+                name="read-only"
+                value={photographer.ratingsAverage}
+                precision={0.1}
+                readOnly
+              />
+            </div>
+          </Tooltip>
           {favorite ? (
             <FavoriteIcon
               className={classes.favoriteFilledIcon}

@@ -28,7 +28,6 @@ const categoriesSectionStyles = (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     filter: 'drop-shadow(0.5rem 0.75rem 0.75rem black)',
-    animation: '$imageReveal 0.5s',
     '& > :nth-child(1)': {
       '&:hover': {
         transform: 'translate(-10%, -8%)',
@@ -132,9 +131,6 @@ const categoriesSectionStyles = (theme) => ({
       width: '10rem'
     }
   },
-  categoryAnimation: {
-    animation: '$imageReveal 0.5s'
-  },
   imageContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -144,9 +140,6 @@ const categoriesSectionStyles = (theme) => ({
     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
     WebkitClipPath:
       'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-    '& > *': {
-      animation: '$imageReveal 1s'
-    },
     [theme.breakpoints.only('sm')]: {
       height: '14rem',
       width: '14rem'

@@ -18,7 +18,7 @@ const cardHeaderStyle = (theme) => ({
   },
   overflowBottom: {
     width: '100%',
-    marginBottom: '-2.5rem',
+    marginBottom: '-2.75rem',
     display: 'flex',
     justifyContent: 'space-between',
     borderRadius: '0.5rem 0.5rem 0 0',

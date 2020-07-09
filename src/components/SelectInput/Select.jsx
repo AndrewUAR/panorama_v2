@@ -3,10 +3,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Rating from '@material-ui/lab/Rating';
 import styles from '../../assets/jss/components/formInputStyle';
 
 const useStyles = makeStyles(styles);
