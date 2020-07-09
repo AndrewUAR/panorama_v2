@@ -29,7 +29,8 @@ const HeaderSection = (props) => {
       getPhotographers(query);
       history.push('/photographers');
     }
-  }, [coordinates, getPhotographers]);
+    // eslint-disable-next-line
+  }, [coordinates, getPhotographers, history, query]);
 
   const onChange = (e, value) => {
     setCoordinates(value.coordinates);

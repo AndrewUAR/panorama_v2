@@ -108,7 +108,7 @@ const PhotographersPage = (props) => {
       setPriceValue(query.priceRange);
       getPhotographers(query);
     }
-  }, [query]);
+  }, [query, getPhotographers, coordinates]);
 
   useEffect(() => {
     const pages = Math.ceil(results / resultsPerPage);
