@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
@@ -16,17 +16,14 @@ const useStyles = makeStyles(styles);
 
 const HeaderSection = (props) => {
   const { getPhotographers, setCoordinates, query } = props;
+  const [loading, setLoading] = useState(false);
   const { coordinates } = query;
+  const [newGeo, setNewGeo] = useState(false);
   const classes = useStyles();
   const history = useHistory();
 
   useEffect(() => {
-    setCoordinates([]);
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (coordinates.length > 1) {
+    if (coordinates.length > 1 && newGeo) {
       history.push('/photographers');
       getPhotographers(query);
     }
@@ -34,12 +31,13 @@ const HeaderSection = (props) => {
   }, [coordinates, getPhotographers, history, query]);
 
   const onChange = (e, value) => {
+    setNewGeo(true);
     setCoordinates(value.coordinates);
   };
 
   const iconClasses = classNames({
     [classes.buttonIcon]: true,
-    [classes.iconAnimation]: true
+    [classes.iconAnimation]: loading
   });
 
   return (
@@ -52,6 +50,8 @@ const HeaderSection = (props) => {
             color="blue"
             size="lg"
             onClick={() => {
+              setLoading(true);
+              setNewGeo(true);
               getMyLocation(setCoordinates);
             }}
           >
@@ -68,7 +68,7 @@ const HeaderSection = (props) => {
             id="location"
             labelText="Enter Desire Location"
             placeholder="Enter Desire Location"
-            // value={location}
+            trigger={setNewGeo}
             onChangeLocation={onChange}
             underlineColor="underlineTeal"
           />

@@ -5,7 +5,8 @@ import {
   blueColor,
   hexToRgb,
   blackColor,
-  dangerColor
+  dangerColor,
+  dropzoneBoxShadow
 } from '../panoramaStyles';
 import image from '../../img/backGround/imgs/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg';
 
@@ -200,6 +201,7 @@ const photographerPageStyles = (theme) => ({
   },
   cardRating: {
     ...defaultFont,
+    ...dropzoneBoxShadow,
     color: whiteColor,
     display: 'flex',
     justifyContent: 'space-between',
@@ -227,6 +229,7 @@ const photographerPageStyles = (theme) => ({
     textAlign: 'center',
     marginBottom: '1rem',
     '& > *': {
+      ...dropzoneBoxShadow,
       background: `rgba(${hexToRgb(whiteColor)}, 0.1)`,
       margin: '0.3rem 0'
     }
@@ -248,7 +251,7 @@ const photographerPageStyles = (theme) => ({
     }
   },
   resultsBar: {
-    ...boxShadow,
+    ...dropzoneBoxShadow,
     ...defaultFont,
     height: '3rem',
     display: 'flex',
@@ -257,8 +260,8 @@ const photographerPageStyles = (theme) => ({
     padding: '0 2rem',
     color: whiteColor,
     fontSize: '1rem',
-    borderRadius: '0.5rem',
-    background: 'linear-gradient(to left, #000046, #1cb5e0)',
+    // borderRadius: '0.5rem',
+    background: 'linear-gradient(to right bottom, #000046, #1cb5e0)',
     [theme.breakpoints.down('sm')]: {
       height: 'auto',
       fontSize: '1rem',

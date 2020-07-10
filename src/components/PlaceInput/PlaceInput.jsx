@@ -33,7 +33,8 @@ const PlaceInput = (props) => {
     labelText,
     underlineColor,
     placeholder,
-    onChangeLocation
+    onChangeLocation,
+    trigger
   } = props;
 
   const onChange = (e) => {
@@ -123,7 +124,10 @@ const PlaceInput = (props) => {
                   ) : (
                     <MyLocationIcon
                       className={classes.inputIcon}
-                      onClick={() => getMyLocation(setCoordinates)}
+                      onClick={() => {
+                        getMyLocation(setCoordinates);
+                        if (trigger) trigger(true);
+                      }}
                     />
                   )}
                 </>

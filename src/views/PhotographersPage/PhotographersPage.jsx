@@ -362,7 +362,7 @@ const PhotographersPage = (props) => {
                   xl={4}
                   className={classes.photographerCard}
                 >
-                  <LazyLoad height={470} debounce={false} throttle={250}>
+                  <LazyLoad height={480} debounce={false} throttle={250}>
                     <PhotographerCard photographerObj={photographer} />
                   </LazyLoad>
                 </GridItem>

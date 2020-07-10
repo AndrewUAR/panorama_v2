@@ -21,6 +21,7 @@ const PhotographerCard = (props) => {
   const [favorite, setFavorite] = useState(false);
   const { firstName, lastName, profilePhoto, photographer } = photographerObj;
   const classes = useStyles();
+
   return (
     <Card color="blue">
       <CardHeader overflow="overflowBottom">
@@ -77,10 +78,11 @@ const PhotographerCard = (props) => {
               <Typography noWrap>
                 Location: {photographer.location.placeName}
               </Typography>
-            </div>
-            <div className={classes.infoRow}>
               <Typography noWrap>
                 Languages: {photographer.languages.join(', ')}
+              </Typography>
+              <Typography noWrap>
+                Categories: {photographer.categories.join(', ')}
               </Typography>
             </div>
           </GridItem>

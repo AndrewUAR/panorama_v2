@@ -17,12 +17,10 @@ export const getPlaces = async (place) => {
 
 export const getMyPlace = async (coordinates) => {
   store.dispatch(asyncActionStart('loadingGeo'));
-  console.log('start');
   const response = await axios.post(
     `${API_ENDPOINT}/api/v1/data/getMyPlace`,
     coordinates
   );
-  console.log('finish');
   store.dispatch(asyncActionFinish('loadingGeo'));
   return response;
 };
