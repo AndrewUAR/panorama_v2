@@ -41,7 +41,8 @@ import {
   setPriceRange,
   setRating,
   setCategories,
-  setLanguages
+  setLanguages,
+  setPlace
 } from '../../app/actions/photographersQueryActions';
 
 const useStyles = makeStyles(styles);
@@ -65,6 +66,7 @@ const PhotographersPage = (props) => {
     setRating,
     setCategories,
     setLanguages,
+    setPlace,
     query
   } = props;
 
@@ -77,7 +79,8 @@ const PhotographersPage = (props) => {
     resultsPerPage,
     rating,
     categories,
-    languages
+    languages,
+    place
   } = query;
 
   const [distanceRange, setDistanceValue] = useState(100);
@@ -85,7 +88,6 @@ const PhotographersPage = (props) => {
 
   const [expanded, setExpanded] = useState(false);
   const [pagesQuantity, setPagesQuantity] = useState(0);
-  const [place, setPlace] = useState('');
 
   const classes = useStyles();
   const theme = useTheme();
@@ -115,6 +117,10 @@ const PhotographersPage = (props) => {
     setPagesQuantity(pages);
   }, [results, resultsPerPage]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page]);
+
   useEffect(
     () => () => {
       setPage(1);
@@ -126,6 +132,7 @@ const PhotographersPage = (props) => {
       setRating('');
       setCategories([]);
       setLanguages([]);
+      setPlace('');
     },
     // eslint-disable-next-line
     []
@@ -172,12 +179,13 @@ const PhotographersPage = (props) => {
   const handleReset = () => {
     setPage(1);
     setSort('');
-    setResultsPerPage('');
+    setResultsPerPage(12);
     setDistanceRange(100);
     setPriceRange([0, 999]);
     setRating('');
     setCategories([]);
     setLanguages([]);
+    setPlace('');
   };
 
   const ratingOptions = _.range(5, 0).map((item, index) => (
@@ -222,7 +230,6 @@ const PhotographersPage = (props) => {
               id="location"
               labelText="Enter City"
               placeholder="Enter City"
-              value={place}
               onChangeLocation={handleLocationChange}
               underlineColor="underlineTeal"
             />
@@ -268,14 +275,12 @@ const PhotographersPage = (props) => {
             </AccordionSummary>
             <AccordionDetails className={classes.accordionDetails}>
               <Hidden mdUp>
-                <AutocompleteSelect
-                  id="sortBy"
-                  labelText="Sort By"
-                  placeholder="Sort by"
+                <Select
+                  id="sort"
+                  labelText="Sort by:"
                   value={sort}
+                  menuItems={sortOptions}
                   onChange={handleSortChange}
-                  options={sortOptions}
-                  multiple={false}
                   underlineColor="underlineTeal"
                 />
               </Hidden>
@@ -327,12 +332,24 @@ const PhotographersPage = (props) => {
         </GridItem>
         <GridItem xs={12} sm={12} md={9} className={classes.photographersArea}>
           <div className={classes.resultsBar}>
-            <span>
-              Total results found:
-              {results}
-            </span>
+            {place ? (
+              <>
+                <div>
+                  <Typography noWrap>Found near: {place}</Typography>
+                </div>
+                <Typography>
+                  Total results:&nbsp;
+                  {results}
+                </Typography>
+              </>
+            ) : (
+              <Typography style={{ marginLeft: 'auto' }}>
+                Total results found near you:&nbsp;
+                {results}
+              </Typography>
+            )}
           </div>
-          <GridContainer style={{ flexGrow: '1' }}>
+          <GridContainer className={classes.resultsArea}>
             {loading ? (
               <GridLoader css={override} loading color="#fff" />
             ) : (
@@ -341,17 +358,18 @@ const PhotographersPage = (props) => {
                   key={index}
                   xs={12}
                   sm={6}
-                  md={4}
+                  md={6}
+                  xl={4}
                   className={classes.photographerCard}
                 >
-                  <LazyLoad height={450} offsetTop={100}>
+                  <LazyLoad height={470} debounce={false} throttle={250}>
                     <PhotographerCard photographerObj={photographer} />
                   </LazyLoad>
                 </GridItem>
               ))
             )}
           </GridContainer>
-          <Hidden smDown>
+          {results > 0 && !loading && (
             <div className={classes.pagination}>
               <Pagination
                 count={pagesQuantity}
@@ -362,7 +380,7 @@ const PhotographersPage = (props) => {
                 shape="rounded"
               />
             </div>
-          </Hidden>
+          )}
         </GridItem>
       </GridContainer>
     </div>
@@ -371,7 +389,7 @@ const PhotographersPage = (props) => {
 
 const mapStateToProps = (state) => ({
   photographersResults: state.photographers,
-  loading: state.async.loading,
+  loading: state.async.fetching,
   query: state.photographersQuery
 });
 
@@ -385,7 +403,8 @@ const actions = {
   setPriceRange,
   setRating,
   setCategories,
-  setLanguages
+  setLanguages,
+  setPlace
 };
 
 PhotographersPage.propTypes = {

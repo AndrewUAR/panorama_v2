@@ -142,7 +142,7 @@ const PlaceInput = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.async.loading
+  loading: state.async.loadingGeo
 });
 
 export default connect(mapStateToProps)(PlaceInput);

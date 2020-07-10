@@ -47,8 +47,11 @@ const homePageStyles = (theme) => ({
       textTransform: 'uppercase'
     }
   },
+  iconAnimation: {
+    animation: '$buttonAnimation 3s infinite'
+  },
   buttonIcon: {
-    fontSize: '2rem'
+    fontSize: '2.5rem'
   },
   divider: {
     ...defaultFont,
@@ -117,6 +120,23 @@ const homePageStyles = (theme) => ({
     },
     '100%': {
       transform: 'translateY(0)'
+    }
+  },
+  '@keyframes buttonAnimation': {
+    '0%': {
+      transform: 'rotate(60deg)'
+    },
+    '25%': {
+      transform: 'rotate(-80deg)'
+    },
+    '50%': {
+      transform: 'rotate(-30deg)'
+    },
+    '75%': {
+      transform: 'rotate(130deg)'
+    },
+    '100%': {
+      transform: 'rotate(50deg)'
     }
   }
 });

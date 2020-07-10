@@ -18,9 +18,9 @@ import {
 
 export const createUser = (userData, history) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('updating'));
     await signUpUser(userData);
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('updating'));
     const notification = {
       message:
         'Your account was successfully created. Please verify your email.',
@@ -32,7 +32,7 @@ export const createUser = (userData, history) => async (dispatch) => {
     history.push('/');
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('updating'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -43,28 +43,24 @@ export const createUser = (userData, history) => async (dispatch) => {
 
 export const loginUser = (userData) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('fetching'));
     const res = await signInUser(userData);
-    dispatch(asyncActionFinish());
-
     const user = res.data.data;
-
     dispatch({
       type: AUTHENTICATE_USER,
       payload: user
     });
-
     const notification = {
       message: 'Log in successfully',
       options: {
         variant: 'success'
       }
     };
-
+    dispatch(asyncActionFinish('fetching'));
     dispatch(enqueueSnackbar(notification));
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('fetching'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -126,9 +122,9 @@ export const updatePassword = (userData) => async (dispatch) => {
 
 export const forgotMyPassword = (userData) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('loading'));
     await forgotPassword(userData);
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('loading'));
     const notification = {
       message: 'Reset link was sent to your email!',
       options: {
@@ -138,7 +134,7 @@ export const forgotMyPassword = (userData) => async (dispatch) => {
     dispatch(enqueueSnackbar(notification));
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('loading'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -149,6 +145,7 @@ export const forgotMyPassword = (userData) => async (dispatch) => {
 
 export const resetPassword = (userData, token) => async (dispatch) => {
   try {
+    dispatch(asyncActionStart('loading'));
     const res = await resetMyPassword(userData, token);
     const user = res.data.data;
     dispatch({
@@ -162,8 +159,10 @@ export const resetPassword = (userData, token) => async (dispatch) => {
       }
     };
     dispatch(enqueueSnackbar(notification));
+    dispatch(enqueueSnackbar(notification));
   } catch (err) {
     if (err.response.data.message) {
+      dispatch(asyncActionError('loading'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -174,9 +173,8 @@ export const resetPassword = (userData, token) => async (dispatch) => {
 
 export const confirmEmail = (id, history) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('loading'));
     await confirmMyEmail(id);
-    dispatch(asyncActionFinish());
     const notification = {
       message:
         'Your email was successfully confirmed. Please proceed to login.',
@@ -184,10 +182,12 @@ export const confirmEmail = (id, history) => async (dispatch) => {
         variant: 'success'
       }
     };
+    dispatch(asyncActionFinish('loading'));
     dispatch(enqueueSnackbar(notification));
     history.push('/login');
   } catch (err) {
     if (err.response.data.message) {
+      dispatch(asyncActionError('loading'));
       const notification = {
         message: 'Your account has been already activated.',
         options: {

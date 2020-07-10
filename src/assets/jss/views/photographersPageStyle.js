@@ -11,7 +11,7 @@ import image from '../../img/backGround/imgs/rene-bohmer-YeUVDKZWSZ4-unsplash.jp
 
 const photographerPageStyles = (theme) => ({
   container: {
-    minHeight: '100vh',
+    minHeight: 'calc(100vh - 12rem)',
     height: 'auto',
     width: '100vw',
     paddingTop: '8rem',
@@ -24,8 +24,9 @@ const photographerPageStyles = (theme) => ({
       rgba(${hexToRgb(blueColor)}, 0.5)), url(${image})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
-    [theme.breakpoints.down('sm')]: {
-      height: 'auto'
+    backgroundAttachment: 'fixed',
+    [theme.breakpoints.only('xs')]: {
+      minHeight: 'calc(100vh - 13rem)'
     }
   },
   searchAndSortBar: {
@@ -149,12 +150,19 @@ const photographerPageStyles = (theme) => ({
       }
     }
   },
+  resultsArea: {
+    flexGrow: '1',
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '2rem'
+    }
+  },
   sideBarTitle: {
     ...defaultFont,
     color: whiteColor,
     margin: '0',
     padding: '0',
-    fontSize: '1.5rem',
+    fontSize: '1.25rem',
+    fontWeight: '400',
     [theme.breakpoints.down('sm')]: {
       fontSize: '1rem'
     }
@@ -170,6 +178,14 @@ const photographerPageStyles = (theme) => ({
     },
     [theme.breakpoints.only('xs')]: {
       padding: '0'
+    },
+    '&:hover': {
+      transform: 'scale(0.98)',
+      transition: 'all 0.2s'
+    },
+    '&:active': {
+      transform: 'scale(1)',
+      transition: 'all 0.2s'
     }
   },
   fullName: {
@@ -189,24 +205,31 @@ const photographerPageStyles = (theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     fontSize: '1rem',
-    padding: '0 1rem'
+    padding: '0 1rem',
+    background: `rgba(${hexToRgb(whiteColor)}, 0.1)`
   },
   cardInfoArea: {
-    padding: '1.25rem 0.75rem'
+    padding: '0.75rem 0.75rem 0 0.75rem'
   },
   infoRow: {
     ...defaultFont,
     color: whiteColor,
-    padding: '0.25rem 1rem'
+    padding: '0.25rem 0.5rem',
+    '& > *': {
+      fontSize: '0.90rem'
+    }
   },
   cardFooter: {
     ...defaultFont,
     fontSize: '1.25rem',
     color: whiteColor,
-    width: '100%',
+    width: '93%',
     textAlign: 'center',
     marginBottom: '1rem',
-    background: `rgba(${hexToRgb(whiteColor)}, 0.1)`
+    '& > *': {
+      background: `rgba(${hexToRgb(whiteColor)}, 0.1)`,
+      margin: '0.3rem 0'
+    }
   },
   favoriteIcon: {
     color: whiteColor
@@ -230,15 +253,23 @@ const photographerPageStyles = (theme) => ({
     height: '3rem',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     padding: '0 2rem',
     color: whiteColor,
-    fontSize: '1.3rem',
+    fontSize: '1rem',
     borderRadius: '0.5rem',
     background: 'linear-gradient(to left, #000046, #1cb5e0)',
     [theme.breakpoints.down('sm')]: {
+      height: 'auto',
       fontSize: '1rem',
-      padding: '0 1rem'
+      padding: '0.5rem',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      background: 'linear-gradient(170deg, #000046, #1cb5e0)',
+      '& > :first-child': {
+        width: '100%'
+      }
     }
   },
   '@keyframes revealCard': {

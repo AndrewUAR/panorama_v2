@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
+import classNames from 'classnames';
 import ExploreIcon from '@material-ui/icons/Explore';
 import PublicIcon from '@material-ui/icons/Public';
 import styles from '../../../assets/jss/views/HomePageStyle/homePageStyle';
@@ -26,8 +27,8 @@ const HeaderSection = (props) => {
 
   useEffect(() => {
     if (coordinates.length > 1) {
-      getPhotographers(query);
       history.push('/photographers');
+      getPhotographers(query);
     }
     // eslint-disable-next-line
   }, [coordinates, getPhotographers, history, query]);
@@ -35,6 +36,11 @@ const HeaderSection = (props) => {
   const onChange = (e, value) => {
     setCoordinates(value.coordinates);
   };
+
+  const iconClasses = classNames({
+    [classes.buttonIcon]: true,
+    [classes.iconAnimation]: true
+  });
 
   return (
     <div className={classes.pageHeader}>
@@ -49,7 +55,7 @@ const HeaderSection = (props) => {
               getMyLocation(setCoordinates);
             }}
           >
-            <ExploreIcon className={classes.buttonIcon} />
+            <ExploreIcon className={iconClasses} />
           </Button>
           <span className={classes.buttonText}>Find photographer near you</span>
         </div>

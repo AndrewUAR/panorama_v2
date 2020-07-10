@@ -7,7 +7,8 @@ import {
   SET_PRICE_RANGE,
   SET_RATING,
   SET_CATEGORIES,
-  SET_LANGUAGES
+  SET_LANGUAGES,
+  SET_PLACE
 } from '../constants/photographersQuery';
 
 export const setCoordinates = (coordinates) => (dispatch) => {
@@ -70,5 +71,12 @@ export const setLanguages = (languages) => (dispatch) => {
   dispatch({
     type: SET_LANGUAGES,
     payload: languages
+  });
+};
+
+export const setPlace = (place) => (dispatch) => {
+  dispatch({
+    type: SET_PLACE,
+    payload: place
   });
 };

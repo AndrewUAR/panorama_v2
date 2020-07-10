@@ -80,7 +80,7 @@ const buttonStyle = (theme) => ({
   },
   justIcon: {
     borderRadius: '5rem',
-    padding: '0.75rem',
+    padding: '0.5rem',
     backgroundColor: 'transparent',
     '& svg, & .fab, & .material-icons': {
       margin: '0'

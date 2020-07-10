@@ -6,22 +6,25 @@ import {
 } from '../constants/async';
 
 const initialState = {
+  loadingGeo: false,
+  updating: false,
+  fetching: false,
   loading: false
 };
 
-const asyncActionStarted = (state) => ({
+const asyncActionStarted = (state, payload) => ({
   ...state,
-  loading: true
+  [payload]: true
 });
 
-const asyncActionFinished = (state) => ({
+const asyncActionFinished = (state, payload) => ({
   ...state,
-  loading: false
+  [payload]: false
 });
 
-const asyncActionError = (state) => ({
+const asyncActionError = (state, payload) => ({
   ...state,
-  loading: false
+  [payload]: false
 });
 
 export default createReducer(initialState, {

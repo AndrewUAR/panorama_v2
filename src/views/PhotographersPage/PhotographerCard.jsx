@@ -22,75 +22,76 @@ const PhotographerCard = (props) => {
   const { firstName, lastName, profilePhoto, photographer } = photographerObj;
   const classes = useStyles();
   return (
-    <div className={classes.card}>
-      <Card color="blue">
-        <CardHeader overflow="overflowBottom">
-          <Tooltip title={photographer.ratingsAverage} placement="right" arrow>
-            <div>
-              <Rating
-                name="read-only"
-                value={photographer.ratingsAverage}
-                precision={0.1}
-                readOnly
-              />
-            </div>
-          </Tooltip>
-          {favorite ? (
-            <FavoriteIcon
-              className={classes.favoriteFilledIcon}
-              onClick={() => setFavorite(false)}
+    <Card color="blue">
+      <CardHeader overflow="overflowBottom">
+        <Tooltip title={photographer.ratingsAverage} placement="right" arrow>
+          <div>
+            <Rating
+              name="read-only"
+              value={photographer.ratingsAverage}
+              precision={0.1}
+              readOnly
             />
-          ) : (
-            <FavoriteBorderIcon
-              className={classes.favoriteIcon}
-              onClick={() => setFavorite(true)}
-            />
-          )}
-        </CardHeader>
-        <MediaCard
-          component="img"
-          alt="Photographer"
-          height={300}
-          image={profilePhoto}
-          title="Andrew"
-        />
-        <CardContent>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={12} className={classes.fullName}>
+          </div>
+        </Tooltip>
+        {favorite ? (
+          <FavoriteIcon
+            className={classes.favoriteFilledIcon}
+            onClick={() => setFavorite(false)}
+          />
+        ) : (
+          <FavoriteBorderIcon
+            className={classes.favoriteIcon}
+            onClick={() => setFavorite(true)}
+          />
+        )}
+      </CardHeader>
+      <MediaCard
+        component="img"
+        alt="Photographer"
+        height={300}
+        image={profilePhoto}
+        title="Andrew"
+      />
+      <CardContent>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12} className={classes.fullName}>
+            <span>
+              {firstName}
+              &nbsp;
+              {lastName}
+            </span>
+          </GridItem>
+          <GridItem xs={12} sm={12} md={12} className={classes.cardInfoArea}>
+            <div className={classes.cardRating}>
               <span>
-                {firstName}
-                {lastName}
+                Hired:&nbsp;
+                {photographer.hired}
               </span>
-            </GridItem>
-            <GridItem xs={12} sm={12} md={12} className={classes.cardInfoArea}>
-              <div className={classes.cardRating}>
-                <span>
-                  Hired:
-                  {photographer.hired}
-                </span>
-                <span>
-                  Rated times:
-                  {photographer.ratingsQuantity}
-                </span>
-              </div>
-              <div className={classes.infoRow}>
-                <Typography noWrap>
-                  Location: {photographer.location.placeName}
-                </Typography>
-              </div>
-              <div className={classes.infoRow}>
-                <Typography noWrap>
-                  Languages: {photographer.languages.join(', ')}
-                </Typography>
-              </div>
-            </GridItem>
-          </GridContainer>
-        </CardContent>
-        <CardFooter className={classes.cardFooter}>
-          <Typography noWrap>Price per hour: 45$</Typography>
-        </CardFooter>
-      </Card>
-    </div>
+              <span>
+                Rated times:&nbsp;
+                {photographer.ratingsQuantity}
+              </span>
+            </div>
+            <div className={classes.infoRow}>
+              <Typography noWrap>
+                Location: {photographer.location.placeName}
+              </Typography>
+            </div>
+            <div className={classes.infoRow}>
+              <Typography noWrap>
+                Languages: {photographer.languages.join(', ')}
+              </Typography>
+            </div>
+          </GridItem>
+        </GridContainer>
+      </CardContent>
+      <CardFooter className={classes.cardFooter}>
+        <Typography noWrap>Response Rate: 95%</Typography>
+        <Typography noWrap>Price per hour: 45$</Typography>
+        <Typography noWrap>Whole day event: 800$</Typography>
+      </CardFooter>
+    </Card>
   );
 };
 

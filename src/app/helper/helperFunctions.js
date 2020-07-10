@@ -3,8 +3,8 @@ import { store } from '../store/store';
 
 export const getMyLocation = (setCoordinates) => {
   console.log('in geo');
-  store.dispatch(asyncActionStart());
   if (navigator.geolocation) {
+    store.dispatch(asyncActionStart());
     navigator.geolocation.getCurrentPosition((position) => {
       setCoordinates(
         [position.coords.longitude, position.coords.latitude]
@@ -13,8 +13,8 @@ export const getMyLocation = (setCoordinates) => {
         // }
       );
     });
+    store.dispatch(asyncActionFinish());
   }
-  store.dispatch(asyncActionFinish());
 };
 
 export const countryToFlag = (isoCode) =>

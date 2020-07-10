@@ -8,7 +8,8 @@ import {
   SET_PRICE_RANGE,
   SET_RATING,
   SET_CATEGORIES,
-  SET_LANGUAGES
+  SET_LANGUAGES,
+  SET_PLACE
 } from '../constants/photographersQuery';
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
   priceRange: [0, 999],
   rating: '',
   categories: [],
-  languages: []
+  languages: [],
+  place: ''
 };
 
 const setCoordinates = (state, payload) => ({
@@ -68,6 +70,11 @@ const setLanguages = (state, payload) => ({
   languages: payload
 });
 
+const setPlace = (state, payload) => ({
+  ...state,
+  place: payload
+});
+
 export default createReducer(initialState, {
   [SET_COORDINATES]: setCoordinates,
   [SET_SORT]: setSort,
@@ -77,5 +84,6 @@ export default createReducer(initialState, {
   [SET_PRICE_RANGE]: setPriceRange,
   [SET_RATING]: setRating,
   [SET_CATEGORIES]: setCategories,
-  [SET_LANGUAGES]: setLanguages
+  [SET_LANGUAGES]: setLanguages,
+  [SET_PLACE]: setPlace
 });

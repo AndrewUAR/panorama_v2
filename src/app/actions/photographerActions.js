@@ -17,9 +17,9 @@ export const createPhotographerProf = (photographerData, history) => async (
   dispatch
 ) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('updating'));
     const res = await createPhotographerProfile(photographerData);
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('updating'));
     const user = res.data.data;
     dispatch({
       type: AUTHENTICATE_USER,
@@ -28,7 +28,7 @@ export const createPhotographerProf = (photographerData, history) => async (
     history.push('/my-profile');
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('updating'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -39,9 +39,9 @@ export const createPhotographerProf = (photographerData, history) => async (
 
 export const getMyPhotographerProfile = () => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('fetching'));
     const res = await getPhotographerProfile();
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('fetching'));
     const user = res.data.data;
     dispatch({
       type: AUTHENTICATE_USER,
@@ -49,7 +49,7 @@ export const getMyPhotographerProfile = () => async (dispatch) => {
     });
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('fetching'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -60,7 +60,7 @@ export const getMyPhotographerProfile = () => async (dispatch) => {
 
 export const getPhotographers = (query) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('fetching'));
     const res = await getAllPhotographers(query);
     const response = res.data.data;
     let payload = {};
@@ -74,10 +74,10 @@ export const getPhotographers = (query) => async (dispatch) => {
       type: GET_ALL_PHOTOGRAPHERS,
       payload
     });
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('fetching'));
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('fetching'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
