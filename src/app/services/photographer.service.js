@@ -29,3 +29,11 @@ export const getAllPhotographers = async (query) => {
   );
   return response;
 };
+
+export const getPhotographer = async (id) => {
+  const response = await axios.get(
+    `${API_ENDPOINT}/api/v1/photographers/${id}`,
+    config
+  );
+  return response;
+};

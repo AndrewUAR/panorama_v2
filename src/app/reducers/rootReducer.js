@@ -16,7 +16,7 @@ import { LOGOUT } from '../constants/auth';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['error', 'modal', 'async', 'notifications', 'photographers']
+  blacklist: ['error', 'modal', 'async', 'notifications']
 };
 
 const appReducers = combineReducers({

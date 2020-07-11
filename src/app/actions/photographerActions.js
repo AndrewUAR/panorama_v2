@@ -8,10 +8,14 @@ import {
 import {
   createPhotographerProfile,
   getPhotographerProfile,
-  getAllPhotographers
+  getAllPhotographers,
+  getPhotographer
 } from '../services/photographer.service';
 import { AUTHENTICATE_USER } from '../constants/auth';
-import { GET_ALL_PHOTOGRAPHERS } from '../constants/photographer';
+import {
+  GET_ALL_PHOTOGRAPHERS,
+  SELECT_PHOTOGRAPHER
+} from '../constants/photographer';
 
 export const createPhotographerProf = (photographerData, history) => async (
   dispatch
@@ -73,6 +77,28 @@ export const getPhotographers = (query) => async (dispatch) => {
     dispatch({
       type: GET_ALL_PHOTOGRAPHERS,
       payload
+    });
+    dispatch(asyncActionFinish('fetching'));
+  } catch (err) {
+    if (err.response.data.message) {
+      dispatch(asyncActionError('fetching'));
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data.message
+      });
+    }
+  }
+};
+
+export const selectPhotographer = (id, history) => async (dispatch) => {
+  try {
+    history.push(`photographers/${id}`);
+    dispatch(asyncActionStart('fetching'));
+    const res = await getPhotographer(id);
+    const photographer = res.data.data;
+    dispatch({
+      type: SELECT_PHOTOGRAPHER,
+      payload: photographer
     });
     dispatch(asyncActionFinish('fetching'));
   } catch (err) {

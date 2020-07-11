@@ -1,7 +1,7 @@
 import { createReducer } from '../helper/reducerUtils';
 import {
   GET_ALL_PHOTOGRAPHERS,
-  SELECTED_PHOTOGRAPHER
+  SELECT_PHOTOGRAPHER
 } from '../constants/photographer';
 
 const initialState = {
@@ -18,10 +18,10 @@ const getPhotographers = (state, payload) => ({
 
 const selectedPhotographer = (state, payload) => ({
   ...state,
-  selectedPhotographer: {}
+  selectedPhotographer: payload
 });
 
 export default createReducer(initialState, {
   [GET_ALL_PHOTOGRAPHERS]: getPhotographers,
-  [SELECTED_PHOTOGRAPHER]: selectedPhotographer
+  [SELECT_PHOTOGRAPHER]: selectedPhotographer
 });

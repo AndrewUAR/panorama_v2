@@ -10,11 +10,11 @@ import image from '../../../img/backGround/settingsBackground.jpg';
 const categoriesSectionStyles = (theme) => ({
   mainContainer: {
     ...container,
-    width: '100',
+    width: '100%',
     padding: '8rem',
     display: 'flex',
     minHeight: '75vh',
-    minWidth: '100vw',
+    minWidth: '98vw',
     position: 'relative',
     flexDirection: 'column',
     backgroundImage: `url(${image})`,

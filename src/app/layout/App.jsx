@@ -24,6 +24,9 @@ const HomePage = lazy(() => import('../../views/HomePage/HomePage'));
 const PhotographersPage = lazy(() =>
   import('../../views/PhotographersPage/PhotographersPage')
 );
+const PhotographerPage = lazy(() =>
+  import('../../views/PhotographerPage/PhotographerPage')
+);
 const LoginPage = lazy(() => import('../../views/LoginPage/LoginPage'));
 const RegisterPage = lazy(() =>
   import('../../views/RegisterPage/RegisterPage')
@@ -82,7 +85,12 @@ const App = () => {
           <Suspense fallback={<LoadingComponent />}>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/photographers" component={PhotographersPage} />
+              <Route
+                exact
+                path="/photographers"
+                component={PhotographersPage}
+              />
+              <Route path="/photographers/:id" component={PhotographerPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
               <Route path="/confirm/:id" component={ConfirmEmail} />

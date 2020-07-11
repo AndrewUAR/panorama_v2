@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -13,17 +15,30 @@ import CardContent from '../../components/Card/CardContent';
 import styles from '../../assets/jss/views/photographersPageStyle';
 import CardHeader from '../../components/Card/CardHeader';
 import CardFooter from '../../components/Card/CardFooter';
+import { selectPhotographer } from '../../app/actions/photographerActions';
 
 const useStyles = makeStyles(styles);
 
 const PhotographerCard = (props) => {
-  const { photographerObj } = props;
+  const { photographerObj, selectPhotographer } = props;
   const [favorite, setFavorite] = useState(false);
-  const { firstName, lastName, profilePhoto, photographer } = photographerObj;
+  const {
+    _id,
+    firstName,
+    lastName,
+    profilePhoto,
+    photographer
+  } = photographerObj;
+
+  const history = useHistory();
   const classes = useStyles();
 
+  const getPhotographer = (_id) => {
+    selectPhotographer(_id, history);
+  };
+
   return (
-    <Card color="blue">
+    <Card color="blue" onClick={() => getPhotographer(_id)}>
       <CardHeader overflow="overflowBottom">
         <Tooltip title={photographer.ratingsAverage} placement="right" arrow>
           <div>
@@ -97,8 +112,12 @@ const PhotographerCard = (props) => {
   );
 };
 
+const actions = {
+  selectPhotographer
+};
+
 PhotographerCard.propTypes = {
   photographerObj: PropTypes.object
 };
 
-export default PhotographerCard;
+export default connect(null, actions)(PhotographerCard);
