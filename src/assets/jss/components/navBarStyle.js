@@ -18,7 +18,10 @@ const navBarStyle = (theme) => ({
     flexFlow: 'row nowrap',
     boxShadow: `0px 4px 5px 0px  rgba(${hexToRgb(
       blackColor
-    )}, 0.2), 0px 4px 5px 0px  rgba(${hexToRgb(blackColor)}, 0.4)`
+    )}, 0.2), 0px 4px 5px 0px  rgba(${hexToRgb(blackColor)}, 0.4)`,
+    [theme.breakpoints.down('sm')]: {
+      padding: '0'
+    }
   },
   fixed: {
     position: 'fixed'

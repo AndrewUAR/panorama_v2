@@ -27,7 +27,8 @@ const photographerPageStyles = (theme) => ({
     backgroundPosition: 'center center',
     backgroundAttachment: 'fixed',
     [theme.breakpoints.only('xs')]: {
-      minHeight: 'calc(100vh - 13rem)'
+      minHeight: 'calc(100vh - 13rem)',
+      paddingTop: '6rem'
     }
   },
   searchAndSortBar: {
@@ -243,7 +244,7 @@ const photographerPageStyles = (theme) => ({
   pagination: {
     display: 'flex',
     justifyContent: 'center',
-    padding: '2rem 0',
+    padding: '2rem 0 1rem 0',
     bottom: '0',
     '& > * *': {
       color: whiteColor,
