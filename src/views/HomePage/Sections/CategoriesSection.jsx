@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { makeStyles, Hidden } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import VisibilitySensor from 'react-visibility-sensor';
 import styles from '../../../assets/jss/views/HomePageStyle/categoriesSectionStyles';
@@ -8,13 +10,19 @@ import image2 from '../../../assets/img/categories/event.jpg';
 import image3 from '../../../assets/img/categories/studio.jpg';
 import image4 from '../../../assets/img/categories/family.jpg';
 import image5 from '../../../assets/img/categories/newborn.jpg';
+import { setCategories } from '../../../app/actions/photographersQueryActions';
 
 const useStyles = makeStyles(styles);
 
-const CategoriesSection = () => {
+const CategoriesSection = (props) => {
+  const { setCategories } = props;
   const [isVisibleTop, setVisibleTop] = useState(false);
   const [isVisibleBottom, setVisibleBottom] = useState(false);
+
+  const history = useHistory();
+
   const classes = useStyles();
+
   const categoriesTitle = classNames({
     [classes.categoryTitle]: true,
     [classes.title]: false
@@ -38,6 +46,11 @@ const CategoriesSection = () => {
     [classes.animationBottom]: isVisibleBottom
   });
 
+  const handleCategoryChange = (category) => {
+    setCategories([category]);
+    history.push('/photographers');
+  };
+
   return (
     <div className={classes.mainContainer}>
       <h1 className={classes.title}>Search by most popular categories</h1>
@@ -47,7 +60,10 @@ const CategoriesSection = () => {
         offset={{ top: 50 }}
       >
         <div className={group1Classes}>
-          <div className={classes.outerContainer}>
+          <div
+            className={classes.outerContainer}
+            onClick={() => handleCategoryChange('Portrait Photography')}
+          >
             <div className={classes.imageContainer}>
               <h2 className={categoriesTitle}>
                 Portrait
@@ -57,7 +73,10 @@ const CategoriesSection = () => {
               <img className={classes.image} src={image1} alt="" />
             </div>
           </div>
-          <div className={classes.outerContainer}>
+          <div
+            className={classes.outerContainer}
+            onClick={() => handleCategoryChange('Event Photography')}
+          >
             <div className={classes.imageContainer}>
               <h2 className={categoriesTitle}>
                 Event
@@ -68,7 +87,10 @@ const CategoriesSection = () => {
             </div>
           </div>
           <Hidden smDown>
-            <div className={classes.outerContainer}>
+            <div
+              className={classes.outerContainer}
+              onClick={() => handleCategoryChange('Studio Photography')}
+            >
               <div className={classes.imageContainer}>
                 <h2 className={categoriesTitle}>
                   Studio
@@ -87,7 +109,10 @@ const CategoriesSection = () => {
           offset={{ top: 50 }}
         >
           <div className={classNames(classes.group2, classes.groupHidden)}>
-            <div className={classes.outerContainer}>
+            <div
+              className={classes.outerContainer}
+              onClick={() => handleCategoryChange('Studio Photography')}
+            >
               <div className={classes.imageContainer}>
                 <h2 className={categoriesTitle}>
                   Studio
@@ -105,7 +130,10 @@ const CategoriesSection = () => {
         partialVisibility={{ top: true }}
         offset={{ top: 50 }}
       >
-        <div className={group2Classes}>
+        <div
+          className={group2Classes}
+          onClick={() => handleCategoryChange('Family Photography')}
+        >
           <div className={classes.outerContainer}>
             <div className={classes.imageContainer}>
               <h2 className={categoriesTitle}>
@@ -116,7 +144,10 @@ const CategoriesSection = () => {
               <img className={classes.image} src={image4} alt="" />
             </div>
           </div>
-          <div className={classes.outerContainer}>
+          <div
+            className={classes.outerContainer}
+            onClick={() => handleCategoryChange('Newborn Photography')}
+          >
             <div className={classes.imageContainer}>
               <h2 className={categoriesTitle}>
                 Newborn
@@ -132,4 +163,8 @@ const CategoriesSection = () => {
   );
 };
 
-export default CategoriesSection;
+const actions = {
+  setCategories
+};
+
+export default connect(null, actions)(CategoriesSection);
