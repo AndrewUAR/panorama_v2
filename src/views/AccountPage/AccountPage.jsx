@@ -29,7 +29,7 @@ const AccountPage = (props) => {
         <GridItem xs={12} sm={11} md={2} className={classes.sidebar}>
           <Sidebar />
         </GridItem>
-        <GridItem xs={12} sm={11} md={8} className={classes.mainArea}>
+        <GridItem xs={12} sm={12} md={8} className={classes.mainArea}>
           {component || <PhotographerAccountPage />}
         </GridItem>
       </GridContainer>

@@ -14,7 +14,8 @@ const headerSectionStyle = (theme) => ({
     height: '40vh',
     marginTop: '4rem',
     [theme.breakpoints.down('sm')]: {
-      height: '40vh'
+      height: '40vh',
+      marginTop: '2rem'
     }
   },
   upperSubContainer: {

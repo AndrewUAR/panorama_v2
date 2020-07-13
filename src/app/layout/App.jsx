@@ -19,6 +19,7 @@ import styles from '../../assets/jss/components/notificationStyle';
 
 import MyAlbums from '../../views/AccountPage/PhotographerAccountPage/Albums/MyAlbums';
 import MyAlbum from '../../views/AccountPage/PhotographerAccountPage/Albums/MyAlbum';
+import Calendar from '../../views/AccountPage/PhotographerAccountPage/Calendar';
 
 const HomePage = lazy(() => import('../../views/HomePage/HomePage'));
 const PhotographersPage = lazy(() =>
@@ -111,6 +112,11 @@ const App = () => {
                 path="/my-profile/albums/:id"
                 roles={['photographer', 'admin']}
                 component={() => <AccountPage component={<MyAlbum />} />}
+              />
+              <RestrictedRoute
+                path="/my-profile/my-calendar"
+                roles={['photographer', 'admin']}
+                component={() => <AccountPage component={<Calendar />} />}
               />
               <RestrictedRoute
                 path="/createPhotographerProfile"

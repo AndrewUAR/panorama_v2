@@ -1,0 +1,20 @@
+.fc-v-event .fc-event-time {
+  color: #000;
+  margin: auto;
+  font-size: 0.75rem;
+  white-space: none!important;
+}
+
+.fc .fc-button-group > .fc-button, .fc .fc-button-group > .fc-button:active {
+  background: #2C3E50!important;
+  border: none!important;
+  box-shadow: 0 10px 30px -12px rgba(#000, 1)!important;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1rem!important;
+}
+
+.fc-timegrid-event .fc-event-time {
+  white-space: break-spaces!important;
+}

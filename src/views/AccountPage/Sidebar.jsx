@@ -1,31 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MessageIcon from '@material-ui/icons/Message';
 import BurstModeIcon from '@material-ui/icons/BurstMode';
 import EventIcon from '@material-ui/icons/Event';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import RateReviewIcon from '@material-ui/icons/RateReview';
 import CreditCardIcon from '@material-ui/icons/CreditCard';
-import SettingsIcon from '@material-ui/icons/Settings';
 import Button from '../../components/Button/CustomButton';
 import styles from '../../assets/jss/views/AccountPageStyle/sidebarStyle';
+import GridContainer from '../../components/Grid/GridContainer';
+import GridItem from '../../components/Grid/GridItem';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+  useMediaQuery
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(styles);
 
 const Sidebar = (props) => {
   const { user } = props;
+  const [expanded, setExpanded] = useState(false);
   const classes = useStyles();
   const history = useHistory();
+  const theme = useTheme();
 
-  const handleAlbums = () => {
-    history.push('/my-profile/albums');
-  };
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
 
-  const handleSummary = () => {
-    history.push('/my-profile');
+  useEffect(() => {
+    setExpanded(isLargeScreen);
+  }, [isLargeScreen]);
+
+  const handleChange = (event, isExpanded) => {
+    setExpanded(isExpanded);
   };
 
   return (
@@ -37,45 +50,68 @@ const Sidebar = (props) => {
             alt="userPhoto"
             className={classes.profPhoto}
           />
-          <h3 className={classes.userName} onClick={() => handleSummary()}>
+          <h3
+            className={classes.userName}
+            onClick={() => history.push('/my-profile')}
+          >
             {user.firstName} {user.lastName}
           </h3>
         </div>
-        <div className={classes.buttonGroup}>
-          <Button fullWidth color="transparent" sideBarButton>
-            <MessageIcon />
-            My Messages
-          </Button>
-          <Button
-            fullWidth
-            color="transparent"
-            sideBarButton
-            onClick={() => handleAlbums()}
+        <Accordion
+          expanded={expanded}
+          onChange={handleChange}
+          classes={{ root: classes.accordion, expanded: classes.accordion }}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            <BurstModeIcon />
-            My Albums
-          </Button>
-          <Button fullWidth color="transparent" sideBarButton>
-            <EventIcon />
-            My Bookings
-          </Button>
-          <Button fullWidth color="transparent" sideBarButton>
-            <DateRangeIcon />
-            My Calender
-          </Button>
-          <Button fullWidth color="transparent" sideBarButton>
-            <RateReviewIcon />
-            My Reviews
-          </Button>
-          <Button fullWidth color="transparent" sideBarButton>
-            <CreditCardIcon />
-            My Payouts
-          </Button>
-          <Button fullWidth color="transparent" sideBarButton href="/settings">
-            <SettingsIcon />
-            Account Settings
-          </Button>
-        </div>
+            <Typography className={classes.sideBarTitle}>Menu</Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.accordionList}>
+            <GridContainer className={classes.buttonGroup}>
+              <GridItem xs={6} sm={6} md={12}>
+                <Button fullWidth color="transparent" sideBarButton>
+                  <MessageIcon />
+                  My Messages
+                </Button>
+                <Button
+                  fullWidth
+                  color="transparent"
+                  sideBarButton
+                  onClick={() => history.push('/my-profile/albums')}
+                >
+                  <BurstModeIcon />
+                  My Albums
+                </Button>
+                <Button fullWidth color="transparent" sideBarButton>
+                  <EventIcon />
+                  My Bookings
+                </Button>
+              </GridItem>
+              <GridItem xs={6} sm={6} md={12}>
+                <Button
+                  fullWidth
+                  color="transparent"
+                  sideBarButton
+                  onClick={() => history.push('/my-profile/my-calendar')}
+                >
+                  <DateRangeIcon />
+                  My Calender
+                </Button>
+                <Button fullWidth color="transparent" sideBarButton>
+                  <RateReviewIcon />
+                  My Reviews
+                </Button>
+                <Button fullWidth color="transparent" sideBarButton>
+                  <CreditCardIcon />
+                  My Payouts
+                </Button>
+              </GridItem>
+            </GridContainer>
+          </AccordionDetails>
+        </Accordion>
       </div>
     </div>
   );

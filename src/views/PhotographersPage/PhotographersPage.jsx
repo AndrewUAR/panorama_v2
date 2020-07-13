@@ -91,11 +91,11 @@ const PhotographersPage = (props) => {
 
   const classes = useStyles();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.up('md'));
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
 
   useEffect(() => {
-    setExpanded(isSmallScreen);
-  }, [isSmallScreen]);
+    setExpanded(isLargeScreen);
+  }, [isLargeScreen]);
 
   useEffect(() => {
     if (_.isEmpty(coordinates)) {
@@ -267,7 +267,6 @@ const PhotographersPage = (props) => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
-              className={classes.accordionTitle}
             >
               <Typography className={classes.sideBarTitle}>
                 Filter by:

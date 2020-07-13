@@ -150,6 +150,15 @@ const buttonStyle = (theme) => ({
       background: 'linear-gradient(to right, #1fa2ff, #12d8fa)',
       ...boxShadow,
       color: whiteColor
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: '0.75rem',
+      '&:hover,&:focus,&:active': {
+        marginLeft: '0',
+        transition: 'none',
+        transform: 'none',
+        borderRight: 'none'
+      }
     }
   },
   '@keyframes pulse': {
