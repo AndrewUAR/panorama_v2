@@ -4,14 +4,13 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import GridLoader from 'react-spinners/GridLoader';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import LazyLoad from 'react-lazy-load';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import UpdateIcon from '@material-ui/icons/Update';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import DeleteIcon from '@material-ui/icons/Delete';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Button from '../../../../components/Button/CustomButton';
 import AddPhotoAlternateIcon from '@material-ui/icons/AddPhotoAlternate';
 import { openModal } from '../../../../app/actions/modalActions';
 import Dropdown from '../../../../components/Dropdown/Dropdown';
@@ -21,6 +20,7 @@ import {
   deleteAlbumImages,
   deleteMyAlbum
 } from '../../../../app/actions/albumActions';
+import GridItem from '../../../../components/Grid/GridItem';
 
 const useStyles = makeStyles(styles);
 
@@ -28,18 +28,20 @@ const MyAlbum = (props) => {
   const {
     selectedAlbum,
     openModal,
-    loadingAsync,
+    loading,
     deleteAlbumImages,
     deleteMyAlbum
   } = props;
   const { title, images, _id } = selectedAlbum;
+
+  console.log(_id);
 
   const history = useHistory();
 
   const classes = useStyles();
 
   const handleDeleteAlbum = () => {
-    deleteMyAlbum(images, _id, history);
+    deleteMyAlbum(_id, history);
   };
 
   const dropdownButtons = [
@@ -68,56 +70,61 @@ const MyAlbum = (props) => {
       <div className={classes.head}>
         <Dropdown
           buttonProps={{
-            className: classes.albumTitle,
+            className: classes.dropdownButton,
             text: title,
             color: 'dark',
             icon: <ArrowDropDownIcon />
           }}
           dropdownList={dropdownButtons}
         />
-        <h3 style={{ color: '#fff' }}>{images ? images.length : 0} photos</h3>
+        <div className={classes.totalResults}>
+          {images ? images.length : 0} photos
+        </div>
       </div>
-      <GridContainer justify="center" className={classes.container}>
-        {loadingAsync ? (
-          <GridLoader loading color="#fff" />
-        ) : (
-          <>
-            <GridList cellHeight={200} cols={3}>
+      <div className={classes.container}>
+        <div className={classes.addButton}>
+          <Button
+            endIcon={<AddIcon />}
+            onClick={() => openModal('AddAlbumImages')}
+          >
+            Add Images
+          </Button>
+        </div>
+        <GridContainer className={classes.images}>
+          {loading ? (
+            <GridLoader loading color="#fff" />
+          ) : (
+            <>
               {images.map((image, index) => (
-                <GridListTile
-                  key={index}
-                  rowcols={1}
-                  className={classes.imageContainer}
-                >
-                  <GridListTileBar
-                    titlePosition="top"
-                    actionIcon={
-                      <DeleteForeverIcon
-                        onClick={() => deleteAlbumImages([image], _id)}
+                <GridItem xs={6} sm={4} md={4} lg={3} key={index}>
+                  <LazyLoad height={190} debounce={false} throttle={250}>
+                    <div className={classes.imageContainer}>
+                      <div className={classes.deleteIcon}>
+                        <DeleteForeverIcon
+                          onClick={() => deleteAlbumImages([image], _id)}
+                        />
+                      </div>
+                      <img
+                        className={classes.albumImage}
+                        src={image}
+                        onClick={() => openModal('ImageGalleryModal')}
+                        alt=""
                       />
-                    }
-                    actionPosition="right"
-                    className={classes.titleBar}
-                  />
-                  <img
-                    className={classes.albumImage}
-                    src={image}
-                    onClick={() => openModal('ImageGalleryModal')}
-                    alt=""
-                  />
-                </GridListTile>
+                    </div>
+                  </LazyLoad>
+                </GridItem>
               ))}
-            </GridList>
-          </>
-        )}
-      </GridContainer>
+            </>
+          )}
+        </GridContainer>
+      </div>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  selectedAlbum: state.selectedAlbum,
-  loadingAsync: state.async.loading
+  selectedAlbum: state.albums.selectedAlbum,
+  loading: state.async.fetching
 });
 
 const actions = {

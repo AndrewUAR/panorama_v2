@@ -16,7 +16,10 @@ const accountPageStyle = (theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     backgroundAttachment: 'fixed',
-    position: 'relative'
+    position: 'relative',
+    [theme.breakpoints.down('sm')]: {
+      padding: '4rem 1rem'
+    }
   },
   sidebar: {
     ...boxShadow,
@@ -33,7 +36,7 @@ const accountPageStyle = (theme) => ({
     }
   },
   mainArea: {
-    height: '45rem',
+    height: 'max-content',
     [theme.breakpoints.down('sm')]: {
       marginTop: '1.5em'
     }

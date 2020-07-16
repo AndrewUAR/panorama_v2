@@ -17,6 +17,8 @@ const CustomButton = (props) => {
     uploadButton,
     settingsButton,
     sideBarButton,
+    startIcon,
+    endIcon,
     children,
     disabled,
     size,
@@ -42,6 +44,8 @@ const CustomButton = (props) => {
       type={type}
       className={btnClasses}
       disabled={disabled}
+      startIcon={startIcon}
+      endIcon={endIcon}
       ref={ref}
       {...rest}
     >
@@ -56,7 +60,9 @@ Button.propTypes = {
   socialSignUp: PropTypes.bool,
   uploadButton: PropTypes.bool,
   color: PropTypes.oneOf(['danger', 'blue', 'black', 'transparent', 'success']),
-  size: PropTypes.oneOf(['sm', 'lg'])
+  size: PropTypes.oneOf(['sm', 'lg']),
+  startIcon: PropTypes.node,
+  endIcon: PropTypes.node
 };
 
 export default CustomButton;

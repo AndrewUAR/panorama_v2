@@ -33,7 +33,7 @@ const buttonStyle = (theme) => ({
     verticalAlign: 'middle',
     touchAction: 'manipulation',
     cursor: 'pointer',
-    '&:hover,&:focus': {
+    '&:hover': {
       color: whiteColor,
       boxShadow: `0 14px 26px -12px rgba(${hexToRgb(
         blackColor
@@ -139,9 +139,6 @@ const buttonStyle = (theme) => ({
     justifyContent: 'flex-start',
     margin: '0',
     borderRadius: '0',
-    '& svg, & .fab, & .material-icons': {
-      paddingRight: '0.5rem'
-    },
     '&:hover,&:focus,&:active': {
       marginLeft: '2px',
       transition: '0.3s ease',
@@ -152,7 +149,8 @@ const buttonStyle = (theme) => ({
       color: whiteColor
     },
     [theme.breakpoints.down('sm')]: {
-      paddingLeft: '0.75rem',
+      fontSize: '0.85rem',
+      paddingRight: '1rem',
       '&:hover,&:focus,&:active': {
         marginLeft: '0',
         transition: 'none',

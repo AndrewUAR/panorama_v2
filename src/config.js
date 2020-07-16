@@ -1,11 +1,9 @@
-export const apiEndPoint = () => 'https://photopanorama.herokuapp.com';
+export const apiEndPoint = () => 'http://localhost:8000';
 
 export const configHeader = () => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json'
     },
     withCredentials: true,
     credentials: 'include'

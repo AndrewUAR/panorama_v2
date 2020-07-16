@@ -26,8 +26,8 @@ const appReducers = combineReducers({
   async: asyncReducer,
   photographers: photographerReducer,
   notifications: notificationReducer,
-  selectedAlbum: albumReducer,
-  photographersQuery: photographersQueryReducer
+  photographersQuery: photographersQueryReducer,
+  albums: albumReducer
 });
 
 const rootReducer = (state, action) => {

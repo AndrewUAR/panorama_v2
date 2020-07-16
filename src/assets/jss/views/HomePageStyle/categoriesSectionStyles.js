@@ -13,15 +13,16 @@ const categoriesSectionStyles = (theme) => ({
     width: '100%',
     padding: '8rem',
     display: 'flex',
-    minHeight: '75vh',
+    minHeight: '50vh',
     minWidth: '98vw',
     position: 'relative',
     flexDirection: 'column',
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'center top',
     [theme.breakpoints.down('sm')]: {
-      padding: '3rem 0'
+      padding: '3rem 0',
+      minHeight: '65vh'
     }
   },
   group1: {

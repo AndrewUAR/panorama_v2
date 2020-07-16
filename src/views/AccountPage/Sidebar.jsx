@@ -72,8 +72,12 @@ const Sidebar = (props) => {
           <AccordionDetails className={classes.accordionList}>
             <GridContainer className={classes.buttonGroup}>
               <GridItem xs={6} sm={6} md={12}>
-                <Button fullWidth color="transparent" sideBarButton>
-                  <MessageIcon />
+                <Button
+                  fullWidth
+                  color="transparent"
+                  sideBarButton
+                  startIcon={<MessageIcon />}
+                >
                   My Messages
                 </Button>
                 <Button
@@ -81,12 +85,16 @@ const Sidebar = (props) => {
                   color="transparent"
                   sideBarButton
                   onClick={() => history.push('/my-profile/albums')}
+                  startIcon={<BurstModeIcon />}
                 >
-                  <BurstModeIcon />
                   My Albums
                 </Button>
-                <Button fullWidth color="transparent" sideBarButton>
-                  <EventIcon />
+                <Button
+                  fullWidth
+                  color="transparent"
+                  sideBarButton
+                  startIcon={<EventIcon />}
+                >
                   My Bookings
                 </Button>
               </GridItem>
@@ -96,16 +104,24 @@ const Sidebar = (props) => {
                   color="transparent"
                   sideBarButton
                   onClick={() => history.push('/my-profile/my-calendar')}
+                  startIcon={<DateRangeIcon />}
                 >
-                  <DateRangeIcon />
                   My Calender
                 </Button>
-                <Button fullWidth color="transparent" sideBarButton>
-                  <RateReviewIcon />
+                <Button
+                  fullWidth
+                  color="transparent"
+                  sideBarButton
+                  startIcon={<RateReviewIcon />}
+                >
                   My Reviews
                 </Button>
-                <Button fullWidth color="transparent" sideBarButton>
-                  <CreditCardIcon />
+                <Button
+                  fullWidth
+                  color="transparent"
+                  sideBarButton
+                  startIcon={<CreditCardIcon />}
+                >
                   My Payouts
                 </Button>
               </GridItem>

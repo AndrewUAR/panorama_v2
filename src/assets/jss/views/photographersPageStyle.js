@@ -19,6 +19,7 @@ const photographerPageStyles = (theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+    justifyContent: 'center',
     backgroundImage: `linear-gradient(to bottom, rgba(${hexToRgb(
       blueColor
     )}, 0.1),

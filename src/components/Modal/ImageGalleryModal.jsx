@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import './ImageGallery.css';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -15,7 +15,7 @@ const useStyles = makeStyles(styles);
 
 const ImageGalleryModel = (props) => {
   const { selectedAlbum, closeModal } = props;
-  const [images, setImages] = useState('');
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     const imagesOriginal = _.map(selectedAlbum.images, (img) => ({
@@ -45,6 +45,7 @@ const ImageGalleryModel = (props) => {
           style={{ maxHeight: '100%' }}
           items={images}
           useBrowserFullscreen={false}
+          startIndex={1}
         />
       </DialogContent>
     </Modal>
@@ -52,7 +53,7 @@ const ImageGalleryModel = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedAlbum: state.selectedAlbum
+  selectedAlbum: state.albums.selectedAlbum
 });
 
 const actions = {

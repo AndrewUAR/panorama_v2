@@ -2,7 +2,8 @@ import {
   GET_ALL_ALBUMS,
   GET_ALBUM,
   CREATE_ALBUM,
-  UPDATE_ALBUM
+  UPDATE_ALBUM,
+  DELETE_ALBUM
 } from '../constants/album.js';
 import { SET_ERROR } from '../constants/error';
 import {
@@ -20,16 +21,17 @@ import {
   deleteAlbum
 } from '../services/album.service';
 
-export const createAlbum = (albumData) => async (dispatch) => {
+export const createAlbum = (albumData, history) => async (dispatch) => {
   try {
     dispatch(asyncActionStart('updating'));
     const res = await createNewAlbum(albumData);
     const album = res.data.data;
-    dispatch(asyncActionFinish('updating'));
     dispatch({
       type: CREATE_ALBUM,
       payload: album
     });
+    history.push(`/my-profile/albums/${album._id}`);
+    dispatch(asyncActionFinish('updating'));
   } catch (err) {
     if (err.response.data.message) {
       dispatch(asyncActionError('updating'));
@@ -88,6 +90,7 @@ export const selectAlbum = (id, history) => async (dispatch) => {
     dispatch(asyncActionStart('fetching'));
     const res = await getAlbum(id);
     const album = res.data.data;
+    console.log(album);
     dispatch({
       type: GET_ALBUM,
       payload: album
@@ -107,17 +110,17 @@ export const selectAlbum = (id, history) => async (dispatch) => {
 
 export const uploadAlbumImages = (images, id) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart('updating'));
+    dispatch(asyncActionStart('uploading'));
     const res = await uploadImages(images, id);
     const album = res.data.data;
     dispatch({
       type: GET_ALBUM,
       payload: album
     });
-    dispatch(asyncActionFinish('updating'));
+    dispatch(asyncActionFinish('uploading'));
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError('updating'));
+      dispatch(asyncActionError('uploading'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -147,15 +150,15 @@ export const deleteAlbumImages = (images, id) => async (dispatch) => {
   }
 };
 
-export const deleteMyAlbum = (images, id, history) => async (dispatch) => {
+export const deleteMyAlbum = (id, history) => async (dispatch) => {
   try {
     dispatch(asyncActionStart('updating'));
-    await deleteAlbum(images, id);
-    dispatch({
-      type: GET_ALBUM,
-      payload: ''
-    });
     history.push('/my-profile/albums');
+    await deleteAlbum(id);
+    dispatch({
+      type: DELETE_ALBUM,
+      payload: {}
+    });
     dispatch(asyncActionFinish('updating'));
   } catch (err) {
     if (err.response.data.message) {

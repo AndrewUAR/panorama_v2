@@ -9,7 +9,8 @@ const initialState = {
   loadingGeo: false,
   updating: false,
   fetching: false,
-  loading: false
+  loading: false,
+  uploading: false
 };
 
 const asyncActionStarted = (state, payload) => ({
