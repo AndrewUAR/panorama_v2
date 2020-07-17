@@ -22,7 +22,7 @@ const useStyles = makeStyles(styles);
 
 const AddAlbumImages = (props) => {
   // const socket = socketIOClient(API_ENDPOINT);
-  const { closeModal, uploadAlbumImages, loadingAsync, selectedAlbum } = props;
+  const { closeModal, uploadAlbumImages, loading, selectedAlbum } = props;
 
   const [files, setFiles] = useState([]);
 
@@ -103,7 +103,7 @@ const AddAlbumImages = (props) => {
             <>
               <div className={buttonGroupStyles}>
                 <Button color="success" onClick={handleUploadImages}>
-                  {loadingAsync ? (
+                  {loading ? (
                     <PulseLoader
                       color="#fff"
                       css={buttonLoaderStyle}
@@ -127,8 +127,8 @@ const AddAlbumImages = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  loadingAsync: state.async.loading,
-  selectedAlbum: state.selectedAlbum
+  loading: state.async.uploading,
+  selectedAlbum: state.albums.selectedAlbum
 });
 
 const actions = {
@@ -139,7 +139,7 @@ const actions = {
 AddAlbumImages.propTypes = {
   closeModal: PropTypes.func.isRequired,
   uploadAlbumImages: PropTypes.func.isRequired,
-  loadingAsync: PropTypes.bool,
+  loading: PropTypes.bool,
   selectedAlbum: PropTypes.object.isRequired
 };
 

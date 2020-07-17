@@ -87,6 +87,10 @@ const modalStyle = (theme) => ({
     background: 'linear-gradient(to bottom left, #3498db, #2c3e50)',
     '& > :first-child': {
       padding: '0 1rem 1rem 0'
+    },
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      width: '70vw'
     }
   },
   modalBox: {

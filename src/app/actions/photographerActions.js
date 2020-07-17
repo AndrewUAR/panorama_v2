@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { SET_ERROR } from '../constants/error';
 import {
   asyncActionStart,
@@ -6,17 +7,23 @@ import {
 } from './asyncActions';
 import {
   createPhotographerProfile,
-  getPhotographerProfile
+  getPhotographerProfile,
+  getAllPhotographers,
+  getPhotographer
 } from '../services/photographer.service';
 import { AUTHENTICATE_USER } from '../constants/auth';
+import {
+  GET_ALL_PHOTOGRAPHERS,
+  SELECT_PHOTOGRAPHER
+} from '../constants/photographer';
 
 export const createPhotographerProf = (photographerData, history) => async (
   dispatch
 ) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('updating'));
     const res = await createPhotographerProfile(photographerData);
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('updating'));
     const user = res.data.data;
     dispatch({
       type: AUTHENTICATE_USER,
@@ -25,7 +32,7 @@ export const createPhotographerProf = (photographerData, history) => async (
     history.push('/my-profile');
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('updating'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message
@@ -36,9 +43,9 @@ export const createPhotographerProf = (photographerData, history) => async (
 
 export const getMyPhotographerProfile = () => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('fetching'));
     const res = await getPhotographerProfile();
-    dispatch(asyncActionFinish());
+    dispatch(asyncActionFinish('fetching'));
     const user = res.data.data;
     dispatch({
       type: AUTHENTICATE_USER,
@@ -46,7 +53,57 @@ export const getMyPhotographerProfile = () => async (dispatch) => {
     });
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('fetching'));
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data.message
+      });
+    }
+  }
+};
+
+export const getPhotographers = (query) => async (dispatch) => {
+  try {
+    dispatch(asyncActionStart('fetching'));
+    const res = await getAllPhotographers(query);
+    const response = res.data.data;
+    let payload = {};
+    if (_.isEmpty(response)) {
+      payload.results = 0;
+      payload.photographers = [];
+    } else {
+      payload = res.data.data[0];
+    }
+    dispatch({
+      type: GET_ALL_PHOTOGRAPHERS,
+      payload
+    });
+    dispatch(asyncActionFinish('fetching'));
+  } catch (err) {
+    if (err.response.data.message) {
+      dispatch(asyncActionError('fetching'));
+      dispatch({
+        type: SET_ERROR,
+        payload: err.response.data.message
+      });
+    }
+  }
+};
+
+export const selectPhotographer = (id, history) => async (dispatch) => {
+  try {
+    history.push(`photographers/${id}`);
+    dispatch(asyncActionStart('fetching'));
+    const res = await getPhotographer(id);
+    const photographer = res.data.data;
+    dispatch({
+      type: SELECT_PHOTOGRAPHER,
+      payload: photographer
+    });
+    dispatch(asyncActionFinish('fetching'));
+  } catch (err) {
+    if (err.response.data.message) {
+      dispatch(asyncActionError('fetching'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message

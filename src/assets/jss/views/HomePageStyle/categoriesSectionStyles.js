@@ -10,25 +10,25 @@ import image from '../../../img/backGround/settingsBackground.jpg';
 const categoriesSectionStyles = (theme) => ({
   mainContainer: {
     ...container,
-    width: '100',
+    width: '100%',
     padding: '8rem',
     display: 'flex',
-    minHeight: '75vh',
-    minWidth: '100vw',
+    minHeight: '50vh',
+    minWidth: '98vw',
     position: 'relative',
     flexDirection: 'column',
     backgroundImage: `url(${image})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'center top',
     [theme.breakpoints.down('sm')]: {
-      padding: '3rem 0'
+      padding: '3rem 0',
+      minHeight: '65vh'
     }
   },
   group1: {
     display: 'flex',
     justifyContent: 'center',
     filter: 'drop-shadow(0.5rem 0.75rem 0.75rem black)',
-    animation: '$imageReveal 0.5s',
     '& > :nth-child(1)': {
       '&:hover': {
         transform: 'translate(-10%, -8%)',
@@ -132,9 +132,6 @@ const categoriesSectionStyles = (theme) => ({
       width: '10rem'
     }
   },
-  categoryAnimation: {
-    animation: '$imageReveal 0.5s'
-  },
   imageContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -144,9 +141,6 @@ const categoriesSectionStyles = (theme) => ({
     clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
     WebkitClipPath:
       'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-    '& > *': {
-      animation: '$imageReveal 1s'
-    },
     [theme.breakpoints.only('sm')]: {
       height: '14rem',
       width: '14rem'

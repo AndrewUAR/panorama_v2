@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import GridLoader from 'react-spinners/GridLoader';
 import { makeStyles } from '@material-ui/core/styles';
-import PermMediaIcon from '@material-ui/icons/PermMedia';
+import AddIcon from '@material-ui/icons/Add';
 import styles from '../../../../assets/jss/views/AccountPageStyle/albumStyle';
 import GridContainer from '../../../../components/Grid/GridContainer';
+import Button from '../../../../components/Button/CustomButton';
 import {
   getAllAlbums,
   selectAlbum
 } from '../../../../app/actions/albumActions';
 import { openModal } from '../../../../app/actions/modalActions';
+import GridItem from '../../../../components/Grid/GridItem';
+import Album from './Album';
 
 const useStyles = makeStyles(styles);
 
 const MyAlbums = (props) => {
-  const { user, selectAlbum, loadingAsync } = props;
-  const [myAlbums, setAlbums] = useState([]);
-
-  const { albums } = user;
+  const { albums, selectAlbum, loadingAsync, openModal, getAllAlbums } = props;
 
   useEffect(() => {
-    if (albums) {
-      setAlbums(albums);
-    }
-  }, [albums]);
+    getAllAlbums();
+    // eslint-disable-next-line
+  }, []);
 
   const history = useHistory();
 
@@ -42,42 +41,38 @@ const MyAlbums = (props) => {
         <h3 style={{ color: '#fff' }}>Albums</h3>
         <h3 style={{ color: '#fff' }}>
           Total:
-          {myAlbums.length}
+          {albums.length}
         </h3>
       </div>
-      <GridContainer justify="space-between" className={classes.container}>
-        {loadingAsync ? (
-          <GridLoader loading color="#fff" />
-        ) : (
-          myAlbums.map((album, index) => (
-            <div
-              className={classes.albumContainer}
-              key={index}
-              onClick={() => handleAlbumSelect(album._id)}
-            >
-              {_.isEmpty(album.images) ? (
-                <div className={classes.emptyAlbum}>
-                  <PermMediaIcon className={classes.icon} />
-                </div>
-              ) : (
-                <div className={classes.albumCover}>
-                  {_.slice(album.images, -3, album.length).map(
-                    (image, index) => (
-                      <img
-                        key={index}
-                        src={image}
-                        className={classes.imageCover}
-                        alt=""
-                      />
-                    )
-                  )}
-                </div>
-              )}
-              <p className={classes.albumTitle}>{album.title}</p>
-            </div>
-          ))
-        )}
-      </GridContainer>
+      <div className={classes.container}>
+        <div className={classes.addButton}>
+          <Button
+            endIcon={<AddIcon />}
+            onClick={() => openModal('CreateAlbumModal')}
+          >
+            Create New Album
+          </Button>
+        </div>
+        <GridContainer justify="center" className={classes.albums}>
+          {loadingAsync ? (
+            <GridLoader loading color="#fff" />
+          ) : (
+            albums.map((album, index) => (
+              <GridItem
+                xs={10}
+                sm={6}
+                md={6}
+                lg={4}
+                key={index}
+                className={classes.itemContainer}
+                onClick={() => handleAlbumSelect(album._id)}
+              >
+                <Album images={_.slice(album.images, -3, album.length)} />
+              </GridItem>
+            ))
+          )}
+        </GridContainer>
+      </div>
     </>
   );
 };
@@ -90,7 +85,8 @@ const actions = {
 
 const mapStateToProps = (state) => ({
   user: state.auth.authUser,
-  loadingAsync: state.async.loading
+  loadingAsync: state.async.loading,
+  albums: state.albums.albums
 });
 
 MyAlbums.propTypes = {

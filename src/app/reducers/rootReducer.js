@@ -8,6 +8,8 @@ import errorReducer from './errorReducer';
 import asyncReducer from './asyncReducer';
 import notificationReducer from './notificationReducer';
 import albumReducer from './albumReducer';
+import photographerReducer from './photographerReducer';
+import photographersQueryReducer from './photographersQueryReducer';
 
 import { LOGOUT } from '../constants/auth';
 
@@ -22,8 +24,10 @@ const appReducers = combineReducers({
   modal: modalReducer,
   error: errorReducer,
   async: asyncReducer,
+  photographers: photographerReducer,
   notifications: notificationReducer,
-  selectedAlbum: albumReducer
+  photographersQuery: photographersQueryReducer,
+  albums: albumReducer
 });
 
 const rootReducer = (state, action) => {

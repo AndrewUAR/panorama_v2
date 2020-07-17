@@ -1,15 +1,18 @@
-import { asyncActionStart } from '../actions/asyncActions';
+import { asyncActionStart, asyncActionFinish } from '../actions/asyncActions';
 import { store } from '../store/store';
 
 export const getMyLocation = (setCoordinates) => {
+  store.dispatch(asyncActionStart('loadingGeo'));
   if (navigator.geolocation) {
-    store.dispatch(asyncActionStart());
     navigator.geolocation.getCurrentPosition((position) => {
-      setCoordinates({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      });
+      setCoordinates(
+        [position.coords.longitude, position.coords.latitude]
+        // lat: position.coords.latitude,
+        // lng: position.coords.longitude
+        // }
+      );
     });
+    store.dispatch(asyncActionFinish('loadingGeo'));
   }
 };
 

@@ -1,101 +1,73 @@
-/* eslint-disable no-use-before-define */
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import CameraEnhanceIcon from '@material-ui/icons/CameraEnhance';
-import TranslateIcon from '@material-ui/icons/Translate';
+import Select from '@material-ui/core/Select';
 import styles from '../../assets/jss/components/formInputStyle';
 
 const useStyles = makeStyles(styles);
 
-const Select = (props) => {
+const CustomSelect = (props) => {
+  const { value, onChange, underlineColor, id, labelText, menuItems } = props;
   const classes = useStyles();
-  const {
-    error,
-    options,
-    labelText,
-    underlineColor,
-    placeholder,
-    value,
-    onChange,
-    id,
-    listName
-  } = props;
+  const [open, setOpen] = useState(false);
 
-  const underlineClasses = classNames({
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const selectClasses = classNames({
     [classes.underline]: true,
-    [classes.underlineError]: error,
     [classes[underlineColor]]: underlineColor
   });
 
-  const getRenderOption = (option, listName) => {
-    switch (listName) {
-      case 'languages':
-        return (
-          <>
-            <span className={classes.renderOptionIcon}>
-              <TranslateIcon />
-            </span>
-            {option}
-          </>
-        );
-      case 'categories':
-        return (
-          <>
-            <span className={classes.renderOptionIcon}>
-              <CameraEnhanceIcon />
-            </span>
-            {option}
-          </>
-        );
-      default:
-        return <>{option}</>;
-    }
-  };
+  const listClasses = classNames({
+    [classes.list]: true,
+    [classes.ratingStars]: true
+  });
 
   return (
-    <FormControl className={classes.formControl}>
-      <Autocomplete
-        multiple
-        id={id}
-        options={options}
-        value={value}
-        autoHighlight
-        getOptionLabel={(option) => option}
-        onChange={onChange}
-        classes={{
-          inputRoot: underlineClasses,
-          tag: classes.chip,
-          listbox: classes.list,
-          option: classes.listItem,
-          noOptions: classes.list
-        }}
-        renderOption={(option) => getRenderOption(option, listName)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            variant="standard"
-            label={labelText}
-            InputLabelProps={{
-              classes: { root: classes.selectLabel }
-            }}
-            InputProps={{
-              ...params.InputProps,
-              classes: { root: classes.selectLabel }
-            }}
-            placeholder={placeholder}
-            classes={{
-              root: classes.input
-            }}
-          />
-        )}
-      />
-      {error ? <p className={classes.error}>{error}</p> : ''}
-    </FormControl>
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel id={id} className={classes.selectLabel}>
+          {labelText}
+        </InputLabel>
+        <Select
+          id={id}
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={value}
+          onChange={onChange}
+          className={selectClasses}
+          classes={{
+            root: classes.white,
+            icon: classes.white
+          }}
+          MenuProps={{
+            classes: { list: listClasses }
+          }}
+        >
+          {menuItems}
+        </Select>
+      </FormControl>
+    </div>
   );
 };
 
-export default Select;
+CustomSelect.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func,
+  underlineColor: PropTypes.string,
+  id: PropTypes.string,
+  labelText: PropTypes.string,
+  menuItems: PropTypes.array
+};
+
+export default CustomSelect;

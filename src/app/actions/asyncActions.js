@@ -4,14 +4,17 @@ import {
   ASYNC_ACTION_ERROR
 } from '../constants/async';
 
-export const asyncActionStart = () => ({
-  type: ASYNC_ACTION_START
+export const asyncActionStart = (payload) => ({
+  type: ASYNC_ACTION_START,
+  payload
 });
 
-export const asyncActionFinish = () => ({
-  type: ASYNC_ACTION_FINISH
+export const asyncActionFinish = (payload) => ({
+  type: ASYNC_ACTION_FINISH,
+  payload
 });
 
-export const asyncActionError = () => ({
-  type: ASYNC_ACTION_ERROR
+export const asyncActionError = (payload) => ({
+  type: ASYNC_ACTION_ERROR,
+  payload
 });

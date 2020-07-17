@@ -32,7 +32,8 @@ const footerStyle = (theme) => ({
     fontSize: '1rem',
     margin: '0',
     [theme.breakpoints.down('sm')]: {
-      paddingTop: '0'
+      paddingTop: '0',
+      fontSize: '0.75rem'
     }
   },
   pink: {

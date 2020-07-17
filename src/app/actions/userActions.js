@@ -10,9 +10,8 @@ import { enqueueSnackbar } from './notificationActions';
 
 export const updateMe = (userData) => async (dispatch) => {
   try {
-    dispatch(asyncActionStart());
+    dispatch(asyncActionStart('updating'));
     const res = await updateCurrentUser(userData);
-    dispatch(asyncActionFinish());
     const user = res.data.data;
     dispatch({
       type: AUTHENTICATE_USER,
@@ -24,10 +23,11 @@ export const updateMe = (userData) => async (dispatch) => {
         variant: 'success'
       }
     };
+    dispatch(asyncActionFinish('updating'));
     dispatch(enqueueSnackbar(notification));
   } catch (err) {
     if (err.response.data.message) {
-      dispatch(asyncActionError());
+      dispatch(asyncActionError('updating'));
       dispatch({
         type: SET_ERROR,
         payload: err.response.data.message

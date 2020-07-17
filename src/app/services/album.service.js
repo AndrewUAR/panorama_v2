@@ -56,10 +56,9 @@ export const deleteImages = async (images, id) => {
   return response;
 };
 
-export const deleteAlbum = async (images, id) => {
+export const deleteAlbum = async (id) => {
   const response = await axios.delete(
     `${API_ENDPOINT}/api/v1/albums/${id}`,
-    { images },
     config
   );
   return response;

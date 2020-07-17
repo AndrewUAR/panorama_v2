@@ -1,9 +1,4 @@
-import {
-  hexToRgb,
-  primaryColor,
-  blueColor,
-  blackColor
-} from '../panoramaStyles';
+import { hexToRgb, primaryColor, blackColor } from '../panoramaStyles';
 
 const cardStyle = (theme) => ({
   card: {
@@ -11,6 +6,7 @@ const cardStyle = (theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     position: 'relative',
+    borderRadius: '0.5rem',
     boxShadow: `2px 0px 26px -12px rgba(${hexToRgb(blackColor)} , 0.7),
       2px 4px 23px 0px rgba(${hexToRgb(blackColor)}, 0.7),
       2px 8px 10px -5px rgba(${hexToRgb(blackColor)}, 0.7)`
@@ -19,7 +15,7 @@ const cardStyle = (theme) => ({
     backgroundColor: `rgba(${hexToRgb(primaryColor)}, 0.6)`
   },
   blue: {
-    backgroundColor: `rgba(${hexToRgb(blueColor)}, 0.6)`
+    background: 'linear-gradient(to left bottom, #000046, #1cb5e0)'
   },
   black: {
     background: 'linear-gradient(to right, #2c3e50, #3498db)'

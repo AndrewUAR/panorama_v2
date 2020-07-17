@@ -46,12 +46,15 @@ const formInputStyle = (theme) => ({
     color: `${whiteColor}!important`,
     fontWeight: '400',
     fontSize: '1rem',
-    lineHeight: '1'
+    lineHeight: '1',
+    '& svg, & .fab, & .material-icons': {
+      color: whiteColor
+    }
   },
   input: {
     color: whiteColor,
     marginTop: '0.5rem',
-    borderRadius: '10px',
+    borderRadius: '0.5rem',
     paddingRight: '0',
     '&,&::placeholder': {
       fontSize: '1rem',
@@ -59,12 +62,21 @@ const formInputStyle = (theme) => ({
       fontWeight: '400'
     },
     '&::placeholder': {
-      color: whiteColor
+      color: `${whiteColor}!important`
     }
   },
   formControl: {
     position: 'relative',
     width: '100%'
+  },
+  sliderInput: {
+    ...defaultFont,
+    color: whiteColor,
+    textAlign: 'center'
+  },
+  sliderLabel: {
+    ...defaultFont,
+    color: whiteColor
   },
   radioFormControl: {
     color: whiteColor
@@ -100,7 +112,7 @@ const formInputStyle = (theme) => ({
   list: {
     ...boxShadow,
     color: whiteColor,
-    maxHeight: '11rem',
+    maxHeight: 'auto',
     background: 'linear-gradient(to right, #2c3e50, #3498db)'
   },
   listItem: {
@@ -114,6 +126,17 @@ const formInputStyle = (theme) => ({
     },
     '& svg, & .fab, & .material-icons': {
       marginRight: '0.5rem'
+    }
+  },
+  ratingStars: {
+    '& > *': {
+      '&:hover': {
+        ...boxShadow,
+        background: 'linear-gradient(to right, #00c6ff, #0072ff)'
+      },
+      '& svg, & .fab, & .material-icons': {
+        fontSize: '1.25rem'
+      }
     }
   },
   selectedItem: {
@@ -145,6 +168,9 @@ const formInputStyle = (theme) => ({
   },
   blue: {
     color: `${blueColor}!important`
+  },
+  white: {
+    color: whiteColor
   }
 });
 

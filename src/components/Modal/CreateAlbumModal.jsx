@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -17,13 +18,15 @@ const CreateAlbumModal = (props) => {
 
   const [title, setTitle] = useState('');
 
+  const history = useHistory();
+
   const onChange = (e) => {
     setTitle(e.target.value);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createAlbum({ title });
+    createAlbum({ title }, history);
     closeModal();
   };
 

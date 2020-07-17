@@ -26,7 +26,6 @@ const PlaceInput = (props) => {
     lng: ''
   });
   const classes = useStyles();
-
   const {
     id,
     loading,
@@ -34,7 +33,8 @@ const PlaceInput = (props) => {
     labelText,
     underlineColor,
     placeholder,
-    onChangeLocation
+    onChangeLocation,
+    trigger
   } = props;
 
   const onChange = (e) => {
@@ -55,10 +55,13 @@ const PlaceInput = (props) => {
   }, [place]);
 
   useEffect(() => {
-    if (coordinates.lat) {
+    if (coordinates.length > 0) {
+      setOpen(true);
       (async () => {
-        const myPlace = await getMyPlace(coordinates);
-        setPlace(myPlace.data.data);
+        const res = await getMyPlace(coordinates);
+        const myPlace = { placeName: res.data.data, coordinates };
+        console.log(myPlace);
+        setOptions([myPlace]);
       })();
     }
   }, [coordinates]);
@@ -121,7 +124,10 @@ const PlaceInput = (props) => {
                   ) : (
                     <MyLocationIcon
                       className={classes.inputIcon}
-                      onClick={() => getMyLocation(setCoordinates)}
+                      onClick={() => {
+                        getMyLocation(setCoordinates);
+                        if (trigger) trigger(true);
+                      }}
                     />
                   )}
                 </>
@@ -140,7 +146,7 @@ const PlaceInput = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.async.loading
+  loading: state.async.loadingGeo
 });
 
 export default connect(mapStateToProps)(PlaceInput);
