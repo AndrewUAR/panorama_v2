@@ -31,7 +31,7 @@ const ImagesModal = (props) => {
       }}
     >
       <div>
-        <GridContainer className={classes.images}>
+        <GridContainer classes={{root: classes.images}}>
           {loading ? (
             <GridLoader loading color="#fff" />
           ) : (

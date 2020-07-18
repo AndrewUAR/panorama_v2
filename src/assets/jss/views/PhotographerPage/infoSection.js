@@ -10,6 +10,7 @@ const infoSectionStyle = (theme) => ({
     ...boxShadow,
     ...defaultFont,
     width: '50%',
+    height: '100%',
     color: whiteColor,
     padding: '2rem',
     marginBottom: '5rem',

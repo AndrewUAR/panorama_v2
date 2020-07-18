@@ -231,7 +231,7 @@ const albumStyle = (theme) => ({
   //   }
   // },
   titleBar: {
-    zIndex: '100',
+    // zIndex: '100',
     color: whiteColor
   },
   // imageCover: {

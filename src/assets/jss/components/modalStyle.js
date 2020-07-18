@@ -13,7 +13,7 @@ const modalStyle = (theme) => ({
     overflow: 'auto',
     margin: '1rem',
     flexWrap: 'wrap',
-    zIndex: '100'
+    zIndex: '1000!important'
   },
   paperDropzone: {
     padding: '1.25rem',

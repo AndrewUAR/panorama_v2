@@ -16,7 +16,11 @@ const albumsSectionStyle = (theme) => ({
     flexDirection: 'column',
     background: `linear-gradient(to right, rgba(${hexToRgb(
       '#1488cc'
-    )}, 0.8), rgba(${hexToRgb('#0575e6')}, 1))`
+    )}, 0.8), rgba(${hexToRgb('#0575e6')}, 1))`,
+    [theme.breakpoints.down('sm')]: {
+      height: 'auto',
+      paddingBottom: '3rem'
+    }
   },
   container: {
     width: '70%',
@@ -32,6 +36,7 @@ const albumsSectionStyle = (theme) => ({
     marginTop: '2rem',
     width: '80%',
     transition: 'all 0.2s ease',
+    zIndex: '1',
     '& > *': {
       margin: 'auto'
     }
