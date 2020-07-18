@@ -92,7 +92,6 @@ export const getPhotographers = (query) => async (dispatch) => {
 
 export const selectPhotographer = (id, history) => async (dispatch) => {
   try {
-    history.push(`photographers/${id}`);
     dispatch(asyncActionStart('fetching'));
     const res = await getPhotographer(id);
     const photographer = res.data.data;
@@ -100,6 +99,7 @@ export const selectPhotographer = (id, history) => async (dispatch) => {
       type: SELECT_PHOTOGRAPHER,
       payload: photographer
     });
+    history.push(`photographers/${id}`);
     dispatch(asyncActionFinish('fetching'));
   } catch (err) {
     if (err.response.data.message) {

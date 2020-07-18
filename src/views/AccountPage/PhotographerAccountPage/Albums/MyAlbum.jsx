@@ -107,7 +107,7 @@ const MyAlbum = (props) => {
                       <img
                         className={classes.albumImage}
                         src={image}
-                        onClick={() => openModal('ImageGalleryModal')}
+                        onClick={() => openModal('ImageGalleryModal', index)}
                         alt=""
                       />
                     </div>

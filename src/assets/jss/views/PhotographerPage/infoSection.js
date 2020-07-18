@@ -1,4 +1,9 @@
-import { boxShadow, defaultFont, whiteColor } from '../../panoramaStyles';
+import {
+  boxShadow,
+  defaultFont,
+  whiteColor,
+  hexToRgb
+} from '../../panoramaStyles';
 
 const infoSectionStyle = (theme) => ({
   container: {
@@ -7,8 +12,11 @@ const infoSectionStyle = (theme) => ({
     width: '50%',
     color: whiteColor,
     padding: '2rem',
+    marginBottom: '5rem',
     borderRadius: '1rem',
-    background: 'linear-gradient(to right bottom, #00d2ff, #3a7bd5)',
+    background: `linear-gradient(to right bottom, rgba(${hexToRgb(
+      '#00d2ff'
+    )}, 0.8), rgba(${hexToRgb('#3a7bd5')}, 0.8))`,
     [theme.breakpoints.down('sm')]: {
       width: '96%',
       padding: '0.5rem 0 1.25rem 0',

@@ -17,6 +17,7 @@ const CustomButton = (props) => {
     uploadButton,
     settingsButton,
     sideBarButton,
+    carouselButton,
     startIcon,
     endIcon,
     children,
@@ -36,6 +37,7 @@ const CustomButton = (props) => {
     [classes.uploadButton]: uploadButton,
     [classes.settingsButton]: settingsButton,
     [classes.sideBarButton]: sideBarButton,
+    [classes.carouselButton]: carouselButton,
     [classes[size]]: size
   });
 

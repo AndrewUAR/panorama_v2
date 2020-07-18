@@ -159,6 +159,11 @@ const buttonStyle = (theme) => ({
       }
     }
   },
+  carouselButton: {
+    margin: '0',
+    padding: '0',
+    cursor: 'pointer'
+  },
   '@keyframes pulse': {
     '0%': {
       boxShadow: `0 0 0 0px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(${hexToRgb(

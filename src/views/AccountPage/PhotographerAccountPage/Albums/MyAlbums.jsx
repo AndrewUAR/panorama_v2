@@ -67,7 +67,10 @@ const MyAlbums = (props) => {
                 className={classes.itemContainer}
                 onClick={() => handleAlbumSelect(album._id)}
               >
-                <Album images={_.slice(album.images, -3, album.length)} />
+                <Album
+                  images={_.slice(album.images, -3, album.length)}
+                  title={album.title}
+                />
               </GridItem>
             ))
           )}

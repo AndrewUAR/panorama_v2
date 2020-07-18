@@ -255,8 +255,14 @@ const albumStyle = (theme) => ({
   //   }
   // },
   albumContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  album: {
     position: 'relative',
-    width: '12rem',
+    width: '16rem',
     height: '16rem',
     cursor: 'pointer'
   },
@@ -266,7 +272,10 @@ const albumStyle = (theme) => ({
     height: '14rem',
     objectFit: 'cover',
     transformStyle: 'preserve-3d',
-    perspective: '3000px'
+    perspective: '3000px',
+    background: `linear-gradient(to right, rgba(${hexToRgb(
+      '#1488cc'
+    )}, 0.8), rgba(${hexToRgb('#0575e6')}, 1))`
   },
   imageContainer2: {
     position: 'absolute',
@@ -291,27 +300,36 @@ const albumStyle = (theme) => ({
     width: '16rem',
     height: '14rem',
     overflow: 'hidden',
+    background: `linear-gradient(to right, rgba(${hexToRgb(
+      '#1488cc'
+    )}, 1), rgba(${hexToRgb('#0575e6')}, 1))`,
     boxShadow:
       '0px -1px 5px 1px rgba(0,0,0,0.75), -11px 67px 33px -45px rgba(0,0,0,0.75), -8px 1px 15px -2px rgba(0,0,0,0.75)',
-    transform: 'rotateY(70deg) translateX(-120%)'
+    transform: 'rotateY(70deg) translateX(-85%)'
   },
   image2: {
     position: 'absolute',
     width: '16rem',
     height: '14rem',
     overflow: 'hidden',
+    background: `linear-gradient(to right, rgba(${hexToRgb(
+      '#1488cc'
+    )}, 1), rgba(${hexToRgb('#0575e6')}, 1))`,
     boxShadow:
       '0px -1px 5px 1px rgba(0,0,0,0.75), -11px 67px 33px -45px rgba(0,0,0,0.75), -8px 1px 15px -2px rgba(0,0,0,0.75)',
-    transform: 'rotateY(70deg) translateX(-110%)'
+    transform: 'rotateY(70deg) translateX(-75%)'
   },
   image3: {
     position: 'absolute',
     width: '16rem',
     height: '14rem',
     overflow: 'hidden',
+    background: `linear-gradient(to right, rgba(${hexToRgb(
+      '#1488cc'
+    )}, 1), rgba(${hexToRgb('#0575e6')}, 1))`,
     boxShadow:
       '0px -1px 5px 1px rgba(0,0,0,0.75), -11px 67px 33px -45px rgba(0,0,0,0.75), 10px 3px 20px -2px rgba(0,0,0,0.75), -8px 1px 15px -2px rgba(0,0,0,0.75)',
-    transform: 'rotateY(70deg) translateX(-100%)'
+    transform: 'rotateY(70deg) translateX(-65%)'
   },
   image4: {
     borderBottomRightRadius: '1.5rem'

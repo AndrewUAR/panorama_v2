@@ -35,9 +35,9 @@ const headerSectionStyle = (theme) => ({
     justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: 'column',
-    background: `linear-gradient(to bottom, rgba(${hexToRgb(
-      '#00d2ff'
-    )}, 0.7), rgba(${hexToRgb('#3a7bd5')}, 0.5))`
+    background: `linear-gradient(to top, rgba(${hexToRgb(
+      '#1488cc'
+    )}, 0.8), rgba(${hexToRgb('#0575e6')}, 1))`
   },
   photoWrapper: {
     position: 'relative',
@@ -107,7 +107,7 @@ const headerSectionStyle = (theme) => ({
     ...defaultFont,
     color: whiteColor,
     fontSize: '1rem',
-    marginBottom: '1rem',
+    marginBottom: '2rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

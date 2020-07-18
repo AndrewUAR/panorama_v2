@@ -129,6 +129,30 @@ const modalStyle = (theme) => ({
     width: 'auto',
     height: '100%',
     margin: 'auto'
+  },
+  albumImage: {
+    ...boxShadow,
+    display: 'inline-block',
+    width: '100%',
+    height: '12rem',
+    overflow: 'hidden',
+    objectFit: 'cover!important',
+    cursor: 'pointer',
+    [theme.breakpoints.down('sm')]: {
+      height: '12rem'
+    }
+  },
+  imageContainer: {
+    position: 'relative',
+    width: '100%',
+    height: '12rem'
+  },
+  images: {
+    width: '100%',
+    height: '80%',
+    '& > *': {
+      padding: '0.3rem'
+    }
   }
 });
 

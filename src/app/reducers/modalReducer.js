@@ -4,6 +4,7 @@ import { MODAL_OPEN, MODAL_CLOSE } from '../constants/modal.js';
 const initialState = null;
 
 const openModal = (state, payload) => {
+  console.log(payload);
   const { modalType, modalProps } = payload;
   return { modalType, modalProps };
 };

@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import CropModal from './CropModal';
 import BecomePhotographerModal from './BecomePhotographerModal';
 import CreateAlbumModal from './CreateAlbumModal';
-import UpdateAlbumModal from './UpdateAlbumModel';
+import UpdateAlbumModal from './UpdateAlbumModal';
 import AddAlbumImages from './AddAlbumImages';
 import ImageGalleryModal from './ImageGalleryModal';
+import ImagesModal from './ImagesModal';
 
 const modalLookup = {
   CropModal,
@@ -14,7 +15,8 @@ const modalLookup = {
   CreateAlbumModal,
   UpdateAlbumModal,
   AddAlbumImages,
-  ImageGalleryModal
+  ImageGalleryModal,
+  ImagesModal
 };
 
 const ModalManager = (props) => {

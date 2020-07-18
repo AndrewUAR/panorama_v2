@@ -6,12 +6,12 @@ import styles from '../../../../assets/jss/views/AccountPageStyle/albumStyle';
 const useStyles = makeStyles(styles);
 
 const Album = (props) => {
-  const { images } = props;
+  const { images, title } = props;
   const classes = useStyles();
 
   return (
-    <div>
-      <div className={classes.albumContainer}>
+    <div className={classes.albumContainer} id="albums">
+      <div className={classes.album}>
         <div className={classes.imageContainer1}>
           <img className={classes.image1} src={images[2]} alt="" />
         </div>
@@ -22,7 +22,7 @@ const Album = (props) => {
           <img className={classes.image3} src={images[0]} alt="" />
         </div>
       </div>
-      <div className={classes.albumTitle}>AlbumName</div>
+      <div className={classes.albumTitle}>{title}</div>
     </div>
   );
 };

@@ -96,7 +96,7 @@ export const selectAlbum = (id, history) => async (dispatch) => {
       payload: album
     });
     dispatch(asyncActionFinish('fetching'));
-    history.push(`/my-profile/albums/${id}`);
+    if (history) history.push(`/my-profile/albums/${id}`);
   } catch (err) {
     if (err.response.data.message) {
       dispatch(asyncActionError('fetching'));

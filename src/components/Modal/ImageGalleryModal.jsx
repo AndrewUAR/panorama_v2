@@ -13,9 +13,11 @@ import styles from '../../assets/jss/components/modalStyle';
 
 const useStyles = makeStyles(styles);
 
-const ImageGalleryModel = (props) => {
-  const { selectedAlbum, closeModal } = props;
+const ImageGalleryModal = (props) => {
+  const { selectedAlbum, closeModal, modalProps } = props;
   const [images, setImages] = useState([]);
+
+  console.log(modalProps)
 
   useEffect(() => {
     const imagesOriginal = _.map(selectedAlbum.images, (img) => ({
@@ -45,7 +47,7 @@ const ImageGalleryModel = (props) => {
           style={{ maxHeight: '100%' }}
           items={images}
           useBrowserFullscreen={false}
-          startIndex={1}
+          startIndex={modalProps}
         />
       </DialogContent>
     </Modal>
@@ -53,13 +55,14 @@ const ImageGalleryModel = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedAlbum: state.albums.selectedAlbum
+  selectedAlbum: state.albums.selectedAlbum,
+  modalProps: state.modal.modalProps
 });
 
 const actions = {
   closeModal
 };
 
-ImageGalleryModel.propTypes = {};
+ImageGalleryModal.propTypes = {};
 
-export default connect(mapStateToProps, actions)(ImageGalleryModel);
+export default connect(mapStateToProps, actions)(ImageGalleryModal);
