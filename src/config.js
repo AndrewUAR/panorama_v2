@@ -5,7 +5,7 @@ export const configHeader = () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    withCredentials: true,
+    withCredentials: true
     // credentials: 'include'
   };
   return config;

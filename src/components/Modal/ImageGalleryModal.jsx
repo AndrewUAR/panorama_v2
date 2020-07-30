@@ -17,7 +17,7 @@ const ImageGalleryModal = (props) => {
   const { selectedAlbum, closeModal, modalProps } = props;
   const [images, setImages] = useState([]);
 
-  console.log(modalProps)
+  console.log(modalProps);
 
   useEffect(() => {
     const imagesOriginal = _.map(selectedAlbum.images, (img) => ({
@@ -46,7 +46,7 @@ const ImageGalleryModal = (props) => {
         <ImageGallery
           style={{ maxHeight: '100%' }}
           items={images}
-          useBrowserFullscreen={false}
+          useBrowserFullscreen={true}
           startIndex={modalProps}
         />
       </DialogContent>

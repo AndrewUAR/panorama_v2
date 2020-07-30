@@ -32,7 +32,7 @@ const ImagesModal = (props) => {
       }}
     >
       <div>
-        <GridContainer classes={{root: classes.images}}>
+        <GridContainer classes={{ root: classes.images }}>
           {loading ? (
             <GridLoader loading color="#fff" />
           ) : (
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => ({
 const actions = {
   openModal,
   closeModal
-}
+};
 
 ImagesModal.propTypes = {
   albums: PropTypes.object.isRequired,

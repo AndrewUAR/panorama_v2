@@ -14,9 +14,8 @@ import styles from '../../../assets/jss/views/AccountPageStyle/calendarStyle.js'
 const useStyles = makeStyles(styles);
 
 const Calendar = () => {
-
   const [dates, setDates] = useState([]);
- 
+
   console.log(dates);
 
   useEffect(() => {
@@ -75,15 +74,17 @@ const Calendar = () => {
     let { start, end, backgroundColor, allDay, id } = info.event;
     start = moment(start).format();
     end = moment(end).format();
-    const newDate = {start, end, color: backgroundColor, allDay, id};
-    const date = _.find(dates, {id});
+    const newDate = { start, end, color: backgroundColor, allDay, id };
+    const date = _.find(dates, { id });
     if (date) {
-      let filterDates = _.filter(dates, function(date) { return date.id !== id});
+      let filterDates = _.filter(dates, function (date) {
+        return date.id !== id;
+      });
       setDates([...filterDates, newDate]);
     } else {
       setDates([...dates, newDate]);
     }
-  }
+  };
 
   const oneDay = 60 * 60 * 24 * 1000;
 
@@ -145,8 +146,6 @@ const Calendar = () => {
           eventResize={handleEventReceive}
           eventResizableFromStart={true}
           eventLeave={(info) => console.log(info)}
-          eventClick={(info) => console.log(info)}
-          // eventColor='#378006'
         />
       </GridItem>
     </GridContainer>
