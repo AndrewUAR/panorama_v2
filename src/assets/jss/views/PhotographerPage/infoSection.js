@@ -14,7 +14,6 @@ const infoSectionStyle = (theme) => ({
     color: whiteColor,
     padding: '2rem',
     marginBottom: '5rem',
-    borderRadius: '1rem',
     background: `linear-gradient(to right bottom, rgba(${hexToRgb(
       '#00d2ff'
     )}, 0.8), rgba(${hexToRgb('#3a7bd5')}, 0.8))`,
@@ -32,7 +31,7 @@ const infoSectionStyle = (theme) => ({
       margin: '0.3rem 0'
     },
     [theme.breakpoints.down('sm')]: {
-      padding: '0.75rem'
+      padding: ' 1rem 2rem'
     }
   },
   bottomSection: {
@@ -43,7 +42,7 @@ const infoSectionStyle = (theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.only('xs')]: {
       borderRight: 'none',
       borderBottom: '3px solid',
       paddingBottom: '1rem'
@@ -53,7 +52,7 @@ const infoSectionStyle = (theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.only('xs')]: {
       marginTop: '1rem'
     }
   },

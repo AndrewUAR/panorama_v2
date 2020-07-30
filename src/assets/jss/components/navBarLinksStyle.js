@@ -4,7 +4,8 @@ import {
   tealColor,
   hexToRgb,
   greyColor,
-  blackColor
+  blackColor,
+  boxShadow
 } from '../panoramaStyles';
 
 const navBarLinksStyle = (theme) => ({
@@ -97,6 +98,7 @@ const navBarLinksStyle = (theme) => ({
     }
   },
   profPhoto: {
+    ...boxShadow,
     width: '3rem',
     hight: '3rem',
     borderRadius: '5rem'

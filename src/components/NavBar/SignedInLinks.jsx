@@ -72,7 +72,7 @@ const SignedInLinks = (props) => {
       <StarsIcon />
       Favorite photographers
     </Link>,
-    <Link className={classes.dropdownLink} to="/">
+    <Link className={classes.dropdownLink} to="/photographers">
       <SearchIcon />
       Explore photographers
     </Link>,

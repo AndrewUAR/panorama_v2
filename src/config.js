@@ -6,7 +6,7 @@ export const configHeader = () => {
       'Content-Type': 'application/json'
     },
     withCredentials: true,
-    credentials: 'include'
+    // credentials: 'include'
   };
   return config;
 };

@@ -1,5 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
+import moment from 'moment';
+import cuid from 'cuid';
+import _ from 'lodash';
 import './Calendar.css';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -11,18 +14,20 @@ import styles from '../../../assets/jss/views/AccountPageStyle/calendarStyle.js'
 const useStyles = makeStyles(styles);
 
 const Calendar = () => {
+
+  const [dates, setDates] = useState([]);
+ 
+  console.log(dates);
+
   useEffect(() => {
     let draggableEl = document.getElementById('external-events');
     new Draggable(draggableEl, {
       itemSelector: '.fc-event',
       eventData: function (eventEl) {
-        let title = eventEl.getAttribute('title');
-        let id = eventEl.getAttribute('data');
         let color = eventEl.getAttribute('color');
         let display = eventEl.getAttribute('display');
         return {
-          title: title,
-          id: id,
+          id: cuid(),
           display: display,
           color: color
         };
@@ -65,6 +70,20 @@ const Calendar = () => {
     info.el.setAttribute('data-toggle', 'modal');
     info.el.setAttribute('data-target', '#selection-modal');
   };
+
+  const handleEventReceive = (info) => {
+    let { start, end, backgroundColor, allDay, id } = info.event;
+    start = moment(start).format();
+    end = moment(end).format();
+    const newDate = {start, end, color: backgroundColor, allDay, id};
+    const date = _.find(dates, {id});
+    if (date) {
+      let filterDates = _.filter(dates, function(date) { return date.id !== id});
+      setDates([...filterDates, newDate]);
+    } else {
+      setDates([...dates, newDate]);
+    }
+  }
 
   const oneDay = 60 * 60 * 24 * 1000;
 
@@ -122,13 +141,11 @@ const Calendar = () => {
             startTime: '00:00', // a start time (10am in this example)
             endTime: '24:00'
           }}
-          eventReceive={function (info) {
-            console.log(info);
-          }}
-          eventResize={function (info) {
-            console.log(info);
-          }}
+          eventReceive={handleEventReceive}
+          eventResize={handleEventReceive}
           eventResizableFromStart={true}
+          eventLeave={(info) => console.log(info)}
+          eventClick={(info) => console.log(info)}
           // eventColor='#378006'
         />
       </GridItem>

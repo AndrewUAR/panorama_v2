@@ -62,7 +62,7 @@ const headerSectionStyle = (theme) => ({
   profilePhoto: {
     ...boxShadow,
     position: 'absolute',
-    height: '20rem',
+    height: '18rem',
     width: 'auto',
     borderRadius: '12rem',
     border: '0.5rem solid',

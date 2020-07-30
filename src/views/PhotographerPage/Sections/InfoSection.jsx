@@ -16,7 +16,7 @@ const InfoSection = (props) => {
 
   return (
     <GridContainer className={classes.container}>
-      <GridItem xs={12} sm={12} className={classes.upperSection}>
+      <GridItem xs={12} sm={12} md={12} className={classes.upperSection}>
         <div className={classes.intro}>
           <span className={classes.field}>Introduction:</span>
           <p>{introduction}</p>
@@ -35,7 +35,7 @@ const InfoSection = (props) => {
         </div>
       </GridItem>
       <GridContainer className={classes.bottomSection}>
-        <GridItem xs={12} sm={12} md={6} className={classes.priceSection}>
+        <GridItem xs={12} sm={6} md={6} className={classes.priceSection}>
           <div>
             <div>
               <span className={classes.field}>Response Rate:</span> 95%
@@ -48,7 +48,7 @@ const InfoSection = (props) => {
             </div>
           </div>
         </GridItem>
-        <GridItem xs={12} sm={12} md={6} className={classes.socialSection}>
+        <GridItem xs={12} sm={6} md={6} className={classes.socialSection}>
           <div>
             <div>
               <span className={classes.field}>Email:</span> {email}

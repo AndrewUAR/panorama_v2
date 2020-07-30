@@ -22,7 +22,7 @@ const photographerPageStyle = (theme) => ({
     }
   },
   buttonsGroup: {
-    margin: '3rem 0 6rem 0',
+    margin: '3rem 0 3rem 0',
     [theme.breakpoints.down('sm')]: {
       margin: '1rem 0 2rem 0'
     }

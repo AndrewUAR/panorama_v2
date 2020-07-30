@@ -17,7 +17,7 @@
     "classnames": "^2.2.6",
     "cuid": "^2.1.8",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.27.0",
     "notistack": "^0.9.11",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

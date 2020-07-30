@@ -2,7 +2,8 @@ import {
   whiteColor,
   blueColor,
   defaultFont,
-  boxShadow
+  boxShadow,
+  hexToRgb
 } from '../panoramaStyles';
 
 const modalStyle = (theme) => ({
@@ -13,7 +14,8 @@ const modalStyle = (theme) => ({
     overflow: 'auto',
     margin: '1rem',
     flexWrap: 'wrap',
-    zIndex: '1000!important'
+    zIndex: '1000',
+    background: `rgba(${hexToRgb('#000')}, 0.8)`
   },
   paperDropzone: {
     padding: '1.25rem',
@@ -150,7 +152,7 @@ const modalStyle = (theme) => ({
   },
   images: {
     width: '100%',
-    height: '80%',
+    height: 'auto',
     '& > *': {
       padding: '0.3rem'
     }

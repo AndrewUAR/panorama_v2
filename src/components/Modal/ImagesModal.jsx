@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './ImageGallery.css';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -13,7 +14,7 @@ import { GridLoader } from 'react-spinners';
 const useStyles = makeStyles(styles);
 
 const ImagesModal = (props) => {
-  const { album, loading, openModal } = props;
+  const { album, loading, openModal, closeModal } = props;
 
   const classes = useStyles();
   return (
@@ -62,9 +63,15 @@ const mapStateToProps = (state) => ({
 });
 
 const actions = {
-  openModal
+  openModal,
+  closeModal
 }
 
-ImagesModal.propTypes = {};
+ImagesModal.propTypes = {
+  albums: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, actions)(ImagesModal);
